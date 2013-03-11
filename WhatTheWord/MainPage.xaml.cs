@@ -15,6 +15,7 @@ namespace WhatTheWord
 	public partial class MainPage : PhoneApplicationPage
 	{
 		public Puzzle CurrentPuzzle { get; set; }
+		public GameState CurrentGameState { get; set; }
 		// Constructor
 		public MainPage()
 		{
@@ -28,37 +29,87 @@ namespace WhatTheWord
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
-			CurrentPuzzle = new Puzzle ("Puzzle1")
+			LoadGameState();
+
+			DisplayGame();
+		}
+
+		/// <summary>
+		/// Load game state from file
+		/// </summary>
+		private void LoadGameState()
+		{
+			CurrentGameState = new GameState();
+			CurrentGameState.LoadGameStateFromFile();
+
+			CurrentPuzzle = LoadCurrentPuzzle(CurrentGameState.CurrentLevel);
+
+			CurrentGameState.Initialize(CurrentPuzzle);
+		}
+
+		private Puzzle LoadCurrentPuzzle(int currentLevel)
+		{
+			return new Puzzle("randomus")
 			{
 				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.jpg", Credits = "mph" },
 				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.jpg", Credits = "mph" },
 				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.jpg", Credits = "mph" },
 				Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.jpg", Credits = "mph" },
 			};
-
-			LoadInitialGameState();
 		}
 
-		private void LoadInitialGameState()
+		/// <summary>
+		/// Display game
+		/// </summary>
+		private void DisplayGame()
 		{
 			LayoutRoot.DataContext = CurrentPuzzle;
+			HeaderPanel.DataContext = CurrentGameState;
 
-			for (int i = 0; i < CurrentPuzzle.Word.Length; i++)
+			for (int i = 0; i < CurrentGameState.GuessPanelState.Length; i++)
 			{
-				TextBlock text = new TextBlock();
-				text.Width = 48;
-				text.Height = 48;
-				text.Text = CurrentPuzzle.Word[i].ToString();
-				GuessPanel.Children.Add(text);
+				TextBlock guessText = new TextBlock();
+				guessText.Width = 48;
+				guessText.Height = 48;
+				switch (CurrentGameState.GuessPanelState[i]) {
+					case GameState.LETTER_NOT_GUESSED:
+						guessText.Text = "_";
+						break;
+					case GameState.LETTER_REVEALED:
+						// TODO: Style this differently
+						guessText.Text = CurrentGameState.PuzzleWord[i].ToString();
+						break;
+					default:
+						guessText.Text = CurrentGameState.PuzzleCharacters[CurrentGameState.GuessPanelState[i]].ToString();
+						break;
+				}
+
+				guessText.Tap += guessText_Tap;
+
+				GuessPanel.Children.Add(guessText);
 			}
 
-			for (int i = 0; i < CurrentPuzzle.Characters.Length; i++)
+			for (int i = 0; i < CurrentGameState.CharacterPanelState.Length; i++)
 			{
 				TextBlock text = new TextBlock();
+				// TODO: This style info should be in a resource file
 				text.Height = 48;
 				text.Width = 48;
 				text.Style = (Style)Application.Current.Resources["Character"];
-				text.Text = CurrentPuzzle.Characters[i].ToString();
+
+				switch (CurrentGameState.CharacterPanelState[i])
+				{
+					case GameState.LETTER_REMOVED:
+						text.Text = "*";
+						break;
+					case GameState.LETTER_GUESSED:
+						text.Text = "_";
+						break;
+					default:
+						text.Text = CurrentGameState.PuzzleCharacters[i].ToString();
+						break;
+				}
+
 				text.Tap += text_Tap;
 				Border border = new Border();
 				border.Child = text;
@@ -75,11 +126,16 @@ namespace WhatTheWord
 			}
 		}
 
+		void guessText_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			throw new NotImplementedException();
+		}
+
 		void text_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			switch (sender.GetType().ToString())
 			{
-				case "TextBox":
+				case "System.Windows.Controls.TextBlock":
 					TextBlock text = (TextBlock)sender;
 					break;
 				default:

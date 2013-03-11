@@ -17,15 +17,12 @@ namespace WhatTheWord.Model
 		public Picture Picture3 { get; set; }
 		public Picture Picture4 { get; set; }
 
-		public String Characters { get; set; }
-
 		public Puzzle(String word)
 		{
 			this.Word = word.ToUpper();
-			GeneratePuzzleCharacters();
 		}
 
-		private void GeneratePuzzleCharacters()
+		public String GeneratePuzzleCharacters()
 		{
 			if (Word.Length > MAX_WORD_LENGTH) throw new ApplicationException("Word is too long");
 			StringBuilder builder = new StringBuilder();
@@ -38,7 +35,7 @@ namespace WhatTheWord.Model
 
 			String orderedCharacters = Word + builder.ToString();
 
-			Characters = Jumble(orderedCharacters);
+			return Jumble(orderedCharacters);
 		}
 
 		public static String Jumble(String orderedCharacters)

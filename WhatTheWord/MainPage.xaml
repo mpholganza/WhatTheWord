@@ -28,9 +28,9 @@
 			<RowDefinition/>
 			<RowDefinition Height="16"/>
 			<RowDefinition/>
+			<RowDefinition Height="51"/>
 			<RowDefinition Height="84"/>
-			<RowDefinition Height="39"/>
-			<RowDefinition Height="152"/>
+			<RowDefinition Height="144"/>
 		</Grid.RowDefinitions>
 
 		<!-- LOCALIZATION NOTE:
@@ -54,8 +54,8 @@
 
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="HeaderPanel" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Orientation="Horizontal" Grid.ColumnSpan="4">
-			<TextBlock Text="##" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock Text="## Coins" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock Text="{Binding CurrentLevel}" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock Text="{Binding Coins}" Style="{StaticResource PhoneTextNormalStyle}"/>
 			<Button Content="+"/>
 			<Button Content="Settings"/>
 		</StackPanel>
@@ -65,33 +65,33 @@
 		<Image Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
 		<Image Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
 
-		<Button Content="Clear" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="72" Height="84"/>
+		<Button Content="Clear" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="72" Height="84" Grid.RowSpan="2"/>
 		<TextBlock Text="{Binding Word}" Grid.Column="1" HorizontalAlignment="Left" Margin="135,10,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="82" Grid.ColumnSpan="3"/>
-		<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="2" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center">
+		<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="2" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center" Height="0">
 			<TextBlock.RenderTransform>
 				<CompositeTransform Rotation="-90"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
-		<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="4" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center">
+		<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="113.75,72.75,-49.39,0" Width="169.64" TextAlignment="Center" Height="0">
 			<TextBlock.RenderTransform>
 				<CompositeTransform Rotation="90"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
-		<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center">
+		<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center" Height="0">
 			<TextBlock.RenderTransform>
 				<CompositeTransform Rotation="-90"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
-		<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="4" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-59.25,72.75,0,0" Width="169.64" TextAlignment="Center">
+		<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="113.75,72.75,-49.39,0" Width="169.64" TextAlignment="Center" Height="0">
 			<TextBlock.RenderTransform>
 				<CompositeTransform Rotation="90"/>
 			</TextBlock.RenderTransform>
 		</TextBlock>
-		
+		<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Bottom" Orientation="Horizontal" Margin="0" Height="84" Width="360" Grid.ColumnSpan="3"/>
+
 		<StackPanel x:Name="LetterPickerPanel1" Grid.Column="1" HorizontalAlignment="Left" Height="72" Grid.Row="7" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="3" Orientation="Horizontal"/>
-		<StackPanel x:Name="LetterPickerPanel2" Grid.Column="1" HorizontalAlignment="Left" Height="72" Grid.Row="7" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,70,0,0"/>
-		<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Left" Height="84" Margin="77,0,0,0" Grid.Row="5" VerticalAlignment="Top" Width="283" Grid.ColumnSpan="3" Orientation="Horizontal"/>
-		<StackPanel Grid.Column="3" HorizontalAlignment="Left" Height="142" Margin="92,0,0,0" Grid.Row="7" VerticalAlignment="Top" Width="81">
+		<StackPanel x:Name="LetterPickerPanel2" Grid.Column="1" HorizontalAlignment="Left" Height="72" Grid.Row="7" VerticalAlignment="Top" Width="274" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,72,0,-2"/>
+		<StackPanel Grid.Column="3" HorizontalAlignment="Left" Height="144" Margin="92,0,0,-2" Grid.Row="7" VerticalAlignment="Top" Width="81">
 			<Button x:Name="BoostButton" Content="!!"/>
 			<Button x:Name="FacebookButton" Content="f"/>
 		</StackPanel>

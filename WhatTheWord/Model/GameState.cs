@@ -11,6 +11,11 @@ namespace WhatTheWord.Model
 {
 	public class GameState
 	{
+		public const int LETTER_REVEALED = 100;
+		public const int LETTER_NOT_GUESSED = 101;
+		public const int LETTER_REMOVED = 102;
+		public const int LETTER_GUESSED = 103;
+
 		[DataMember]
 		public int CurrentLevel { get; set; }
 
@@ -21,10 +26,27 @@ namespace WhatTheWord.Model
 		public String FBMessage { get; set; }
 
 		[DataMember]
-		public String GuessPanelState { get; set; }
+		public String PuzzleWord { get; set; }
 
 		[DataMember]
-		public String CharacterPanelState { get; set; }
+		public String PuzzleCharacters { get; set; }
+
+		[DataMember]
+		public int[] GuessPanelState { get; set; }
+
+		[DataMember]
+		public int[] CharacterPanelState { get; set; }
+
+		public GameState()
+		{
+			this.CurrentLevel = 0;
+			this.Coins = 0;
+			this.PuzzleWord = "";
+			this.PuzzleCharacters = "";
+			this.FBMessage = "";
+			this.GuessPanelState = null;
+			this.CharacterPanelState = null;
+		}
 
 		public async void LoadGameStateFromFile()
 		{
@@ -36,11 +58,16 @@ namespace WhatTheWord.Model
 			stream.Close();
 
 			// TODO: This is the wrong way to do this
-			this.CurrentLevel = gs.CurrentLevel;
-			this.Coins = gs.Coins;
-			this.FBMessage = gs.FBMessage;
-			this.GuessPanelState = gs.GuessPanelState;
-			this.CharacterPanelState = gs.CharacterPanelState;
+			if (null != gs)
+			{
+				this.CurrentLevel = gs.CurrentLevel;
+				this.Coins = gs.Coins;
+				this.PuzzleWord = gs.PuzzleWord;
+				this.PuzzleCharacters = gs.PuzzleCharacters;
+				this.FBMessage = gs.FBMessage;
+				this.GuessPanelState = gs.GuessPanelState;
+				this.CharacterPanelState = gs.CharacterPanelState;
+			}
 		}
 
 		public void WriteGameDataToFile()
@@ -51,12 +78,28 @@ namespace WhatTheWord.Model
 		public override String ToString()
 		{
 			MemoryStream stream = new MemoryStream();
-
 			DataContractJsonSerializer ser = new DataContractJsonSerializer(this.GetType());
 			ser.WriteObject(stream, this);
 			byte[] json = stream.ToArray();
 			stream.Close();
 			return Encoding.UTF8.GetString(json, 0, json.Length);
+		}
+
+		internal void Initialize(Puzzle CurrentPuzzle)
+		{
+			this.GuessPanelState = new int[CurrentPuzzle.Word.Length];
+			for (int i = 0; i < CurrentPuzzle.Word.Length; i++)
+			{
+				GuessPanelState[i] = LETTER_NOT_GUESSED;
+			}
+
+			this.PuzzleCharacters = CurrentPuzzle.GeneratePuzzleCharacters();
+			this.CharacterPanelState = new int[this.PuzzleCharacters.Length];
+			for (int i = 0; i < this.PuzzleCharacters.Length; i++)
+			{
+				CharacterPanelState[i] = i;
+			}
+
 		}
 	}
 }
