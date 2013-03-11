@@ -11,7 +11,7 @@ namespace WhatTheWord
 {
 	class FileAccess
 	{
-		public async static Task<String> LoadGameStateFromLocalFolderAsync()
+		public async static Task<String> LoadDataFromFileAsync(String fileName)
 		{
 			String data = String.Empty;
 			StorageFile file = null;
@@ -19,7 +19,7 @@ namespace WhatTheWord
 			try
 			{
 				file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
-					new Uri("ms-appdata:///local/gamestate.txt"));
+					new Uri(fileName));
 				exists = true;
 			}
 			catch (FileNotFoundException) {}
@@ -36,14 +36,14 @@ namespace WhatTheWord
 			return data;
 		}
 
-		public async static void WriteGameStateToLocalFolderAsync(String data)
+		public async static void WriteDataToFileAsync(String data, String fileName)
 		{
 			StorageFile file = null;
 			bool exists = false;
 			try
 			{
 				file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
-					new Uri("ms-appdata:///local/gamestate.txt"));
+					new Uri(fileName));
 				exists = true;
 			}
 			catch (FileNotFoundException)
@@ -53,8 +53,7 @@ namespace WhatTheWord
 
 			if (!exists)
 			{
-				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(
-					"ms-appdata:///local/gamestate.txt", CreationCollisionOption.OpenIfExists);
+				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 			}
 
 			Stream stream = await file.OpenStreamForWriteAsync();
