@@ -11,10 +11,10 @@ namespace WhatTheWord.Model
 {
 	public class GameState
 	{
-		public const int LETTER_REVEALED = 100;
-		public const int LETTER_NOT_GUESSED = 101;
-		public const int LETTER_REMOVED = 102;
-		public const int LETTER_GUESSED = 103;
+		public const int GUESSPANEL_LETTER_REVEALED = 100;
+		public const int GUESSPANEL_LETTER_NOT_GUESSED = 101;
+		public const int CHARACTERPANEL_LETTER_REMOVED = 200;
+		public const int CHARACTERPANEL_LETTER_GUESSED = 201;
 
 		[DataMember]
 		public int CurrentLevel { get; set; }
@@ -70,6 +70,19 @@ namespace WhatTheWord.Model
 			}
 		}
 
+		public int GetNextFreeGuessPanelIndex()
+		{
+			if (GuessPanelState != null)
+			{
+				for (int i = 0; i < GuessPanelState.Length; i++)
+				{
+					if (GuessPanelState[i] == GameState.GUESSPANEL_LETTER_NOT_GUESSED) return i;
+				}
+			}
+
+			return -1;
+		}
+
 		public void WriteGameDataToFile()
 		{
 			FileAccess.WriteDataToFileAsync(this.ToString(), "ms-appdata:///local/gamestate.txt");
@@ -90,7 +103,7 @@ namespace WhatTheWord.Model
 			this.GuessPanelState = new int[CurrentPuzzle.Word.Length];
 			for (int i = 0; i < CurrentPuzzle.Word.Length; i++)
 			{
-				GuessPanelState[i] = LETTER_NOT_GUESSED;
+				GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
 			}
 
 			this.PuzzleCharacters = CurrentPuzzle.GeneratePuzzleCharacters();
@@ -100,6 +113,11 @@ namespace WhatTheWord.Model
 				CharacterPanelState[i] = i;
 			}
 
+		}
+
+		internal void CheckAnswer()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

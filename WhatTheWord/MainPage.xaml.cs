@@ -66,16 +66,17 @@ namespace WhatTheWord
 			LayoutRoot.DataContext = CurrentPuzzle;
 			HeaderPanel.DataContext = CurrentGameState;
 
+			GuessPanel.Children.Clear();
 			for (int i = 0; i < CurrentGameState.GuessPanelState.Length; i++)
 			{
 				TextBlock guessText = new TextBlock();
 				guessText.Width = 48;
 				guessText.Height = 48;
 				switch (CurrentGameState.GuessPanelState[i]) {
-					case GameState.LETTER_NOT_GUESSED:
+					case GameState.GUESSPANEL_LETTER_NOT_GUESSED:
 						guessText.Text = "_";
 						break;
-					case GameState.LETTER_REVEALED:
+					case GameState.GUESSPANEL_LETTER_REVEALED:
 						// TODO: Style this differently
 						guessText.Text = CurrentGameState.PuzzleWord[i].ToString();
 						break;
@@ -84,11 +85,16 @@ namespace WhatTheWord
 						break;
 				}
 
-				guessText.Tap += guessText_Tap;
+				var x = i;
+				guessText.Tap += (sender, e) =>
+				{
+					GuessPanelLetterPressed(x);
+				};
 
 				GuessPanel.Children.Add(guessText);
 			}
 
+			LetterPickerPanel1.Children.Clear(); LetterPickerPanel2.Children.Clear();
 			for (int i = 0; i < CurrentGameState.CharacterPanelState.Length; i++)
 			{
 				TextBlock text = new TextBlock();
@@ -99,10 +105,10 @@ namespace WhatTheWord
 
 				switch (CurrentGameState.CharacterPanelState[i])
 				{
-					case GameState.LETTER_REMOVED:
+					case GameState.CHARACTERPANEL_LETTER_REMOVED:
 						text.Text = "*";
 						break;
-					case GameState.LETTER_GUESSED:
+					case GameState.CHARACTERPANEL_LETTER_GUESSED:
 						text.Text = "_";
 						break;
 					default:
@@ -110,7 +116,12 @@ namespace WhatTheWord
 						break;
 				}
 
-				text.Tap += text_Tap;
+				var x = i;
+				text.Tap += (sender, e) =>
+				{
+					CharacterPanelLetterPressed(x);
+				};
+
 				Border border = new Border();
 				border.Child = text;
 				border.Style = (Style)Application.Current.Resources["CharacterBorder"];
@@ -126,21 +137,38 @@ namespace WhatTheWord
 			}
 		}
 
-		void guessText_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+
+		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
-			throw new NotImplementedException();
+			int currentGuessPanelIndexValue = CurrentGameState.GuessPanelState[guessPanelIndex];
+			if (currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_REVEALED && currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_NOT_GUESSED)
+			{
+				// Return a letter back to the character panel
+				CurrentGameState.CharacterPanelState[currentGuessPanelIndexValue] = currentGuessPanelIndexValue;
+				CurrentGameState.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+			}
+
+			DisplayGame();
 		}
 
-		void text_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		private void CharacterPanelLetterPressed(int characterPanelIndex)
 		{
-			switch (sender.GetType().ToString())
+			int currentCharacterPanelIndexValue = CurrentGameState.CharacterPanelState[characterPanelIndex];
+			if (currentCharacterPanelIndexValue != GameState.CHARACTERPANEL_LETTER_GUESSED && currentCharacterPanelIndexValue != GameState.CHARACTERPANEL_LETTER_REMOVED)
 			{
-				case "System.Windows.Controls.TextBlock":
-					TextBlock text = (TextBlock)sender;
-					break;
-				default:
-					throw new ApplicationException("Unexpected object.");
+				// Place the chosen letter as a guess of the letter in the next available slot in the guess panel
+				int nextFreeGuessPanelIndex = CurrentGameState.GetNextFreeGuessPanelIndex();
+				if (nextFreeGuessPanelIndex == -1) return;
+				CurrentGameState.GuessPanelState[nextFreeGuessPanelIndex] = currentCharacterPanelIndexValue;
+				CurrentGameState.CharacterPanelState[characterPanelIndex] = GameState.CHARACTERPANEL_LETTER_GUESSED;
 			}
+
+			if (-1 == CurrentGameState.GetNextFreeGuessPanelIndex())
+			{
+				CurrentGameState.CheckAnswer();
+			}
+
+			DisplayGame();
 		}
 
 
