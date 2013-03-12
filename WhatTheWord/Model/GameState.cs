@@ -100,6 +100,7 @@ namespace WhatTheWord.Model
 
 		internal void Initialize(Puzzle CurrentPuzzle)
 		{
+			this.PuzzleWord = CurrentPuzzle.Word;
 			this.GuessPanelState = new int[CurrentPuzzle.Word.Length];
 			for (int i = 0; i < CurrentPuzzle.Word.Length; i++)
 			{
@@ -115,9 +116,14 @@ namespace WhatTheWord.Model
 
 		}
 
-		internal void CheckAnswer()
+		internal bool CheckAnswer()
 		{
-			throw new NotImplementedException();
+			for (int i = 0; i < GuessPanelState.Length; i++)
+			{
+				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i]) return false;
+			}
+
+			return true;
 		}
 	}
 }
