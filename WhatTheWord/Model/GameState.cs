@@ -101,8 +101,8 @@ namespace WhatTheWord.Model
 		internal void Initialize(Puzzle CurrentPuzzle)
 		{
 			this.PuzzleWord = CurrentPuzzle.Word;
-			this.GuessPanelState = new int[CurrentPuzzle.Word.Length];
-			for (int i = 0; i < CurrentPuzzle.Word.Length; i++)
+			this.GuessPanelState = new int[PuzzleWord.Length];
+			for (int i = 0; i < PuzzleWord.Length; i++)
 			{
 				GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
 			}
@@ -120,10 +120,20 @@ namespace WhatTheWord.Model
 		{
 			for (int i = 0; i < GuessPanelState.Length; i++)
 			{
-				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i]) return false;
+				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i] && PuzzleCharacters[GuessPanelState[i]] != GameState.GUESSPANEL_LETTER_REVEALED) return false;
 			}
 
 			return true;
+		}
+
+		internal void CompleteLevel()
+		{
+			CurrentLevel++;
+			Coins = Coins + 2;
+			PuzzleWord = "";
+			PuzzleCharacters = "";
+			GuessPanelState = null;
+			CharacterPanelState = null;
 		}
 	}
 }

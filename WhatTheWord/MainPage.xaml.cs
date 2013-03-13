@@ -165,10 +165,30 @@ namespace WhatTheWord
 
 			if (-1 == CurrentGameState.GetNextFreeGuessPanelIndex())
 			{
-				CurrentGameState.CheckAnswer();
+				if (CurrentGameState.CheckAnswer())
+				{
+					PuzzleComplete();
+					return;
+				}
+				else
+				{
+					PuzzleIncorrect();
+					return;
+				}
 			}
 
 			DisplayGame();
+		}
+
+		private void PuzzleComplete()
+		{
+			CurrentGameState.CompleteLevel();
+			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
+		}
+
+		private void PuzzleIncorrect()
+		{
+			// display incorrect guess
 		}
 
 
