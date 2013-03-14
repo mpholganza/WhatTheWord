@@ -126,6 +126,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
+    <Content Include="Assets\Fonts\nevis.ttf" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -136,10 +138,72 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\PuzzlePictures\icecream.jpg" />
-    <Content Include="Assets\PuzzlePictures\magnets.jpg" />
-    <Content Include="Assets\PuzzlePictures\mangoes.jpg" />
-    <Content Include="Assets\PuzzlePictures\water_houses.jpg" />
+    <Content Include="Assets\boostTile%401280_768.png" />
+    <Content Include="Assets\coinIcon%401280_768.png" />
+    <Content Include="Assets\facebookTile%401280_768.png" />
+    <Content Include="Assets\guessBG%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_a%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_b%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_c%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_clear%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_d%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_e%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_f%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_g%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_h%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_i%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_j%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_k%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_l%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_m%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_n%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_o%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_p%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_q%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_r%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_s%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_t%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_u%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_v%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_w%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_x%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_y%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_z%401280_768.png" />
+    <Content Include="Assets\inGameBG%401280_768.png" />
+    <Content Include="Assets\levelBG%401280_768.png" />
+    <Content Include="Assets\levelIcon%401280_768.png" />
+    <Content Include="Assets\PuzzlePictures\icecream.png" />
+    <Content Include="Assets\PuzzlePictures\magnets.png" />
+    <Content Include="Assets\PuzzlePictures\mangoes.png" />
+    <Content Include="Assets\PuzzlePictures\water_houses.png" />
+    <Content Include="Assets\sandBoxBG%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_a%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_b%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_c%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_d%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_e%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_f%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_g%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_h%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_i%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_j%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_k%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_l%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_m%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_n%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_o%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_p%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_q%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_r%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_s%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_t%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_u%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_v%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_w%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_x%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_y%401280_768.png" />
+    <Content Include="Assets\SandboxLetters\sb_z%401280_768.png" />
+    <Content Include="Assets\settingsButton%401280_768.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -155,6 +219,8 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\topBarBG%401280_768.png" />
+    <Content Include="Assets\undoButton%401280_768.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

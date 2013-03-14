@@ -9,11 +9,12 @@
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
 		
-		<Style x:Key="CharacterBorder" TargetType="Border">
-
-		</Style>
-		<Style x:Key="Character" TargetType="TextBlock">
-
+		<Style x:Key="HeaderFont" TargetType="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+			<Setter Property="FontSize" Value="28" />
 		</Style>
 	</Application.Resources>
 

@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WhatTheWord.Resources;
 using WhatTheWord.Model;
+using System.Windows.Media.Imaging;
 
 namespace WhatTheWord
 {
@@ -51,10 +52,10 @@ namespace WhatTheWord
 		{
 			return new Puzzle("randomus")
 			{
-				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.jpg", Credits = "mph" },
-				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.jpg", Credits = "mph" },
-				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.jpg", Credits = "mph" },
-				Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.jpg", Credits = "mph" },
+				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
+				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
+				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
+				Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
 			};
 		}
 
@@ -69,70 +70,68 @@ namespace WhatTheWord
 			GuessPanel.Children.Clear();
 			for (int i = 0; i < CurrentGameState.GuessPanelState.Length; i++)
 			{
-				TextBlock guessText = new TextBlock();
-				guessText.Width = 48;
-				guessText.Height = 48;
+				Image letterImage = new Image();
+				letterImage.Width = 36;
+				letterImage.Height = 36;
 				switch (CurrentGameState.GuessPanelState[i]) {
 					case GameState.GUESSPANEL_LETTER_NOT_GUESSED:
-						guessText.Text = "_";
+						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_clear@1280_768.png", UriKind.Relative));
 						break;
 					case GameState.GUESSPANEL_LETTER_REVEALED:
 						// TODO: Style this differently
-						guessText.Text = CurrentGameState.PuzzleWord[i].ToString();
+						string correctLetter = CurrentGameState.PuzzleWord[i].ToString();
+						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_" + correctLetter + "@1280_768.png", UriKind.Relative));
 						break;
 					default:
-						guessText.Text = CurrentGameState.PuzzleCharacters[CurrentGameState.GuessPanelState[i]].ToString();
+						string guessLetter = CurrentGameState.PuzzleCharacters[CurrentGameState.GuessPanelState[i]].ToString();
+						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_" + guessLetter + "@1280_768.png", UriKind.Relative));
 						break;
 				}
 
 				var x = i;
-				guessText.Tap += (sender, e) =>
+				letterImage.Tap += (sender, e) =>
 				{
 					GuessPanelLetterPressed(x);
 				};
 
-				GuessPanel.Children.Add(guessText);
+				GuessPanel.Children.Add(letterImage);
 			}
 
 			LetterPickerPanel1.Children.Clear(); LetterPickerPanel2.Children.Clear();
 			for (int i = 0; i < CurrentGameState.CharacterPanelState.Length; i++)
 			{
-				TextBlock text = new TextBlock();
+				Image letterImage = new Image();
 				// TODO: This style info should be in a resource file
-				text.Height = 48;
-				text.Width = 48;
-				text.Style = (Style)Application.Current.Resources["Character"];
+				letterImage.Height = 48;
+				letterImage.Width = 48;
 
 				switch (CurrentGameState.CharacterPanelState[i])
 				{
 					case GameState.CHARACTERPANEL_LETTER_REMOVED:
-						text.Text = "*";
+						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
 						break;
 					case GameState.CHARACTERPANEL_LETTER_GUESSED:
-						text.Text = "_";
+						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
 						break;
 					default:
-						text.Text = CurrentGameState.PuzzleCharacters[i].ToString();
+						string letter = CurrentGameState.PuzzleCharacters[i].ToString();
+						letterImage.Source = new BitmapImage(new Uri("/Assets/SandboxLetters/sb_" + letter + "@1280_768.png", UriKind.Relative));
 						break;
 				}
 
 				var x = i;
-				text.Tap += (sender, e) =>
+				letterImage.Tap += (sender, e) =>
 				{
 					CharacterPanelLetterPressed(x);
 				};
 
-				Border border = new Border();
-				border.Child = text;
-				border.Style = (Style)Application.Current.Resources["CharacterBorder"];
-
 				if (0 == i % 2)
 				{
-					LetterPickerPanel1.Children.Add(border);
+					LetterPickerPanel1.Children.Add(letterImage);
 				}
 				else
 				{
-					LetterPickerPanel2.Children.Add(border);
+					LetterPickerPanel2.Children.Add(letterImage);
 				}
 			}
 		}
