@@ -141,23 +141,7 @@ namespace WhatTheWord
 
 		private void ClearButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			// Clear guess panel
-			for (int i = 0; i < CurrentGameState.GuessPanelState.Length; i++)
-			{
-				if (CurrentGameState.GuessPanelState[i] != GameState.GUESSPANEL_LETTER_REVEALED)
-				{
-					CurrentGameState.GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
-				}
-			}
-
-			// Clear character panel
-			for (int i = 0; i < CurrentGameState.CharacterPanelState.Length; i++)
-			{
-				if (CurrentGameState.CharacterPanelState[i] != GameState.CHARACTERPANEL_LETTER_REMOVED)
-				{
-					CurrentGameState.CharacterPanelState[i] = i;
-				}
-			}
+			CurrentGameState.ClearGuessPanel();
 
 			DisplayGame();
 		}

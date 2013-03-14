@@ -83,8 +83,30 @@ namespace WhatTheWord.Model
 			return -1;
 		}
 
+		internal void ClearGuessPanel()
+		{
+			// Clear guess panel
+			for (int i = 0; i < GuessPanelState.Length; i++)
+			{
+				if (GuessPanelState[i] != GameState.GUESSPANEL_LETTER_REVEALED)
+				{
+					GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+				}
+			}
+
+			// Clear character panel
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				if (CharacterPanelState[i] != GameState.CHARACTERPANEL_LETTER_REMOVED)
+				{
+					CharacterPanelState[i] = i;
+				}
+			}
+		}
+
 		public void JumblePuzzleCharacters()
 		{
+			this.ClearGuessPanel();
 			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
 		}
 
