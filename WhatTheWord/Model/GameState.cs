@@ -83,6 +83,11 @@ namespace WhatTheWord.Model
 			return -1;
 		}
 
+		public void JumblePuzzleCharacters()
+		{
+			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
+		}
+
 		public void WriteGameDataToFile()
 		{
 			FileAccess.WriteDataToFileAsync(this.ToString(), "ms-appdata:///local/gamestate.txt");
@@ -113,7 +118,6 @@ namespace WhatTheWord.Model
 			{
 				CharacterPanelState[i] = i;
 			}
-
 		}
 
 		internal bool CheckAnswer()

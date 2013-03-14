@@ -111,7 +111,7 @@
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image Grid.Column="2" Width="36" Height="36" Source="/Assets/undoButton@1280_768.png"/>
+			<Image x:Name="ShuffleButton" Grid.Column="2" Width="36" Height="36" Source="/Assets/undoButton@1280_768.png"/>
 		</Grid>
 
 		<!--Character Panel Grid-->

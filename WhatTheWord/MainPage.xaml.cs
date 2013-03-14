@@ -35,6 +35,7 @@ namespace WhatTheWord
 			DisplayGame();
 
 			ClearButton.Tap += ClearButton_Tap;
+			ShuffleButton.Tap += ShuffleButton_Tap;
 		}
 
 		/// <summary>
@@ -157,6 +158,13 @@ namespace WhatTheWord
 					CurrentGameState.CharacterPanelState[i] = i;
 				}
 			}
+
+			DisplayGame();
+		}
+
+		private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			CurrentGameState.JumblePuzzleCharacters();
 
 			DisplayGame();
 		}
