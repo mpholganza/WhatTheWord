@@ -44,9 +44,12 @@
 			<Image Grid.Column="0" Source="/Assets/levelBG@1280_768.png" Stretch="Fill"/>
 			<Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="16,0,0,0"/>
 			<TextBlock Grid.Column="0" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" Margin="64,0,12,0"/>
-			<Image Grid.Column="1" Source="/Assets/coinIcon@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="0,0,64,0"/>
-			<TextBlock Grid.Column="1" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
-			<Image Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" Width="48" Height="48"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+			    <Image Source="/Assets/coinIcon@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+			    <TextBlock Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
+                <Image x:Name="CoinsButton" Source="/Assets/undoButton@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="12,0,0,0"/>
+            </StackPanel>
+            <Image Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" Width="48" Height="48"/>
 		</Grid>
 		
 		<!--Images Grid-->
@@ -144,7 +147,7 @@
 				</StackPanel.Resources>
 			</StackPanel>
 			<Image Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left"/>
-			<Image Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left"/>
+			<Image x:Name="FacebookButton" Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left" Tap="FacebookButton_Tap"/>
 		</Grid>
 
 		<!-- LOCALIZATION NOTE:

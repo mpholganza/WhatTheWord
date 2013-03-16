@@ -10,6 +10,8 @@ using Microsoft.Phone.Shell;
 using WhatTheWord.Resources;
 using WhatTheWord.Model;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls.Primitives;
+using WhatTheWord.Popups;
 
 namespace WhatTheWord
 {
@@ -17,6 +19,11 @@ namespace WhatTheWord
 	{
 		public Puzzle CurrentPuzzle { get; set; }
 		public GameState CurrentGameState { get; set; }
+
+        Popup _CoinsPopup = new Popup();
+        Popup _FacebookPopup = new Popup();
+        Popup _BoostPopup = new Popup();
+
 		// Constructor
 		public MainPage()
 		{
@@ -35,7 +42,9 @@ namespace WhatTheWord
 			DisplayGame();
 
 			ClearButton.Tap += ClearButton_Tap;
-			ShuffleButton.Tap += ShuffleButton_Tap;
+            ShuffleButton.Tap += ShuffleButton_Tap;
+            CoinsButton.Tap += CoinsButton_Tap;
+            FacebookButton.Tap += FacebookButton_Tap;
 		}
 
 		/// <summary>
@@ -140,6 +149,21 @@ namespace WhatTheWord
 			}
 		}
 
+        private void DisplayFacebookPopup()
+        {
+            double hostWidth = Application.Current.Host.Content.ActualWidth;
+            double hostHeight = Application.Current.Host.Content.ActualHeight;
+
+            FacebookUserControl facebookUserControl = new FacebookUserControl(this.LayoutRoot, hostWidth, hostHeight);
+
+            _FacebookPopup.HorizontalOffset = (hostWidth - facebookUserControl.PopupWidth) / 2.0;
+            _FacebookPopup.VerticalOffset = (hostHeight - facebookUserControl.PopupHeight) / 4.0 + 30;
+
+            _FacebookPopup.Child = facebookUserControl;
+
+            _FacebookPopup.IsOpen = true;
+        }
+
 		private void ClearButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			CurrentGameState.ClearGuessPanel();
@@ -153,6 +177,16 @@ namespace WhatTheWord
 
 			DisplayGame();
 		}
+
+        private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            // TODO: display coins popup
+        }
+
+        private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            DisplayFacebookPopup();
+        }
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
