@@ -85,6 +85,7 @@ namespace WhatTheWord.Popups
         private void webBrowser1_Loaded(object sender, RoutedEventArgs e)
         {
             this.isBrowserLoaded = true;
+            bool b = this.isBrowserLoaded;
         }
 
         private Uri GetFacebookLoginUrl(string appId, string extendedPermissions)

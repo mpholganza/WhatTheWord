@@ -8,6 +8,14 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using WhatTheWord.Resources;
 
+#if DEBUG
+using MockIAPLib;
+using System.Xml.Linq;
+using Store = MockIAPLib;
+#else
+using Windows.ApplicationModel.Store;
+#endif
+
 namespace WhatTheWord
 {
 	public partial class App : Application
@@ -54,8 +62,27 @@ namespace WhatTheWord
 				// and consume battery power when the user is not using the phone.
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
+            SetupMockIAP();
 
 		}
+
+        private void SetupMockIAP()
+        {
+#if DEBUG
+            MockIAP.Init();
+
+            var sri = App.GetResourceStream(new Uri("MockupLicenseInfo.xml", UriKind.Relative));
+            XDocument doc = XDocument.Load(sri.Stream);
+            string xml = doc.ToString();
+
+            MockIAP.RunInMockMode(true);
+            MockIAP.SetListingInformation(1, "en-us", "In-App Purchase sample app", "Free", "In-App Purchase Test");
+
+            MockIAP.PopulateIAPItemsFromXml(xml);
+
+            MockIAP.ClearCache();
+#endif
+        }
 
 		// Code to execute when the application is launching (eg, from Start)
 		// This code will not execute when the application is reactivated

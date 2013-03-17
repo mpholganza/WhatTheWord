@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProductListings>
+  <!-- Consumables -->
+  <ProductListing Key="100Coins" Purchased="false" Fulfilled="false">
+    <Name>100 Coins</Name>
+    <Description>100 coins for Atomic Coins</Description>
+    <ProductId>WhatTheWord.Consumables.Coins.100</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$10.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;100</Keywords>
+    <Tag>100</Tag>
+  </ProductListing>
+  <ProductListing Key="50Coins" Purchased="false" Fulfilled="false">
+    <Name>50 Coins</Name>
+    <Description>50 coins for Atomic Coins</Description>
+    <ProductId>WhatTheWord.Consumables.Coins.50</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$5.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;50</Keywords>
+    <Tag>50</Tag>
+  </ProductListing>
+  <ProductListing Key="20Coins" Purchased="false" Fulfilled="false">
+    <Name>20 Coins</Name>
+    <Description>20 coins for Atomic Coins</Description>
+    <ProductId>WhatTheWord.Consumables.Coins.20</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$2.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;20</Keywords>
+    <Tag>20</Tag>
+  </ProductListing>
+</ProductListings>

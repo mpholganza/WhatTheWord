@@ -25,12 +25,12 @@ namespace WhatTheWord
         Popup _BoostPopup = new Popup();
 
         FacebookUserControl facebookUserControl;
+        CoinsUserControl coinsUserControl;
 
 		// Constructor
 		public MainPage()
 		{
-			InitializeComponent();
-            InitializeFacebookPopup();
+            InitializeComponent();
 
 			// Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
@@ -47,11 +47,22 @@ namespace WhatTheWord
             facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot, hostWidth, hostHeight);
         }
 
+        private void InitializeCoinsPopup()
+        {
+            double hostWidth = Application.Current.Host.Content.ActualWidth;
+            double hostHeight = Application.Current.Host.Content.ActualHeight;
+
+            coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState, hostWidth, hostHeight);
+        }
+
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadGameState();
 
-			DisplayGame();
+            DisplayGame();
+
+            InitializeFacebookPopup();
+            InitializeCoinsPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
             ShuffleButton.Tap += ShuffleButton_Tap;
@@ -177,7 +188,7 @@ namespace WhatTheWord
 
         private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: display coins popup
+            coinsUserControl.show();
         }
 
         private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
