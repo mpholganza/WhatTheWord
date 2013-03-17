@@ -234,7 +234,7 @@ namespace WhatTheWord.Popups
             {
 
                 // Save the picture to the Windows Phone media library.
-                _bitmap.SaveJpeg(stream, _bitmap.PixelWidth, _bitmap.PixelHeight, 0, 100);
+                _bitmap.SaveJpeg(stream, _bitmap.PixelWidth, _bitmap.PixelHeight, 0, 95);
                 stream.Seek(0, SeekOrigin.Begin);
                 screenshot = ConvertToByteArray(stream);
             }
@@ -248,6 +248,8 @@ namespace WhatTheWord.Popups
 
             //fb.PostAsync("me/feed", parameters);
             fb.PostAsync("me/photos", parameters);
+
+            this.hide();
         }
 
         public byte[] ConvertToByteArray(Stream fileStream)
