@@ -24,16 +24,28 @@ namespace WhatTheWord
         Popup _FacebookPopup = new Popup();
         Popup _BoostPopup = new Popup();
 
+        FacebookUserControl facebookUserControl;
+
 		// Constructor
 		public MainPage()
 		{
 			InitializeComponent();
+            InitializeFacebookPopup();
 
 			// Sample code to localize the ApplicationBar
-			//BuildLocalizedApplicationBar();
+            //BuildLocalizedApplicationBar();
 
-			Loaded += MainPage_Loaded;
+            Loaded += MainPage_Loaded;
+
 		}
+
+        private void InitializeFacebookPopup()
+        {
+            double hostWidth = Application.Current.Host.Content.ActualWidth;
+            double hostHeight = Application.Current.Host.Content.ActualHeight;
+
+            facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot, hostWidth, hostHeight);
+        }
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -149,21 +161,6 @@ namespace WhatTheWord
 			}
 		}
 
-        private void DisplayFacebookPopup()
-        {
-            double hostWidth = Application.Current.Host.Content.ActualWidth;
-            double hostHeight = Application.Current.Host.Content.ActualHeight;
-
-            FacebookUserControl facebookUserControl = new FacebookUserControl(this.LayoutRoot, hostWidth, hostHeight);
-
-            _FacebookPopup.HorizontalOffset = (hostWidth - facebookUserControl.PopupWidth) / 2.0;
-            _FacebookPopup.VerticalOffset = (hostHeight - facebookUserControl.PopupHeight) / 4.0 + 30;
-
-            _FacebookPopup.Child = facebookUserControl;
-
-            _FacebookPopup.IsOpen = true;
-        }
-
 		private void ClearButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			CurrentGameState.ClearGuessPanel();
@@ -185,7 +182,7 @@ namespace WhatTheWord
 
         private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            DisplayFacebookPopup();
+            facebookUserControl.show();
         }
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)

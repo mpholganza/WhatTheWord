@@ -12,6 +12,7 @@ using Facebook;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
+using System.Windows.Controls.Primitives;
 
 namespace WhatTheWord.Popups
 {
@@ -32,6 +33,9 @@ namespace WhatTheWord.Popups
         private readonly FacebookClient _fb = new FacebookClient();
         private string _accessToken = "";
 
+        private bool isBrowserLoaded = false;
+
+        Popup _popup;
         UIElement _screenshotUI;
         WriteableBitmap _bitmap;
 
@@ -41,70 +45,46 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public FacebookUserControl(UIElement screenshotUI, double hostWindowWidth, double hostWindowHeight)
+        public FacebookUserControl(Popup popup, UIElement screenshotUI, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
+
+            _popup = popup;
 
             _screenshotUI = screenshotUI;
 
             this.HostWindowWidth = hostWindowWidth;
             this.HostWindowHeight = hostWindowHeight;
 
-            this.PopupWidth = this.HostWindowWidth - 24;
-            this.PopupHeight = Math.Min(this.HostWindowHeight - 120, 800);
+            HostPanel.Width = this.HostWindowWidth;
+            HostPanel.Height = this.HostWindowHeight;
 
-            this.Visibility = System.Windows.Visibility.Collapsed;
-            webBrowser1.Visibility = System.Windows.Visibility.Collapsed;
-            SharePanel.Visibility = System.Windows.Visibility.Collapsed;
-        }
+            Overlay.Width = this.HostWindowWidth;
+            Overlay.Height = this.HostWindowHeight;
 
-        private static bool fadedIn = false;
+            this.PopupWidth = this.HostWindowWidth * 0.9;
+            this.PopupHeight = this.HostWindowHeight * 0.8;
 
-        private void fadeIn(FrameworkElement ui)
-        {
-            if (fadedIn)
-            {
-                return;
-            }
-            fadedIn = true;
-            // Create a duration of 2 seconds.
-            Duration duration = new Duration(TimeSpan.FromMilliseconds(200));
+            HeaderPanel.Width = this.PopupWidth;
+            HeaderPanel.Height = 102;
 
-            // Create two DoubleAnimations and set their properties.
-            DoubleAnimation myDoubleAnimation1 = new DoubleAnimation();
-            DoubleAnimation myDoubleAnimation2 = new DoubleAnimation();
+            ContentPanel.Width = this.PopupWidth;
+            //ContentPanel.MaxHeight = this.PopupHeight - HeaderPanel.Height;
 
-            myDoubleAnimation1.Duration = duration;
-            myDoubleAnimation2.Duration = duration;
+            webBrowser1.Width = this.PopupWidth;
+            webBrowser1.Height = this.PopupHeight - HeaderPanel.Height;
 
-            Storyboard sb = new Storyboard();
-            sb.Duration = duration;
+            int leftMargin = (int) ((HostPanel.Width - this.PopupWidth) / 2.0);
+            int topMargin = (int) ((HostPanel.Height - this.PopupHeight) / 2.0);
 
-            sb.Children.Add(myDoubleAnimation1);
-            sb.Children.Add(myDoubleAnimation2);
-
-            Storyboard.SetTarget(myDoubleAnimation1, ui);
-            Storyboard.SetTarget(myDoubleAnimation2, ui);
-
-            // Set the attached properties of Canvas.Left and Canvas.Top
-            // to be the target properties of the two respective DoubleAnimations.
-            Storyboard.SetTargetProperty(myDoubleAnimation1, new PropertyPath("Width"));
-            Storyboard.SetTargetProperty(myDoubleAnimation2, new PropertyPath("Height"));
-
-            myDoubleAnimation1.From = 0;
-            myDoubleAnimation1.To = this.PopupWidth;
-
-            myDoubleAnimation2.From = 0;
-            myDoubleAnimation2.To = this.PopupHeight;
-
-            sb.Begin();
-            //new Animation.SizeAnimation(ui.ActualWidth, ui.ActualHeight).Apply(ui);
+            HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
+            ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
+            webBrowser1.Margin = new Thickness(leftMargin, 0, 0 , 0);
         }
 
         private void webBrowser1_Loaded(object sender, RoutedEventArgs e)
         {
-            var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
-            webBrowser1.Navigate(loginUrl);
+            this.isBrowserLoaded = true;
         }
 
         private Uri GetFacebookLoginUrl(string appId, string extendedPermissions)
@@ -125,27 +105,85 @@ namespace WhatTheWord.Popups
             return _fb.GetLoginUrl(parameters);
         }
 
+        public void show()
+        {
+            showLoading();
+
+            var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
+            webBrowser1.Navigate(loginUrl);
+
+        }
+
+        public void hide()
+        {
+            _popup.IsOpen = false;
+        }
+
+        private void showLoading()
+        {
+            Overlay.Visibility = System.Windows.Visibility.Visible;
+
+            HeaderPanel.Visibility = System.Windows.Visibility.Collapsed;
+            webBrowser1.Visibility = System.Windows.Visibility.Collapsed;
+            ContentPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (!_popup.IsOpen)
+            {
+                _popup.Child = this;
+                _popup.IsOpen = true;
+            }
+        }
+
+        private void showLogin()
+        {
+            HeaderTitle.Text = "Login";
+
+            Overlay.Visibility = System.Windows.Visibility.Visible;
+            HeaderPanel.Visibility = System.Windows.Visibility.Visible;
+            webBrowser1.Visibility = System.Windows.Visibility.Visible;
+
+            ContentPanel.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (!_popup.IsOpen)
+            {
+                _popup.Child = this;
+                _popup.IsOpen = true;
+            }
+        }
+
+        private void showPost()
+        {
+            HeaderTitle.Text = "Share";
+
+            Overlay.Visibility = System.Windows.Visibility.Visible;
+            HeaderPanel.Visibility = System.Windows.Visibility.Visible;
+            ContentPanel.Visibility = System.Windows.Visibility.Visible;
+
+            webBrowser1.Visibility = System.Windows.Visibility.Collapsed;
+
+            if (!_popup.IsOpen)
+            {
+                _popup.Child = this;
+                _popup.IsOpen = true;
+            }
+        }
+
         private void webBrowser1_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             FacebookOAuthResult oauthResult;
             if (!_fb.TryParseOAuthCallbackUrl(e.Uri, out oauthResult))
             {
-                fadeIn(this);
-                SharePanel.Visibility = System.Windows.Visibility.Collapsed;
-                this.Visibility = System.Windows.Visibility.Visible;
-                webBrowser1.Visibility = System.Windows.Visibility.Visible;
+                showLogin();
                 return;
             }
 
             if (oauthResult.IsSuccess)
             {
                 _accessToken = oauthResult.AccessToken;
-                webBrowser1.Visibility = System.Windows.Visibility.Collapsed;
-                this.Visibility = System.Windows.Visibility.Visible;
-                SharePanel.Visibility = System.Windows.Visibility.Visible;
+
+                showPost();
 
                 TakeScreenshot();
-                //LoginSucceded(accessToken);
             }
             else
             {
@@ -166,17 +204,6 @@ namespace WhatTheWord.Popups
 
             //SaveToMediaLibrary(bmpCurrentScreenImage, fileName, 100);
             //MessageBox.Show("Captured image " + fileName + " Saved Sucessfully", "WmDev Capture Screen", MessageBoxButton.OK);
-        }
-
-        public void SaveToMediaLibrary(WriteableBitmap bitmap, string name, int quality)
-        {
-            using (var stream = new MemoryStream())
-            {
-                // Save the picture to the Windows Phone media library.
-                bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, quality);
-                stream.Seek(0, SeekOrigin.Begin);
-                new Microsoft.Xna.Framework.Media.MediaLibrary().SavePicture(name, stream);
-            }
         }
 
         private void PostButton_Click_1(object sender, RoutedEventArgs routedEventArgs)
@@ -222,10 +249,6 @@ namespace WhatTheWord.Popups
             fb.PostAsync("me/photos", parameters);
         }
 
-        /// Converts to byte array.
-        /// 
-        /// "fileStream">The file stream.
-        /// 
         public byte[] ConvertToByteArray(Stream fileStream)
         {
             if (fileStream != null)
@@ -238,6 +261,11 @@ namespace WhatTheWord.Popups
             }
 
             return null;
+        }
+
+        private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            this.hide();
         }
 
 
@@ -262,5 +290,60 @@ namespace WhatTheWord.Popups
         ////    };
 
         ////    fb.GetAsync("me?fields=id");
+
+        private static bool fadedIn = false;
+
+        private void fadeIn(FrameworkElement ui)
+        {
+            if (fadedIn)
+            {
+                return;
+            }
+            fadedIn = true;
+            // Create a duration of 2 seconds.
+            Duration duration = new Duration(TimeSpan.FromMilliseconds(200));
+
+            // Create two DoubleAnimations and set their properties.
+            DoubleAnimation myDoubleAnimation1 = new DoubleAnimation();
+            DoubleAnimation myDoubleAnimation2 = new DoubleAnimation();
+
+            myDoubleAnimation1.Duration = duration;
+            myDoubleAnimation2.Duration = duration;
+
+            Storyboard sb = new Storyboard();
+            sb.Duration = duration;
+
+            sb.Children.Add(myDoubleAnimation1);
+            sb.Children.Add(myDoubleAnimation2);
+
+            Storyboard.SetTarget(myDoubleAnimation1, ui);
+            Storyboard.SetTarget(myDoubleAnimation2, ui);
+
+            // Set the attached properties of Canvas.Left and Canvas.Top
+            // to be the target properties of the two respective DoubleAnimations.
+            Storyboard.SetTargetProperty(myDoubleAnimation1, new PropertyPath("Width"));
+            Storyboard.SetTargetProperty(myDoubleAnimation2, new PropertyPath("Height"));
+
+            myDoubleAnimation1.From = 0;
+            myDoubleAnimation1.To = this.PopupWidth;
+
+            myDoubleAnimation2.From = 0;
+            myDoubleAnimation2.To = this.PopupHeight;
+
+            sb.Begin();
+            //new Animation.SizeAnimation(ui.ActualWidth, ui.ActualHeight).Apply(ui);
+        }
+
+        public void SaveToMediaLibrary(WriteableBitmap bitmap, string name, int quality)
+        {
+            using (var stream = new MemoryStream())
+            {
+                // Save the picture to the Windows Phone media library.
+                bitmap.SaveJpeg(stream, bitmap.PixelWidth, bitmap.PixelHeight, 0, quality);
+                stream.Seek(0, SeekOrigin.Begin);
+                new Microsoft.Xna.Framework.Media.MediaLibrary().SavePicture(name, stream);
+            }
+        }
     }
+
 }

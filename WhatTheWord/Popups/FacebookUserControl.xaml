@@ -9,29 +9,67 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    >
 
+    <Grid x:Name="HostPanel" Margin="0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="Overlay" Grid.Row="0" Grid.RowSpan="2" Background="Black" Opacity="0.5" Margin="0"/>
 
-    <!--ContentPanel - place additional content here-->
-    <Grid x:Name="ContentPanel" Grid.Row="1" Background="#3B5998">
+        <Grid x:Name="HeaderPanel" Grid.Row="0" Background="#EECC5D" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-        <phone:WebBrowser x:Name="webBrowser1" Margin="12,17,12,17" IsScriptEnabled="True" Navigated="webBrowser1_Navigated" Loaded="webBrowser1_Loaded"/>
+            <Image x:Name="BackButton" Grid.Column="0" Source="/Assets/backButton@1280_768.png" HorizontalAlignment="Left" Margin="12,0,0,0" Height="78" Width="78" Stretch="Fill" Tap="BackButton_Tap" />
 
-        <StackPanel x:Name="SharePanel" Margin="12,17,12,17">
-            <TextBlock Text="Post to Wall" Margin="9,0,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="320"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" x:Name="Message" TextWrapping="Wrap" Text="Hum... what is this word supposed to be?" Height="180" IsReadOnly="False"/>
-                <Image Grid.Column="1" x:Name="Screenshot" Height="160" Margin="0,10,8,5"/>
-            </Grid>
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="PostButton" Content="Post" Width="160" Click="PostButton_Click_1"/>
-                <Button Content="Cancel" Width="160" />
+            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="Login" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}" />
+
+            <Image Grid.Column="2" Source="/Assets/facebookTile@1280_768.png" Margin="0,0,12,0" Height="55" Width="55" Stretch="Fill" />
+            
+        </Grid>
+
+        <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0"
+                          IsScriptEnabled="True" Navigated="webBrowser1_Navigated" Loaded="webBrowser1_Loaded"  
+                          BorderBrush="#F5F5ED" BorderThickness="4,3,4,4" />
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Background="#F5F5ED" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+
+            <StackPanel x:Name="SharePanel" Margin="12,17,12,17">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left"
+                           x:Name="Screenshot" Height="160" Margin="8,10,0,0"/>
+
+                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="Message" TextWrapping="Wrap" Text="Help me guess this word!" Height="180" IsReadOnly="False"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Button x:Name="PostButton" Width="160" Click="PostButton_Click_1" Padding="0">
+                        <Grid>
+                            <Image Source="/Assets/cancelPostButton@1280_768.png" Stretch="Fill"/>
+                            <TextBlock Text="Post" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+                </Grid>
             </StackPanel>
-        </StackPanel>
+            
+        </Grid>
 
     </Grid>
 

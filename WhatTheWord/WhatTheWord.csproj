@@ -135,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\correctSlider%401280_768.png" />
+    <Content Include="Assets\backButton%401280_768.png" />
+    <Content Include="Assets\cancelPostButton%401280_768.png" />
+    <Content Include="Assets\cancelPostButton_p%401280_768.png" />
+    <Content Include="Assets\facebookSharePostBG%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
     <Content Include="Assets\gamestate.txt">
