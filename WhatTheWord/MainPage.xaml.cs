@@ -53,8 +53,9 @@ namespace WhatTheWord
 
 		private Puzzle LoadCurrentPuzzle(int currentLevel)
 		{
-			return new Puzzle("randomus")
+			return new Puzzle()
 			{
+				Word = "randomus".ToUpper(),
 				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
 				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
 				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },

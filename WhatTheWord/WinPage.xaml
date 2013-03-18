@@ -11,26 +11,37 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Margin="0">
+		<Grid.Background>
+			<ImageBrush Stretch="Fill" ImageSource="/Assets/winTransitionBG@1280_768.png"/>
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="CORRECT!" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Awesome!" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
+		<StackPanel HorizontalAlignment="Center" Height="256" Grid.Row="1" VerticalAlignment="Top" Width="480">
+			<StackPanel.Background>
+				<ImageBrush Stretch="Fill" ImageSource="/Assets/infoBG@1280_768.png"/>
+			</StackPanel.Background>
+			<!--<Image Source="/Assets/PuzzlePictures/mangoes.png"></Image>-->
+			<TextBlock Text="NICE JOB!"></TextBlock>
+			<TextBlock Text="The word was:"></TextBlock>
+			<StackPanel x:Name="WinWord"></StackPanel>
+			<TextBlock Text="Coins earned:"></TextBlock>
+			<StackPanel>
+				<Image x:Name="WinImage"></Image>
+				<TextBlock x:Name="WinCoins"></TextBlock>
+			</StackPanel>
+		</StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<Button x:Name="NextPuzzle" Content="Next" HorizontalAlignment="Left" Margin="0,535,0,0" VerticalAlignment="Top" />
-
+		<Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
+			<Button x:Name="NextPuzzle" Content="Next Puzzle" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
 		</Grid>
-    </Grid>
+	</Grid>
 
 </phone:PhoneApplicationPage>

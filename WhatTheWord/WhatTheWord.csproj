@@ -99,6 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\GameState.cs" />
+    <Compile Include="Model\InAppPurchase.cs" />
     <Compile Include="Model\Puzzle.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,8 +127,42 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
+    <Content Include="Assets\gamestate.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\infoBG%401280_768.png" />
+    <Content Include="Assets\nextPuzzleButton%401280_768.png" />
+    <Content Include="Assets\nextPuzzleButton_p%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_a_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_b_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_c_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_d_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_e_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_f_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_g_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_h_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_i_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_j_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_k_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_l_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_m_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_n_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_o_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_p_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_q_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_r_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_s_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_t_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_u_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_v_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_w_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_x_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_y_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_z_win%401280_768.png" />
+    <Content Include="Assets\winTransitionBG%401280_768.png" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -142,6 +177,8 @@
     <Content Include="Assets\coinIcon%401280_768.png" />
     <Content Include="Assets\facebookTile%401280_768.png" />
     <Content Include="Assets\guessBG%401280_768.png" />
+    <Content Include="Assets\guessBGCorrect%401280_768.png" />
+    <Content Include="Assets\guessBGTryAgain%401280_768.png" />
     <Content Include="Assets\GuessLetters\gb_a%401280_768.png" />
     <Content Include="Assets\GuessLetters\gb_b%401280_768.png" />
     <Content Include="Assets\GuessLetters\gb_c%401280_768.png" />
@@ -204,6 +241,7 @@
     <Content Include="Assets\SandboxLetters\sb_y%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_z%401280_768.png" />
     <Content Include="Assets\settingsButton%401280_768.png" />
+    <Content Include="Assets\shuffleButton%401280_768.png" />
     <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -220,6 +258,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\topBarBG%401280_768.png" />
+    <Content Include="Assets\tryAgainSlider%401280_768.png" />
     <Content Include="Assets\undoButton%401280_768.png" />
   </ItemGroup>
   <ItemGroup>

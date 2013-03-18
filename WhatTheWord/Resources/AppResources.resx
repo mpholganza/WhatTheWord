@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -133,5 +133,39 @@
   </data>
   <data name="AppBarMenuItemText" xml:space="preserve">
     <value>Menu Item</value>
+  </data>
+  <data name="GameStateDefault" xml:space="preserve">
+    <value>status=ok;;;
+flight=4;;;
+dataType=config;;;dataValue=key=initialCoins;value=200;;;;
+dataType=config;;;dataValue=key=boostRemoveLettersCost;value=30;;;;
+dataType=config;;;dataValue=key=boostRemoveLettersNumberOfLetters;value=3;;;;
+dataType=config;;;dataValue=key=boostRevealLetterCost;value=50;;;;
+dataType=config;;;dataValue=key=boostShuffleCost;value=800;;;;
+dataType=config;;;dataValue=key=rewardCoinsPerQuestion;value=5;;;;
+dataType=config;;;dataValue=key=rateMeReward;value=300;;;;
+dataType=config;;;dataValue=key=rateMeShowInitial;value=5;;;;
+dataType=config;;;dataValue=key=rateMeShowReminderInterval;value=10;;;;
+dataType=config;;;dataValue=key=boostBounceTimeInterval;value=10;;;;
+dataType=config;;;dataValue=key=picsFailedDownloadWait;value=15;;;;
+dataType=config;;;dataValue=key=picsSuccessDownloadWait;value=2;;;;
+dataType=config;;;dataValue=key=rateMeURL;value=http://;;;;
+dataType=config;;;dataValue=key=picturesFilenamePath;value=https://s3.amazonaws.com/usa-guessthisword-pictures/;;;;
+dataType=iap;;;dataValue=bundleId=bundle1;price=0.99;coins=300;order=5;name=300 Coins;;;;
+dataType=iap;;;dataValue=bundleId=bundle2;price=1.99;coins=700;order=4;name=600 Coins;discount=+100 FREE;;;;
+dataType=iap;;;dataValue=bundleId=bundle3;price=4.99;coins=2100;order=3;name=1500 Coins;discount=+600 FREE;;;;
+dataType=iap;;;dataValue=bundleId=bundle4;price=9.99;coins=5000;order=2;name=3000 Coins;discount=+2000 FREE;;;;
+dataType=iap;;;dataValue=bundleId=bundle5;price=24.99;coins=15000;order=1;name=7500 Coins;discount=+7500 FREE;;;;
+dataType=puzzles;;;dataValue=id=1;answer=soft;enable=1;order=1;filename1=soft1.zip;credits1=AtomDocs;filename2=soft2.zip;credits2=Chris Chittleborough;filename3=soft3.zip;credits3=flattop341;filename4=soft4.zip;credits4=Biaph;;;
+dataType=puzzles;;;dataValue=id=2;answer=safe;enable=1;order=2;filename1=safe1.zip;credits1=tat;filename2=safe2.zip;credits2=psicologiaclinica;filename3=safe3.zip;credits3=Scott Ableman;filename4=safe4.zip;credits4=mconnors;;;
+dataType=puzzles;;;dataValue=id=3;answer=bass;enable=1;order=3;filename1=bass1.zip;credits1=jeltovski;filename2=bass2.zip;credits2=FranzPisa;filename3=bass3.zip;credits3=chyap28;filename4=bass4.zip;credits4=dpawatts;;;
+dataType=puzzles;;;dataValue=id=4;answer=rack;enable=1;order=4;filename1=rack1.zip;credits1=Danielle Scott;filename2=rack2.zip;credits2=joiseyshowaa;filename3=rack3.zip;credits3=torkildr;filename4=rack4.zip;credits4=_Josh_Lowe_;;;
+dataType=puzzles;;;dataValue=id=5;answer=code;enable=1;order=5;filename1=code1.zip;credits1=hotblack;filename2=code2.zip;credits2=Grafixar;filename3=code3.zip;credits3=mconnors;filename4=code4.zip;credits4=jppi;;;
+dataType=puzzles;;;dataValue=id=6;answer=amazon;enable=1;order=6;filename1=amazon1.zip;credits1=Nicholas_T;filename2=amazon2.zip;credits2=Olga Kruglova;filename3=amazon3.zip;credits3=kalleboo;filename4=amazon4.zip;credits4=sindy;;;
+dataType=puzzles;;;dataValue=id=7;answer=sticky;enable=1;order=7;filename1=sticky1.zip;credits1=diongillard;filename2=sticky2.zip;credits2=earl53;filename3=sticky3.zip;credits3=BotheredByBees;filename4=sticky4.zip;credits4=jurvetson;;;
+dataType=puzzles;;;dataValue=id=8;answer=shiny;enable=1;order=8;filename1=shiny1.zip;credits1=peasap;filename2=sticky2.zip;credits2=Hamed Saber;filename3=sticky3.zip;credits3=Ladyheart;filename4=sticky4.zip;credits4=jdurham;;;
+dataType=puzzles;;;dataValue=id=9;answer=house;enable=1;order=9;filename1=house1.zip;credits1=Hakan Dahlstrom;filename2=house2.zip;credits2=doctor bob;filename3=house3.zip;credits3=ronnieb;filename4=house4.zip;credits4=Dirigentens;;;
+dataType=puzzles;;;dataValue=id=10;answer=park;enable=1;order=10;filename1=park1.zip;credits1=Foter.com;filename2=park2.zip;credits2=wburris;filename3=park3.zip;credits3=radworld;filename4=park4.zip;credits4=kevin dooley;;;
+flight=4;;;</value>
   </data>
 </root>

@@ -17,23 +17,22 @@ namespace WhatTheWord.Model
 		public Picture Picture3 { get; set; }
 		public Picture Picture4 { get; set; }
 
-		public Puzzle(String word)
-		{
-			this.Word = word.ToUpper();
-		}
+		public int Id { get; set; }
+		public bool Enabled { get; set; }
+		public int Order { get; set; }
 
-		public String GeneratePuzzleCharacters()
+		public static String GeneratePuzzleCharacters(String word)
 		{
-			if (Word.Length > MAX_WORD_LENGTH) throw new ApplicationException("Word is too long");
+			if (word.Length > MAX_WORD_LENGTH) throw new ApplicationException("Word is too long");
 			StringBuilder builder = new StringBuilder();
 			Random random = new Random((int)DateTime.Now.Ticks);
 
-			for (int i = Word.Length; i < Puzzle.GUESS_ARRAY_LENGTH; i++)
+			for (int i = word.Length; i < Puzzle.GUESS_ARRAY_LENGTH; i++)
 			{
 				builder.Append(Convert.ToChar(Convert.ToInt32(Math.Floor(random.NextDouble() * 26 + 65))));
 			}
 
-			String orderedCharacters = Word + builder.ToString();
+			String orderedCharacters = word + builder.ToString();
 
 			return Jumble(orderedCharacters);
 		}
