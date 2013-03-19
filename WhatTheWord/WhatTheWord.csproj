@@ -105,6 +105,9 @@
     <Compile Include="Popups\CoinsUserControl.xaml.cs">
       <DependentUpon>CoinsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\BoostsUserControl.xaml.cs">
+      <DependentUpon>BoostsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\FacebookUserControl.xaml.cs">
       <DependentUpon>FacebookUserControl.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Popups\CoinsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\BoostsUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

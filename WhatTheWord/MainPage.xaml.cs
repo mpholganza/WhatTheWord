@@ -22,10 +22,11 @@ namespace WhatTheWord
 
         Popup _CoinsPopup = new Popup();
         Popup _FacebookPopup = new Popup();
-        Popup _BoostPopup = new Popup();
+        Popup _BoostsPopup = new Popup();
 
         FacebookUserControl facebookUserControl;
         CoinsUserControl coinsUserControl;
+        BoostsUserControl boostsUserControl;
 
 		// Constructor
 		public MainPage()
@@ -41,18 +42,20 @@ namespace WhatTheWord
 
         private void InitializeFacebookPopup()
         {
-            double hostWidth = Application.Current.Host.Content.ActualWidth;
-            double hostHeight = Application.Current.Host.Content.ActualHeight;
-
-            facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot, hostWidth, hostHeight);
+            facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
         private void InitializeCoinsPopup()
         {
-            double hostWidth = Application.Current.Host.Content.ActualWidth;
-            double hostHeight = Application.Current.Host.Content.ActualHeight;
+            coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
 
-            coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState, hostWidth, hostHeight);
+        private void InitializeBoostsPopup()
+        {
+            boostsUserControl = new BoostsUserControl(_BoostsPopup, CurrentGameState,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
@@ -63,6 +66,7 @@ namespace WhatTheWord
 
             InitializeFacebookPopup();
             InitializeCoinsPopup();
+            InitializeBoostsPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
             ShuffleButton.Tap += ShuffleButton_Tap;
@@ -185,6 +189,11 @@ namespace WhatTheWord
 
 			DisplayGame();
 		}
+
+        private void BoostsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            boostsUserControl.show();
+        }
 
         private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {

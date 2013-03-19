@@ -146,7 +146,7 @@
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left"/>
+			<Image Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left" Tap="BoostsButton_Tap"/>
 			<Image x:Name="FacebookButton" Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left" Tap="FacebookButton_Tap"/>
 		</Grid>
 
