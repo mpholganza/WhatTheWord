@@ -83,6 +83,11 @@ namespace WhatTheWord.Model
 			}
 		}
 
+		public Puzzle getCurrentPuzzle()
+		{
+			return Puzzles.Find(i => i.Order == CurrentLevel);
+		}
+
 		#region Parse Functions
 		public void DeserializeGameData(string gameData)
 		{
@@ -424,7 +429,9 @@ namespace WhatTheWord.Model
 			key = kvp[0];
 			value = kvp[1];
 		}
+		#endregion
 
+		#region Gameplay logic
 		public int GetNextFreeGuessPanelIndex()
 		{
 			if (GuessPanelState != null)
@@ -437,7 +444,6 @@ namespace WhatTheWord.Model
 
 			return -1;
 		}
-		#endregion
 
 		internal void ClearGuessPanel()
 		{
@@ -465,6 +471,28 @@ namespace WhatTheWord.Model
 			this.ClearGuessPanel();
 			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
 		}
+
+		internal bool CheckAnswer()
+		{
+			for (int i = 0; i < GuessPanelState.Length; i++)
+			{
+				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i] && PuzzleCharacters[GuessPanelState[i]] != GameState.GUESSPANEL_LETTER_REVEALED) return false;
+			}
+
+			return true;
+		}
+
+		internal void CompleteLevel()
+		{
+			CurrentLevel++;
+			Coins = Coins + 2;
+			PuzzleWord = "";
+			PuzzleCharacters = "";
+			GuessPanelState = null;
+			CharacterPanelState = null;
+		}
+
+		#endregion
 
 		public void WriteGameDataToFile()
 		{
@@ -496,26 +524,6 @@ namespace WhatTheWord.Model
 			{
 				CharacterPanelState[i] = i;
 			}
-		}
-
-		internal bool CheckAnswer()
-		{
-			for (int i = 0; i < GuessPanelState.Length; i++)
-			{
-				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i] && PuzzleCharacters[GuessPanelState[i]] != GameState.GUESSPANEL_LETTER_REVEALED) return false;
-			}
-
-			return true;
-		}
-
-		internal void CompleteLevel()
-		{
-			CurrentLevel++;
-			Coins = Coins + 2;
-			PuzzleWord = "";
-			PuzzleCharacters = "";
-			GuessPanelState = null;
-			CharacterPanelState = null;
 		}
 	}
 }

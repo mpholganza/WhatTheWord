@@ -101,7 +101,7 @@
     <Compile Include="Model\GameState.cs" />
     <Compile Include="Model\InAppPurchase.cs" />
     <Compile Include="Model\Puzzle.cs" />
-    <Compile Include="Picture.cs" />
+    <Compile Include="Model\Picture.cs" />
     <Compile Include="Popups\CoinsUserControl.xaml.cs">
       <DependentUpon>CoinsUserControl.xaml</DependentUpon>
     </Compile>

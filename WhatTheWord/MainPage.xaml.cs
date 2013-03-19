@@ -20,58 +20,58 @@ namespace WhatTheWord
 		public Puzzle CurrentPuzzle { get; set; }
 		public GameState CurrentGameState { get; set; }
 
-        Popup _CoinsPopup = new Popup();
-        Popup _FacebookPopup = new Popup();
-        Popup _BoostsPopup = new Popup();
+		Popup _CoinsPopup = new Popup();
+		Popup _FacebookPopup = new Popup();
+		Popup _BoostsPopup = new Popup();
 
-        FacebookUserControl facebookUserControl;
-        CoinsUserControl coinsUserControl;
-        BoostsUserControl boostsUserControl;
+		FacebookUserControl facebookUserControl;
+		CoinsUserControl coinsUserControl;
+		BoostsUserControl boostsUserControl;
 
 		// Constructor
 		public MainPage()
 		{
-            InitializeComponent();
+			InitializeComponent();
 
 			// Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+			//BuildLocalizedApplicationBar();
 
-            Loaded += MainPage_Loaded;
+			Loaded += MainPage_Loaded;
 
 		}
 
-        private void InitializeFacebookPopup()
-        {
-            facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot,
-                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
-        }
+		private void InitializeFacebookPopup()
+		{
+			facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
 
-        private void InitializeCoinsPopup()
-        {
-            coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState,
-                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
-        }
+		private void InitializeCoinsPopup()
+		{
+			coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
 
-        private void InitializeBoostsPopup()
-        {
-            boostsUserControl = new BoostsUserControl(_BoostsPopup, CurrentGameState,
-                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
-        }
+		private void InitializeBoostsPopup()
+		{
+			boostsUserControl = new BoostsUserControl(_BoostsPopup, CurrentGameState,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadGameState();
 
-            DisplayGame();
+			DisplayGame();
 
-            InitializeFacebookPopup();
-            InitializeCoinsPopup();
-            InitializeBoostsPopup();
+			InitializeFacebookPopup();
+			InitializeCoinsPopup();
+			InitializeBoostsPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
-            ShuffleButton.Tap += ShuffleButton_Tap;
-            CoinsButton.Tap += CoinsButton_Tap;
-            FacebookButton.Tap += FacebookButton_Tap;
+			ShuffleButton.Tap += ShuffleButton_Tap;
+			CoinsButton.Tap += CoinsButton_Tap;
+			FacebookButton.Tap += FacebookButton_Tap;
 		}
 
 		/// <summary>
@@ -113,7 +113,8 @@ namespace WhatTheWord
 				Image letterImage = new Image();
 				letterImage.Width = 36;
 				letterImage.Height = 36;
-				switch (CurrentGameState.GuessPanelState[i]) {
+				switch (CurrentGameState.GuessPanelState[i])
+				{
 					case GameState.GUESSPANEL_LETTER_NOT_GUESSED:
 						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_clear@1280_768.png", UriKind.Relative));
 						break;
@@ -190,20 +191,20 @@ namespace WhatTheWord
 			DisplayGame();
 		}
 
-        private void BoostsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            boostsUserControl.show();
-        }
+		private void BoostsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			boostsUserControl.show();
+		}
 
-        private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            coinsUserControl.show();
-        }
+		private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			coinsUserControl.show();
+		}
 
-        private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            facebookUserControl.show();
-        }
+		private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			facebookUserControl.show();
+		}
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
