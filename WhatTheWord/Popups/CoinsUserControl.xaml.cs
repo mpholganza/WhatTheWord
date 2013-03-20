@@ -26,8 +26,8 @@ namespace WhatTheWord.Popups
 {
     public partial class CoinsUserControl : UserControl
     {
-        Popup _popup;
-        GameState _gameState;
+        private Popup _popup;
+        private MainPage _mainPage;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -35,12 +35,12 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public CoinsUserControl(Popup popup, GameState gameState, double hostWindowWidth, double hostWindowHeight)
+        public CoinsUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
 
             _popup = popup;
-            _gameState = gameState;
+            _mainPage = mainPage;
 
             this.HostWindowWidth = hostWindowWidth;
             this.HostWindowHeight = hostWindowHeight;
@@ -80,7 +80,7 @@ namespace WhatTheWord.Popups
 
                 foreach (ProductListing listing in listingInformation.ProductListings.Values)
                 {
-                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(listing, _gameState));
+                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(listing, _mainPage));
                 }
             }
             catch (Exception e)

@@ -42,19 +42,19 @@ namespace WhatTheWord
 
 		private void InitializeFacebookPopup()
 		{
-			facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot,
+			facebookUserControl = new FacebookUserControl(_FacebookPopup, this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeCoinsPopup()
 		{
-			coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState,
+			coinsUserControl = new CoinsUserControl(_CoinsPopup, this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeBoostsPopup()
 		{
-			boostsUserControl = new BoostsUserControl(_BoostsPopup, CurrentGameState,
+			boostsUserControl = new BoostsUserControl(_BoostsPopup, this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
@@ -102,7 +102,7 @@ namespace WhatTheWord
 		/// <summary>
 		/// Display game
 		/// </summary>
-		private void DisplayGame()
+		public void DisplayGame()
 		{
 			LayoutRoot.DataContext = CurrentPuzzle;
 			HeaderPanel.DataContext = CurrentGameState;

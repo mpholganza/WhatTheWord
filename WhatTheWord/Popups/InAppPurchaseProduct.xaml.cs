@@ -21,12 +21,13 @@ namespace WhatTheWord.Popups
 {
     public partial class InAppPurchaseProduct : UserControl
     {
-        private GameState _gameState;
-        public InAppPurchaseProduct(ProductListing listing, GameState gameState)
+        private MainPage _mainPage;
+
+        public InAppPurchaseProduct(ProductListing listing, MainPage mainPage)
         {
             InitializeComponent();
 
-            _gameState = gameState;
+            _mainPage = mainPage;
 
             Name.Text = listing.Name;
             Price.Text = listing.FormattedPrice;
@@ -65,8 +66,8 @@ namespace WhatTheWord.Popups
                 }
             }
 
-            _gameState.Coins += coinsToAdd;
-            // TODO: Update UI to display the new game state
+            _mainPage.CurrentGameState.Coins += coinsToAdd;
+            _mainPage.DisplayGame();
         }
     }
 }

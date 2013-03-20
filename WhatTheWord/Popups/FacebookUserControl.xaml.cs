@@ -35,9 +35,10 @@ namespace WhatTheWord.Popups
 
         private bool isBrowserLoaded = false;
 
-        Popup _popup;
-        UIElement _screenshotUI;
-        WriteableBitmap _bitmap;
+        private Popup _popup;
+        private MainPage _mainPage;
+        private UIElement _screenshotUI;
+        private WriteableBitmap _bitmap;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -45,13 +46,13 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public FacebookUserControl(Popup popup, UIElement screenshotUI, double hostWindowWidth, double hostWindowHeight)
+        public FacebookUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
 
             _popup = popup;
-
-            _screenshotUI = screenshotUI;
+            _mainPage = mainPage;
+            _screenshotUI = _mainPage.LayoutRoot;
 
             this.HostWindowWidth = hostWindowWidth;
             this.HostWindowHeight = hostWindowHeight;

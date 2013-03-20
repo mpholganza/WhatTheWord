@@ -19,47 +19,6 @@
             <Setter Property="Margin" Value="12,0,0,0" />
         </Style>
 
-        <Style x:Key="CoinBorder" TargetType="Border">
-            <Setter Property="BorderBrush" Value="#EBEBDC" />
-            <Setter Property="Height" Value="100" />
-            <Setter Property="BorderThickness" Value="0,0,0,3" />
-        </Style>
-
-        <Style x:Key="CoinIcon" TargetType="Image">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Height" Value="70" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-
-        <Style x:Key="CoinName" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="Margin" Value="12,0,0,0" />
-        </Style>
-
-        <Style x:Key="CoinButton" TargetType="Button">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Background" Value="#DF8800" />
-            <Setter Property="Height" Value="80" />
-            <Setter Property="Width" Value="135" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-
-        <Style x:Key="CoinButton_Text" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="20" />
-        </Style>
-
     </UserControl.Resources>
     
     <Grid x:Name="HostPanel" Margin="0">

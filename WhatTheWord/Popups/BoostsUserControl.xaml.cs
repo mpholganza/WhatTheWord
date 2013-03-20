@@ -26,8 +26,8 @@ namespace WhatTheWord.Popups
 {
     public partial class BoostsUserControl : UserControl
     {
-        Popup _popup;
-        GameState _gameState;
+        private Popup _popup;
+        private MainPage _mainPage;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -35,12 +35,12 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public BoostsUserControl(Popup popup, GameState gameState, double hostWindowWidth, double hostWindowHeight)
+        public BoostsUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
 
             _popup = popup;
-            _gameState = gameState;
+            _mainPage = mainPage;
 
             this.HostWindowWidth = hostWindowWidth;
             this.HostWindowHeight = hostWindowHeight;
@@ -112,7 +112,8 @@ namespace WhatTheWord.Popups
 
         private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: add game logic
+            _mainPage.CurrentGameState.JumblePuzzleCharacters();
+            _mainPage.DisplayGame();
         }
     }
 
