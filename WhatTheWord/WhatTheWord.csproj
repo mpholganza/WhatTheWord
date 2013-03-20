@@ -169,6 +169,9 @@
     <Content Include="Assets\infoBG%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton_p%401280_768.png" />
+    <Content Include="Assets\removeALetterBoostIcon%401280_768.png" />
+    <Content Include="Assets\revealALetterBoostIcon%401280_768.png" />
+    <Content Include="Assets\shuffleBoostIcon%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_a_win%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_b_win%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_c_win%401280_768.png" />

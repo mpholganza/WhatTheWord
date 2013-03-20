@@ -54,7 +54,7 @@ namespace WhatTheWord.Popups
             this.PopupWidth = this.HostWindowWidth * 0.9;
 
             HeaderPanel.Width = this.PopupWidth;
-            HeaderPanel.Height = 102;
+            //HeaderPanel.Height = 102;
 
             ContentPanel.Width = this.PopupWidth;
             //ContentPanel.MaxHeight = this.PopupHeight - HeaderPanel.Height;
@@ -102,7 +102,17 @@ namespace WhatTheWord.Popups
 
         private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            // TODO: add game logic
+        }
 
+        private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            // TODO: add game logic
+        }
+
+        private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            // TODO: add game logic
         }
     }
 

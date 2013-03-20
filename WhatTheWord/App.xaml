@@ -15,8 +15,48 @@
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
 			<Setter Property="FontSize" Value="28" />
-		</Style>
-	</Application.Resources>
+        </Style>
+
+        <Style x:Key="Popup_Overlay" TargetType="Grid">
+            <Setter Property="Background" Value="Black" />
+            <Setter Property="Opacity" Value="0.5" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style x:Key="Popup_HeaderPanel" TargetType="Grid">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Background" Value="#EECC5D" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style x:Key="Popup_ContentPanel" TargetType="Grid">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Background" Value="#F5F5ED" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style x:Key="Popup_HeaderFont" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="48" />
+        </Style>
+
+        <Style x:Key="Popup_BackButtonIcon" TargetType="Image">
+            <Setter Property="Source" Value="/Assets/backButton@1280_768.png" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="12,0,0,0" />
+            <Setter Property="Height" Value="60" />
+            <Setter Property="Width" Value="60" />
+            <Setter Property="Stretch" Value="UniformToFill" />
+        </Style>
+        
+    </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
         <!--Required object that handles lifetime events for the application-->
