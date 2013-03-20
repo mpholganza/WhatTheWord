@@ -52,6 +52,14 @@
             <Setter Property="Margin" Value="0" />
         </Style>
 
+        <Style x:Key="BoostButton_Icon" TargetType="Image">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Margin" Value="0,0,3,0" />
+            <Setter Property="Source" Value="/Assets/coinIcon@1280_768.png" />
+        </Style>
+
         <Style x:Key="BoostButton_Text" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -110,7 +118,10 @@
 
                         <Button x:Name="RevealALetterButton" Grid.Column="2" Tap="RevealALetterButton_Tap"
                                    Style="{StaticResource BoostButton}">
-                            <TextBlock Text="20 Coins" Style="{StaticResource BoostButton_Text}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <TextBlock Text="20" Style="{StaticResource BoostButton_Text}"/>
+                            </StackPanel>
                         </Button>
                     </Grid>
                 </Border>
@@ -131,7 +142,10 @@
 
                         <Button x:Name="RemoveALetterButton" Grid.Column="2" Tap="RemoveALetterButton_Tap"
                                    Style="{StaticResource BoostButton}">
-                            <TextBlock Text="50 Coins" Style="{StaticResource BoostButton_Text}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <TextBlock Text="50" Style="{StaticResource BoostButton_Text}"/>
+                            </StackPanel>
                         </Button>
                     </Grid>
                 </Border>
@@ -152,7 +166,10 @@
 
                         <Button x:Name="ShuffleButton" Grid.Column="2" Tap="ShuffleButton_Tap"
                                    Style="{StaticResource BoostButton}">
-                            <TextBlock Text="100 Coins" Style="{StaticResource BoostButton_Text}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <TextBlock Text="100" Style="{StaticResource BoostButton_Text}"/>
+                            </StackPanel>
                         </Button>
                     </Grid>
                 </Border>

@@ -28,11 +28,11 @@ namespace WhatTheWord.Popups
 
             _gameState = gameState;
 
-            ProductName.Text = listing.Name;
+            Name.Text = listing.Name;
             Price.Text = listing.FormattedPrice;
-            PurchaseButton.Tag = listing.ProductId;
+            Button.Tag = listing.ProductId;
 
-            PurchaseButton.Tap += PurchaseButton_Click;
+            Button.Tap += PurchaseButton_Click;
         }
 
         private void PurchaseButton_Click(object sender, RoutedEventArgs e)

@@ -54,7 +54,7 @@ namespace WhatTheWord.Popups
             this.PopupWidth = this.HostWindowWidth * 0.9;
 
             HeaderPanel.Width = this.PopupWidth;
-            HeaderPanel.Height = 102;
+            //HeaderPanel.Height = 102;
 
             ContentPanel.Width = this.PopupWidth;
             //ContentPanel.MaxHeight = this.PopupHeight - HeaderPanel.Height;
@@ -112,21 +112,6 @@ namespace WhatTheWord.Popups
 
             HeaderPanel.Visibility = System.Windows.Visibility.Collapsed;
             ContentPanel.Visibility = System.Windows.Visibility.Collapsed;
-
-            if (!_popup.IsOpen)
-            {
-                _popup.Child = this;
-                _popup.IsOpen = true;
-            }
-        }
-
-        private void showPost()
-        {
-            HeaderTitle.Text = "Share";
-
-            Overlay.Visibility = System.Windows.Visibility.Visible;
-            HeaderPanel.Visibility = System.Windows.Visibility.Visible;
-            ContentPanel.Visibility = System.Windows.Visibility.Visible;
 
             if (!_popup.IsOpen)
             {
