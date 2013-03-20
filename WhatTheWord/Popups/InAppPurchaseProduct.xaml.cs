@@ -29,7 +29,7 @@ namespace WhatTheWord.Popups
 
             _mainPage = mainPage;
 
-            Name.Text = listing.Name;
+            ProductName.Text = listing.Name;
             Price.Text = listing.FormattedPrice;
             Button.Tag = listing.ProductId;
 
