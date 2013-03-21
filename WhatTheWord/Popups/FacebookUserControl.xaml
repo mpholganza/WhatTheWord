@@ -127,7 +127,7 @@
                     <Image x:Name="Screenshot" Style="{StaticResource FacebookPostScreenshot}"/>
                 </Border>
 
-                <TextBox x:Name="Message" Grid.Row="0" Grid.Column="1" Text="Help me guess what this word is! Help me guess what this word is! Help me guess what this word is!"
+                <TextBox x:Name="Message" Grid.Row="0" Grid.Column="1" Text="Help me guess what this word is!"
                             Style="{StaticResource FacebookPostMessage}"/>
 
                 <Button x:Name="PostButton" Grid.Row="1" Grid.Column="1" Tap="PostButton_Tap"
