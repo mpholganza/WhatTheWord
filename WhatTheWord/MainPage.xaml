@@ -47,7 +47,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
 			    <Image Source="/Assets/coinIcon@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
-                <Image x:Name="CoinsButton" Source="/Assets/undoButton@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="12,0,0,0"/>
+                <Image x:Name="CoinsButton" Source="/Assets/coinIapButton@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="12,0,0,0"/>
             </StackPanel>
             <Image Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" HorizontalAlignment="Right" Width="48" Height="48" Margin="0,0,16,0"/>
 		</Grid>

@@ -70,17 +70,33 @@ namespace WhatTheWord.Popups
 
         private async void setupPurchases()
         {
-            ListingInformation listingInformation;
-
             try
             {
-                listingInformation = await CurrentApp.LoadListingInformationAsync();
-
+                ListingInformation listingInformation = await CurrentApp.LoadListingInformationAsync();
+                Dictionary<int, InAppPurchase> unorderedPurchases = new Dictionary<int, InAppPurchase>();
                 ContentStackPanel.Children.Clear();
 
+                // for each registered product on the Store
                 foreach (ProductListing listing in listingInformation.ProductListings.Values)
                 {
-                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(listing, _mainPage));
+                    // if there is a match between a registered product on the Store and our own server data
+                    if (_mainPage.CurrentGameState.Purchases.ContainsKey(listing.ProductId))
+                    {
+                        // add it to the list of products to be displayed
+                        unorderedPurchases.Add(
+                            _mainPage.CurrentGameState.Purchases[listing.ProductId].Order,
+                            _mainPage.CurrentGameState.Purchases[listing.ProductId]);
+                    }
+                }
+
+                // sort the list of products based on Order
+                var list = unorderedPurchases.Keys.ToList();
+                list.Sort();
+
+                // add the list of products in ascending Order
+                foreach (var key in list)
+                {
+                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(unorderedPurchases[key], _mainPage));
                 }
             }
             catch (Exception e)

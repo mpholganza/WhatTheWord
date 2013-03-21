@@ -155,6 +155,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\coinIapButton%401280_768.png" />
     <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
@@ -305,6 +306,7 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

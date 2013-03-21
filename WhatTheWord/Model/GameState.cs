@@ -33,7 +33,7 @@ namespace WhatTheWord.Model
 		public int picsSuccessDownloadWait { get; set; }
 		public string rateMeURL { get; set; }
 		public string picturesFilenamePath { get; set; }
-		public List<InAppPurchase> Purchases { get; set; }
+		public Dictionary<string,InAppPurchase> Purchases { get; set; }
 		public List<Puzzle> Puzzles { get; set; }
 		#endregion
 
@@ -54,6 +54,7 @@ namespace WhatTheWord.Model
 			this.PuzzleCharacters = "";
 			this.GuessPanelState = null;
 			this.CharacterPanelState = null;
+            this.Purchases = new Dictionary<string, InAppPurchase>();
 		}
 
 		public async void LoadGameStateFromFile()
@@ -338,20 +339,21 @@ namespace WhatTheWord.Model
 
 		private void parseInAppPurchase(string iapInfo)
 		{
-			List<InAppPurchase> iaps = new List<InAppPurchase>();
 			string[] kvps = iapInfo.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+
+            InAppPurchase p = null;
+            string bundleId = string.Empty;
+            decimal price = 0;
+            int coins = 0;
+            int order = 0;
+            string name = string.Empty;
+            string discount = string.Empty;
+
 			for (int i = 0; i < kvps.Length; i++)
 			{
 				string key = string.Empty;
 				string value = string.Empty;
 				GetKeyValuePairFromString(kvps[i], out key, out value);
-
-				string bundleId = string.Empty;
-				double price = 0;
-				int coins = 0;
-				int order = 0;
-				string name = string.Empty;
-				string discount = string.Empty;
 
 				bool success = false;
 				switch (key)
@@ -359,23 +361,30 @@ namespace WhatTheWord.Model
 					case "bundleId":
 						bundleId = value;
 						success = true;
+                        p = new InAppPurchase() { BundleId = bundleId };
+				        this.Purchases.Add(bundleId, p);
 						break;
 					case "price":
-						success = double.TryParse(value, out price);
+						success = decimal.TryParse(value, out price);
+                        p.Price = price;
 						break;
 					case "coins":
 						success = int.TryParse(value, out coins);
+                        p.Coins = coins;
 						break;
 					case "order":
 						success = (int.TryParse(value, out order));
+                        p.Order = order;
 						break;
 					case "name":
 						name = value;
 						success = true;
+                        p.Name = name;
 						break;
 					case "discount":
 						discount = value;
 						success = true;
+                        p.Discount = discount;
 						break;
 					default:
 						throw new ApplicationException("Unknown Gatedata InAppPurchase property: " + key);
@@ -385,18 +394,7 @@ namespace WhatTheWord.Model
 				{
 					throw new ApplicationException("Invalid InAppPurchase info. Trouble parsing " + key + ": " + value);
 				}
-
-				iaps.Add(new InAppPurchase()
-				{
-					BundleId = bundleId,
-					Price = price,
-					Coins = coins,
-					Order = order,
-					Name = name,
-				});
 			}
-
-			this.Purchases = iaps;
 		}
 
 		public void GetDataTypeAndDataValue(string dataLine, out string dataType, out string dataValue)

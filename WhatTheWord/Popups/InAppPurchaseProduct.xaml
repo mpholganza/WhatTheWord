@@ -27,12 +27,22 @@
         </Style>
 
         <Style x:Key="ProductName" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Margin" Value="12,0,0,0" />
+        </Style>
+
+        <Style x:Key="ProductDiscount" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="#FF702C" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Margin" Value="12,0,0,0" />
         </Style>
 
@@ -66,11 +76,16 @@
 
             <Image x:Name="Icon" Grid.Column="0" Style="{StaticResource ProductIcon}" />
 
-            <TextBlock x:Name="ProductName" Grid.Column="1" Text="400 coins" 
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock x:Name="ProductName" Text="2000 Coins" 
                        Style="{StaticResource ProductName}"/>
+                <TextBlock x:Name="ProductDiscount" Text="+600 FREE" 
+                       Style="{StaticResource ProductDiscount}"/>
+            </StackPanel>
 
             <Button x:Name="Button" Grid.Column="2" Style="{StaticResource ProductButton}">
-                <TextBlock x:Name="Price" Text="$2000" Style="{StaticResource ProductButton_Text}"/>
+                <TextBlock x:Name="Price" Text="$20.00" 
+                           Style="{StaticResource ProductButton_Text}"/>
             </Button>
         </Grid>
     </Border>
