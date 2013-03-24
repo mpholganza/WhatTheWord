@@ -65,8 +65,17 @@ namespace WhatTheWord.Popups
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
 
+            setupBoosts();
         }
 
+        private void setupBoosts()
+        {
+            RevealALetterButton_Text.Text = _mainPage.CurrentGameState.boostRevealLetterCost.ToString();
+            RemoveALetterButton_Text.Text = _mainPage.CurrentGameState.boostRemoveLettersCost.ToString();
+            ShuffleButton_Text.Text = _mainPage.CurrentGameState.boostShuffleCost.ToString();
+        }
+
+        #region Show and Hide
         public void show()
         {
             if (!_popup.IsOpen)
@@ -79,6 +88,11 @@ namespace WhatTheWord.Popups
         public void hide()
         {
             _popup.IsOpen = false;
+        }
+
+        public bool isOpen()
+        {
+            return _popup.IsOpen;
         }
 
         private void showLoading()
@@ -94,26 +108,71 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
         }
+        #endregion
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             this.hide();
         }
 
+        private void openCoinsPopup()
+        {
+            _mainPage.coinsUserControl.isOpenedFromBoosts = true;
+            _mainPage.coinsUserControl.show();
+        }
+
         private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: add game logic
+            int cost = int.Parse(RevealALetterButton_Text.Text);
+
+            if (cost > _mainPage.CurrentGameState.Coins)
+            {
+                openCoinsPopup();
+            }
+            else
+            {
+                _mainPage.CurrentGameState.Coins -= cost;
+                _mainPage.CurrentGameState.RevealLetter();
+                _mainPage.DisplayGame();
+            }
+            
+            this.hide();
         }
 
         private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: add game logic
+            int cost = int.Parse(RemoveALetterButton_Text.Text);
+
+            if (cost > _mainPage.CurrentGameState.Coins)
+            {
+                openCoinsPopup();
+            }
+            else
+            {
+                _mainPage.CurrentGameState.Coins -= cost;
+                _mainPage.CurrentGameState.RemoveLetter();
+                _mainPage.DisplayGame();
+            }
+
+            this.hide();
         }
 
         private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            _mainPage.CurrentGameState.JumblePuzzleCharacters();
-            _mainPage.DisplayGame();
+            int cost = int.Parse(ShuffleButton_Text.Text);
+
+            if (cost > _mainPage.CurrentGameState.Coins)
+            {
+                openCoinsPopup();
+            }
+            else
+            {
+                _mainPage.CurrentGameState.Coins -= cost;
+                _mainPage.CurrentGameState.JumblePuzzleCharacters();
+                _mainPage.DisplayGame();
+            }
+
+            this.hide();
         }
     }
 

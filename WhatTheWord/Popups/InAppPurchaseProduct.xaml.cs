@@ -23,13 +23,15 @@ namespace WhatTheWord.Popups
     {
         private InAppPurchase _product;
         private MainPage _mainPage;
+        private CoinsUserControl _coinsUserControl;
 
-        public InAppPurchaseProduct(InAppPurchase product, MainPage mainPage)
+        public InAppPurchaseProduct(InAppPurchase product, MainPage mainPage, CoinsUserControl coinsUserControl)
         {
             InitializeComponent();
 
             _mainPage = mainPage;
             _product = product;
+            _coinsUserControl = coinsUserControl;
 
             Price.Text = String.Format("{0:C}", _product.Price);
             ProductName.Text = _product.Name;
@@ -73,6 +75,7 @@ namespace WhatTheWord.Popups
 
             _mainPage.CurrentGameState.Coins += coinsToAdd;
             _mainPage.DisplayGame();
+            _coinsUserControl.hide();
         }
     }
 }

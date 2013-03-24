@@ -17,6 +17,8 @@ namespace WhatTheWord.Popups
         private Popup _popup;
         private MainPage _mainPage;
 
+        public bool isOpenedFromSettings = false;
+
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
 
@@ -55,6 +57,7 @@ namespace WhatTheWord.Popups
 
         }
 
+        #region Show and Hide
         public void show()
         {
             if (!_popup.IsOpen)
@@ -66,7 +69,17 @@ namespace WhatTheWord.Popups
 
         public void hide()
         {
+            if (isOpenedFromSettings)
+            {
+                _mainPage.settingsUserControl.show();
+                this.isOpenedFromSettings = false;
+            }
             _popup.IsOpen = false;
+        }
+
+        public bool isOpen()
+        {
+            return _popup.IsOpen;
         }
 
         private void showLoading()
@@ -82,6 +95,7 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
         }
+        #endregion
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {

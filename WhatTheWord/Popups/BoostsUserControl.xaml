@@ -120,7 +120,7 @@
                                    Style="{StaticResource BoostButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Style="{StaticResource BoostButton_Icon}"/>
-                                <TextBlock Text="20" Style="{StaticResource BoostButton_Text}"/>
+                                <TextBlock x:Name="RevealALetterButton_Text" Text="20" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -144,7 +144,7 @@
                                    Style="{StaticResource BoostButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Style="{StaticResource BoostButton_Icon}"/>
-                                <TextBlock Text="50" Style="{StaticResource BoostButton_Text}"/>
+                                <TextBlock x:Name="RemoveALetterButton_Text" Text="50" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>
                     </Grid>
@@ -168,7 +168,7 @@
                                    Style="{StaticResource BoostButton}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Style="{StaticResource BoostButton_Icon}"/>
-                                <TextBlock Text="100" Style="{StaticResource BoostButton_Text}"/>
+                                <TextBlock x:Name="ShuffleButton_Text" Text="100" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>
                     </Grid>

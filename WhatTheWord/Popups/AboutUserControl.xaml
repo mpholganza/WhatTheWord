@@ -23,24 +23,24 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontSize" Value="28" />
             <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
         <Style x:Key="AboutName" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="22" />
             <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
         <Style x:Key="AboutLink" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="Black" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontSize" Value="22" />
             <Setter Property="FontStyle" Value="Italic" />
             <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
@@ -87,9 +87,9 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             
-            <StackPanel Grid.Column="0" Grid.Row="0"
+            <StackPanel Grid.Column="0" Grid.Row="0" 
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        >
+                        Margin="25,20,0,0">
                 <TextBlock Text="Designers"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="Trixi Baquirin"
@@ -104,9 +104,9 @@
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="0"
+            <StackPanel Grid.Column="1" Grid.Row="0" 
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        >
+                        Margin="6,20,20,0">
                 <TextBlock Text="Programmers"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="Jacky Yip"
@@ -119,7 +119,7 @@
 
             <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                         VerticalAlignment="Top" HorizontalAlignment="Center"
-                        >
+                        Margin="20,20,20,30">
                 <TextBlock Text="Photos Provided by:"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="foter.com"

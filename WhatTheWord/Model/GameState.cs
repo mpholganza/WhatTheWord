@@ -22,10 +22,10 @@ namespace WhatTheWord.Model
 
 		#region Config variables
 		public int initialCoins { get; set; }
-		public double boostRemoveLettersCost { get; set; }
+		public int boostRemoveLettersCost { get; set; }
 		public int boostRemoveLettersNumberOfLetters { get; set; }
-		public double boostRevealLetterCost { get; set; }
-		public double boostShuffleCost { get; set; }
+		public int boostRevealLetterCost { get; set; }
+		public int boostShuffleCost { get; set; }
 		public int rewardCoinsPerQuestion { get; set; }
 		public int rateMeReward { get; set; }
 		public int rateMeShowInitial { get; set; }
@@ -158,10 +158,10 @@ namespace WhatTheWord.Model
 
 			bool success = false;
 			int initialCoins = 0;
-			double boostRemoveLettersCost = 0;
+			int boostRemoveLettersCost = 0;
 			int boostRemoveLettersNumberOfLetters = 0;
-			double boostRevealLetterCost = 0;
-			double boostShuffleCost = 0;
+			int boostRevealLetterCost = 0;
+			int boostShuffleCost = 0;
 			int rewardCoinsPerQuestion = 0;
 			int rateMeReward = 0;
 			int rateMeShowInitial = 0;
@@ -176,46 +176,60 @@ namespace WhatTheWord.Model
 			{
 				case "initialCoins":
 					success = int.TryParse(value, out initialCoins);
+                    this.initialCoins = initialCoins;
 					break;
 				case "boostRemoveLettersCost":
-					success = double.TryParse(value, out boostRemoveLettersCost);
+					success = int.TryParse(value, out boostRemoveLettersCost);
+			        this.boostRemoveLettersCost = boostRemoveLettersCost;
 					break;
 				case "boostRemoveLettersNumberOfLetters":
 					success = int.TryParse(value, out boostRemoveLettersNumberOfLetters);
+                    this.boostRemoveLettersNumberOfLetters = boostRemoveLettersNumberOfLetters;
 					break;
 				case "boostRevealLetterCost":
-					success = double.TryParse(value, out boostRevealLetterCost);
+					success = int.TryParse(value, out boostRevealLetterCost);
+                    this.boostRevealLetterCost = boostRevealLetterCost;
 					break;
 				case "boostShuffleCost":
-					success = double.TryParse(value, out boostShuffleCost);
+					success = int.TryParse(value, out boostShuffleCost);
+                    this.boostShuffleCost = boostShuffleCost;
 					break;
 				case "rewardCoinsPerQuestion":
 					success = int.TryParse(value, out rewardCoinsPerQuestion);
+                    this.rewardCoinsPerQuestion = rewardCoinsPerQuestion;
 					break;
 				case "rateMeReward":
 					success = int.TryParse(value, out rateMeReward);
+                    this.rateMeReward = rateMeReward;
 					break;
 				case "rateMeShowInitial":
 					success = int.TryParse(value, out rateMeShowInitial);
+                    this.rateMeShowInitial = rateMeShowInitial;
 					break;
 				case "rateMeShowReminderInterval":
 					success = int.TryParse(value, out rateMeShowReminderInterval);
+                    this.rateMeShowReminderInterval = rateMeShowReminderInterval;
 					break;
 				case "boostBounceTimeInterval":
 					success = int.TryParse(value, out boostBounceTimeInterval);
+                    this.boostBounceTimeInterval = boostBounceTimeInterval;
 					break;
 				case "picsFailedDownloadWait":
 					success = int.TryParse(value, out picsFailedDownloadWait);
+                    this.picsFailedDownloadWait = picsFailedDownloadWait;
 					break;
 				case "picsSuccessDownloadWait":
 					success = int.TryParse(value, out picsSuccessDownloadWait);
+                    this.picsSuccessDownloadWait = picsSuccessDownloadWait;
 					break;
 				case "rateMeURL":
 					rateMeURL = value;
+                    this.rateMeURL = rateMeURL;
 					success = true;
 					break;
 				case "picturesFilenamePath":
 					picturesFilenamePath = value;
+                    this.picturesFilenamePath = picturesFilenamePath;
 					success = true;
 					break;
 				default:
@@ -226,22 +240,6 @@ namespace WhatTheWord.Model
 			{
 				throw new ApplicationException("Invalid Gatedata config info. Trouble parsing " + keyName + ": " + value);
 			}
-
-			// Only doing it this way because TryParse can't write to instance variables :(
-			this.initialCoins = initialCoins;
-			this.boostRemoveLettersCost = boostRemoveLettersCost;
-			this.boostRemoveLettersNumberOfLetters = boostRemoveLettersNumberOfLetters;
-			this.boostRevealLetterCost = boostRevealLetterCost;
-			this.boostShuffleCost = boostShuffleCost;
-			this.rewardCoinsPerQuestion = rewardCoinsPerQuestion;
-			this.rateMeReward = rateMeReward;
-			this.rateMeShowInitial = rateMeShowInitial;
-			this.rateMeShowReminderInterval = rateMeShowReminderInterval;
-			this.boostBounceTimeInterval = boostBounceTimeInterval;
-			this.picsFailedDownloadWait = picsFailedDownloadWait;
-			this.picsSuccessDownloadWait = picsSuccessDownloadWait;
-			this.rateMeURL = rateMeURL;
-			this.picturesFilenamePath = picturesFilenamePath;
 		}
 
 		private void parsePuzzleString(string puzzleInfo)
@@ -491,6 +489,30 @@ namespace WhatTheWord.Model
 			GuessPanelState = null;
 			CharacterPanelState = null;
 		}
+
+        public void RevealLetter()
+        {
+            // Clear the guess panel
+            this.ClearGuessPanel();
+
+            // Pick a letter that hasn't been revealed yet
+            Random random = new Random((int)DateTime.Now.Ticks);
+            int revealIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * GuessPanelState.Length));
+
+            // Set it to revealed
+            GuessPanelState[revealIndex] = GameState.GUESSPANEL_LETTER_REVEALED;
+        }
+
+        public void RemoveLetter()
+        {
+            // Pick a letter that is not a part of the actual word
+			Random random = new Random((int)DateTime.Now.Ticks);
+            int removeIndex = -1;
+            //Convert.ToInt32(Math.Floor(random.NextDouble() * CharacterPanelState.Length)));
+
+            // Set it to removed
+            CharacterPanelState[removeIndex] = GameState.CHARACTERPANEL_LETTER_REMOVED;
+        }
 
 		#endregion
 

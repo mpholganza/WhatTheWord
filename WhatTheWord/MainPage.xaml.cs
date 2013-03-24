@@ -20,17 +20,11 @@ namespace WhatTheWord
 		public Puzzle CurrentPuzzle { get; set; }
 		public GameState CurrentGameState { get; set; }
 
-		Popup _CoinsPopup = new Popup();
-		Popup _FacebookPopup = new Popup();
-        Popup _BoostsPopup = new Popup();
-        Popup _AboutPopup = new Popup();
-        Popup _SettingsPopup = new Popup();
-
 		FacebookUserControl facebookUserControl;
-		CoinsUserControl coinsUserControl;
-        BoostsUserControl boostsUserControl;
+		public CoinsUserControl coinsUserControl;
+        public BoostsUserControl boostsUserControl;
         public AboutUserControl aboutUserControl;
-        SettingsUserControl settingsUserControl;
+        public SettingsUserControl settingsUserControl;
 
 		// Constructor
 		public MainPage()
@@ -46,31 +40,31 @@ namespace WhatTheWord
 
 		private void InitializeFacebookPopup()
 		{
-			facebookUserControl = new FacebookUserControl(_FacebookPopup, this,
+			facebookUserControl = new FacebookUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeCoinsPopup()
 		{
-			coinsUserControl = new CoinsUserControl(_CoinsPopup, this,
-				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+			coinsUserControl = new CoinsUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeBoostsPopup()
 		{
-			boostsUserControl = new BoostsUserControl(_BoostsPopup, this,
-				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+			boostsUserControl = new BoostsUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
         private void InitializeAboutPopup()
         {
-            aboutUserControl = new AboutUserControl(_AboutPopup, this,
+            aboutUserControl = new AboutUserControl(new Popup(), this,
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
         private void InitializeSettingsPopup()
         {
-            settingsUserControl = new SettingsUserControl(_SettingsPopup, this,
+            settingsUserControl = new SettingsUserControl(new Popup(), this,
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
@@ -281,7 +275,40 @@ namespace WhatTheWord
 			// display incorrect guess
 		}
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            bool cancelBackbutton = true;
 
+            if (facebookUserControl.isOpen())
+            {
+                facebookUserControl.hide();
+            }
+            else if (boostsUserControl.isOpen())
+            {
+                boostsUserControl.hide();
+            }
+            else if (coinsUserControl.isOpen())
+            {
+                coinsUserControl.hide();
+            }
+            else if (aboutUserControl.isOpen())
+            {
+                aboutUserControl.hide();
+            }
+            else if (settingsUserControl.isOpen())
+            {
+                settingsUserControl.hide();
+            }
+            else
+            {
+                cancelBackbutton = false;
+            }
+
+            if (cancelBackbutton)
+            {
+                e.Cancel = true;  //Cancels the default behavior.
+            }
+        }
 
 		// Sample code for building a localized ApplicationBar
 		//private void BuildLocalizedApplicationBar()

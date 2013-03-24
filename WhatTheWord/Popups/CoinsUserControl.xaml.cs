@@ -35,6 +35,8 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
+        public bool isOpenedFromBoosts = false;
+
         public CoinsUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
@@ -96,7 +98,7 @@ namespace WhatTheWord.Popups
                 // add the list of products in ascending Order
                 foreach (var key in list)
                 {
-                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(unorderedPurchases[key], _mainPage));
+                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(unorderedPurchases[key], _mainPage, this));
                 }
             }
             catch (Exception e)
@@ -108,18 +110,38 @@ namespace WhatTheWord.Popups
             }
         }
 
+        #region Show and Hide
         public void show()
         {
             if (!_popup.IsOpen)
             {
                 _popup.Child = this;
                 _popup.IsOpen = true;
+
+                if (isOpenedFromBoosts)
+                {
+                    this.HeaderTitle.Text = "Get Coins!";
+                }
+                else
+                {
+                    this.HeaderTitle.Text = "Coins";
+                }
             }
         }
 
         public void hide()
         {
+            if (isOpenedFromBoosts)
+            {
+                _mainPage.boostsUserControl.show();
+                isOpenedFromBoosts = false;
+            }
             _popup.IsOpen = false;
+        }
+
+        public bool isOpen()
+        {
+            return _popup.IsOpen;
         }
 
         private void showLoading()
@@ -135,7 +157,7 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
         }
-
+        #endregion
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {

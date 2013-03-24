@@ -99,6 +99,11 @@ namespace WhatTheWord.Popups
             _popup.IsOpen = false;
         }
 
+        public bool isOpen()
+        {
+            return _popup.IsOpen;
+        }
+
         private void showLoading()
         {
             Overlay.Visibility = System.Windows.Visibility.Visible;
