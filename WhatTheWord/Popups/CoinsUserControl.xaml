@@ -16,7 +16,7 @@
 
         <Style x:Key="CoinsContentPanel" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Vertical" />
-            <Setter Property="Margin" Value="12,0,0,0" />
+            <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
     </UserControl.Resources>

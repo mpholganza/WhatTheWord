@@ -4,7 +4,7 @@ dataType=config;;;dataValue=key=initialCoins;value=200;;;;
 dataType=config;;;dataValue=key=boostRemoveLettersCost;value=30;;;;
 dataType=config;;;dataValue=key=boostRemoveLettersNumberOfLetters;value=3;;;;
 dataType=config;;;dataValue=key=boostRevealLetterCost;value=50;;;;
-dataType=config;;;dataValue=key=boostShuffleCost;value=800;;;;
+dataType=config;;;dataValue=key=boostShuffleCost;value=8000;;;;
 dataType=config;;;dataValue=key=rewardCoinsPerQuestion;value=5;;;;
 dataType=config;;;dataValue=key=rateMeReward;value=300;;;;
 dataType=config;;;dataValue=key=rateMeShowInitial;value=5;;;;
@@ -18,7 +18,7 @@ dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c1;price=0.99;coins=
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c2;price=1.99;coins=700;order=4;name=600 Coins;discount=+100 FREE;;;;
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c5;price=4.99;coins=2100;order=3;name=1500 Coins;discount=+600 FREE;;;;
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c10;price=9.99;coins=5000;order=2;name=3000 Coins;discount=+2000 FREE;;;;
-dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c25;price=24.99;coins=15000;order=1;name=7500 Coins;discount=+7500 FREE;;;;
+dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c25;price=249.99;coins=150000;order=1;name=7500 Coins;discount=+7500 FREE;;;;
 dataType=puzzles;;;dataValue=id=1;answer=soft;enable=1;order=1;filename1=soft1.zip;credits1=AtomDocs;filename2=soft2.zip;credits2=Chris Chittleborough;filename3=soft3.zip;credits3=flattop341;filename4=soft4.zip;credits4=Biaph;;;
 dataType=puzzles;;;dataValue=id=2;answer=safe;enable=1;order=2;filename1=safe1.zip;credits1=tat;filename2=safe2.zip;credits2=psicologiaclinica;filename3=safe3.zip;credits3=Scott Ableman;filename4=safe4.zip;credits4=mconnors;;;
 dataType=puzzles;;;dataValue=id=3;answer=bass;enable=1;order=3;filename1=bass1.zip;credits1=jeltovski;filename2=bass2.zip;credits2=FranzPisa;filename3=bass3.zip;credits3=chyap28;filename4=bass4.zip;credits4=dpawatts;;;

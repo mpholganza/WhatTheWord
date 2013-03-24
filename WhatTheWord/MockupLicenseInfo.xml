@@ -31,4 +31,24 @@
     <Keywords>coins;20</Keywords>
     <Tag>20</Tag>
   </ProductListing>
+  <ProductListing Key="1000Coins" Purchased="false" Fulfilled="false">
+    <Name>20 Coins</Name>
+    <Description>20 coins for Atomic Coins</Description>
+    <ProductId>com.kooapps.guessthisword.c10</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$2.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;20</Keywords>
+    <Tag>20</Tag>
+  </ProductListing>
+  <ProductListing Key="10000Coins" Purchased="false" Fulfilled="false">
+    <Name>20 Coins</Name>
+    <Description>20 coins for Atomic Coins</Description>
+    <ProductId>com.kooapps.guessthisword.c25</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$2.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;20</Keywords>
+    <Tag>20</Tag>
+  </ProductListing>
 </ProductListings>
