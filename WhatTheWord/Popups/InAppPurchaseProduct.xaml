@@ -69,14 +69,14 @@
     <Border Style="{StaticResource ProductBorder}">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="90"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Image x:Name="Icon" Grid.Column="0" Style="{StaticResource ProductIcon}" />
 
-            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <TextBlock x:Name="ProductName" Text="2000 Coins" 
                        Style="{StaticResource ProductName}"/>
                 <TextBlock x:Name="ProductDiscount" Text="+600 FREE" 

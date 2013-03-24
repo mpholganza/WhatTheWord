@@ -22,11 +22,15 @@ namespace WhatTheWord
 
 		Popup _CoinsPopup = new Popup();
 		Popup _FacebookPopup = new Popup();
-		Popup _BoostsPopup = new Popup();
+        Popup _BoostsPopup = new Popup();
+        Popup _AboutPopup = new Popup();
+        Popup _SettingsPopup = new Popup();
 
 		FacebookUserControl facebookUserControl;
 		CoinsUserControl coinsUserControl;
-		BoostsUserControl boostsUserControl;
+        BoostsUserControl boostsUserControl;
+        public AboutUserControl aboutUserControl;
+        SettingsUserControl settingsUserControl;
 
 		// Constructor
 		public MainPage()
@@ -58,6 +62,18 @@ namespace WhatTheWord
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
+        private void InitializeAboutPopup()
+        {
+            aboutUserControl = new AboutUserControl(_AboutPopup, this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
+
+        private void InitializeSettingsPopup()
+        {
+            settingsUserControl = new SettingsUserControl(_SettingsPopup, this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
+
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadGameState();
@@ -67,6 +83,8 @@ namespace WhatTheWord
 			InitializeFacebookPopup();
 			InitializeCoinsPopup();
 			InitializeBoostsPopup();
+            InitializeAboutPopup();
+            InitializeSettingsPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
@@ -205,6 +223,11 @@ namespace WhatTheWord
 		{
 			facebookUserControl.show();
 		}
+
+        private void SettingsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            settingsUserControl.show();
+        }
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{

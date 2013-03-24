@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.ComponentModel;
 
 namespace WhatTheWord.Model
 {
 	public class GameState
 	{
+
 		#region Constants
 		public const int GUESSPANEL_LETTER_REVEALED = 100;
 		public const int GUESSPANEL_LETTER_NOT_GUESSED = 101;
