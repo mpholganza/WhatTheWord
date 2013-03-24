@@ -14,24 +14,15 @@ namespace WhatTheWord
 		public async static Task<String> LoadDataFromFileAsync(String fileName)
 		{
 			String data = String.Empty;
-			StorageFile file = null;
-			bool exists = false;
 			try
 			{
-				file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
-					new Uri(fileName));
-				exists = true;
-			}
-			catch (FileNotFoundException) {}
-
-			if (exists)
-			{
-				Stream stream = await file.OpenStreamForReadAsync();
+				Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(fileName);
 				using (StreamReader reader = new StreamReader(stream))
 				{
 					data = await reader.ReadToEndAsync();
 				}
 			}
+			catch (FileNotFoundException) {}
 
 			return data;
 		}
@@ -39,21 +30,13 @@ namespace WhatTheWord
 		public async static void WriteDataToFileAsync(String data, String fileName)
 		{
 			StorageFile file = null;
-			bool exists = false;
 			try
 			{
-				file = await Windows.Storage.StorageFile.GetFileFromApplicationUriAsync(
-					new Uri(fileName));
-				exists = true;
+				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 			}
-			catch (FileNotFoundException)
+			catch (Exception e)
 			{
-				exists = false;
-			}
-
-			if (!exists)
-			{
-				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+				Console.WriteLine("Error writing to file" + e.Message);
 			}
 
 			Stream stream = await file.OpenStreamForWriteAsync();

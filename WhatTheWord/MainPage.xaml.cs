@@ -80,7 +80,7 @@ namespace WhatTheWord
 		private void LoadGameState()
 		{
 			CurrentGameState = new GameState();
-			CurrentGameState.LoadGameStateFromFile();
+			CurrentGameState.LoadGameState();
 
 			CurrentPuzzle = LoadCurrentPuzzle(CurrentGameState.CurrentLevel);
 

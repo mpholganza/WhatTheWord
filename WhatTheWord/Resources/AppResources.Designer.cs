@@ -88,24 +88,6 @@ namespace WhatTheWord.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to status=ok;;;
-        ///flight=4;;;
-        ///dataType=config;;;dataValue=key=initialCoins;value=200;;;;
-        ///dataType=config;;;dataValue=key=boostRemoveLettersCost;value=30;;;;
-        ///dataType=config;;;dataValue=key=boostRemoveLettersNumberOfLetters;value=3;;;;
-        ///dataType=config;;;dataValue=key=boostRevealLetterCost;value=50;;;;
-        ///dataType=config;;;dataValue=key=boostShuffleCost;value=800;;;;
-        ///dataType=config;;;dataValue=key=rewardCoinsPerQuestion;value=5;;;;
-        ///dataType=config;;;dataValue=key=rateMeReward;value=300;;;;
-        ///dataType=config;; [rest of string was truncated]&quot;;.
-        /// </summary>
-        public static string GameStateDefault {
-            get {
-                return ResourceManager.GetString("GameStateDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

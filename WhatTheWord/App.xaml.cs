@@ -12,6 +12,8 @@ using WhatTheWord.Resources;
 using MockIAPLib;
 using System.Xml.Linq;
 using Store = MockIAPLib;
+using System.Net;
+using WhatTheWord.Model;
 #else
 using Windows.ApplicationModel.Store;
 #endif
@@ -63,7 +65,45 @@ namespace WhatTheWord
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
             SetupMockIAP();
+		}
 
+		private void LoadGameConfigFromWeb()
+		{
+			//string udid = DeviceExtendedProperties.GetValue("DeviceUniqueId").ToString();
+			//string flight = "test";
+			//string password = "pjcfizp12fzviwx";
+			//string appName = "com.kooapps.guessthisword";
+			//string version = "1.0";
+			//string hash = MD5(MD5(udid) + "com.kooapps.guessthisword" + flight + password + version + udid);
+
+			// Download config info from web, if valid save to file
+			//string uri = "http://www.google.com";
+			Uri uri = new Uri("http://www.kooappsservers.com/kooappsFlights/getData.php?appName=com.kooapps.guessthisword&hash=a3819daec9ab5b3243abf7d8731e4d77&udid=testudid&version=1.0&flight=test&password=pjcfizp12fzviwx");
+			//string uri = String.Format("http://www.kooappsservers.com/kooappsFlights/getData.php?appName={0}&hash={1}&udid={2}&version={3}&flight={4}&password={5}",
+			//	appName, hash, udid, version, flight, password);
+
+			WebClient client = new WebClient();
+			client.DownloadStringCompleted += client_DownloadStringCompleted;
+			client.DownloadStringAsync(uri);
+		}
+
+		void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs args)
+		{
+			if (!args.Cancelled && args.Error == null)
+			{
+				string gameData = args.Result;
+				try
+				{
+					(new GameState()).DeserializeGameData(gameData); // test that the gamedata deserializes correctly
+				}
+				catch (ApplicationException)
+				{
+					// deserialized incorrectly. fail quietly
+					// TODO: report to server of failed deserialization
+					Console.WriteLine("Failed deserialization:\n" + gameData);
+				}
+				GameState.WriteGameDataToFile(args.Result);
+			}
 		}
 
         private void SetupMockIAP()
@@ -88,12 +128,14 @@ namespace WhatTheWord
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
+			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is activated (brought to foreground)
 		// This code will not execute when the application is first launched
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
+			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is deactivated (sent to background)

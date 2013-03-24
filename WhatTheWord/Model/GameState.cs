@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Windows.Resources;
+using System.Net;
+using Microsoft.Phone.Info;
+using System.Threading;
 
 namespace WhatTheWord.Model
 {
@@ -44,6 +48,7 @@ namespace WhatTheWord.Model
 		public String PuzzleCharacters { get; set; }
 		public int[] GuessPanelState { get; set; }
 		public int[] CharacterPanelState { get; set; }
+		public bool Loaded { get; set; }
 		#endregion
 
 		public GameState()
@@ -54,13 +59,60 @@ namespace WhatTheWord.Model
 			this.PuzzleCharacters = "";
 			this.GuessPanelState = null;
 			this.CharacterPanelState = null;
+			this.Loaded = false;
 		}
 
-		public async void LoadGameStateFromFile()
+		/// <summary>
+		/// Load game config data. This can come from two potential places. In order of precedence
+		/// 1. Previously downloaded config info from the web.
+		/// 2. Built-in config file.
+		/// </summary>
+		public void LoadGameState()
 		{
-			//String gameData = await FileAccess.LoadDataFromFileAsync("gamestate.txt");
-			String gameData = Resources.AppResources.GameStateDefault;
+			// Load config info from previously saved file
+			LoadGameConfigFromFile();
+			if (this.Loaded) return;
+
+			// Built-in config file
+			LoadGameConfigFromDefaultFile();
+
+			if (!this.Loaded)
+			{
+				throw new ApplicationException("Unable to load game config information.");
+			}
+		}
+
+		private async void LoadGameConfigFromFile()
+		{
+			Task<String> loadDataFromFileTask =  FileAccess.LoadDataFromFileAsync("gamestate.txt");
+			string gameData = await loadDataFromFileTask;
+			if (gameData != string.Empty)
+			{
+				try
+				{
+					DeserializeGameData(gameData);
+				}
+				catch (ApplicationException)
+				{
+					// deserialized incorrectly. fail quietly
+					// TODO: report to server of failed deserialization
+					Console.WriteLine("Failed deserialization:\n" + gameData);
+				}
+			}
+		}
+
+		private void LoadGameConfigFromDefaultFile()
+		{
+			StreamResourceInfo sri = App.GetResourceStream(new Uri("Assets/gamestate.txt", UriKind.Relative));
+			StreamReader streamReader = new StreamReader(sri.Stream);
+			string gameData = streamReader.ReadToEnd();
 			DeserializeGameData(gameData);
+		}
+
+		private string MD5(string original)
+		{
+			// TODO: get md5 implementation
+			return original;
 		}
 
 		public void DeserializeJsonFile(string gameData)
@@ -91,7 +143,7 @@ namespace WhatTheWord.Model
 		#region Parse Functions
 		public void DeserializeGameData(string gameData)
 		{
-			string[] lines = gameData.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+			string[] lines = gameData.Split(new string[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			if (lines.Length < 3) { throw new ApplicationException("Gamedata File is empty"); }
 
 			string key = string.Empty;
@@ -112,7 +164,7 @@ namespace WhatTheWord.Model
 			GetKeyValuePairFromString(flightLine2[0], out key, out value);
 			if (key != "flight") { throw new ApplicationException("Corrupt Gamedata file"); }
 
-			if (flightHash != value) { throw new ApplicationException("Corrupt Gamedata file"); }
+			if (flightHash != value) { throw new ApplicationException("Corrupt Gamedata file. Hash does not match"); }
 
 			for (int i = 2; i < lines.Length - 1; i++)
 			{
@@ -135,6 +187,8 @@ namespace WhatTheWord.Model
 						throw new ApplicationException("Invalid line in Gamedata file:" + lines[i]);
 				}
 			}
+
+			this.Loaded = true;
 		}
 
 		private void parseConfigString(string configInfo)
@@ -492,23 +546,6 @@ namespace WhatTheWord.Model
 			CharacterPanelState = null;
 		}
 
-		#endregion
-
-		public void WriteGameDataToFile()
-		{
-			FileAccess.WriteDataToFileAsync(this.ToString(), "ms-appdata:///local/gamestate.txt");
-		}
-
-		public override String ToString()
-		{
-			MemoryStream stream = new MemoryStream();
-			DataContractJsonSerializer ser = new DataContractJsonSerializer(this.GetType());
-			ser.WriteObject(stream, this);
-			byte[] json = stream.ToArray();
-			stream.Close();
-			return Encoding.UTF8.GetString(json, 0, json.Length);
-		}
-
 		internal void Initialize(Puzzle CurrentPuzzle)
 		{
 			this.PuzzleWord = CurrentPuzzle.Word;
@@ -524,6 +561,22 @@ namespace WhatTheWord.Model
 			{
 				CharacterPanelState[i] = i;
 			}
+		}
+		#endregion
+
+		public static void WriteGameDataToFile(string gameData)
+		{
+			FileAccess.WriteDataToFileAsync(gameData, "gamestate.txt");
+		}
+
+		public override String ToString()
+		{
+			MemoryStream stream = new MemoryStream();
+			DataContractJsonSerializer ser = new DataContractJsonSerializer(this.GetType());
+			ser.WriteObject(stream, this);
+			byte[] json = stream.ToArray();
+			stream.Close();
+			return Encoding.UTF8.GetString(json, 0, json.Length);
 		}
 	}
 }
