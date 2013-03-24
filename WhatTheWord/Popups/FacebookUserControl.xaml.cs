@@ -18,7 +18,8 @@ namespace WhatTheWord.Popups
 {
     public partial class FacebookUserControl : UserControl
     {
-        private const string AppId = "561883217157240";
+        //private const string AppId = "561883217157240"; // cookpanion
+        private const string AppId = "456585341077776"; // guesstheword
 
         /// <summary>
         /// Extended permissions is a comma separated list of permissions to ask the user.

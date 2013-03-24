@@ -9,6 +9,8 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 using System.Windows.Controls.Primitives;
+using Microsoft.Phone.Tasks;
+using System.Reflection;
 
 namespace WhatTheWord.Popups
 {
@@ -108,7 +110,25 @@ namespace WhatTheWord.Popups
 
         private void Feedback_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: add game logic
+            byte[] deviceID = (byte[])Microsoft.Phone.Info.DeviceExtendedProperties.GetValue("DeviceUniqueId");
+            string deviceIDAsString = Convert.ToBase64String(deviceID);
+
+            var nameHelper = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
+            var version = nameHelper.Version;
+            var full = nameHelper.FullName;
+            var name = nameHelper.Name;
+
+            EmailComposeTask emailComposeTask = new EmailComposeTask();
+
+            emailComposeTask.Subject = "Guess the Word Support";
+            emailComposeTask.Body = "UDID: " + deviceIDAsString + Environment.NewLine + 
+                "Version: " + version + Environment.NewLine + 
+                Environment.NewLine + 
+                "(Please enter your issue here)" +
+                Environment.NewLine;
+            emailComposeTask.To = "support@kooapps.com";
+
+            emailComposeTask.Show();
         }
     }
 
