@@ -32,7 +32,6 @@ namespace WhatTheWord.Popups
         private const string ExtendedPermissions = "publish_actions";
 
         private readonly FacebookClient _fb = new FacebookClient();
-        private string _accessToken = "";
 
         private bool isBrowserLoaded = false;
 
@@ -82,6 +81,30 @@ namespace WhatTheWord.Popups
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
             Browser.Margin = new Thickness(leftMargin, 0, 0, 0);
+
+            verifyFacebookToken();
+        }
+
+        private async void verifyFacebookToken()
+        {
+            string accessToken = _mainPage.CurrentGameState.FacebookToken;
+            _mainPage.CurrentGameState.FacebookToken = "";
+
+            //accessToken = "AAAGfQw8QiRABAFpEDHyaOPZBVfBaTgq2ZAECXMCZCDuBGs5vUiQlZAOLZARartIT4ACGLeYeJLbHxiUZBnCRmO4MF03eWuiPkxS4PGGVFa3AZDZD";
+
+            if (!String.IsNullOrWhiteSpace(accessToken))
+            {
+                try
+                {
+                    FacebookClient fb = new FacebookClient(accessToken);
+                    var result = await fb.GetTaskAsync("me");
+                    _mainPage.CurrentGameState.FacebookToken = accessToken;
+                }
+                catch (FacebookApiException e)
+                {
+                    // token is invalid (e.g., expired)
+                }
+            }
         }
 
         #region Show and Hide
@@ -91,8 +114,15 @@ namespace WhatTheWord.Popups
             showLoading();
 
             var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
-            Browser.Navigate(loginUrl);
 
+            if (String.IsNullOrWhiteSpace(_mainPage.CurrentGameState.FacebookToken))
+            {
+                Browser.Navigate(loginUrl);
+            }
+            else
+            {
+                showPost();
+            }
         }
 
         public void hide()
@@ -152,6 +182,7 @@ namespace WhatTheWord.Popups
                 _popup.Child = this;
                 _popup.IsOpen = true;
             }
+            takeScreenshot();
         }
         #endregion
 
@@ -190,10 +221,11 @@ namespace WhatTheWord.Popups
 
             if (oauthResult.IsSuccess)
             {
-                _accessToken = oauthResult.AccessToken;
+                _mainPage.CurrentGameState.FacebookToken = oauthResult.AccessToken;
 
+                // TODO: Save token to file
+                //_mainPage.CurrentGameState.WriteGameDataToFile();
                 showPost();
-                takeScreenshot();
             }
             else
             {
@@ -203,21 +235,9 @@ namespace WhatTheWord.Popups
         }
 
 
-        private void PostToFacebook()
+        private async void PostToFacebook()
         {
-            FacebookClient fb = new FacebookClient(_accessToken);
-
-            fb.PostCompleted += (o, e) =>
-            {
-                if (e.Cancelled || e.Error != null)
-                {
-                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
-                    return;
-                }
-
-                var result = (IDictionary<string, object>)e.GetResultData();
-                var id = (string)result["id"];
-            };
+            FacebookClient fb = new FacebookClient(_mainPage.CurrentGameState.FacebookToken);
 
             // Encode to JPEG format
             byte[] screenshot;
@@ -236,8 +256,15 @@ namespace WhatTheWord.Popups
                 FileName = "image.jpeg"
             }.SetValue(screenshot);
 
-            //fb.PostAsync("me/feed", parameters);
-            fb.PostAsync("me/photos", parameters);
+            try
+            {
+                //fb.PostAsync("me/photos", parameters);
+                var result = await fb.PostTaskAsync("me/photos", parameters);
+            }
+            catch (FacebookApiException e)
+            {
+                Dispatcher.BeginInvoke(() => MessageBox.Show(e.Message));
+            }
 
             this.hide();
         }

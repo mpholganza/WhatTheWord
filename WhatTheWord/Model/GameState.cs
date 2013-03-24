@@ -39,7 +39,8 @@ namespace WhatTheWord.Model
 		public List<Puzzle> Puzzles { get; set; }
 		#endregion
 
-		#region Gameplay variables
+        #region Gameplay variables
+        public string FacebookToken { get; set; }
 		public int CurrentLevel { get; set; }
 		public int Coins { get; set; }
 		public String PuzzleWord { get; set; }
@@ -50,6 +51,7 @@ namespace WhatTheWord.Model
 
 		public GameState()
 		{
+            this.FacebookToken = "";
 			this.CurrentLevel = 0;
 			this.Coins = 0;
 			this.PuzzleWord = "";
@@ -77,6 +79,7 @@ namespace WhatTheWord.Model
 			// TODO: This is the wrong way to do this
 			if (null != gs)
 			{
+                this.FacebookToken = gs.FacebookToken;
 				this.CurrentLevel = gs.CurrentLevel;
 				this.Coins = gs.Coins;
 				this.PuzzleWord = gs.PuzzleWord;
