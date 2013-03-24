@@ -74,7 +74,7 @@
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="26" />
         </Style>
     </UserControl.Resources>
     

@@ -124,7 +124,7 @@ namespace WhatTheWord.Popups
                 }
                 else
                 {
-                    this.HeaderTitle.Text = "Coins";
+                    this.HeaderTitle.Text = "COINS";
                 }
             }
         }

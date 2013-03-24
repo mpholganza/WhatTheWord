@@ -43,7 +43,7 @@
             <Image x:Name="BackButton" Grid.Column="0" Tap="BackButton_Tap" 
                    Style="{StaticResource Popup_BackButtonIcon}" />
 
-            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="Coins" 
+            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="COINS" 
                        Style="{StaticResource Popup_HeaderFont}" />
 
         </Grid>

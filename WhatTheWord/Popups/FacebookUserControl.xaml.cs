@@ -152,7 +152,7 @@ namespace WhatTheWord.Popups
 
         private void showLogin()
         {
-            HeaderTitle.Text = "Login";
+            HeaderTitle.Text = "LOGIN";
 
             Overlay.Visibility = System.Windows.Visibility.Visible;
             HeaderPanel.Visibility = System.Windows.Visibility.Visible;
@@ -169,7 +169,7 @@ namespace WhatTheWord.Popups
 
         private void showPost()
         {
-            HeaderTitle.Text = "Share";
+            HeaderTitle.Text = "SHARE";
 
             Overlay.Visibility = System.Windows.Visibility.Visible;
             HeaderPanel.Visibility = System.Windows.Visibility.Visible;
@@ -230,7 +230,7 @@ namespace WhatTheWord.Popups
             else
             {
                 // user cancelled
-                MessageBox.Show(oauthResult.ErrorDescription);
+                Dispatcher.BeginInvoke(() => MessageBox.Show(oauthResult.ErrorDescription));
             }
         }
 
