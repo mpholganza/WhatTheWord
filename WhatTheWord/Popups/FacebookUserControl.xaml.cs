@@ -183,6 +183,9 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
             takeScreenshot();
+
+            Message.Focus();
+            Message.SelectionStart = Message.Text.Length;
         }
         #endregion
 
