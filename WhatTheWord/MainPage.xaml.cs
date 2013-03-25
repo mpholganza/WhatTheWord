@@ -12,6 +12,7 @@ using WhatTheWord.Model;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
 using WhatTheWord.Popups;
+using System.Windows.Threading;
 
 namespace WhatTheWord
 {
@@ -25,6 +26,8 @@ namespace WhatTheWord
         public BoostsUserControl boostsUserControl;
         public AboutUserControl aboutUserControl;
         public SettingsUserControl settingsUserControl;
+
+        private DispatcherTimer boostBounceTimer;
 
 		// Constructor
 		public MainPage()
@@ -68,6 +71,19 @@ namespace WhatTheWord
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
+        private void InitializeBoostBounceTimer()
+        {
+            boostBounceTimer = new System.Windows.Threading.DispatcherTimer();
+            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, 10, 0); // 10 seconds 
+            boostBounceTimer.Tick += new EventHandler(bounceBoostButton);
+            boostBounceTimer.Start();
+        }
+
+        private void bounceBoostButton(object o, EventArgs sender)
+        {
+            BoostBounceStoryboard.Begin();
+        }
+
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadGameState();
@@ -79,6 +95,7 @@ namespace WhatTheWord
 			InitializeBoostsPopup();
             InitializeAboutPopup();
             InitializeSettingsPopup();
+            InitializeBoostBounceTimer();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
@@ -205,7 +222,7 @@ namespace WhatTheWord
 
 		private void BoostsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			boostsUserControl.show();
+            boostsUserControl.show();
 		}
 
 		private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)

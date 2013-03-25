@@ -12,6 +12,32 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="BoostBounceStoryboard">
+            <DoubleAnimationUsingKeyFrames
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)"
+             Storyboard.TargetName="BoostButton">
+
+                <!-- This keyframe animates the ellipse up to the crest 
+                     where it slows down and stops. -->
+                <EasingDoubleKeyFrame Value="-25" KeyTime="00:00:00.5">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+
+                <!-- This keyframe animates the ellipse back down and makes
+                     it bounce. -->
+                <EasingDoubleKeyFrame Value="0" KeyTime="00:00:01">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <BounceEase Bounces="1" Bounciness="2" EasingMode="EaseOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
 
 	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot">
@@ -146,8 +172,13 @@
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left" Tap="BoostsButton_Tap"/>
-			<Image x:Name="FacebookButton" Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left" Tap="FacebookButton_Tap"/>
+            <Image x:Name="BoostButton" Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left" Tap="BoostsButton_Tap"
+                   RenderTransformOrigin="0.5,0.5" >
+                <Image.RenderTransform>
+                    <CompositeTransform TranslateY="0"/>
+                </Image.RenderTransform>
+            </Image>
+            <Image x:Name="FacebookButton" Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left" Tap="FacebookButton_Tap"/>
 		</Grid>
 
 		<!-- LOCALIZATION NOTE:
