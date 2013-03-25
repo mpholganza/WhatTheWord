@@ -10,11 +10,13 @@ using System.Windows.Resources;
 using System.Net;
 using Microsoft.Phone.Info;
 using System.Threading;
+using System.ComponentModel;
 
 namespace WhatTheWord.Model
 {
 	public class GameState
 	{
+
 		#region Constants
 		public const int GUESSPANEL_LETTER_REVEALED = 100;
 		public const int GUESSPANEL_LETTER_NOT_GUESSED = 101;
@@ -24,10 +26,10 @@ namespace WhatTheWord.Model
 
 		#region Config variables
 		public int initialCoins { get; set; }
-		public double boostRemoveLettersCost { get; set; }
+		public int boostRemoveLettersCost { get; set; }
 		public int boostRemoveLettersNumberOfLetters { get; set; }
-		public double boostRevealLetterCost { get; set; }
-		public double boostShuffleCost { get; set; }
+		public int boostRevealLetterCost { get; set; }
+		public int boostShuffleCost { get; set; }
 		public int rewardCoinsPerQuestion { get; set; }
 		public int rateMeReward { get; set; }
 		public int rateMeShowInitial { get; set; }
@@ -37,11 +39,12 @@ namespace WhatTheWord.Model
 		public int picsSuccessDownloadWait { get; set; }
 		public string rateMeURL { get; set; }
 		public string picturesFilenamePath { get; set; }
-		public List<InAppPurchase> Purchases { get; set; }
+		public Dictionary<string,InAppPurchase> Purchases { get; set; }
 		public List<Puzzle> Puzzles { get; set; }
 		#endregion
 
-		#region Gameplay variables
+        #region Gameplay variables
+        public string FacebookToken { get; set; }
 		public int CurrentLevel { get; set; }
 		public int Coins { get; set; }
 		public String PuzzleWord { get; set; }
@@ -53,6 +56,7 @@ namespace WhatTheWord.Model
 
 		public GameState()
 		{
+            this.FacebookToken = "";
 			this.CurrentLevel = 0;
 			this.Coins = 0;
 			this.PuzzleWord = "";
@@ -60,6 +64,7 @@ namespace WhatTheWord.Model
 			this.GuessPanelState = null;
 			this.CharacterPanelState = null;
 			this.Loaded = false;
+            this.Purchases = new Dictionary<string, InAppPurchase>();
 		}
 
 		/// <summary>
@@ -126,6 +131,7 @@ namespace WhatTheWord.Model
 			// TODO: This is the wrong way to do this
 			if (null != gs)
 			{
+                this.FacebookToken = gs.FacebookToken;
 				this.CurrentLevel = gs.CurrentLevel;
 				this.Coins = gs.Coins;
 				this.PuzzleWord = gs.PuzzleWord;
@@ -209,10 +215,10 @@ namespace WhatTheWord.Model
 
 			bool success = false;
 			int initialCoins = 0;
-			double boostRemoveLettersCost = 0;
+			int boostRemoveLettersCost = 0;
 			int boostRemoveLettersNumberOfLetters = 0;
-			double boostRevealLetterCost = 0;
-			double boostShuffleCost = 0;
+			int boostRevealLetterCost = 0;
+			int boostShuffleCost = 0;
 			int rewardCoinsPerQuestion = 0;
 			int rateMeReward = 0;
 			int rateMeShowInitial = 0;
@@ -227,46 +233,60 @@ namespace WhatTheWord.Model
 			{
 				case "initialCoins":
 					success = int.TryParse(value, out initialCoins);
+                    this.initialCoins = initialCoins;
 					break;
 				case "boostRemoveLettersCost":
-					success = double.TryParse(value, out boostRemoveLettersCost);
+					success = int.TryParse(value, out boostRemoveLettersCost);
+			        this.boostRemoveLettersCost = boostRemoveLettersCost;
 					break;
 				case "boostRemoveLettersNumberOfLetters":
 					success = int.TryParse(value, out boostRemoveLettersNumberOfLetters);
+                    this.boostRemoveLettersNumberOfLetters = boostRemoveLettersNumberOfLetters;
 					break;
 				case "boostRevealLetterCost":
-					success = double.TryParse(value, out boostRevealLetterCost);
+					success = int.TryParse(value, out boostRevealLetterCost);
+                    this.boostRevealLetterCost = boostRevealLetterCost;
 					break;
 				case "boostShuffleCost":
-					success = double.TryParse(value, out boostShuffleCost);
+					success = int.TryParse(value, out boostShuffleCost);
+                    this.boostShuffleCost = boostShuffleCost;
 					break;
 				case "rewardCoinsPerQuestion":
 					success = int.TryParse(value, out rewardCoinsPerQuestion);
+                    this.rewardCoinsPerQuestion = rewardCoinsPerQuestion;
 					break;
 				case "rateMeReward":
 					success = int.TryParse(value, out rateMeReward);
+                    this.rateMeReward = rateMeReward;
 					break;
 				case "rateMeShowInitial":
 					success = int.TryParse(value, out rateMeShowInitial);
+                    this.rateMeShowInitial = rateMeShowInitial;
 					break;
 				case "rateMeShowReminderInterval":
 					success = int.TryParse(value, out rateMeShowReminderInterval);
+                    this.rateMeShowReminderInterval = rateMeShowReminderInterval;
 					break;
 				case "boostBounceTimeInterval":
 					success = int.TryParse(value, out boostBounceTimeInterval);
+                    this.boostBounceTimeInterval = boostBounceTimeInterval;
 					break;
 				case "picsFailedDownloadWait":
 					success = int.TryParse(value, out picsFailedDownloadWait);
+                    this.picsFailedDownloadWait = picsFailedDownloadWait;
 					break;
 				case "picsSuccessDownloadWait":
 					success = int.TryParse(value, out picsSuccessDownloadWait);
+                    this.picsSuccessDownloadWait = picsSuccessDownloadWait;
 					break;
 				case "rateMeURL":
 					rateMeURL = value;
+                    this.rateMeURL = rateMeURL;
 					success = true;
 					break;
 				case "picturesFilenamePath":
 					picturesFilenamePath = value;
+                    this.picturesFilenamePath = picturesFilenamePath;
 					success = true;
 					break;
 				default:
@@ -277,22 +297,6 @@ namespace WhatTheWord.Model
 			{
 				throw new ApplicationException("Invalid Gatedata config info. Trouble parsing " + keyName + ": " + value);
 			}
-
-			// Only doing it this way because TryParse can't write to instance variables :(
-			this.initialCoins = initialCoins;
-			this.boostRemoveLettersCost = boostRemoveLettersCost;
-			this.boostRemoveLettersNumberOfLetters = boostRemoveLettersNumberOfLetters;
-			this.boostRevealLetterCost = boostRevealLetterCost;
-			this.boostShuffleCost = boostShuffleCost;
-			this.rewardCoinsPerQuestion = rewardCoinsPerQuestion;
-			this.rateMeReward = rateMeReward;
-			this.rateMeShowInitial = rateMeShowInitial;
-			this.rateMeShowReminderInterval = rateMeShowReminderInterval;
-			this.boostBounceTimeInterval = boostBounceTimeInterval;
-			this.picsFailedDownloadWait = picsFailedDownloadWait;
-			this.picsSuccessDownloadWait = picsSuccessDownloadWait;
-			this.rateMeURL = rateMeURL;
-			this.picturesFilenamePath = picturesFilenamePath;
 		}
 
 		private void parsePuzzleString(string puzzleInfo)
@@ -392,20 +396,21 @@ namespace WhatTheWord.Model
 
 		private void parseInAppPurchase(string iapInfo)
 		{
-			List<InAppPurchase> iaps = new List<InAppPurchase>();
 			string[] kvps = iapInfo.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+
+            InAppPurchase p = null;
+            string bundleId = string.Empty;
+            decimal price = 0;
+            int coins = 0;
+            int order = 0;
+            string name = string.Empty;
+            string discount = string.Empty;
+
 			for (int i = 0; i < kvps.Length; i++)
 			{
 				string key = string.Empty;
 				string value = string.Empty;
 				GetKeyValuePairFromString(kvps[i], out key, out value);
-
-				string bundleId = string.Empty;
-				double price = 0;
-				int coins = 0;
-				int order = 0;
-				string name = string.Empty;
-				string discount = string.Empty;
 
 				bool success = false;
 				switch (key)
@@ -413,23 +418,30 @@ namespace WhatTheWord.Model
 					case "bundleId":
 						bundleId = value;
 						success = true;
+                        p = new InAppPurchase() { BundleId = bundleId };
+				        this.Purchases.Add(bundleId, p);
 						break;
 					case "price":
-						success = double.TryParse(value, out price);
+						success = decimal.TryParse(value, out price);
+                        p.Price = price;
 						break;
 					case "coins":
 						success = int.TryParse(value, out coins);
+                        p.Coins = coins;
 						break;
 					case "order":
 						success = (int.TryParse(value, out order));
+                        p.Order = order;
 						break;
 					case "name":
 						name = value;
 						success = true;
+                        p.Name = name;
 						break;
 					case "discount":
 						discount = value;
 						success = true;
+                        p.Discount = discount;
 						break;
 					default:
 						throw new ApplicationException("Unknown Gatedata InAppPurchase property: " + key);
@@ -439,18 +451,7 @@ namespace WhatTheWord.Model
 				{
 					throw new ApplicationException("Invalid InAppPurchase info. Trouble parsing " + key + ": " + value);
 				}
-
-				iaps.Add(new InAppPurchase()
-				{
-					BundleId = bundleId,
-					Price = price,
-					Coins = coins,
-					Order = order,
-					Name = name,
-				});
 			}
-
-			this.Purchases = iaps;
 		}
 
 		public void GetDataTypeAndDataValue(string dataLine, out string dataType, out string dataValue)
@@ -545,6 +546,30 @@ namespace WhatTheWord.Model
 			GuessPanelState = null;
 			CharacterPanelState = null;
 		}
+
+        public void RevealLetter()
+        {
+            // Clear the guess panel
+            this.ClearGuessPanel();
+
+            // Pick a letter that hasn't been revealed yet
+            Random random = new Random((int)DateTime.Now.Ticks);
+            int revealIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * GuessPanelState.Length));
+
+            // Set it to revealed
+            GuessPanelState[revealIndex] = GameState.GUESSPANEL_LETTER_REVEALED;
+        }
+
+        public void RemoveLetter()
+        {
+            // Pick a letter that is not a part of the actual word
+			Random random = new Random((int)DateTime.Now.Ticks);
+            int removeIndex = -1;
+            //Convert.ToInt32(Math.Floor(random.NextDouble() * CharacterPanelState.Length)));
+
+            // Set it to removed
+            CharacterPanelState[removeIndex] = GameState.CHARACTERPANEL_LETTER_REMOVED;
+        }
 
 		internal void Initialize(Puzzle CurrentPuzzle)
 		{

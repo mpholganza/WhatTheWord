@@ -20,13 +20,11 @@ namespace WhatTheWord
 		public Puzzle CurrentPuzzle { get; set; }
 		public GameState CurrentGameState { get; set; }
 
-		Popup _CoinsPopup = new Popup();
-		Popup _FacebookPopup = new Popup();
-		Popup _BoostsPopup = new Popup();
-
 		FacebookUserControl facebookUserControl;
-		CoinsUserControl coinsUserControl;
-		BoostsUserControl boostsUserControl;
+		public CoinsUserControl coinsUserControl;
+        public BoostsUserControl boostsUserControl;
+        public AboutUserControl aboutUserControl;
+        public SettingsUserControl settingsUserControl;
 
 		// Constructor
 		public MainPage()
@@ -42,21 +40,33 @@ namespace WhatTheWord
 
 		private void InitializeFacebookPopup()
 		{
-			facebookUserControl = new FacebookUserControl(_FacebookPopup, this.LayoutRoot,
+			facebookUserControl = new FacebookUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeCoinsPopup()
 		{
-			coinsUserControl = new CoinsUserControl(_CoinsPopup, CurrentGameState,
-				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+			coinsUserControl = new CoinsUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
 		private void InitializeBoostsPopup()
 		{
-			boostsUserControl = new BoostsUserControl(_BoostsPopup, CurrentGameState,
-				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+			boostsUserControl = new BoostsUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
+
+        private void InitializeAboutPopup()
+        {
+            aboutUserControl = new AboutUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
+
+        private void InitializeSettingsPopup()
+        {
+            settingsUserControl = new SettingsUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -67,6 +77,8 @@ namespace WhatTheWord
 			InitializeFacebookPopup();
 			InitializeCoinsPopup();
 			InitializeBoostsPopup();
+            InitializeAboutPopup();
+            InitializeSettingsPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
@@ -102,7 +114,7 @@ namespace WhatTheWord
 		/// <summary>
 		/// Display game
 		/// </summary>
-		private void DisplayGame()
+		public void DisplayGame()
 		{
 			LayoutRoot.DataContext = CurrentPuzzle;
 			HeaderPanel.DataContext = CurrentGameState;
@@ -206,6 +218,11 @@ namespace WhatTheWord
 			facebookUserControl.show();
 		}
 
+        private void SettingsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            settingsUserControl.show();
+        }
+
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
 			int currentGuessPanelIndexValue = CurrentGameState.GuessPanelState[guessPanelIndex];
@@ -258,7 +275,40 @@ namespace WhatTheWord
 			// display incorrect guess
 		}
 
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            bool cancelBackbutton = true;
 
+            if (facebookUserControl.isOpen())
+            {
+                facebookUserControl.hide();
+            }
+            else if (boostsUserControl.isOpen())
+            {
+                boostsUserControl.hide();
+            }
+            else if (coinsUserControl.isOpen())
+            {
+                coinsUserControl.hide();
+            }
+            else if (aboutUserControl.isOpen())
+            {
+                aboutUserControl.hide();
+            }
+            else if (settingsUserControl.isOpen())
+            {
+                settingsUserControl.hide();
+            }
+            else
+            {
+                cancelBackbutton = false;
+            }
+
+            if (cancelBackbutton)
+            {
+                e.Cancel = true;  //Cancels the default behavior.
+            }
+        }
 
 		// Sample code for building a localized ApplicationBar
 		//private void BuildLocalizedApplicationBar()

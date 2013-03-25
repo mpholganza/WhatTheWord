@@ -108,6 +108,12 @@
     <Compile Include="Popups\BoostsUserControl.xaml.cs">
       <DependentUpon>BoostsUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\AboutUserControl.xaml.cs">
+      <DependentUpon>AboutUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\SettingsUserControl.xaml.cs">
+      <DependentUpon>SettingsUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\FacebookUserControl.xaml.cs">
       <DependentUpon>FacebookUserControl.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Popups\AboutUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\SettingsUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Popups\FacebookUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -155,20 +169,31 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\aboutButton%401280_768.png" />
+    <Content Include="Assets\altLineColor%40%401280_768.png" />
+    <Content Include="Assets\coinIapButton%401280_768.png" />
     <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton_p%401280_768.png" />
     <Content Include="Assets\facebookSharePostBG%401280_768.png" />
+    <Content Include="Assets\feedbackButton%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
     <Content Include="Assets\gamestate.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\infoBG%401280_768.png" />
+    <Content Include="Assets\lineColor%40%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton_p%401280_768.png" />
+    <Content Include="Assets\removeALetterBoostIcon%401280_768.png" />
+    <Content Include="Assets\revealALetterBoostIcon%401280_768.png" />
+    <Content Include="Assets\shuffleBoostIcon%401280_768.png" />
+    <Content Include="Assets\soundButton%401280_768.png" />
+    <Content Include="Assets\toggleButtonOff%401280_768.png" />
+    <Content Include="Assets\toggleButtonOn%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_a_win%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_b_win%401280_768.png" />
     <Content Include="Assets\WinLetters\gb_c_win%401280_768.png" />
@@ -302,6 +327,7 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

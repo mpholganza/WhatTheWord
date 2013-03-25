@@ -4,7 +4,7 @@
   <ProductListing Key="100Coins" Purchased="false" Fulfilled="false">
     <Name>100 Coins</Name>
     <Description>100 coins for Atomic Coins</Description>
-    <ProductId>WhatTheWord.Consumables.Coins.100</ProductId>
+    <ProductId>com.kooapps.guessthisword.c1</ProductId>
     <ProductType>Consumable</ProductType>
     <FormattedPrice>$10.00</FormattedPrice>
     <ImageUri></ImageUri>
@@ -14,7 +14,7 @@
   <ProductListing Key="50Coins" Purchased="false" Fulfilled="false">
     <Name>50 Coins</Name>
     <Description>50 coins for Atomic Coins</Description>
-    <ProductId>WhatTheWord.Consumables.Coins.50</ProductId>
+    <ProductId>com.kooapps.guessthisword.c2</ProductId>
     <ProductType>Consumable</ProductType>
     <FormattedPrice>$5.00</FormattedPrice>
     <ImageUri></ImageUri>
@@ -24,7 +24,27 @@
   <ProductListing Key="20Coins" Purchased="false" Fulfilled="false">
     <Name>20 Coins</Name>
     <Description>20 coins for Atomic Coins</Description>
-    <ProductId>WhatTheWord.Consumables.Coins.20</ProductId>
+    <ProductId>com.kooapps.guessthisword.c5</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$2.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;20</Keywords>
+    <Tag>20</Tag>
+  </ProductListing>
+  <ProductListing Key="1000Coins" Purchased="false" Fulfilled="false">
+    <Name>20 Coins</Name>
+    <Description>20 coins for Atomic Coins</Description>
+    <ProductId>com.kooapps.guessthisword.c10</ProductId>
+    <ProductType>Consumable</ProductType>
+    <FormattedPrice>$2.00</FormattedPrice>
+    <ImageUri></ImageUri>
+    <Keywords>coins;20</Keywords>
+    <Tag>20</Tag>
+  </ProductListing>
+  <ProductListing Key="10000Coins" Purchased="false" Fulfilled="false">
+    <Name>20 Coins</Name>
+    <Description>20 coins for Atomic Coins</Description>
+    <ProductId>com.kooapps.guessthisword.c25</ProductId>
     <ProductType>Consumable</ProductType>
     <FormattedPrice>$2.00</FormattedPrice>
     <ImageUri></ImageUri>

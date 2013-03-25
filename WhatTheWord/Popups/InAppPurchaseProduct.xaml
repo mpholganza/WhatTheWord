@@ -8,23 +8,84 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     d:DesignHeight="480" d:DesignWidth="480">
+    
+    <UserControl.Resources>
+        <local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
 
-    <Border x:Name="Divider" Height="100" BorderBrush="#EBEBDC" BorderThickness="0,0,0,3">
-        <Grid x:Name="LayoutRoot">
+        <Style x:Key="ProductBorder" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#EBEBDC" />
+            <Setter Property="Height" Value="100" />
+            <Setter Property="BorderThickness" Value="0,0,0,3" />
+        </Style>
+
+        <Style x:Key="ProductIcon" TargetType="Image">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="70" />
+            <Setter Property="Margin" Value="15,0,0,0" />
+            <Setter Property="Source" Value="/Assets/IAPcoinIcon@1280_768.png" />
+        </Style>
+
+        <Style x:Key="ProductName" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+
+        <Style x:Key="ProductDiscount" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Foreground" Value="#FF702C" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+
+        <Style x:Key="ProductButton" TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Background" Value="#DF8800" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Width" Value="135" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,0,0,0" />
+        </Style>
+
+        <Style x:Key="ProductButton_Text" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="22" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource ProductBorder}">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="CoinIcon" Grid.Column="0" Source="/Assets/IAPcoinIcon@1280_768.png" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0" Stretch="Uniform" />
-            <TextBlock x:Name="ProductName" Grid.Column="1" Text="400 coins" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
+            <Image x:Name="Icon" Grid.Column="0" Style="{StaticResource ProductIcon}" />
 
-            <Button x:Name="PurchaseButton" Grid.Column="2" Margin="0" Padding="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <Grid>
-                    <Image Source="/Assets/buyButton@1280_768.png" Stretch="Uniform"/>
-                    <TextBlock x:Name="Price" Text="$2000" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextNormalStyle}"/>
-                </Grid>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock x:Name="ProductName" Text="2000 Coins" 
+                       Style="{StaticResource ProductName}"/>
+                <TextBlock x:Name="ProductDiscount" Text="+600 FREE" 
+                       Style="{StaticResource ProductDiscount}"/>
+            </StackPanel>
+
+            <Button x:Name="Button" Grid.Column="2" Style="{StaticResource ProductButton}">
+                <TextBlock x:Name="Price" Text="$20.00" 
+                           Style="{StaticResource ProductButton_Text}"/>
             </Button>
         </Grid>
     </Border>

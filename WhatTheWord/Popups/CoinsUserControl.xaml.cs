@@ -26,8 +26,8 @@ namespace WhatTheWord.Popups
 {
     public partial class CoinsUserControl : UserControl
     {
-        Popup _popup;
-        GameState _gameState;
+        private Popup _popup;
+        private MainPage _mainPage;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -35,12 +35,14 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public CoinsUserControl(Popup popup, GameState gameState, double hostWindowWidth, double hostWindowHeight)
+        public bool isOpenedFromBoosts = false;
+
+        public CoinsUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
 
             _popup = popup;
-            _gameState = gameState;
+            _mainPage = mainPage;
 
             this.HostWindowWidth = hostWindowWidth;
             this.HostWindowHeight = hostWindowHeight;
@@ -54,7 +56,7 @@ namespace WhatTheWord.Popups
             this.PopupWidth = this.HostWindowWidth * 0.9;
 
             HeaderPanel.Width = this.PopupWidth;
-            HeaderPanel.Height = 102;
+            //HeaderPanel.Height = 102;
 
             ContentPanel.Width = this.PopupWidth;
             //ContentPanel.MaxHeight = this.PopupHeight - HeaderPanel.Height;
@@ -70,17 +72,33 @@ namespace WhatTheWord.Popups
 
         private async void setupPurchases()
         {
-            ListingInformation listingInformation;
-
             try
             {
-                listingInformation = await CurrentApp.LoadListingInformationAsync();
-
+                ListingInformation listingInformation = await CurrentApp.LoadListingInformationAsync();
+                Dictionary<int, InAppPurchase> unorderedPurchases = new Dictionary<int, InAppPurchase>();
                 ContentStackPanel.Children.Clear();
 
+                // for each registered product on the Store
                 foreach (ProductListing listing in listingInformation.ProductListings.Values)
                 {
-                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(listing, _gameState));
+                    // if there is a match between a registered product on the Store and our own server data
+                    if (_mainPage.CurrentGameState.Purchases.ContainsKey(listing.ProductId))
+                    {
+                        // add it to the list of products to be displayed
+                        unorderedPurchases.Add(
+                            _mainPage.CurrentGameState.Purchases[listing.ProductId].Order,
+                            _mainPage.CurrentGameState.Purchases[listing.ProductId]);
+                    }
+                }
+
+                // sort the list of products based on Order
+                var list = unorderedPurchases.Keys.ToList();
+                list.Sort();
+
+                // add the list of products in ascending Order
+                foreach (var key in list)
+                {
+                    ContentStackPanel.Children.Add(new InAppPurchaseProduct(unorderedPurchases[key], _mainPage, this));
                 }
             }
             catch (Exception e)
@@ -92,18 +110,38 @@ namespace WhatTheWord.Popups
             }
         }
 
+        #region Show and Hide
         public void show()
         {
             if (!_popup.IsOpen)
             {
                 _popup.Child = this;
                 _popup.IsOpen = true;
+
+                if (isOpenedFromBoosts)
+                {
+                    this.HeaderTitle.Text = "Get Coins!";
+                }
+                else
+                {
+                    this.HeaderTitle.Text = "COINS";
+                }
             }
         }
 
         public void hide()
         {
+            if (isOpenedFromBoosts)
+            {
+                _mainPage.boostsUserControl.show();
+                isOpenedFromBoosts = false;
+            }
             _popup.IsOpen = false;
+        }
+
+        public bool isOpen()
+        {
+            return _popup.IsOpen;
         }
 
         private void showLoading()
@@ -119,22 +157,7 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
         }
-
-        private void showPost()
-        {
-            HeaderTitle.Text = "Share";
-
-            Overlay.Visibility = System.Windows.Visibility.Visible;
-            HeaderPanel.Visibility = System.Windows.Visibility.Visible;
-            ContentPanel.Visibility = System.Windows.Visibility.Visible;
-
-            if (!_popup.IsOpen)
-            {
-                _popup.Child = this;
-                _popup.IsOpen = true;
-            }
-        }
-
+        #endregion
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {

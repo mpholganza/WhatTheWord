@@ -10,65 +10,132 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     >
+    
+    <UserControl.Resources>
+        <local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
+        
+        <Style x:Key="FacebookIcon" TargetType="Image">
+            <Setter Property="Source" Value="/Assets/facebookTile@1280_768.png" />
+            <Setter Property="Margin" Value="0,0,5,0" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Stretch" Value="Uniform" />
+        </Style>
+        
+        <Style x:Key="FacebookBrowser" TargetType="phone:WebBrowser">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Background" Value="#F5F5ED" />
+            <Setter Property="BorderBrush" Value="#F5F5ED" />
+            <Setter Property="BorderThickness" Value="4,3,4,4" />
+        </Style>
 
+        <Style x:Key="FacebookContentPanelPadding" TargetType="Grid">
+            <Setter Property="Margin" Value="12,17,12,20" />
+        </Style>
+
+        <Style x:Key="FacebookPostScreenshot_Border" TargetType="Border">
+            <Setter Property="BorderBrush" Value="#C8C8C1" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="235" />
+            <Setter Property="Margin" Value="8,10,5,0" />
+        </Style>
+
+        <Style x:Key="FacebookPostScreenshot" TargetType="Image">
+        </Style>
+
+        <Style x:Key="FacebookPostMessage" TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Height" Value="180" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="LineHeight" Value="30" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="BorderBrush" Value="#C8C8C1" />
+            <Setter Property="BorderThickness" Value="2" />
+        </Style>
+
+        <Style x:Key="FacebookPostButton" TargetType="Button">
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="#DF8800" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0" />
+        </Style>
+
+        <Style x:Key="FacebookPostButton_Text" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+            <Setter Property="FontSize" Value="26" />
+        </Style>
+    </UserControl.Resources>
+    
     <Grid x:Name="HostPanel" Margin="0">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Grid x:Name="Overlay" Grid.Row="0" Grid.RowSpan="2" Background="Black" Opacity="0.5" Margin="0"/>
 
-        <Grid x:Name="HeaderPanel" Grid.Row="0" Background="#EECC5D" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0">
+        <Grid x:Name="Overlay" Grid.Row="0" Grid.RowSpan="2" 
+              Style="{StaticResource Popup_Overlay}" />
+
+        <Grid x:Name="HeaderPanel" Grid.Row="0" 
+              Style="{StaticResource Popup_HeaderPanel}" >
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="BackButton" Grid.Column="0" Source="/Assets/backButton@1280_768.png" HorizontalAlignment="Left" Margin="12,0,0,0" Height="78" Width="78" Stretch="Fill" Tap="BackButton_Tap" />
+            <Image x:Name="BackButton" Grid.Column="0" Tap="BackButton_Tap" 
+                   Style="{StaticResource Popup_BackButtonIcon}" />
 
-            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="Login" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}" />
+            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="Login" 
+                       Style="{StaticResource Popup_HeaderFont}" />
 
-            <Image Grid.Column="2" Source="/Assets/facebookTile@1280_768.png" Margin="0,0,12,0" Height="55" Width="55" Stretch="Fill" />
+            <Image Grid.Column="2" Style="{StaticResource FacebookIcon}" />
             
         </Grid>
 
-        <phone:WebBrowser Grid.Row="1" x:Name="webBrowser1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0"
-                          IsScriptEnabled="True" Navigated="webBrowser1_Navigated" Loaded="webBrowser1_Loaded"  
-                          BorderBrush="#F5F5ED" BorderThickness="4,3,4,4" />
+        <phone:WebBrowser Grid.Row="1" x:Name="Browser" Style="{StaticResource FacebookBrowser}"
+                          IsScriptEnabled="True" Navigated="Browser_Navigated" Loaded="Browser_Loaded" />
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Background="#F5F5ED" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Style="{StaticResource Popup_ContentPanel}" >
 
-            <StackPanel x:Name="SharePanel" Margin="12,17,12,17">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Style="{StaticResource FacebookContentPanelPadding}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left"
-                           x:Name="Screenshot" Height="160" Margin="8,10,0,0"/>
+                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource FacebookPostScreenshot_Border}">
+                    <Image x:Name="Screenshot" Style="{StaticResource FacebookPostScreenshot}"/>
+                </Border>
 
-                    <TextBox Grid.Row="0" Grid.Column="1" x:Name="Message" TextWrapping="Wrap" Text="Help me guess this word!" Height="180" IsReadOnly="False"/>
+                <TextBox x:Name="Message" Grid.Row="0" Grid.Column="1" Text="Help me guess what this word is!"
+                            Style="{StaticResource FacebookPostMessage}"/>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                    <Button x:Name="PostButton" Width="160" Click="PostButton_Click_1" Padding="0">
-                        <Grid>
-                            <Image Source="/Assets/cancelPostButton@1280_768.png" Stretch="Fill"/>
-                            <TextBlock Text="Post" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Button>
-                </StackPanel>
-                </Grid>
-            </StackPanel>
-            
+                <Button x:Name="PostButton" Grid.Row="1" Grid.Column="1" Tap="PostButton_Tap"
+                        Style="{StaticResource FacebookPostButton}">
+                    <TextBlock Text="Post" Style="{StaticResource FacebookPostButton_Text}"/>
+                </Button>
+            </Grid>
+
         </Grid>
 
     </Grid>
