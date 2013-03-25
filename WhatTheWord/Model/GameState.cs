@@ -536,7 +536,7 @@ namespace WhatTheWord.Model
 		{
 			for (int i = 0; i < GuessPanelState.Length; i++)
 			{
-				if (PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i] && PuzzleCharacters[GuessPanelState[i]] != GameState.GUESSPANEL_LETTER_REVEALED) return false;
+				if (GuessPanelState[i] != GameState.GUESSPANEL_LETTER_REVEALED && PuzzleCharacters[GuessPanelState[i]] != PuzzleWord[i]) return false;
 			}
 
 			return true;
@@ -552,29 +552,81 @@ namespace WhatTheWord.Model
 			CharacterPanelState = null;
 		}
 
-        public void RevealLetter()
-        {
-            // Clear the guess panel
-            this.ClearGuessPanel();
+		public void RevealLetter()
+		{
+			if (!this.CanRevealLetter())
+			{
+				// TODO: Report to server. This should never happen.
+				Console.WriteLine("Called reveal letter when user shouldn't be able to.");
+				return;
+			}
 
-            // Pick a letter that hasn't been revealed yet
-            Random random = new Random((int)DateTime.Now.Ticks);
-            int revealIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * GuessPanelState.Length));
+			// Clear the guess panel
+			this.ClearGuessPanel();
 
-            // Set it to revealed
-            GuessPanelState[revealIndex] = GameState.GUESSPANEL_LETTER_REVEALED;
-        }
+			// Pick a letter that hasn't been revealed yet
+			int revealedLetters = 0;
+			for (int i = 0; i < GuessPanelState.Length; i++)
+			{
+				if (GuessPanelState[i] == GUESSPANEL_LETTER_REVEALED) revealedLetters++;
+			}
 
-        public void RemoveLetter()
-        {
-            // Pick a letter that is not a part of the actual word
 			Random random = new Random((int)DateTime.Now.Ticks);
-            int removeIndex = -1;
-            //Convert.ToInt32(Math.Floor(random.NextDouble() * CharacterPanelState.Length)));
+			int revealIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * (GuessPanelState.Length - revealedLetters)));
+			int revealIndexOffset = 0;
 
-            // Set it to removed
-            CharacterPanelState[removeIndex] = GameState.CHARACTERPANEL_LETTER_REMOVED;
-        }
+			// Set it to revealed
+			for (int i = 0; i <= revealIndex; i++)
+			{
+				while (GameState.GUESSPANEL_LETTER_REVEALED == GuessPanelState[i + revealIndexOffset]) { revealIndexOffset++; }
+			}
+
+			GuessPanelState[revealIndex + revealIndexOffset] = GameState.GUESSPANEL_LETTER_REVEALED;
+		}
+
+		public bool CanRevealLetter()
+		{
+			int revealedLetters = 0;
+			for (int i = 0; i < GuessPanelState.Length; i++)
+			{
+				if (GuessPanelState[i] == GUESSPANEL_LETTER_REVEALED) revealedLetters++;
+			}
+
+			return (revealedLetters < this.GuessPanelState.Length - 1);
+		}
+
+		public void RemoveLetter()
+		{
+			if (!this.CanRemoveLetter())
+			{
+				// TODO: Report to server. This should never happen
+				return;
+			}
+
+			// clear guess panel
+			this.ClearGuessPanel();
+
+			// Pick a letter that is not a part of the actual word
+			Random random = new Random((int)DateTime.Now.Ticks);
+			int removeIndex = -1;
+
+			//Convert.ToInt32(Math.Floor(random.NextDouble() * CharacterPanelState.Length)));
+
+			// Set it to removed
+			CharacterPanelState[removeIndex] = GameState.CHARACTERPANEL_LETTER_REMOVED;
+		}
+
+		public bool CanRemoveLetter()
+		{
+			// check that number of unremoved letters is more than the length of the word
+			int removedLetters = 0;
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				if (CharacterPanelState[i] == CHARACTERPANEL_LETTER_REMOVED) removedLetters++;
+			}
+
+			return (removedLetters > this.PuzzleWord.Length);
+		}
 
 		internal void Initialize(Puzzle CurrentPuzzle)
 		{
