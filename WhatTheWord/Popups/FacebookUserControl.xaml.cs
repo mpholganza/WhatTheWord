@@ -20,6 +20,7 @@ namespace WhatTheWord.Popups
     {
         //private const string AppId = "561883217157240"; // cookpanion
         private const string AppId = "456585341077776"; // guesstheword
+        private const string AppSecret = "1ceee952d1dcc1af00d0e8d4f1655b5d"; // guesstheword
 
         /// <summary>
         /// Extended permissions is a comma separated list of permissions to ask the user.
@@ -96,13 +97,22 @@ namespace WhatTheWord.Popups
             {
                 try
                 {
-                    FacebookClient fb = new FacebookClient(accessToken);
-                    var result = await fb.GetTaskAsync("me");
-                    _mainPage.CurrentGameState.FacebookToken = accessToken;
+                    FacebookClient fb = new FacebookClient();
+
+                    var parameters = new Dictionary<string, object>();
+                    parameters["client_id"] = AppId;
+                    parameters["client_secret"] = AppSecret;
+                    parameters["grant_type"] = "fb_exchange_token";
+                    parameters["fb_exchange_token"] = accessToken;
+
+                    var result = (IDictionary<string, object>)await fb.GetTaskAsync("oauth/access_token", parameters);
+
+                    _mainPage.CurrentGameState.FacebookToken = (string)result["access_token"];
                 }
                 catch (FacebookApiException e)
                 {
                     // token is invalid (e.g., expired)
+                    //Console.WriteLine(e.Message);
                 }
             }
         }

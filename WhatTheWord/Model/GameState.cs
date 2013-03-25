@@ -453,6 +453,7 @@ namespace WhatTheWord.Model
 				BundleId = bundleId,
 				Price = price,
 				Coins = coins,
+                Discount = discount,
 				Order = order,
 				Name = name,
 			};
