@@ -172,6 +172,8 @@ namespace WhatTheWord.Model
 
 			if (flightHash != value) { throw new ApplicationException("Corrupt Gamedata file. Hash does not match"); }
 
+			this.Purchases = new Dictionary<string, InAppPurchase>();
+
 			for (int i = 2; i < lines.Length - 1; i++)
 			{
 				string dataType = string.Empty;
@@ -187,7 +189,8 @@ namespace WhatTheWord.Model
 						parsePuzzleString(dataValue);
 						break;
 					case "iap":
-						parseInAppPurchase(dataValue);
+						InAppPurchase purchase = parseInAppPurchase(dataValue);
+						this.Purchases.Add(purchase.BundleId, purchase);
 						break;
 					default:
 						throw new ApplicationException("Invalid line in Gamedata file:" + lines[i]);
@@ -394,11 +397,10 @@ namespace WhatTheWord.Model
 			this.Puzzles = puzzles;
 		}
 
-		private void parseInAppPurchase(string iapInfo)
+		private InAppPurchase parseInAppPurchase(string iapInfo)
 		{
 			string[] kvps = iapInfo.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
 
-            InAppPurchase p = null;
             string bundleId = string.Empty;
             decimal price = 0;
             int coins = 0;
@@ -418,30 +420,23 @@ namespace WhatTheWord.Model
 					case "bundleId":
 						bundleId = value;
 						success = true;
-                        p = new InAppPurchase() { BundleId = bundleId };
-				        this.Purchases.Add(bundleId, p);
 						break;
 					case "price":
 						success = decimal.TryParse(value, out price);
-                        p.Price = price;
 						break;
 					case "coins":
 						success = int.TryParse(value, out coins);
-                        p.Coins = coins;
 						break;
 					case "order":
 						success = (int.TryParse(value, out order));
-                        p.Order = order;
 						break;
 					case "name":
 						name = value;
 						success = true;
-                        p.Name = name;
 						break;
 					case "discount":
 						discount = value;
 						success = true;
-                        p.Discount = discount;
 						break;
 					default:
 						throw new ApplicationException("Unknown Gatedata InAppPurchase property: " + key);
@@ -452,6 +447,15 @@ namespace WhatTheWord.Model
 					throw new ApplicationException("Invalid InAppPurchase info. Trouble parsing " + key + ": " + value);
 				}
 			}
+
+			return new InAppPurchase()
+			{
+				BundleId = bundleId,
+				Price = price,
+				Coins = coins,
+				Order = order,
+				Name = name,
+			};
 		}
 
 		public void GetDataTypeAndDataValue(string dataLine, out string dataType, out string dataValue)
