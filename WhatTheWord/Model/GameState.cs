@@ -607,13 +607,35 @@ namespace WhatTheWord.Model
 			this.ClearGuessPanel();
 
 			// Pick a letter that is not a part of the actual word
+			List<char> removeCandidates = new List<char>();
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				int candidate = CharacterPanelState[i];
+				if (candidate != GameState.CHARACTERPANEL_LETTER_REMOVED)
+				{
+					removeCandidates.Add(PuzzleCharacters[candidate]);
+				}
+			}
+
+			List<char> unremovableCharacters = this.PuzzleWord.ToList<char>();
+			removeCandidates.Sort();
+			unremovableCharacters.Sort();
+
+			unremovableCharacters.ForEach(c => removeCandidates.Remove(c));
+
 			Random random = new Random((int)DateTime.Now.Ticks);
-			int removeIndex = -1;
+			int removeIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * removeCandidates.Count));
+			char removeChar = removeCandidates[removeIndex];
 
-			//Convert.ToInt32(Math.Floor(random.NextDouble() * CharacterPanelState.Length)));
-
-			// Set it to removed
-			CharacterPanelState[removeIndex] = GameState.CHARACTERPANEL_LETTER_REMOVED;
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				if (CharacterPanelState[i] != GameState.CHARACTERPANEL_LETTER_REMOVED && PuzzleCharacters[CharacterPanelState[i]] == removeChar)
+				{
+					// Set it to removed
+					CharacterPanelState[i] = GameState.CHARACTERPANEL_LETTER_REMOVED;
+					return;
+				}
+			}
 		}
 
 		public bool CanRemoveLetter()
@@ -625,7 +647,7 @@ namespace WhatTheWord.Model
 				if (CharacterPanelState[i] == CHARACTERPANEL_LETTER_REMOVED) removedLetters++;
 			}
 
-			return (removedLetters > this.PuzzleWord.Length);
+			return (CharacterPanelState.Length - removedLetters > this.PuzzleWord.Length);
 		}
 
 		internal void Initialize(Puzzle CurrentPuzzle)

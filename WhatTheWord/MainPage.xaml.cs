@@ -120,7 +120,7 @@ namespace WhatTheWord
 		{
 			return new Puzzle()
 			{
-				Word = "randomus".ToUpper(),
+				Word = "random".ToUpper(),
 				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
 				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
 				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },

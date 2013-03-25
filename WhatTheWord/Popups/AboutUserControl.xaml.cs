@@ -105,11 +105,6 @@ namespace WhatTheWord.Popups
         private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             // TODO: add game logic
-			if (_mainPage.CurrentGameState.CanRevealLetter())
-			{
-				_mainPage.CurrentGameState.RevealLetter();
-				_mainPage.DisplayGame();
-			}
         }
 
         private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -125,6 +125,7 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(RevealALetterButton_Text.Text);
 
+			// TODO: Ensure revealing a letter is valid. Use CanRevealLetter(). Preferably disable this option?
             if (cost > _mainPage.CurrentGameState.Coins)
             {
                 openCoinsPopup();
@@ -143,6 +144,7 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(RemoveALetterButton_Text.Text);
 
+			// TODO: Ensure removing a letter is valid. Use CanRemoveLetter. Preferably disable this option?
             if (cost > _mainPage.CurrentGameState.Coins)
             {
                 openCoinsPopup();
