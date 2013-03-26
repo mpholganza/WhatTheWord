@@ -43,13 +43,6 @@
         </Style>
 
         <Style x:Key="BoostButton" TargetType="Button">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="Background" Value="#DF8800" />
-            <Setter Property="Height" Value="80" />
-            <Setter Property="Width" Value="135" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
         <Style x:Key="BoostButton_Icon" TargetType="Image">
@@ -117,9 +110,9 @@
                                    Style="{StaticResource BoostName}"/>
 
                         <Button x:Name="RevealALetterButton" Grid.Column="2" Tap="RevealALetterButton_Tap"
-                                   Style="{StaticResource BoostButton}">
+                                   Style="{StaticResource Popup_ButtonStyle}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <Image x:Name="RevealALetterButton_Icon" Style="{StaticResource BoostButton_Icon}"/>
                                 <TextBlock x:Name="RevealALetterButton_Text" Text="20" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>
@@ -141,9 +134,9 @@
                                    Style="{StaticResource BoostName}"/>
 
                         <Button x:Name="RemoveALetterButton" Grid.Column="2" Tap="RemoveALetterButton_Tap"
-                                   Style="{StaticResource BoostButton}">
+                                   Style="{StaticResource Popup_ButtonStyle}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <Image x:Name="RemoveALetterButton_Icon" Style="{StaticResource BoostButton_Icon}"/>
                                 <TextBlock x:Name="RemoveALetterButton_Text" Text="50" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>
@@ -165,9 +158,9 @@
                                    Style="{StaticResource BoostName}"/>
 
                         <Button x:Name="ShuffleButton" Grid.Column="2" Tap="ShuffleButton_Tap"
-                                   Style="{StaticResource BoostButton}">
+                                   Style="{StaticResource Popup_ButtonStyle}">
                             <StackPanel Orientation="Horizontal">
-                                <Image Style="{StaticResource BoostButton_Icon}"/>
+                                <Image x:Name="ShuffleButton_Icon" Style="{StaticResource BoostButton_Icon}"/>
                                 <TextBlock x:Name="ShuffleButton_Text" Text="100" Style="{StaticResource BoostButton_Text}"/>
                             </StackPanel>
                         </Button>

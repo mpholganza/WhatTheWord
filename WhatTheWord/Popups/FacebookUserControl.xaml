@@ -60,15 +60,6 @@
             <Setter Property="BorderThickness" Value="2" />
         </Style>
 
-        <Style x:Key="FacebookPostButton" TargetType="Button">
-            <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="Background" Value="#DF8800" />
-            <Setter Property="Height" Value="80" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0" />
-        </Style>
-
         <Style x:Key="FacebookPostButton_Text" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -131,7 +122,8 @@
                             Style="{StaticResource FacebookPostMessage}"/>
 
                 <Button x:Name="PostButton" Grid.Row="1" Grid.Column="1" Tap="PostButton_Tap"
-                        Style="{StaticResource FacebookPostButton}">
+                        VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="80" Width="Auto"
+                        Style="{StaticResource Popup_ButtonStyle}">
                     <TextBlock Text="Post" Style="{StaticResource FacebookPostButton_Text}"/>
                 </Button>
             </Grid>

@@ -89,7 +89,7 @@ namespace WhatTheWord.Popups
         private async void verifyFacebookToken()
         {
             string accessToken = _mainPage.CurrentGameState.FacebookToken;
-            _mainPage.CurrentGameState.FacebookToken = "";
+            _mainPage.CurrentGameState.FacebookToken = string.Empty;
 
             //accessToken = "AAAGfQw8QiRABAFpEDHyaOPZBVfBaTgq2ZAECXMCZCDuBGs5vUiQlZAOLZARartIT4ACGLeYeJLbHxiUZBnCRmO4MF03eWuiPkxS4PGGVFa3AZDZD";
 
@@ -277,6 +277,7 @@ namespace WhatTheWord.Popups
             catch (FacebookApiException e)
             {
                 Dispatcher.BeginInvoke(() => MessageBox.Show(e.Message));
+                _mainPage.CurrentGameState.FacebookToken = string.Empty;
             }
 
             this.hide();

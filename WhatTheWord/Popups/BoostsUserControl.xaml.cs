@@ -29,6 +29,9 @@ namespace WhatTheWord.Popups
         private Popup _popup;
         private MainPage _mainPage;
 
+        private BitmapImage _boostButtonEnabledIcon = new BitmapImage(new Uri("/Assets/coinIcon@1280_768.png", UriKind.Relative));
+        private BitmapImage _boostButtonDisabledIcon = new BitmapImage(new Uri("/Assets/coinIcon_disabled@1280_768.png", UriKind.Relative));
+
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
 
@@ -78,6 +81,7 @@ namespace WhatTheWord.Popups
         #region Show and Hide
         public void show()
         {
+            disableButtonsIfCannotBoost();
             if (!_popup.IsOpen)
             {
                 _popup.Child = this;
@@ -121,11 +125,28 @@ namespace WhatTheWord.Popups
             _mainPage.coinsUserControl.show();
         }
 
+        private void disableButtonsIfCannotBoost()
+        {
+            bool canRevealLetter = _mainPage.CurrentGameState.CanRevealLetter();
+            bool canRemoveLetter = _mainPage.CurrentGameState.CanRemoveLetter();
+
+            if (this.RevealALetterButton.IsEnabled != canRevealLetter)
+            {
+                this.RevealALetterButton.IsEnabled = canRevealLetter;
+                this.RevealALetterButton_Icon.Source = canRevealLetter ? _boostButtonEnabledIcon : _boostButtonDisabledIcon;
+            }
+
+            if (this.RemoveALetterButton.IsEnabled != canRemoveLetter)
+            {
+                this.RemoveALetterButton.IsEnabled = canRemoveLetter;
+                this.RemoveALetterButton_Icon.Source = canRemoveLetter ? _boostButtonEnabledIcon : _boostButtonDisabledIcon;
+            }
+        }
+
         private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             int cost = int.Parse(RevealALetterButton_Text.Text);
 
-			// TODO: Ensure revealing a letter is valid. Use CanRevealLetter(). Preferably disable this option?
             if (cost > _mainPage.CurrentGameState.Coins)
             {
                 openCoinsPopup();
@@ -144,7 +165,6 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(RemoveALetterButton_Text.Text);
 
-			// TODO: Ensure removing a letter is valid. Use CanRemoveLetter. Preferably disable this option?
             if (cost > _mainPage.CurrentGameState.Coins)
             {
                 openCoinsPopup();

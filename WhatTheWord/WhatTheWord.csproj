@@ -172,6 +172,7 @@
     <Content Include="Assets\aboutButton%401280_768.png" />
     <Content Include="Assets\altLineColor%40%401280_768.png" />
     <Content Include="Assets\coinIapButton%401280_768.png" />
+    <Content Include="Assets\coinIcon_disabled%401280_768.png" />
     <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
