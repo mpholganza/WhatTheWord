@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls.Primitives;
 using WhatTheWord.Popups;
 using System.Windows.Threading;
+using System.Windows.Media;
 
 namespace WhatTheWord
 {
@@ -74,7 +75,7 @@ namespace WhatTheWord
         private void InitializeBoostBounceTimer()
         {
             boostBounceTimer = new System.Windows.Threading.DispatcherTimer();
-            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, 10, 0); // 10 seconds 
+            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, 10, 0); // 10 seconds
             boostBounceTimer.Tick += new EventHandler(bounceBoostButton);
             boostBounceTimer.Start();
         }
@@ -270,7 +271,6 @@ namespace WhatTheWord
 				if (CurrentGameState.CheckAnswer())
 				{
 					PuzzleComplete();
-					return;
 				}
 				else
 				{
@@ -281,15 +281,49 @@ namespace WhatTheWord
 			DisplayGame();
 		}
 
+		private DispatcherTimer puzzleStatusTimer;
 		private void PuzzleComplete()
 		{
+			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
+			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
+			PuzzleAttemptStatus.Text = "CORRECT!";
+			PuzzleAttemptStatus.Visibility = Visibility.Visible;
+			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGCorrect@1280_768.png", UriKind.Relative)));
+			puzzleStatusTimer = new DispatcherTimer();
+			puzzleStatusTimer.Interval = new TimeSpan(0, 0, 0, 1, 200);
+			puzzleStatusTimer.Tick += puzzleStatusTimer_Correct;
+			puzzleStatusTimer.Start();
+		}
+
+		private void puzzleStatusTimer_Correct(object sender, EventArgs e)
+		{
+			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
+			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
+			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			CurrentGameState.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
+			puzzleStatusTimer.Stop();
 		}
 
 		private void PuzzleIncorrect()
 		{
-			// display incorrect guess
+			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
+			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
+			PuzzleAttemptStatus.Text = "TRY AGAIN!";
+			PuzzleAttemptStatus.Visibility = Visibility.Visible;
+			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGTryAgain@1280_768.png", UriKind.Relative)));
+			puzzleStatusTimer = new DispatcherTimer();
+			puzzleStatusTimer.Interval = new TimeSpan(0, 0, 0, 1, 200);
+			puzzleStatusTimer.Tick += puzzleStatusTimer_Incorrect;
+			puzzleStatusTimer.Start();
+		}
+
+		private void puzzleStatusTimer_Incorrect(object sender, EventArgs e)
+		{
+			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
+			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
+			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
+			puzzleStatusTimer.Stop();
 		}
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)

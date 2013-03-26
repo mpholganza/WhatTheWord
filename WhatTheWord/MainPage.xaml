@@ -118,11 +118,11 @@
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<Image Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="36" Width="240" Source="/Assets/correctSlider@1280_768.png" Stretch="None" Visibility="Collapsed"/>
+			<Image x:Name="PuzzleAttemptStatusBackground" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="36" Width="240" Source="/Assets/correctSlider@1280_768.png" Stretch="None" Visibility="Collapsed"/>
 			<TextBlock x:Name="PuzzleAttemptStatus" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource HeaderFont}" Height="32" Text="CORRECT!" Foreground="White" Visibility="Collapsed"/>
 		</Grid>
 
-		<Grid Grid.Row="2">
+		<Grid Grid.Row="2" x:Name="GuessPanelGrid">
 			<Grid.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/guessBG@1280_768.png"/>
 			</Grid.Background>
