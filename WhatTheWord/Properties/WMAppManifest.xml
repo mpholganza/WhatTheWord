@@ -2,7 +2,7 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
   <App xmlns="" ProductID="{3ca0eac9-2e9a-4ba3-92f8-178ec57ec2f4}" Title="Guess the Word" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="WhatTheWord author" Description="Sample description" Publisher="WhatTheWord" PublisherID="{fdd7c563-7e91-45a6-97eb-de43173271f2}">
-    <IconPath IsRelative="true" IsResource="false">Assets\PuzzlePictures\mangoes.png</IconPath>
+    <IconPath IsRelative="true" IsResource="false">Assets\guesstheword-336x336-appicon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
@@ -17,9 +17,9 @@
     <Tokens>
       <PrimaryToken TokenID="WhatTheWordToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\guesstheword-336x336-appicon.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\guesstheword-336x336-appicon.png</BackgroundImageURI>
           <Title>WhatTheWord</Title>
           <BackContent>
           </BackContent>
