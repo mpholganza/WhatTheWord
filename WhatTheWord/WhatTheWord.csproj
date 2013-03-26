@@ -182,7 +182,7 @@
     <Content Include="Assets\feedbackButton%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
-    <Content Include="Assets\gamestate.txt">
+    <Content Include="gameconfig.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\guesstheword-336x336-appicon.png" />
@@ -225,6 +225,7 @@
     <Content Include="Assets\winTransitionBG%401280_768.png" />
     <Content Include="Assets\IAPcoinIcon%401280_768.png" />
     <Content Include="MockupLicenseInfo.xml" />
+    <Content Include="SplashScreenImage.jpg" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">

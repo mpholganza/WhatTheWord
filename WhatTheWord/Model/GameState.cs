@@ -22,6 +22,8 @@ namespace WhatTheWord.Model
 		public const int GUESSPANEL_LETTER_NOT_GUESSED = 101;
 		public const int CHARACTERPANEL_LETTER_REMOVED = 200;
 		public const int CHARACTERPANEL_LETTER_GUESSED = 201;
+		public const string GAMECONFIGFILE = "gameconfig.txt";
+		public const string GAMESTATEFILE = "gamestate.txt";
 		#endregion
 
 		#region Config variables
@@ -89,7 +91,7 @@ namespace WhatTheWord.Model
 
 		private async void LoadGameConfigFromFile()
 		{
-			Task<String> loadDataFromFileTask =  FileAccess.LoadDataFromFileAsync("gamestate.txt");
+			Task<String> loadDataFromFileTask =  FileAccess.LoadDataFromFileAsync(GameState.GAMECONFIGFILE);
 			string gameData = await loadDataFromFileTask;
 			if (gameData != string.Empty)
 			{
@@ -108,7 +110,7 @@ namespace WhatTheWord.Model
 
 		private void LoadGameConfigFromDefaultFile()
 		{
-			StreamResourceInfo sri = App.GetResourceStream(new Uri("Assets/gamestate.txt", UriKind.Relative));
+			StreamResourceInfo sri = App.GetResourceStream(new Uri(GameState.GAMECONFIGFILE, UriKind.Relative));
 			StreamReader streamReader = new StreamReader(sri.Stream);
 			string gameData = streamReader.ReadToEnd();
 			DeserializeGameData(gameData);
@@ -668,9 +670,14 @@ namespace WhatTheWord.Model
 		}
 		#endregion
 
-		public static void WriteGameDataToFile(string gameData)
+		public static void WriteGameConfigToFile(string gameData)
 		{
-			FileAccess.WriteDataToFileAsync(gameData, "gamestate.txt");
+			FileAccess.WriteDataToFileAsync(gameData, GameState.GAMECONFIGFILE);
+		}
+
+		public static void WriteGamePlayStateToFile(string gamePlayState)
+		{
+			FileAccess.WriteDataToFileAsync(gamePlayState, GameState.GAMECONFIGFILE);
 		}
 
 		public override String ToString()

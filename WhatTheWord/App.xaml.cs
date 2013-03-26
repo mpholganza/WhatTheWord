@@ -102,7 +102,7 @@ namespace WhatTheWord
 					// TODO: report to server of failed deserialization
 					Console.WriteLine("Failed deserialization:\n" + gameData);
 				}
-				GameState.WriteGameDataToFile(args.Result);
+				GameState.WriteGameConfigToFile(args.Result);
 			}
 		}
 
