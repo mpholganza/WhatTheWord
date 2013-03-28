@@ -87,7 +87,9 @@ namespace WhatTheWord
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
-			LoadGameState();
+			LoadCurrentPuzzle(0);
+			CurrentGameState = new GameState();
+			CurrentGameState.Initialize(CurrentPuzzle);
 
 			DisplayGame();
 
@@ -104,22 +106,9 @@ namespace WhatTheWord
 			FacebookButton.Tap += FacebookButton_Tap;
 		}
 
-		/// <summary>
-		/// Load game state from file
-		/// </summary>
-		private void LoadGameState()
+		private void LoadCurrentPuzzle(int currentLevel)
 		{
-			CurrentGameState = new GameState();
-			CurrentGameState.LoadGameState();
-
-			CurrentPuzzle = LoadCurrentPuzzle(CurrentGameState.CurrentLevel);
-
-			CurrentGameState.Initialize(CurrentPuzzle);
-		}
-
-		private Puzzle LoadCurrentPuzzle(int currentLevel)
-		{
-			return new Puzzle()
+			CurrentPuzzle = new Puzzle()
 			{
 				Word = "random".ToUpper(),
 				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },

@@ -109,7 +109,7 @@ namespace WhatTheWord.Popups
 
                     _mainPage.CurrentGameState.FacebookToken = (string)result["access_token"];
                 }
-                catch (FacebookApiException e)
+                catch (FacebookApiException)
                 {
                     // token is invalid (e.g., expired)
                     //Console.WriteLine(e.Message);

@@ -82,12 +82,12 @@ namespace WhatTheWord.Popups
                 foreach (ProductListing listing in listingInformation.ProductListings.Values)
                 {
                     // if there is a match between a registered product on the Store and our own server data
-                    if (_mainPage.CurrentGameState.Purchases.ContainsKey(listing.ProductId))
+                    if (App.Current.ConfigData.Purchases.ContainsKey(listing.ProductId))
                     {
                         // add it to the list of products to be displayed
                         unorderedPurchases.Add(
-                            _mainPage.CurrentGameState.Purchases[listing.ProductId].Order,
-                            _mainPage.CurrentGameState.Purchases[listing.ProductId]);
+                            App.Current.ConfigData.Purchases[listing.ProductId].Order,
+                            App.Current.ConfigData.Purchases[listing.ProductId]);
                     }
                 }
 

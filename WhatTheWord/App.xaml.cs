@@ -28,6 +28,13 @@ namespace WhatTheWord
 		/// <returns>The root frame of the Phone Application.</returns>
 		public static PhoneApplicationFrame RootFrame { get; private set; }
 
+		public GameConfig ConfigData { get; set; }
+
+		public static new App Current
+		{
+			get { return Application.Current as App; }
+		}
+
 		/// <summary>
 		/// Constructor for the Application object.
 		/// </summary>
@@ -65,6 +72,13 @@ namespace WhatTheWord
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
             SetupMockIAP();
+			LoadGame();
+		}
+
+		private void LoadGame()
+		{
+			ConfigData = new GameConfig();
+			ConfigData.Load();
 		}
 
 		private void LoadGameConfigFromWeb()
@@ -94,7 +108,7 @@ namespace WhatTheWord
 				string gameData = args.Result;
 				try
 				{
-					(new GameState()).DeserializeGameData(gameData); // test that the gamedata deserializes correctly
+					(new GameConfig()).Deserialize(gameData); // test that the gamedata deserializes correctly
 				}
 				catch (ApplicationException)
 				{

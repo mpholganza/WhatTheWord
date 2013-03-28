@@ -66,9 +66,9 @@ namespace WhatTheWord.Popups
 
             foreach (ProductLicense license in productLicenses.Values)
             {
-                if (license.IsConsumable && license.IsActive && _mainPage.CurrentGameState.Purchases.ContainsKey(license.ProductId))
+                if (license.IsConsumable && license.IsActive && App.Current.ConfigData.Purchases.ContainsKey(license.ProductId))
                 {
-                    coinsToAdd += _mainPage.CurrentGameState.Purchases[license.ProductId].Coins;
+                    coinsToAdd += App.Current.ConfigData.Purchases[license.ProductId].Coins;
                     CurrentApp.ReportProductFulfillment(license.ProductId);
                 }
             }

@@ -73,9 +73,9 @@ namespace WhatTheWord.Popups
 
         private void setupBoosts()
         {
-            RevealALetterButton_Text.Text = _mainPage.CurrentGameState.boostRevealLetterCost.ToString();
-            RemoveALetterButton_Text.Text = _mainPage.CurrentGameState.boostRemoveLettersCost.ToString();
-            ShuffleButton_Text.Text = _mainPage.CurrentGameState.boostShuffleCost.ToString();
+            RevealALetterButton_Text.Text = App.Current.ConfigData.boostRevealLetterCost.ToString();
+            RemoveALetterButton_Text.Text = App.Current.ConfigData.boostRemoveLettersCost.ToString();
+            ShuffleButton_Text.Text = App.Current.ConfigData.boostShuffleCost.ToString();
         }
 
         #region Show and Hide
