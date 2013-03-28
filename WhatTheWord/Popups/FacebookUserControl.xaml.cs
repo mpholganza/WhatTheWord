@@ -88,8 +88,8 @@ namespace WhatTheWord.Popups
 
         private async void verifyFacebookToken()
         {
-            string accessToken = _mainPage.CurrentGameState.FacebookToken;
-            _mainPage.CurrentGameState.FacebookToken = string.Empty;
+            string accessToken = App.Current.StateData.FacebookToken;
+            App.Current.StateData.FacebookToken = string.Empty;
 
             //accessToken = "AAAGfQw8QiRABAFpEDHyaOPZBVfBaTgq2ZAECXMCZCDuBGs5vUiQlZAOLZARartIT4ACGLeYeJLbHxiUZBnCRmO4MF03eWuiPkxS4PGGVFa3AZDZD";
 
@@ -107,7 +107,7 @@ namespace WhatTheWord.Popups
 
                     var result = (IDictionary<string, object>)await fb.GetTaskAsync("oauth/access_token", parameters);
 
-                    _mainPage.CurrentGameState.FacebookToken = (string)result["access_token"];
+                    App.Current.StateData.FacebookToken = (string)result["access_token"];
                 }
                 catch (FacebookApiException)
                 {
@@ -125,7 +125,7 @@ namespace WhatTheWord.Popups
 
             var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
 
-            if (String.IsNullOrWhiteSpace(_mainPage.CurrentGameState.FacebookToken))
+            if (String.IsNullOrWhiteSpace(App.Current.StateData.FacebookToken))
             {
                 Browser.Navigate(loginUrl);
             }
@@ -234,10 +234,10 @@ namespace WhatTheWord.Popups
 
             if (oauthResult.IsSuccess)
             {
-                _mainPage.CurrentGameState.FacebookToken = oauthResult.AccessToken;
+                App.Current.StateData.FacebookToken = oauthResult.AccessToken;
 
                 // TODO: Save token to file
-                //_mainPage.CurrentGameState.WriteGameDataToFile();
+                //App.Current.StateData.WriteGameDataToFile();
                 showPost();
             }
             else
@@ -250,7 +250,7 @@ namespace WhatTheWord.Popups
 
         private async void PostToFacebook()
         {
-            FacebookClient fb = new FacebookClient(_mainPage.CurrentGameState.FacebookToken);
+            FacebookClient fb = new FacebookClient(App.Current.StateData.FacebookToken);
 
             // Encode to JPEG format
             byte[] screenshot;
@@ -277,7 +277,7 @@ namespace WhatTheWord.Popups
             catch (FacebookApiException e)
             {
                 Dispatcher.BeginInvoke(() => MessageBox.Show(e.Message));
-                _mainPage.CurrentGameState.FacebookToken = string.Empty;
+                App.Current.StateData.FacebookToken = string.Empty;
             }
 
             this.hide();

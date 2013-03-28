@@ -114,7 +114,7 @@ namespace WhatTheWord.Popups
 
         private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            _mainPage.CurrentGameState.JumblePuzzleCharacters();
+            App.Current.StateData.JumblePuzzleCharacters();
             _mainPage.DisplayGame();
         }
     }

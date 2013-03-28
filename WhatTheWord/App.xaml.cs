@@ -29,6 +29,7 @@ namespace WhatTheWord
 		public static PhoneApplicationFrame RootFrame { get; private set; }
 
 		public GameConfig ConfigData { get; set; }
+		public GameState StateData { get; set; }
 
 		public static new App Current
 		{
@@ -79,6 +80,8 @@ namespace WhatTheWord
 		{
 			ConfigData = new GameConfig();
 			ConfigData.Load();
+			StateData = new GameState();
+			// Load statedata from file
 		}
 
 		private void LoadGameConfigFromWeb()

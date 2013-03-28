@@ -127,8 +127,8 @@ namespace WhatTheWord.Popups
 
         private void disableButtonsIfCannotBoost()
         {
-            bool canRevealLetter = _mainPage.CurrentGameState.CanRevealLetter();
-            bool canRemoveLetter = _mainPage.CurrentGameState.CanRemoveLetter();
+            bool canRevealLetter = App.Current.StateData.CanRevealLetter();
+            bool canRemoveLetter = App.Current.StateData.CanRemoveLetter();
 
             if (this.RevealALetterButton.IsEnabled != canRevealLetter)
             {
@@ -147,14 +147,14 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(RevealALetterButton_Text.Text);
 
-            if (cost > _mainPage.CurrentGameState.Coins)
+            if (cost > App.Current.StateData.Coins)
             {
                 openCoinsPopup();
             }
             else
             {
-                _mainPage.CurrentGameState.Coins -= cost;
-                _mainPage.CurrentGameState.RevealLetter();
+                App.Current.StateData.Coins -= cost;
+                App.Current.StateData.RevealLetter();
                 _mainPage.DisplayGame();
             }
             
@@ -165,14 +165,14 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(RemoveALetterButton_Text.Text);
 
-            if (cost > _mainPage.CurrentGameState.Coins)
+            if (cost > App.Current.StateData.Coins)
             {
                 openCoinsPopup();
             }
             else
             {
-                _mainPage.CurrentGameState.Coins -= cost;
-                _mainPage.CurrentGameState.RemoveLetter();
+                App.Current.StateData.Coins -= cost;
+                App.Current.StateData.RemoveLetter();
                 _mainPage.DisplayGame();
             }
 
@@ -183,14 +183,14 @@ namespace WhatTheWord.Popups
         {
             int cost = int.Parse(ShuffleButton_Text.Text);
 
-            if (cost > _mainPage.CurrentGameState.Coins)
+            if (cost > App.Current.StateData.Coins)
             {
                 openCoinsPopup();
             }
             else
             {
-                _mainPage.CurrentGameState.Coins -= cost;
-                _mainPage.CurrentGameState.JumblePuzzleCharacters();
+                App.Current.StateData.Coins -= cost;
+                App.Current.StateData.JumblePuzzleCharacters();
                 _mainPage.DisplayGame();
             }
 

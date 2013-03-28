@@ -20,8 +20,6 @@ namespace WhatTheWord
 	public partial class MainPage : PhoneApplicationPage
 	{
 		public Puzzle CurrentPuzzle { get; set; }
-		public GameState CurrentGameState { get; set; }
-
 		FacebookUserControl facebookUserControl;
 		public CoinsUserControl coinsUserControl;
         public BoostsUserControl boostsUserControl;
@@ -39,7 +37,6 @@ namespace WhatTheWord
 			//BuildLocalizedApplicationBar();
 
 			Loaded += MainPage_Loaded;
-
 		}
 
 		private void InitializeFacebookPopup()
@@ -88,8 +85,7 @@ namespace WhatTheWord
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
 			LoadCurrentPuzzle(0);
-			CurrentGameState = new GameState();
-			CurrentGameState.Initialize(CurrentPuzzle);
+			App.Current.StateData.Initialize(CurrentPuzzle);
 
 			DisplayGame();
 
@@ -124,26 +120,26 @@ namespace WhatTheWord
 		public void DisplayGame()
 		{
 			LayoutRoot.DataContext = CurrentPuzzle;
-			HeaderPanel.DataContext = CurrentGameState;
+			HeaderPanel.DataContext = App.Current.StateData;
 
 			GuessPanel.Children.Clear();
-			for (int i = 0; i < CurrentGameState.GuessPanelState.Length; i++)
+			for (int i = 0; i < App.Current.StateData.GuessPanelState.Length; i++)
 			{
 				Image letterImage = new Image();
 				letterImage.Width = 36;
 				letterImage.Height = 36;
-				switch (CurrentGameState.GuessPanelState[i])
+				switch (App.Current.StateData.GuessPanelState[i])
 				{
 					case GameState.GUESSPANEL_LETTER_NOT_GUESSED:
 						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_clear@1280_768.png", UriKind.Relative));
 						break;
 					case GameState.GUESSPANEL_LETTER_REVEALED:
 						// TODO: Style this differently
-						string correctLetter = CurrentGameState.PuzzleWord[i].ToString();
+						string correctLetter = App.Current.StateData.PuzzleWord[i].ToString();
 						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_" + correctLetter + "@1280_768.png", UriKind.Relative));
 						break;
 					default:
-						string guessLetter = CurrentGameState.PuzzleCharacters[CurrentGameState.GuessPanelState[i]].ToString();
+						string guessLetter = App.Current.StateData.PuzzleCharacters[App.Current.StateData.GuessPanelState[i]].ToString();
 						letterImage.Source = new BitmapImage(new Uri("/Assets/GuessLetters/gb_" + guessLetter + "@1280_768.png", UriKind.Relative));
 						break;
 				}
@@ -158,14 +154,14 @@ namespace WhatTheWord
 			}
 
 			LetterPickerPanel1.Children.Clear(); LetterPickerPanel2.Children.Clear();
-			for (int i = 0; i < CurrentGameState.CharacterPanelState.Length; i++)
+			for (int i = 0; i < App.Current.StateData.CharacterPanelState.Length; i++)
 			{
 				Image letterImage = new Image();
 				// TODO: This style info should be in a resource file
 				letterImage.Height = 48;
 				letterImage.Width = 48;
 
-				switch (CurrentGameState.CharacterPanelState[i])
+				switch (App.Current.StateData.CharacterPanelState[i])
 				{
 					case GameState.CHARACTERPANEL_LETTER_REMOVED:
 						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
@@ -174,7 +170,7 @@ namespace WhatTheWord
 						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
 						break;
 					default:
-						string letter = CurrentGameState.PuzzleCharacters[i].ToString();
+						string letter = App.Current.StateData.PuzzleCharacters[i].ToString();
 						letterImage.Source = new BitmapImage(new Uri("/Assets/SandboxLetters/sb_" + letter + "@1280_768.png", UriKind.Relative));
 						break;
 				}
@@ -198,14 +194,14 @@ namespace WhatTheWord
 
 		private void ClearButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			CurrentGameState.ClearGuessPanel();
+			App.Current.StateData.ClearGuessPanel();
 
 			DisplayGame();
 		}
 
 		private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			CurrentGameState.JumblePuzzleCharacters();
+			App.Current.StateData.JumblePuzzleCharacters();
 
 			DisplayGame();
 		}
@@ -232,12 +228,12 @@ namespace WhatTheWord
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
-			int currentGuessPanelIndexValue = CurrentGameState.GuessPanelState[guessPanelIndex];
+			int currentGuessPanelIndexValue = App.Current.StateData.GuessPanelState[guessPanelIndex];
 			if (currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_REVEALED && currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_NOT_GUESSED)
 			{
 				// Return a letter back to the character panel
-				CurrentGameState.CharacterPanelState[currentGuessPanelIndexValue] = currentGuessPanelIndexValue;
-				CurrentGameState.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+				App.Current.StateData.CharacterPanelState[currentGuessPanelIndexValue] = currentGuessPanelIndexValue;
+				App.Current.StateData.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
 			}
 
 			DisplayGame();
@@ -245,19 +241,19 @@ namespace WhatTheWord
 
 		private void CharacterPanelLetterPressed(int characterPanelIndex)
 		{
-			int currentCharacterPanelIndexValue = CurrentGameState.CharacterPanelState[characterPanelIndex];
+			int currentCharacterPanelIndexValue = App.Current.StateData.CharacterPanelState[characterPanelIndex];
 			if (currentCharacterPanelIndexValue != GameState.CHARACTERPANEL_LETTER_GUESSED && currentCharacterPanelIndexValue != GameState.CHARACTERPANEL_LETTER_REMOVED)
 			{
 				// Place the chosen letter as a guess of the letter in the next available slot in the guess panel
-				int nextFreeGuessPanelIndex = CurrentGameState.GetNextFreeGuessPanelIndex();
+				int nextFreeGuessPanelIndex = App.Current.StateData.GetNextFreeGuessPanelIndex();
 				if (nextFreeGuessPanelIndex == -1) return;
-				CurrentGameState.GuessPanelState[nextFreeGuessPanelIndex] = currentCharacterPanelIndexValue;
-				CurrentGameState.CharacterPanelState[characterPanelIndex] = GameState.CHARACTERPANEL_LETTER_GUESSED;
+				App.Current.StateData.GuessPanelState[nextFreeGuessPanelIndex] = currentCharacterPanelIndexValue;
+				App.Current.StateData.CharacterPanelState[characterPanelIndex] = GameState.CHARACTERPANEL_LETTER_GUESSED;
 			}
 
-			if (-1 == CurrentGameState.GetNextFreeGuessPanelIndex())
+			if (-1 == App.Current.StateData.GetNextFreeGuessPanelIndex())
 			{
-				if (CurrentGameState.CheckAnswer())
+				if (App.Current.StateData.CheckAnswer())
 				{
 					PuzzleComplete();
 				}
@@ -289,7 +285,7 @@ namespace WhatTheWord
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
-			CurrentGameState.CompleteLevel();
+			App.Current.StateData.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
 			puzzleStatusTimer.Stop();
 		}

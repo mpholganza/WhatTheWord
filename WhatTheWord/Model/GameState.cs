@@ -106,6 +106,10 @@ namespace WhatTheWord.Model
 
 		public void JumblePuzzleCharacters()
 		{
+			// TODO: IMPORTANT BUG - CAN'T SHIP WITH THIS
+			// if jumbled after removing letters removed letters can characters show up
+			// replacing non-removed characters. this can make the puzzle unsolvable
+			// should only jumble characters in the characterpanel
 			this.ClearGuessPanel();
 			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
 		}

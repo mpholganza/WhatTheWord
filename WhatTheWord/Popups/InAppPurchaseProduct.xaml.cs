@@ -73,7 +73,7 @@ namespace WhatTheWord.Popups
                 }
             }
 
-            _mainPage.CurrentGameState.Coins += coinsToAdd;
+            App.Current.StateData.Coins += coinsToAdd;
             _mainPage.DisplayGame();
             _coinsUserControl.hide();
         }
