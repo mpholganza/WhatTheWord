@@ -127,6 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utility.cs" />
     <Compile Include="WinPage.xaml.cs">
       <DependentUpon>WinPage.xaml</DependentUpon>
     </Compile>
@@ -183,7 +184,47 @@
     <Content Include="Assets\feedbackButton%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
-    <Content Include="gameconfig.txt">
+    <Content Include="Assets\PuzzlePictures\amazon1.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon2.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon3.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon4.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass1.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass2.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass3.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass4.jpg" />
+    <Content Include="Assets\PuzzlePictures\code1.jpg" />
+    <Content Include="Assets\PuzzlePictures\code2.jpg" />
+    <Content Include="Assets\PuzzlePictures\code3.jpg" />
+    <Content Include="Assets\PuzzlePictures\code4.jpg" />
+    <Content Include="Assets\PuzzlePictures\house1.jpg" />
+    <Content Include="Assets\PuzzlePictures\house2.jpg" />
+    <Content Include="Assets\PuzzlePictures\house3.jpg" />
+    <Content Include="Assets\PuzzlePictures\house4.jpg" />
+    <Content Include="Assets\PuzzlePictures\park1.jpg" />
+    <Content Include="Assets\PuzzlePictures\park2.jpg" />
+    <Content Include="Assets\PuzzlePictures\park3.jpg" />
+    <Content Include="Assets\PuzzlePictures\park4.jpg" />
+    <Content Include="Assets\PuzzlePictures\rack1.jpg" />
+    <Content Include="Assets\PuzzlePictures\rack2.jpg" />
+    <Content Include="Assets\PuzzlePictures\rack3.jpg" />
+    <Content Include="Assets\PuzzlePictures\rack4.jpg" />
+    <Content Include="Assets\PuzzlePictures\safe1.jpg" />
+    <Content Include="Assets\PuzzlePictures\safe2.jpg" />
+    <Content Include="Assets\PuzzlePictures\safe3.jpg" />
+    <Content Include="Assets\PuzzlePictures\safe4.jpg" />
+    <Content Include="Assets\PuzzlePictures\shiny1.jpg" />
+    <Content Include="Assets\PuzzlePictures\shiny2.jpg" />
+    <Content Include="Assets\PuzzlePictures\shiny3.jpg" />
+    <Content Include="Assets\PuzzlePictures\shiny4.jpg" />
+    <Content Include="Assets\PuzzlePictures\soft1.jpg" />
+    <Content Include="Assets\PuzzlePictures\soft2.jpg" />
+    <Content Include="Assets\PuzzlePictures\soft3.jpg" />
+    <Content Include="Assets\PuzzlePictures\soft4.jpg" />
+    <Content Include="Assets\PuzzlePictures\sticky1.jpg" />
+    <Content Include="Assets\PuzzlePictures\sticky2.jpg" />
+    <Content Include="Assets\PuzzlePictures\sticky3.jpg" />
+    <Content Include="Assets\PuzzlePictures\sticky4.jpg" />
+    <Content Include="gameconfigdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\guesstheword-336x336-appicon.png" />
@@ -225,6 +266,7 @@
     <Content Include="Assets\WinLetters\gb_z_win%401280_768.png" />
     <Content Include="Assets\winTransitionBG%401280_768.png" />
     <Content Include="Assets\IAPcoinIcon%401280_768.png" />
+    <Content Include="gamestatedefault.txt" />
     <Content Include="MockupLicenseInfo.xml" />
     <Content Include="SplashScreenImage.jpg" />
     <None Include="packages.config" />

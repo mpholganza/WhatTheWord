@@ -26,7 +26,7 @@ dataType=puzzles;;;dataValue=id=4;answer=rack;enable=1;order=4;filename1=rack1.z
 dataType=puzzles;;;dataValue=id=5;answer=code;enable=1;order=5;filename1=code1.zip;credits1=hotblack;filename2=code2.zip;credits2=Grafixar;filename3=code3.zip;credits3=mconnors;filename4=code4.zip;credits4=jppi;;;
 dataType=puzzles;;;dataValue=id=6;answer=amazon;enable=1;order=6;filename1=amazon1.zip;credits1=Nicholas_T;filename2=amazon2.zip;credits2=Olga Kruglova;filename3=amazon3.zip;credits3=kalleboo;filename4=amazon4.zip;credits4=sindy;;;
 dataType=puzzles;;;dataValue=id=7;answer=sticky;enable=1;order=7;filename1=sticky1.zip;credits1=diongillard;filename2=sticky2.zip;credits2=earl53;filename3=sticky3.zip;credits3=BotheredByBees;filename4=sticky4.zip;credits4=jurvetson;;;
-dataType=puzzles;;;dataValue=id=8;answer=shiny;enable=1;order=8;filename1=shiny1.zip;credits1=peasap;filename2=sticky2.zip;credits2=Hamed Saber;filename3=sticky3.zip;credits3=Ladyheart;filename4=sticky4.zip;credits4=jdurham;;;
+dataType=puzzles;;;dataValue=id=8;answer=shiny;enable=1;order=8;filename1=shiny1.zip;credits1=peasap;filename2=shiny2.zip;credits2=Hamed Saber;filename3=shiny3.zip;credits3=Ladyheart;filename4=shiny4.zip;credits4=jdurham;;;
 dataType=puzzles;;;dataValue=id=9;answer=house;enable=1;order=9;filename1=house1.zip;credits1=Hakan Dahlstrom;filename2=house2.zip;credits2=doctor bob;filename3=house3.zip;credits3=ronnieb;filename4=house4.zip;credits4=Dirigentens;;;
 dataType=puzzles;;;dataValue=id=10;answer=park;enable=1;order=10;filename1=park1.zip;credits1=Foter.com;filename2=park2.zip;credits2=wburris;filename3=park3.zip;credits3=radworld;filename4=park4.zip;credits4=kevin dooley;;;
 flight=4;;;

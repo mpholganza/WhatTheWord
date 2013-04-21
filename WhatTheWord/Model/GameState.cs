@@ -22,13 +22,14 @@ namespace WhatTheWord.Model
 		public const int GUESSPANEL_LETTER_NOT_GUESSED = 101;
 		public const int CHARACTERPANEL_LETTER_REMOVED = 200;
 		public const int CHARACTERPANEL_LETTER_GUESSED = 201;
-		public const string GAMECONFIGFILE = "gameconfig.txt";
 		public const string GAMESTATEFILE = "gamestate.txt";
+		public const string GAMESTATEDEFAULTFILE = "gamestatedefault.txt";
 		#endregion
 
         #region Gameplay variables
         public string FacebookToken { get; set; }
 		public int CurrentLevel { get; set; }
+		public bool PuzzleInitialized { get; set; }
 		public int Coins { get; set; }
 		public String PuzzleWord { get; set; }
 		public String PuzzleCharacters { get; set; }
@@ -38,35 +39,147 @@ namespace WhatTheWord.Model
 
 		public GameState()
 		{
-            this.FacebookToken = "";
-			this.CurrentLevel = 0;
+			this.CurrentLevel = 1;
 			this.Coins = 0;
 			this.PuzzleWord = "";
 			this.PuzzleCharacters = "";
 			this.GuessPanelState = null;
 			this.CharacterPanelState = null;
+			this.FacebookToken = "";
 		}
 
-		public string GamePlayDataToString()
+		public async void Load()
 		{
-			string gamePlayData = "currentLevel=" + this.CurrentLevel + Environment.NewLine +
-				"coins=" + this.Coins + Environment.NewLine +
-				"guesspanelstate=" + this.GuessPanelState.ToString() + Environment.NewLine +
-				"characterpanelstate=" + this.CharacterPanelState.ToString() + Environment.NewLine +
-				"puzzleword=" + this.PuzzleWord + Environment.NewLine +
-				"puzzlecharacters=" + this.PuzzleCharacters + Environment.NewLine +
-				"facebooktoken=" + this.FacebookToken;
+			if (await LoadGameStateFromFile()) { return; }
 
-			return gamePlayData;
-		//public string FacebookToken { get; set; }
-		//public int CurrentLevel { get; set; }
-		//public int Coins { get; set; }
-		//public String PuzzleWord { get; set; }
-		//public String PuzzleCharacters { get; set; }
-		//public int[] GuessPanelState { get; set; }
-		//public int[] CharacterPanelState { get; set; }
-		//public bool Loaded { get; set; }
+			if (!LoadGameStateFromDefaultFile())
+			{
+				throw new ApplicationException("Unable to load game state information.");
+			}
+		}
 
+		private bool LoadGameStateFromDefaultFile()
+		{
+			StreamResourceInfo sri = App.GetResourceStream(new Uri(GameState.GAMESTATEDEFAULTFILE, UriKind.Relative));
+			StreamReader streamReader = new StreamReader(sri.Stream);
+			string gameData = streamReader.ReadToEnd();
+			try
+			{
+				Deserialize(gameData);
+			}
+			catch (ApplicationException)
+			{
+				// deserialized incorrectly. fail quietly
+				// TODO: report to server of failed deserialization
+				Console.WriteLine("Failed deserialization:\n" + gameData);
+				return false;
+			}
+
+			return true;
+		}
+
+		private async Task<bool> LoadGameStateFromFile()
+		{
+			string gameData = await FileAccess.LoadDataFromFileAsync(GameState.GAMESTATEFILE);
+			try
+			{
+				Deserialize(gameData);
+			}
+			catch (ApplicationException)
+			{
+				// deserialized incorrectly. fail quietly
+				// TODO: report to server of failed deserialization
+				Console.WriteLine("Failed deserialization:\n" + gameData);
+				return false;
+			}
+
+			return true;
+		}
+
+		private void Deserialize(string gameData)
+		{
+			int currentlevel = 0;
+			int coins = 0;
+			int[] guesspanelstate = null;
+			int[] characterpanelstate = null;
+			string puzzleword = string.Empty;
+			string puzzlecharacters = string.Empty;
+			bool puzzleinitialized = false;
+			string facebooktoken = string.Empty;
+
+			string[] lines = gameData.Split(new string[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+			if (lines.Length < 1) { throw new ApplicationException("GameState data is empty."); }
+
+			for (int i = 0; i < lines.Length; i++)
+			{
+				string key = string.Empty;
+				string value = string.Empty;
+				GameConfig.GetKeyValuePairFromString(lines[i], out key, out value);
+				bool success = false;
+
+				switch (key)
+				{
+					case "currentlevel":
+						success = Int32.TryParse(value, out currentlevel);
+						break;
+					case "coins":
+						success = Int32.TryParse(value, out coins);
+						break;
+					case "guesspanelstate":
+						try
+						{
+							guesspanelstate = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray();
+							success = true;
+						}
+						catch (Exception)
+						{
+							success = false;
+						}
+						break;
+					case "characterpanelstate":
+						try
+						{
+							characterpanelstate = value.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(x => int.Parse(x)).ToArray();
+							success = true;
+						}
+						catch (Exception)
+						{
+							success = false;
+						}
+						break;
+					case "puzzleword":
+						puzzleword = value;
+						success = true;
+						break;
+					case "puzzlecharacters":
+						puzzlecharacters = value;
+						success = true;
+						break;
+					case "puzzleinitialized":
+						success = bool.TryParse(value, out puzzleinitialized);
+						break;
+					case "facebooktoken":
+						facebooktoken = value;
+						success = true;
+						break;
+					default:
+						throw new ApplicationException("Unknown GameState property: " + key);
+				}
+
+				if (!success)
+				{
+					throw new ApplicationException("Invalid GameState data. Trouble parsing " + key + ": " + value);
+				}
+			}
+
+			this.CurrentLevel = currentlevel;
+			this.Coins = coins;
+			this.GuessPanelState = guesspanelstate;
+			this.CharacterPanelState = characterpanelstate;
+			this.PuzzleWord = puzzleword;
+			this.PuzzleCharacters = puzzlecharacters;
+			this.PuzzleInitialized = puzzleinitialized;
+			this.FacebookToken = facebooktoken;
 		}
 
 		#region Gameplay logic
@@ -132,6 +245,8 @@ namespace WhatTheWord.Model
 			PuzzleCharacters = "";
 			GuessPanelState = null;
 			CharacterPanelState = null;
+			PuzzleInitialized = false;
+			WriteGameStateToFile();
 		}
 
 		public void RevealLetter()
@@ -164,6 +279,8 @@ namespace WhatTheWord.Model
 			}
 
 			GuessPanelState[revealIndex + revealIndexOffset] = GameState.GUESSPANEL_LETTER_REVEALED;
+
+			this.WriteGameStateToFile();
 		}
 
 		public bool CanRevealLetter()
@@ -218,6 +335,8 @@ namespace WhatTheWord.Model
 					return;
 				}
 			}
+
+			this.WriteGameStateToFile();
 		}
 
 		public bool CanRemoveLetter()
@@ -232,42 +351,46 @@ namespace WhatTheWord.Model
 			return (CharacterPanelState.Length - removedLetters > this.PuzzleWord.Length);
 		}
 
-		internal void Initialize(Puzzle CurrentPuzzle)
+		internal void InitializePuzzle(Puzzle CurrentPuzzle)
 		{
-			this.PuzzleWord = CurrentPuzzle.Word;
-			this.GuessPanelState = new int[PuzzleWord.Length];
-			for (int i = 0; i < PuzzleWord.Length; i++)
+			if (!this.PuzzleInitialized)
 			{
-				GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
-			}
+				this.PuzzleWord = CurrentPuzzle.Word;
+				this.GuessPanelState = new int[PuzzleWord.Length];
+				for (int i = 0; i < PuzzleWord.Length; i++)
+				{
+					GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+				}
 
-			this.PuzzleCharacters = Puzzle.GeneratePuzzleCharacters(CurrentPuzzle.Word);
-			this.CharacterPanelState = new int[this.PuzzleCharacters.Length];
-			for (int i = 0; i < this.PuzzleCharacters.Length; i++)
-			{
-				CharacterPanelState[i] = i;
+				this.PuzzleCharacters = Puzzle.GeneratePuzzleCharacters(CurrentPuzzle.Word);
+				this.CharacterPanelState = new int[this.PuzzleCharacters.Length];
+				for (int i = 0; i < this.PuzzleCharacters.Length; i++)
+				{
+					CharacterPanelState[i] = i;
+				}
+
+				this.PuzzleInitialized = true;
 			}
 		}
 		#endregion
 
-		public static void WriteGameConfigToFile(string gameData)
+		public void WriteGameStateToFile()
 		{
-			FileAccess.WriteDataToFileAsync(gameData, GameState.GAMECONFIGFILE);
+			FileAccess.WriteDataToFileAsync(this.ToString(), GameState.GAMESTATEFILE);
 		}
 
-		public static void WriteGamePlayStateToFile(string gamePlayState)
+		public override string ToString()
 		{
-			FileAccess.WriteDataToFileAsync(gamePlayState, GameState.GAMECONFIGFILE);
-		}
+			string gamePlayData = "currentlevel=" + this.CurrentLevel + Environment.NewLine +
+				"coins=" + this.Coins + Environment.NewLine +
+				"guesspanelstate=" + Utility.IntArrayToString(this.GuessPanelState, ",") + Environment.NewLine +
+				"characterpanelstate=" + Utility.IntArrayToString(this.CharacterPanelState, ",") + Environment.NewLine +
+				"puzzleword=" + this.PuzzleWord + Environment.NewLine +
+				"puzzlecharacters=" + this.PuzzleCharacters + Environment.NewLine +
+				"puzzleinitialized=" + this.PuzzleInitialized.ToString() + Environment.NewLine +
+				"facebooktoken=" + this.FacebookToken;
 
-		public override String ToString()
-		{
-			MemoryStream stream = new MemoryStream();
-			DataContractJsonSerializer ser = new DataContractJsonSerializer(this.GetType());
-			ser.WriteObject(stream, this);
-			byte[] json = stream.ToArray();
-			stream.Close();
-			return Encoding.UTF8.GetString(json, 0, json.Length);
+			return gamePlayData;
 		}
 	}
 }

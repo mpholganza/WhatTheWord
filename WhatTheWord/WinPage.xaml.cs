@@ -21,6 +21,7 @@ namespace WhatTheWord
 		void NextPuzzle_Click(object sender, RoutedEventArgs e)
 		{
 			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+			NavigationService.RemoveBackEntry();
 		}
 	}
 }

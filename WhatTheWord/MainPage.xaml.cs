@@ -37,6 +37,7 @@ namespace WhatTheWord
 			//BuildLocalizedApplicationBar();
 
 			Loaded += MainPage_Loaded;
+			//DataContext = new GameStateViewModel();
 		}
 
 		private void InitializeFacebookPopup()
@@ -84,8 +85,8 @@ namespace WhatTheWord
 
 		void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
-			LoadCurrentPuzzle(0);
-			App.Current.StateData.Initialize(CurrentPuzzle);
+			LoadCurrentPuzzle(App.Current.StateData.CurrentLevel);
+			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 
 			DisplayGame();
 
@@ -104,14 +105,21 @@ namespace WhatTheWord
 
 		private void LoadCurrentPuzzle(int currentLevel)
 		{
-			CurrentPuzzle = new Puzzle()
-			{
-				Word = "random".ToUpper(),
-				Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
-				Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
-				Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
-				Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
-			};
+			Puzzle puzzle = App.Current.ConfigData.Puzzles[currentLevel];
+			puzzle.Picture1.URI = "/Assets/PuzzlePictures/" + puzzle.Picture1.URI.Replace("zip", "jpg");
+			puzzle.Picture2.URI = "/Assets/PuzzlePictures/" + puzzle.Picture2.URI.Replace("zip", "jpg");
+			puzzle.Picture3.URI = "/Assets/PuzzlePictures/" + puzzle.Picture3.URI.Replace("zip", "jpg");
+			puzzle.Picture4.URI = "/Assets/PuzzlePictures/" + puzzle.Picture4.URI.Replace("zip", "jpg");
+
+			CurrentPuzzle = puzzle;
+			//CurrentPuzzle = new Puzzle()
+			//{
+			//	Word = "random".ToUpper(),
+			//	Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
+			//	Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
+			//	Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
+			//	Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
+			//};
 		}
 
 		/// <summary>
@@ -121,6 +129,7 @@ namespace WhatTheWord
 		{
 			LayoutRoot.DataContext = CurrentPuzzle;
 			HeaderPanel.DataContext = App.Current.StateData;
+			CoinsText.Text = App.Current.StateData.Coins.ToString();
 
 			GuessPanel.Children.Clear();
 			for (int i = 0; i < App.Current.StateData.GuessPanelState.Length; i++)
@@ -236,6 +245,7 @@ namespace WhatTheWord
 				App.Current.StateData.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
 			}
 
+			App.Current.StateData.WriteGameStateToFile();
 			DisplayGame();
 		}
 
@@ -263,6 +273,7 @@ namespace WhatTheWord
 				}
 			}
 
+			App.Current.StateData.WriteGameStateToFile();
 			DisplayGame();
 		}
 
@@ -287,6 +298,7 @@ namespace WhatTheWord
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			App.Current.StateData.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
+			NavigationService.RemoveBackEntry();
 			puzzleStatusTimer.Stop();
 		}
 

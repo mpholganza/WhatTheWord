@@ -10,6 +10,11 @@ namespace WhatTheWord.Model
 {
 	public class GameConfig
 	{
+		#region Constants
+		public const string GAMECONFIGFILE = "gameconfig.txt";
+		public const string GAMECONFIGDEFAULTFILE = "gameconfigdefault.txt";
+		#endregion
+
 		#region Config variables
 		public int initialCoins { get; set; }
 		public int boostRemoveLettersCost { get; set; }
@@ -26,13 +31,13 @@ namespace WhatTheWord.Model
 		public string rateMeURL { get; set; }
 		public string picturesFilenamePath { get; set; }
 		public Dictionary<string, InAppPurchase> Purchases { get; set; }
-		public List<Puzzle> Puzzles { get; set; }
+		public Dictionary<int, Puzzle> Puzzles { get; set; }
 		#endregion
 
 		public async void Load()
 		{
 			// Load config info from previously saved file
-			if (await LoadGameConfigFromFile()) { return; }
+			//if (await LoadGameConfigFromFile()) { return; }
 
 			// Built-in config file
 			if (!LoadGameConfigFromDefaultFile())
@@ -43,7 +48,7 @@ namespace WhatTheWord.Model
 
 		private async Task<bool> LoadGameConfigFromFile()
 		{
-			Task<String> loadDataFromFileTask = FileAccess.LoadDataFromFileAsync(GameState.GAMECONFIGFILE);
+			Task<String> loadDataFromFileTask = FileAccess.LoadDataFromFileAsync(GameConfig.GAMECONFIGFILE);
 			string gameData = await loadDataFromFileTask;
 			if (gameData != string.Empty)
 			{
@@ -65,7 +70,7 @@ namespace WhatTheWord.Model
 
 		private bool LoadGameConfigFromDefaultFile()
 		{
-			StreamResourceInfo sri = App.GetResourceStream(new Uri(GameState.GAMECONFIGFILE, UriKind.Relative));
+			StreamResourceInfo sri = App.GetResourceStream(new Uri(GameConfig.GAMECONFIGDEFAULTFILE, UriKind.Relative));
 			StreamReader streamReader = new StreamReader(sri.Stream);
 			string gameData = streamReader.ReadToEnd();
 			try
@@ -109,6 +114,7 @@ namespace WhatTheWord.Model
 			if (flightHash != value) { throw new ApplicationException("Corrupt Gamedata file. Hash does not match"); }
 
 			this.Purchases = new Dictionary<string, InAppPurchase>();
+			this.Puzzles = new Dictionary<int, Puzzle>();
 
 			for (int i = 2; i < lines.Length - 1; i++)
 			{
@@ -122,7 +128,8 @@ namespace WhatTheWord.Model
 						parseConfigString(dataValue);
 						break;
 					case "puzzles":
-						parsePuzzleString(dataValue);
+						Puzzle puzzle = parsePuzzleString(dataValue);
+						this.Puzzles.Add(puzzle.Id, puzzle);
 						break;
 					case "iap":
 						InAppPurchase purchase = parseInAppPurchase(dataValue);
@@ -236,28 +243,28 @@ namespace WhatTheWord.Model
 			}
 		}
 
-		private void parsePuzzleString(string puzzleInfo)
+		private Puzzle parsePuzzleString(string puzzleInfo)
 		{
-			List<Puzzle> puzzles = new List<Puzzle>();
 			string[] kvps = puzzleInfo.Split(new string[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
+
+			int id = 0;
+			string answer = string.Empty;
+			bool enable = false;
+			int order = 0;
+			string filename1 = string.Empty;
+			string credits1 = string.Empty;
+			string filename2 = string.Empty;
+			string credits2 = string.Empty;
+			string filename3 = string.Empty;
+			string credits3 = string.Empty;
+			string filename4 = string.Empty;
+			string credits4 = string.Empty;
+
 			for (int i = 0; i < kvps.Length; i++)
 			{
 				string key = string.Empty;
 				string value = string.Empty;
 				GetKeyValuePairFromString(kvps[i], out key, out value);
-
-				int id = 0;
-				string answer = string.Empty;
-				bool enable = false;
-				int order = 0;
-				string filename1 = string.Empty;
-				string credits1 = string.Empty;
-				string filename2 = string.Empty;
-				string credits2 = string.Empty;
-				string filename3 = string.Empty;
-				string credits3 = string.Empty;
-				string filename4 = string.Empty;
-				string credits4 = string.Empty;
 
 				bool success = false;
 				switch (key)
@@ -315,21 +322,19 @@ namespace WhatTheWord.Model
 				{
 					throw new ApplicationException("Invalid Gamedata puzzle info. Trouble parsing " + key + ": " + value);
 				}
-
-				puzzles.Add(new Puzzle()
-				{
-					Word = answer.ToUpper(), // TODO: Fix constructor to do the ToUpper() instead of here
-					Picture1 = new Picture { URI = filename1, Credits = credits1 },
-					Picture2 = new Picture { URI = filename2, Credits = credits2 },
-					Picture3 = new Picture { URI = filename3, Credits = credits3 },
-					Picture4 = new Picture { URI = filename4, Credits = credits4 },
-					Enabled = enable,
-					Id = id,
-					Order = order,
-				});
 			}
 
-			this.Puzzles = puzzles;
+			return new Puzzle()
+			{
+				Word = answer.ToUpper(), // TODO: Fix constructor to do the ToUpper() instead of here
+				Picture1 = new Picture { URI = filename1, Credits = credits1 },
+				Picture2 = new Picture { URI = filename2, Credits = credits2 },
+				Picture3 = new Picture { URI = filename3, Credits = credits3 },
+				Picture4 = new Picture { URI = filename4, Credits = credits4 },
+				Enabled = enable,
+				Id = id,
+				Order = order,
+			};
 		}
 
 		private InAppPurchase parseInAppPurchase(string iapInfo)
@@ -418,11 +423,20 @@ namespace WhatTheWord.Model
 			dataValue = dataValueValue;
 		}
 
-		public void GetKeyValuePairFromString(string kvpString, out string key, out string value)
+		public static void GetKeyValuePairFromString(string kvpString, out string key, out string value)
 		{
 			String[] kvp = kvpString.Split(new string[] { "=" }, StringSplitOptions.None);
 			key = kvp[0];
 			value = kvp[1];
+		}
+
+		/// <summary>
+		/// Save game config
+		/// </summary>
+		/// <param name="gameData"></param>
+		public static void WriteGameConfigToFile(string gameData)
+		{
+			FileAccess.WriteDataToFileAsync(gameData, GameConfig.GAMECONFIGFILE);
 		}
 	}
 }

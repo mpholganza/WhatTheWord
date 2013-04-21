@@ -16,10 +16,12 @@ namespace WhatTheWord
 			String data = String.Empty;
 			try
 			{
-				Stream stream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(fileName);
-				using (StreamReader reader = new StreamReader(stream))
+				StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
+				using (Stream stream = await file.OpenStreamForReadAsync())
 				{
-					data = await reader.ReadToEndAsync();
+					byte[] content = new byte[stream.Length];
+					await stream.ReadAsync(content, 0, (int)stream.Length);
+					data = Encoding.UTF8.GetString(content, 0, content.Length);
 				}
 			}
 			catch (FileNotFoundException) {}
@@ -39,10 +41,10 @@ namespace WhatTheWord
 				Console.WriteLine("Error writing to file" + e.Message);
 			}
 
-			Stream stream = await file.OpenStreamForWriteAsync();
-			using (StreamWriter writer = new StreamWriter(stream))
+			using (Stream stream = await file.OpenStreamForWriteAsync())
 			{
-				await writer.WriteAsync(data);
+				byte[] content = Encoding.UTF8.GetBytes(data);
+				await stream.WriteAsync(content, 0 , content.Length);
 			}
 		}
 	}
