@@ -434,7 +434,7 @@ namespace WhatTheWord.Model
 		/// Save game config
 		/// </summary>
 		/// <param name="gameData"></param>
-		public static void WriteGameConfigToFile(string gameData)
+		public static void Save(string gameData)
 		{
 			FileAccess.WriteDataToFileAsync(gameData, GameConfig.GAMECONFIGFILE);
 		}

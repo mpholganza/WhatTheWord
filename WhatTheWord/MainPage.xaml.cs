@@ -245,7 +245,7 @@ namespace WhatTheWord
 				App.Current.StateData.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
 			}
 
-			App.Current.StateData.WriteGameStateToFile();
+			App.Current.StateData.Save();
 			DisplayGame();
 		}
 
@@ -273,7 +273,7 @@ namespace WhatTheWord
 				}
 			}
 
-			App.Current.StateData.WriteGameStateToFile();
+			App.Current.StateData.Save();
 			DisplayGame();
 		}
 

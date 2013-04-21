@@ -119,7 +119,7 @@ namespace WhatTheWord
 					// TODO: report to server of failed deserialization
 					Console.WriteLine("Failed deserialization:\n" + gameData);
 				}
-				GameConfig.WriteGameConfigToFile(args.Result);
+				GameConfig.Save(args.Result);
 			}
 		}
 
@@ -159,16 +159,12 @@ namespace WhatTheWord
 		// This code will not execute when the application is closing
 		private void Application_Deactivated(object sender, DeactivatedEventArgs e)
 		{
-			//StateData.WriteGameStateToFile();
-			//GameState.WriteGameStateToFile(StateData.ToString());
 		}
 
 		// Code to execute when the application is closing (eg, user hit Back)
 		// This code will not execute when the application is deactivated
 		private void Application_Closing(object sender, ClosingEventArgs e)
 		{
-			//StateData.WriteGameStateToFile();
-			//GameState.WriteGameStateToFile(StateData.ToString());
 		}
 
 		// Code to execute if a navigation fails

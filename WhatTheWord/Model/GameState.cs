@@ -246,7 +246,7 @@ namespace WhatTheWord.Model
 			GuessPanelState = null;
 			CharacterPanelState = null;
 			PuzzleInitialized = false;
-			WriteGameStateToFile();
+			Save();
 		}
 
 		public void RevealLetter()
@@ -280,7 +280,7 @@ namespace WhatTheWord.Model
 
 			GuessPanelState[revealIndex + revealIndexOffset] = GameState.GUESSPANEL_LETTER_REVEALED;
 
-			this.WriteGameStateToFile();
+			this.Save();
 		}
 
 		public bool CanRevealLetter()
@@ -336,7 +336,7 @@ namespace WhatTheWord.Model
 				}
 			}
 
-			this.WriteGameStateToFile();
+			this.Save();
 		}
 
 		public bool CanRemoveLetter()
@@ -374,7 +374,7 @@ namespace WhatTheWord.Model
 		}
 		#endregion
 
-		public void WriteGameStateToFile()
+		public void Save()
 		{
 			FileAccess.WriteDataToFileAsync(this.ToString(), GameState.GAMESTATEFILE);
 		}
