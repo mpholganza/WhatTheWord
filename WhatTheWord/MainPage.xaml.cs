@@ -25,6 +25,8 @@ namespace WhatTheWord
         public BoostsUserControl boostsUserControl;
         public AboutUserControl aboutUserControl;
         public SettingsUserControl settingsUserControl;
+		public NewPuzzlesUserControl newPuzzlesUserControl;
+		public OutOfPuzzlesUserControl outOfPuzzlesUserControl;
 
         private DispatcherTimer boostBounceTimer;
 
@@ -33,25 +35,29 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
-			// Sample code to localize the ApplicationBar
-			//BuildLocalizedApplicationBar();
-
-			LoadCurrentPuzzle(App.Current.StateData.CurrentLevel);
-			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
-
-			DisplayGame();
-
 			InitializeFacebookPopup();
 			InitializeCoinsPopup();
 			InitializeBoostsPopup();
 			InitializeAboutPopup();
 			InitializeSettingsPopup();
 			InitializeBoostBounceTimer();
+			InitializeNewPuzzlesPopup();
+			InitializeOutOfPuzzlesPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
 			CoinsButton.Tap += CoinsButton_Tap;
 			FacebookButton.Tap += FacebookButton_Tap;
+
+			if (!TryLoadCurrentPuzzle(App.Current.StateData.CurrentLevel))
+			{
+				outOfPuzzlesUserControl.show();
+			}
+			else
+			{
+				App.Current.StateData.InitializePuzzle(CurrentPuzzle);
+				DisplayGame();
+			}
 		}
 
 		private void InitializeFacebookPopup()
@@ -84,6 +90,18 @@ namespace WhatTheWord
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
+		private void InitializeOutOfPuzzlesPopup()
+		{
+			outOfPuzzlesUserControl = new OutOfPuzzlesUserControl(new Popup(), this,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
+
+		private void InitializeNewPuzzlesPopup()
+		{
+			newPuzzlesUserControl = new NewPuzzlesUserControl(new Popup(), this,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
+
         private void InitializeBoostBounceTimer()
         {
             boostBounceTimer = new System.Windows.Threading.DispatcherTimer();
@@ -97,15 +115,24 @@ namespace WhatTheWord
             BoostBounceStoryboard.Begin();
         }
 
-		private void LoadCurrentPuzzle(int currentLevel)
+		private bool TryLoadCurrentPuzzle(int currentLevel)
 		{
-			Puzzle puzzle = App.Current.ConfigData.Puzzles[currentLevel];
-			puzzle.Picture1.URI = "/Assets/PuzzlePictures/" + puzzle.Picture1.URI.Replace("zip", "jpg");
-			puzzle.Picture2.URI = "/Assets/PuzzlePictures/" + puzzle.Picture2.URI.Replace("zip", "jpg");
-			puzzle.Picture3.URI = "/Assets/PuzzlePictures/" + puzzle.Picture3.URI.Replace("zip", "jpg");
-			puzzle.Picture4.URI = "/Assets/PuzzlePictures/" + puzzle.Picture4.URI.Replace("zip", "jpg");
+			Puzzle puzzle;
+			try
+			{
+				puzzle = App.Current.ConfigData.Puzzles[currentLevel];
+				puzzle.Picture1.URI = "/Assets/PuzzlePictures/" + puzzle.Picture1.URI.Replace("zip", "jpg");
+				puzzle.Picture2.URI = "/Assets/PuzzlePictures/" + puzzle.Picture2.URI.Replace("zip", "jpg");
+				puzzle.Picture3.URI = "/Assets/PuzzlePictures/" + puzzle.Picture3.URI.Replace("zip", "jpg");
+				puzzle.Picture4.URI = "/Assets/PuzzlePictures/" + puzzle.Picture4.URI.Replace("zip", "jpg");
+			}
+			catch
+			{
+				return false;
+			}
 
 			CurrentPuzzle = puzzle;
+			return true;
 			//CurrentPuzzle = new Puzzle()
 			//{
 			//	Word = "random".ToUpper(),
