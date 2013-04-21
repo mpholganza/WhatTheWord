@@ -36,8 +36,22 @@ namespace WhatTheWord
 			// Sample code to localize the ApplicationBar
 			//BuildLocalizedApplicationBar();
 
-			Loaded += MainPage_Loaded;
-			//DataContext = new GameStateViewModel();
+			LoadCurrentPuzzle(App.Current.StateData.CurrentLevel);
+			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
+
+			DisplayGame();
+
+			InitializeFacebookPopup();
+			InitializeCoinsPopup();
+			InitializeBoostsPopup();
+			InitializeAboutPopup();
+			InitializeSettingsPopup();
+			InitializeBoostBounceTimer();
+
+			ClearButton.Tap += ClearButton_Tap;
+			ShuffleButton.Tap += ShuffleButton_Tap;
+			CoinsButton.Tap += CoinsButton_Tap;
+			FacebookButton.Tap += FacebookButton_Tap;
 		}
 
 		private void InitializeFacebookPopup()
@@ -82,26 +96,6 @@ namespace WhatTheWord
         {
             BoostBounceStoryboard.Begin();
         }
-
-		void MainPage_Loaded(object sender, RoutedEventArgs e)
-		{
-			LoadCurrentPuzzle(App.Current.StateData.CurrentLevel);
-			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
-
-			DisplayGame();
-
-			InitializeFacebookPopup();
-			InitializeCoinsPopup();
-			InitializeBoostsPopup();
-            InitializeAboutPopup();
-            InitializeSettingsPopup();
-            InitializeBoostBounceTimer();
-
-			ClearButton.Tap += ClearButton_Tap;
-			ShuffleButton.Tap += ShuffleButton_Tap;
-			CoinsButton.Tap += CoinsButton_Tap;
-			FacebookButton.Tap += FacebookButton_Tap;
-		}
 
 		private void LoadCurrentPuzzle(int currentLevel)
 		{

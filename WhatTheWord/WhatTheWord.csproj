@@ -112,6 +112,12 @@
     <Compile Include="Popups\AboutUserControl.xaml.cs">
       <DependentUpon>AboutUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\NewPuzzlesUserControl.xaml.cs">
+      <DependentUpon>NewPuzzlesUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Popups\OutOfPuzzlesUserControl.xaml.cs">
+      <DependentUpon>OutOfPuzzlesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
@@ -150,6 +156,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Popups\AboutUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\NewPuzzlesUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\OutOfPuzzlesUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
