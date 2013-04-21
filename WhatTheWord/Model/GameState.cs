@@ -240,7 +240,7 @@ namespace WhatTheWord.Model
 		internal void CompleteLevel()
 		{
 			CurrentLevel++;
-			Coins = Coins + 2;
+			Coins = Coins + App.Current.ConfigData.rewardCoinsPerQuestion;
 			PuzzleWord = "";
 			PuzzleCharacters = "";
 			GuessPanelState = null;
