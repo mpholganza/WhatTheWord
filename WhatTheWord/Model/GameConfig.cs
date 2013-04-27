@@ -34,7 +34,7 @@ namespace WhatTheWord.Model
 		public Dictionary<int, Puzzle> Puzzles { get; set; }
 		#endregion
 
-		public async void Load()
+		public async Task Load()
 		{
 			// Load config info from previously saved file
 			//if (await LoadGameConfigFromFile()) { return; }

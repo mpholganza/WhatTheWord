@@ -52,12 +52,11 @@ namespace WhatTheWord
 			if (!TryLoadCurrentPuzzle(App.Current.StateData.CurrentLevel))
 			{
 				outOfPuzzlesUserControl.show();
+				return;
 			}
-			else
-			{
-				App.Current.StateData.InitializePuzzle(CurrentPuzzle);
-				DisplayGame();
-			}
+
+			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
+			DisplayGame();
 		}
 
 		private void InitializeFacebookPopup()
@@ -121,6 +120,9 @@ namespace WhatTheWord
 			try
 			{
 				puzzle = App.Current.ConfigData.Puzzles[currentLevel];
+				// TODO: Look for file in LocalFolder first
+
+				// if not in LocalFolder look in pre-packaged Assets folder
 				puzzle.Picture1.URI = "/Assets/PuzzlePictures/" + puzzle.Picture1.URI.Replace("zip", "jpg");
 				puzzle.Picture2.URI = "/Assets/PuzzlePictures/" + puzzle.Picture2.URI.Replace("zip", "jpg");
 				puzzle.Picture3.URI = "/Assets/PuzzlePictures/" + puzzle.Picture3.URI.Replace("zip", "jpg");

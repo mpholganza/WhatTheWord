@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DownloadManager.cs" />
     <Compile Include="FileAccess.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -193,11 +194,12 @@
     <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton%401280_768.png" />
-    <Content Include="Assets\cancelPostButton_p%401280_768.png" />
+    <Content Include="Assets\PuzzlePictures\cancelPostButton_p%401280_768.png" />
     <Content Include="Assets\facebookSharePostBG%401280_768.png" />
     <Content Include="Assets\feedbackButton%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
+    <Content Include="Assets\guesstheword-336x336-appicon.png" />
     <Content Include="Assets\PuzzlePictures\amazon1.jpg" />
     <Content Include="Assets\PuzzlePictures\amazon2.jpg" />
     <Content Include="Assets\PuzzlePictures\amazon3.jpg" />
@@ -241,7 +243,7 @@
     <Content Include="gameconfigdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\guesstheword-336x336-appicon.png" />
+    <Content Include="Assets\guesstheword-336x336-appicon_old.png" />
     <Content Include="Assets\infoBG%401280_768.png" />
     <Content Include="Assets\lineColor%40%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton%401280_768.png" />

@@ -48,7 +48,7 @@ namespace WhatTheWord.Model
 			this.FacebookToken = "";
 		}
 
-		public async void Load()
+		public async Task Load()
 		{
 			if (await LoadGameStateFromFile()) { return; }
 

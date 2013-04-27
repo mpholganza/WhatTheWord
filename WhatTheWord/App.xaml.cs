@@ -14,6 +14,8 @@ using System.Xml.Linq;
 using Store = MockIAPLib;
 using System.Net;
 using WhatTheWord.Model;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 #else
 using Windows.ApplicationModel.Store;
 #endif
@@ -76,12 +78,12 @@ namespace WhatTheWord
 			LoadGame();
 		}
 
-		private void LoadGame()
+		private async Task LoadGame()
 		{
 			ConfigData = new GameConfig();
-			ConfigData.Load();
+			await ConfigData.Load();
 			StateData = new GameState();
-			StateData.Load();
+			await StateData.Load();
 		}
 
 		private void LoadGameConfigFromWeb()
@@ -109,9 +111,11 @@ namespace WhatTheWord
 			if (!args.Cancelled && args.Error == null)
 			{
 				string gameData = args.Result;
+				GameConfig tempGameConfig = new GameConfig();
+
 				try
 				{
-					(new GameConfig()).Deserialize(gameData); // test that the gamedata deserializes correctly
+					tempGameConfig.Deserialize(gameData); // test that the gamedata deserializes correctly
 				}
 				catch (ApplicationException)
 				{
@@ -120,7 +124,22 @@ namespace WhatTheWord
 					Console.WriteLine("Failed deserialization:\n" + gameData);
 				}
 				GameConfig.Save(args.Result);
+				//UpdateFiles(tempGameConfig);
 			}
+		}
+
+		private void UpdateFiles(GameConfig tempGameConfig)
+		{
+			List<string> filesToDownload = new List<string>();
+			foreach (KeyValuePair<int, Puzzle> puzzleKvp in tempGameConfig.Puzzles) {
+				Puzzle puzzle = puzzleKvp.Value;
+				filesToDownload.Add(puzzle.Picture1.URI);
+				filesToDownload.Add(puzzle.Picture2.URI);
+				filesToDownload.Add(puzzle.Picture3.URI);
+				filesToDownload.Add(puzzle.Picture4.URI);
+			}
+
+			DownloadManager.DownloadMissingFiles(filesToDownload, ConfigData.picturesFilenamePath);
 		}
 
         private void SetupMockIAP()

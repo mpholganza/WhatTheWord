@@ -20,7 +20,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\guesstheword-336x336-appicon.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\guesstheword-336x336-appicon.png</BackgroundImageURI>
-          <Title>Guess the Word</Title>
+          <Title>Guess this Word</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI>

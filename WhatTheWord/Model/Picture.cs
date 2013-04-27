@@ -8,7 +8,11 @@ namespace WhatTheWord
 {
 	public class Picture
 	{
-		public String URI { get; set; }
-		public String Credits { get; set; }
+		public string URI { get; set; }
+		public string Credits { get; set; }
+		//public bool IsLoaded()
+		//{
+
+		//}
 	}
 }
