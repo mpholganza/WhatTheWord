@@ -82,7 +82,7 @@
                                       Style="{StaticResource ImageButtonStyle}"
                                       x:Name="CoinsButton" />
             </StackPanel>
-            <controls:ImageButton Grid.Column="2" Tap="SettingsButton_Tap"
+            <controls:ImageButton Grid.Column="2" 
                                   ImageSource="/Assets/settingsButton@1280_768.png"
                                   ImageDisabledSource="/Assets/settingsButton@1280_768.png"
                                   ImagePressedSource="/Assets/settingsButton_p@1280_768.png"
@@ -201,13 +201,13 @@
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image x:Name="BoostButton" Grid.Row="1" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" HorizontalAlignment="Right" Tap="BoostsButton_Tap"
+			<Image x:Name="BoostButton" Grid.Row="1" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" HorizontalAlignment="Right"
                    RenderTransformOrigin="0.5,0.5">
 				<Image.RenderTransform>
 					<CompositeTransform TranslateY="0"/>
 				</Image.RenderTransform>
 			</Image>
-			<Image x:Name="FacebookButton" Grid.Row="3" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" HorizontalAlignment="Right" Tap="FacebookButton_Tap"/>
+			<Image x:Name="FacebookButton" Grid.Row="3" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" HorizontalAlignment="Right" />
 		</Grid>
 
 		<!-- LOCALIZATION NOTE:

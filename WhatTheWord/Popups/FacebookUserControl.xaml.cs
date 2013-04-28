@@ -83,7 +83,7 @@ namespace WhatTheWord.Popups
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
             Browser.Margin = new Thickness(leftMargin, 0, 0, 0);
 
-            //verifyFacebookToken();
+            verifyFacebookToken();
         }
 
         private async void verifyFacebookToken()
@@ -109,10 +109,10 @@ namespace WhatTheWord.Popups
 
                     App.Current.StateData.FacebookToken = (string)result["access_token"];
                 }
-                catch (FacebookApiException)
+                catch (FacebookApiException e)
                 {
                     // token is invalid (e.g., expired)
-                    //Console.WriteLine(e.Message);
+                    System.Diagnostics.Debug.WriteLine("verifyFacebookToken: " + e.Message);
                 }
             }
         }
@@ -124,6 +124,8 @@ namespace WhatTheWord.Popups
             showLoading();
 
             var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
+
+            App.Current.StateData.FacebookToken = String.Empty;
 
             if (String.IsNullOrWhiteSpace(App.Current.StateData.FacebookToken))
             {
@@ -225,6 +227,11 @@ namespace WhatTheWord.Popups
 
         private void Browser_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            if (e.Uri.AbsolutePath.Contains("/blank.html"))
+            {
+                return;
+            }
+
             FacebookOAuthResult oauthResult;
             if (!_fb.TryParseOAuthCallbackUrl(e.Uri, out oauthResult))
             {
@@ -235,15 +242,14 @@ namespace WhatTheWord.Popups
             if (oauthResult.IsSuccess)
             {
                 App.Current.StateData.FacebookToken = oauthResult.AccessToken;
-
-                // TODO: Save token to file
-                //App.Current.StateData.WriteGameDataToFile();
+                App.Current.StateData.Save();
                 showPost();
             }
             else
             {
                 // user cancelled
-                Dispatcher.BeginInvoke(() => MessageBox.Show(oauthResult.ErrorDescription));
+                System.Diagnostics.Debug.WriteLine("Browser_Navigated: " + oauthResult.ErrorDescription);
+                //Dispatcher.BeginInvoke(() => MessageBox.Show(oauthResult.ErrorDescription));
             }
         }
 
@@ -276,7 +282,11 @@ namespace WhatTheWord.Popups
             }
             catch (FacebookApiException e)
             {
-                Dispatcher.BeginInvoke(() => MessageBox.Show(e.Message));
+                System.Diagnostics.Debug.WriteLine("PostToFacebook: " + e.Message);
+                Dispatcher.BeginInvoke(() => MessageBox.Show(
+                    "Sorry, the post didn't make it to Facebook." + Environment.NewLine + Environment.NewLine +
+                    "A weak Internet connection may have been the problem, so please give it a try later."
+                    ));
                 App.Current.StateData.FacebookToken = string.Empty;
             }
 
