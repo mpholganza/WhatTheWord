@@ -257,7 +257,6 @@
     <Content Include="gameconfigdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\guesstheword-336x336-appicon_old.png" />
     <Content Include="Assets\infoBG%401280_768.png" />
     <Content Include="Assets\lineColor%40%401280_768.png" />
     <Content Include="Assets\nextPuzzleButton%401280_768.png" />
