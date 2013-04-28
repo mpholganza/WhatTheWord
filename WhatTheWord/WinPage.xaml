@@ -12,7 +12,75 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="False">
-
+    
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="NiceJobStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="NiceJob" Duration="00:00:00.25" From="2.5" To="1.0" />
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="NiceJob" Duration="00:00:00.25" From="2.5" To="1.0" />
+        </Storyboard>
+        <Storyboard x:Name="TheWordWasStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="TheWordWas" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="TheWordWas" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+        </Storyboard>
+        <!--<Storyboard x:Name="WinLetterStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+                Duration="00:00:00.2" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+                Duration="00:00:00.2" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+        </Storyboard>-->
+        <Storyboard x:Name="CoinsEarnedStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="CoinsEarned" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="CoinsEarned" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+        </Storyboard>
+        <Storyboard x:Name="CoinsIconStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.2" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.2" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+        </Storyboard>
+        <!--<Storyboard x:Name="WinCoinsStoryboard">
+            <DoubleAnimation x:Name="WinCoinsAnimation"
+                Storyboard.TargetProperty="TextBlock.Text"
+                Storyboard.TargetName="WinCoins" Duration="00:00:00.5" From="0" To="20"
+                BeginTime="00:00:00.0">
+            </DoubleAnimation>
+        </Storyboard>-->
+        <Storyboard x:Name="NextPuzzleStoryboard">
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="NextPuzzle" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="NextPuzzle" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+    
 	<!--LayoutRoot is the root grid where all page content is placed-->
 	<Grid x:Name="LayoutRoot" Margin="0">
 		<Grid.Background>
@@ -30,14 +98,21 @@
 			</StackPanel.Background>
             
             <Image x:Name="WinImage" Height="180" Margin="0,29,0,12" Source="/Assets/PuzzlePictures/mangoes.png" />
-			<TextBlock Text="NICE JOB!"
+			<TextBlock x:Name="NiceJob" Text="NICE JOB!"
                        Foreground="Black" FontWeight="Bold" FontSize="60" FontFamily="/Fonts/nevis.ttf"
-                       HorizontalAlignment="Center">
-                
+                       HorizontalAlignment="Center"
+                       RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <CompositeTransform ScaleY="1" ScaleX="1"/>
+                </TextBlock.RenderTransform>
             </TextBlock>
-            <TextBlock Text="The word was:"
+            <TextBlock x:Name="TheWordWas" Text="The word was:"
                        Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
-                       HorizontalAlignment="Center">
+                       HorizontalAlignment="Center"
+                       RenderTransformOrigin="0.5,0.5" >
+                <TextBlock.RenderTransform>
+                    <CompositeTransform ScaleY="1" ScaleX="1"/>
+                </TextBlock.RenderTransform>
             </TextBlock>
             <StackPanel x:Name="WinWord" Orientation="Horizontal" HorizontalAlignment="Center"
                         Margin="12">
@@ -50,12 +125,21 @@
                 <Image Source="/Assets/WinLetters/gb_g_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
                 <Image Source="/Assets/WinLetters/gb_h_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
             </StackPanel>
-            <TextBlock Text="Coins earned:"
+            <TextBlock x:Name="CoinsEarned" Text="Coins earned:"
                        Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
-                       HorizontalAlignment="Center">
+                       HorizontalAlignment="Center"
+                       RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform ScaleY="1.0" ScaleX="1.0"/>
+                </TextBlock.RenderTransform>
             </TextBlock>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image Source="/Assets/wincoinIcon@1280_768.png" Height="70" Margin="0,0,7,0" />
+                <Image x:Name="CoinsIcon" Source="/Assets/wincoinIcon@1280_768.png" Height="70" Margin="0,0,7,0"
+                       RenderTransformOrigin="0.5,0.5" >
+                    <Image.RenderTransform>
+                        <CompositeTransform ScaleY="1" ScaleX="1"/>
+                    </Image.RenderTransform>
+                </Image>
                 <TextBlock x:Name="WinCoins" VerticalAlignment="Center"
                            Text="10"
                            Foreground="Black" FontWeight="Bold" FontSize="56" FontFamily="/Fonts/nevis.ttf">
@@ -67,7 +151,11 @@
             <Button x:Name="NextPuzzle" 
                     Background="#E8BD27" BorderThickness="0" Margin="0,8,0,0"
                     HorizontalAlignment="Center" VerticalAlignment="Top"
-                    Style="{StaticResource WinPage_ButtonStyle}">
+                    Style="{StaticResource WinPage_ButtonStyle}"
+                       RenderTransformOrigin="0.5,0.5" >
+                <Button.RenderTransform>
+                    <CompositeTransform ScaleY="1" ScaleX="1"/>
+                </Button.RenderTransform>
                 <TextBlock Text="Next Puzzle" 
                            Padding="20,8,20,8"
                            Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
