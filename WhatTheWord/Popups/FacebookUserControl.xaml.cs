@@ -83,7 +83,7 @@ namespace WhatTheWord.Popups
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
             Browser.Margin = new Thickness(leftMargin, 0, 0, 0);
 
-            verifyFacebookToken();
+            //verifyFacebookToken();
         }
 
         private async void verifyFacebookToken()
