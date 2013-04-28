@@ -86,7 +86,7 @@
             
             <StackPanel Grid.Column="0" Grid.Row="0" 
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="25,20,25,20">
+                        Margin="25,20,25,40">
                 <TextBlock Text="Thank you for playing Guess This Word! Check back often for new puzzles!"
                            Style="{StaticResource OutOfPuzzlesHeaderTitle}" />
             </StackPanel>
