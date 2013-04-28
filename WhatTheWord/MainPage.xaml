@@ -48,10 +48,10 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="128*"/>
-			<RowDefinition Height="780*"/>
-			<RowDefinition Height="107*"/>
-			<RowDefinition Height="265*"/>
+			<RowDefinition Height="79.3"/>
+			<RowDefinition Height="487.5"/>
+			<RowDefinition Height="66.25"/>
+			<RowDefinition Height="166.875"/>
 		</Grid.RowDefinitions>
 
 		<!--Header Grid-->
@@ -71,49 +71,49 @@
 			<Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="16,0,0,0"/>
 			<TextBlock Grid.Column="0" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" Margin="64,0,12,0"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-			    <Image Source="/Assets/coinIcon@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+			    <Image Source="/Assets/coinIcon@1280_768.png" Width="42" Height="42" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock x:Name="CoinsText" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
-                <Image x:Name="CoinsButton" Source="/Assets/coinIapButton@1280_768.png" Width="28" Height="28" HorizontalAlignment="Center" Margin="12,0,0,0"/>
+                <Image x:Name="CoinsButton" Source="/Assets/coinIapButton@1280_768.png" Width="37.5" Height="37.5" HorizontalAlignment="Center" Margin="12,0,0,0"/>
             </StackPanel>
-            <Image x:Name="SettingsButton" Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" HorizontalAlignment="Right" Width="48" Height="48" Margin="0,0,16,0" Tap="SettingsButton_Tap"/>
+            <Image x:Name="SettingsButton" Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" HorizontalAlignment="Right" Width="56.875" Height="56.875" Margin="0,0,12.5,0" Tap="SettingsButton_Tap"/>
 		</Grid>
-		
+
 		<!--Images Grid-->
 		<Grid Grid.Row="1" Grid.ColumnSpan="2">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="5*"/>
-				<ColumnDefinition Width="18*"/>
+				<ColumnDefinition Width="29.375"/>
 				<ColumnDefinition Width="1*"/>
-				<ColumnDefinition Width="18*"/>
-				<ColumnDefinition Width="5*"/>
+				<ColumnDefinition Width="15"/>
+				<ColumnDefinition Width="1*"/>
+				<ColumnDefinition Width="29.375"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="5*"/>
-				<RowDefinition Height="18*"/>
-				<RowDefinition Height="1.4*"/>
-				<RowDefinition Height="18*"/>
-				<RowDefinition Height="5*"/>
+				<RowDefinition Height="18.125"/>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="15.625"/>
+				<RowDefinition Height="1*"/>
+				<RowDefinition Height="48.125"/>
 			</Grid.RowDefinitions>
 			<Image Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture1.URI}"/>
 			<Image Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
 			<Image Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
 			<Image Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
-			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-45,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-70,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="112,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="137,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-45,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-70,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="112,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="137,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
@@ -127,14 +127,14 @@
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/guessBG@1280_768.png"/>
 			</Grid.Background>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="5*"/>
-				<ColumnDefinition Width="30*"/>
-				<ColumnDefinition Width="5*"/>
+				<ColumnDefinition Width="58.75"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="58.75"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Image x:Name="ClearButton" Grid.Column="0" Width="36" Height="36" Source="/Assets/undoButton@1280_768.png"/>
+			<Image x:Name="ClearButton" Grid.Column="0" Width="37.5" Height="37.5" Source="/Assets/undoButton@1280_768.png"/>
 			<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
@@ -142,7 +142,7 @@
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image x:Name="ShuffleButton" Grid.Column="2" Width="36" Height="36" Source="/Assets/shuffleButton@1280_768.png"/>
+			<Image x:Name="ShuffleButton" Grid.Column="2" Width="37.5" Height="37.5" Source="/Assets/shuffleButton@1280_768.png"/>
 		</Grid>
 
 		<!--Character Panel Grid-->
@@ -151,34 +151,38 @@
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/sandBoxBG@1280_768.png"/>
 			</Grid.Background>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="16*"></ColumnDefinition>
-				<ColumnDefinition Width="4*"/>
+				<ColumnDefinition Width="26"/>
+				<ColumnDefinition/>
+				<ColumnDefinition Width="26"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="1*"/>
-				<RowDefinition Height="1*"/>
+				<RowDefinition Height="15"/>
+				<RowDefinition/>
+				<RowDefinition Height="15.625"/>
+				<RowDefinition/>
+				<RowDefinition Height="23.75"/>
 			</Grid.RowDefinitions>
-			<StackPanel x:Name="LetterPickerPanel1" Margin="48,22,0,9" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+			<StackPanel x:Name="LetterPickerPanel1" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,8,0"></Setter>
+						<Setter Property="Margin" Value="0,0,5.625,0"></Setter>
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<StackPanel x:Name="LetterPickerPanel2" Margin="48,9,0,22" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+			<StackPanel x:Name="LetterPickerPanel2" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,8,0"></Setter>
+						<Setter Property="Margin" Value="0,0,5.625,0"></Setter>
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-            <Image x:Name="BoostButton" Grid.Row="0" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" Margin="0,22,0,9" HorizontalAlignment="Left" Tap="BoostsButton_Tap"
-                   RenderTransformOrigin="0.5,0.5" >
-                <Image.RenderTransform>
-                    <CompositeTransform TranslateY="0"/>
-                </Image.RenderTransform>
-            </Image>
-            <Image x:Name="FacebookButton" Grid.Row="1" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" Margin="0,9,0,22" HorizontalAlignment="Left" Tap="FacebookButton_Tap"/>
+			<Image x:Name="BoostButton" Grid.Row="1" Grid.Column="1" Source="/Assets/boostTile@1280_768.png" HorizontalAlignment="Right" Tap="BoostsButton_Tap"
+                   RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<CompositeTransform TranslateY="0"/>
+				</Image.RenderTransform>
+			</Image>
+			<Image x:Name="FacebookButton" Grid.Row="3" Grid.Column="1" Source="/Assets/facebookTile@1280_768.png" HorizontalAlignment="Right" Tap="FacebookButton_Tap"/>
 		</Grid>
 
 		<!-- LOCALIZATION NOTE:

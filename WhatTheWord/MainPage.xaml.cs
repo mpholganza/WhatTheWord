@@ -158,8 +158,8 @@ namespace WhatTheWord
 			for (int i = 0; i < App.Current.StateData.GuessPanelState.Length; i++)
 			{
 				Image letterImage = new Image();
-				letterImage.Width = 36;
-				letterImage.Height = 36;
+				letterImage.Width = 37.5;
+				letterImage.Height = 37.5;
 				switch (App.Current.StateData.GuessPanelState[i])
 				{
 					case GameState.GUESSPANEL_LETTER_NOT_GUESSED:
@@ -190,8 +190,8 @@ namespace WhatTheWord
 			{
 				Image letterImage = new Image();
 				// TODO: This style info should be in a resource file
-				letterImage.Height = 48;
-				letterImage.Width = 48;
+				letterImage.Height = 56.25;
+				letterImage.Width = 56.25;
 
 				switch (App.Current.StateData.CharacterPanelState[i])
 				{
