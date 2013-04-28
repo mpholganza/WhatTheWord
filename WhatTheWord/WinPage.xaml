@@ -19,29 +19,61 @@
 			<ImageBrush Stretch="Fill" ImageSource="/Assets/winTransitionBG@1280_768.png"/>
 		</Grid.Background>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="1*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="2*"/>
 		</Grid.RowDefinitions>
 
-		<StackPanel HorizontalAlignment="Center" Height="256" Grid.Row="1" VerticalAlignment="Top" Width="480">
+        <StackPanel Grid.Row="1" Height="520">
 			<StackPanel.Background>
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/infoBG@1280_768.png"/>
 			</StackPanel.Background>
-			<!--<Image Source="/Assets/PuzzlePictures/mangoes.png"></Image>-->
-			<TextBlock Text="NICE JOB!"></TextBlock>
-			<TextBlock Text="The word was:"></TextBlock>
-			<StackPanel x:Name="WinWord"></StackPanel>
-			<TextBlock Text="Coins earned:"></TextBlock>
-			<StackPanel>
-				<Image x:Name="WinImage"></Image>
-				<TextBlock x:Name="WinCoins"></TextBlock>
+            
+            <Image x:Name="WinImage" Height="180" Margin="0,29,0,12" Source="/Assets/PuzzlePictures/mangoes.png" />
+			<TextBlock Text="NICE JOB!"
+                       Foreground="Black" FontWeight="Bold" FontSize="60" FontFamily="/Fonts/nevis.ttf"
+                       HorizontalAlignment="Center">
+                
+            </TextBlock>
+            <TextBlock Text="The word was:"
+                       Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <StackPanel x:Name="WinWord" Orientation="Horizontal" HorizontalAlignment="Center"
+                        Margin="12">
+                <Image Source="/Assets/WinLetters/gb_a_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_b_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_c_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_d_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_e_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_f_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_g_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+                <Image Source="/Assets/WinLetters/gb_h_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
+            </StackPanel>
+            <TextBlock Text="Coins earned:"
+                       Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
+                       HorizontalAlignment="Center">
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="/Assets/wincoinIcon@1280_768.png" Height="70" Margin="0,0,7,0" />
+                <TextBlock x:Name="WinCoins" VerticalAlignment="Center"
+                           Text="10"
+                           Foreground="Black" FontWeight="Bold" FontSize="56" FontFamily="/Fonts/nevis.ttf">
+                </TextBlock>
 			</StackPanel>
 		</StackPanel>
 
-		<Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
-			<Button x:Name="NextPuzzle" Content="Next Puzzle" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
-		</Grid>
+		<Grid x:Name="ContentPanel" Grid.Row="2">
+            <Button x:Name="NextPuzzle" 
+                    Background="#E8BD27" BorderThickness="0" Margin="0,8,0,0"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Style="{StaticResource WinPage_ButtonStyle}">
+                <TextBlock Text="Next Puzzle" 
+                           Padding="20,8,20,8"
+                           Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+        </Grid>
 	</Grid>
 
 </phone:PhoneApplicationPage>

@@ -94,6 +94,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DownloadManager.cs" />
+    <Compile Include="Controls\ImageButton.xaml.cs">
+      <DependentUpon>ImageButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileAccess.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -144,6 +147,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\ImageButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,7 +195,10 @@
   <ItemGroup>
     <Content Include="Assets\aboutButton%401280_768.png" />
     <Content Include="Assets\altLineColor%40%401280_768.png" />
+    <Content Include="Assets\backButton_p%401280_768.png" />
+    <Content Include="Assets\backButton_q%401280_768.png" />
     <Content Include="Assets\coinIapButton%401280_768.png" />
+    <Content Include="Assets\coinIapButton_p%401280_768.png" />
     <Content Include="Assets\coinIcon_disabled%401280_768.png" />
     <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\backButton%401280_768.png" />
@@ -240,6 +250,10 @@
     <Content Include="Assets\PuzzlePictures\sticky2.jpg" />
     <Content Include="Assets\PuzzlePictures\sticky3.jpg" />
     <Content Include="Assets\PuzzlePictures\sticky4.jpg" />
+    <Content Include="Assets\settingsButton_p%401280_768.png" />
+    <Content Include="Assets\shuffleButton_p%401280_768.png" />
+    <Content Include="Assets\undoButton_p%401280_768.png" />
+    <Content Include="Assets\wincoinIcon%401280_768.png" />
     <Content Include="gameconfigdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -403,6 +417,7 @@
       <Name>MockIAPLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
