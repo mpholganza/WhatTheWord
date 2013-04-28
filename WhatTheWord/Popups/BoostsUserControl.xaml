@@ -5,6 +5,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhatTheWord.Controls"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -82,8 +83,16 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
-            <Image x:Name="BackButton" Grid.Column="0" Tap="BackButton_Tap" 
-                   Style="{StaticResource Popup_BackButtonIcon}" />
+            <!--<Image x:Name="BackButton" Grid.Column="0" Tap="BackButton_Tap" 
+                   Style="{StaticResource Popup_BackButtonIcon}" />-->
+            <controls:ImageButton Grid.Column="0" Tap="BackButton_Tap"
+                                  ImageSource="/Assets/backButton@1280_768.png"
+                                  ImageDisabledSource="/Assets/backButton@1280_768.png"
+                                  ImagePressedSource="/Assets/backButton_p@1280_768.png"
+                                  Height="60" Width="60"
+                                  Margin="12,0,0,0" HorizontalAlignment="Left"
+                                  Style="{StaticResource ImageButtonStyle}"
+                                  x:Name="BackButton" />
 
             <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="BOOSTS" 
                        Style="{StaticResource Popup_HeaderFont}" />

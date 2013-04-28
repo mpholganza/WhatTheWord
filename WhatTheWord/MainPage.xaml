@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhatTheWord.Controls"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -73,10 +74,24 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
 			    <Image Source="/Assets/coinIcon@1280_768.png" Width="36" Height="36" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock x:Name="CoinsText" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
-                <Image x:Name="CoinsButton" Source="/Assets/coinIapButton@1280_768.png" Width="28" Height="28" HorizontalAlignment="Center" Margin="12,0,0,0"/>
+                <!--<Image x:Name="CoinsButton" Source="/Assets/coinIapButton@1280_768.png" Width="28" Height="28" HorizontalAlignment="Center" Margin="12,0,0,0"/>-->
+                <controls:ImageButton ImageSource="/Assets/coinIapButton@1280_768.png"
+                                      ImageDisabledSource="/Assets/coinIapButton@1280_768.png"
+                                      ImagePressedSource="/Assets/coinIapButton_p@1280_768.png"
+                                      Width="28" Height="28"
+                                      Margin="12,0,0,0"
+                                      Style="{StaticResource ImageButtonStyle}"
+                                      x:Name="CoinsButton" />
             </StackPanel>
-            <Image x:Name="SettingsButton" Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" HorizontalAlignment="Right" Width="48" Height="48" Margin="0,0,16,0" Tap="SettingsButton_Tap"/>
-		</Grid>
+            <!--<Image x:Name="SettingsButton" Grid.Column="2" Source="/Assets/settingsButton@1280_768.png" HorizontalAlignment="Right" Width="48" Height="48" Margin="0,0,16,0" Tap="SettingsButton_Tap"/>-->
+            <controls:ImageButton Grid.Column="2" Tap="SettingsButton_Tap"
+                                  ImageSource="/Assets/settingsButton@1280_768.png"
+                                  ImageDisabledSource="/Assets/settingsButton@1280_768.png"
+                                  ImagePressedSource="/Assets/settingsButton_p@1280_768.png"
+                                  HorizontalAlignment="Right" Width="48" Height="48" Margin="0,0,16,0"
+                                  Style="{StaticResource ImageButtonStyle}"
+                                  x:Name="SettingsButton" />
+        </Grid>
 		
 		<!--Images Grid-->
 		<Grid Grid.Row="1" Grid.ColumnSpan="2">
@@ -134,16 +149,30 @@
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Image x:Name="ClearButton" Grid.Column="0" Width="36" Height="36" Source="/Assets/undoButton@1280_768.png"/>
-			<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
+			<!--<Image x:Name="ClearButton" Grid.Column="0" Width="36" Height="36" Source="/Assets/undoButton@1280_768.png"/>-->
+            <controls:ImageButton Grid.Column="0"
+                                  ImageSource="/Assets/undoButton@1280_768.png"
+                                  ImageDisabledSource="/Assets/undoButton@1280_768.png"
+                                  ImagePressedSource="/Assets/undoButton_p@1280_768.png"
+                                  Width="36" Height="36" 
+                                  Style="{StaticResource ImageButtonStyle}"
+                                  x:Name="ClearButton" />
+            <StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
 						<Setter Property="Margin" Value="0,0,8,0"></Setter>
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
-			<Image x:Name="ShuffleButton" Grid.Column="2" Width="36" Height="36" Source="/Assets/shuffleButton@1280_768.png"/>
-		</Grid>
+			<!--<Image x:Name="ShuffleButton" Grid.Column="2" Width="36" Height="36" Source="/Assets/shuffleButton@1280_768.png"/>-->
+            <controls:ImageButton Grid.Column="2"
+                                  ImageSource="/Assets/shuffleButton@1280_768.png"
+                                  ImageDisabledSource="/Assets/shuffleButton@1280_768.png"
+                                  ImagePressedSource="/Assets/shuffleButton_p@1280_768.png"
+                                  Width="36" Height="36" 
+                                  Style="{StaticResource ImageButtonStyle}"
+                                  x:Name="ShuffleButton" />
+        </Grid>
 
 		<!--Character Panel Grid-->
 		<Grid Grid.Row="3" Grid.ColumnSpan="2">
