@@ -251,6 +251,7 @@
     <Content Include="Assets\settingsButton_p%401280_768.png" />
     <Content Include="Assets\shuffleButton_p%401280_768.png" />
     <Content Include="Assets\undoButton_p%401280_768.png" />
+    <Content Include="Assets\wincoinIcon%401280_768.png" />
     <Content Include="gameconfigdefault.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
