@@ -47,6 +47,7 @@ namespace WhatTheWord
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
 			CoinsButton.Tap += CoinsButton_Tap;
+			CoinsStackPanel.Tap += CoinsButton_Tap;
 			FacebookButton.Tap += FacebookButton_Tap;
 
 			if (!TryLoadCurrentPuzzle(App.Current.StateData.CurrentLevel))

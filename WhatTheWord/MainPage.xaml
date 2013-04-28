@@ -71,13 +71,13 @@
 			<Image Grid.Column="0" Source="/Assets/levelBG@1280_768.png" Stretch="Fill"/>
 			<Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="16,0,0,0"/>
 			<TextBlock Grid.Column="0" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" Margin="64,0,12,0"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-				<Image Source="/Assets/coinIcon@1280_768.png" Width="42" Height="42" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <StackPanel x:Name="CoinsStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+				<Image Source="/Assets/coinIcon@1280_768.png" Width="37" Height="37" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock x:Name="CoinsText" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
                 <controls:ImageButton ImageSource="/Assets/coinIapButton@1280_768.png"
                                       ImageDisabledSource="/Assets/coinIapButton@1280_768.png"
                                       ImagePressedSource="/Assets/coinIapButton_p@1280_768.png"
-                                      Width="42" Height="42"
+                                      Width="23.125" Height="23.125"
                                       Margin="12,0,0,0"
                                       Style="{StaticResource ImageButtonStyle}"
                                       x:Name="CoinsButton" />
