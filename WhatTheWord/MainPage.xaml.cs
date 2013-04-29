@@ -35,6 +35,23 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
+			InitializeFacebookPopup();
+			InitializeCoinsPopup();
+			InitializeBoostsPopup();
+			InitializeAboutPopup();
+			InitializeSettingsPopup();
+			InitializeBoostBounceTimer();
+			InitializeNewPuzzlesPopup();
+			InitializeOutOfPuzzlesPopup();
+
+			ClearButton.Tap += ClearButton_Tap;
+			ShuffleButton.Tap += ShuffleButton_Tap;
+			CoinsButton.Tap += CoinsButton_Tap;
+			CoinsStackPanel.Tap += CoinsButton_Tap;
+			SettingsButton.Tap += SettingsButton_Tap;
+			BoostButton.Tap += BoostsButton_Tap;
+			FacebookButton.Tap += FacebookButton_Tap;
+
 			if (!TryLoadCurrentPuzzle(App.Current.StateData.CurrentLevel))
 			{
 				outOfPuzzlesUserControl.show();
@@ -43,23 +60,6 @@ namespace WhatTheWord
 
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
-
-            InitializeFacebookPopup();
-            InitializeCoinsPopup();
-            InitializeBoostsPopup();
-            InitializeAboutPopup();
-            InitializeSettingsPopup();
-            InitializeBoostBounceTimer();
-            InitializeNewPuzzlesPopup();
-            InitializeOutOfPuzzlesPopup();
-
-            ClearButton.Tap += ClearButton_Tap;
-            ShuffleButton.Tap += ShuffleButton_Tap;
-            CoinsButton.Tap += CoinsButton_Tap;
-            CoinsStackPanel.Tap += CoinsButton_Tap;
-            SettingsButton.Tap += SettingsButton_Tap;
-            BoostButton.Tap += BoostsButton_Tap;
-            FacebookButton.Tap += FacebookButton_Tap;
 		}
 
 		private void InitializeFacebookPopup()

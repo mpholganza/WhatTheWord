@@ -89,6 +89,7 @@
                         Margin="25,20,25,40">
                 <TextBlock Text="Thank you for playing Guess This Word! Check back often for new puzzles!"
                            Style="{StaticResource OutOfPuzzlesHeaderTitle}" />
+				<Button x:Name="debugReset" Tap="DebugResetButton_Tap">Debug Reset</Button>
             </StackPanel>
 
         </Grid>
