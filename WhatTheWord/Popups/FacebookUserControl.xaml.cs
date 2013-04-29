@@ -295,12 +295,14 @@ namespace WhatTheWord.Popups
 
         private void PostButton_Tap(object sender, System.Windows.Input.GestureEventArgs evt)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             PostToFacebook();
             this.hide();
         }
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             this.hide();
         }
 

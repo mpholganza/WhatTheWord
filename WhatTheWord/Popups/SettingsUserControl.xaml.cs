@@ -94,6 +94,7 @@ namespace WhatTheWord.Popups
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             this.hide();
         }
 
@@ -103,6 +104,7 @@ namespace WhatTheWord.Popups
 
         private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             _mainPage.aboutUserControl.isOpenedFromSettings = true;
             _mainPage.aboutUserControl.show();
             this.hide();
@@ -110,6 +112,8 @@ namespace WhatTheWord.Popups
 
         private void Feedback_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
+
             byte[] deviceID = (byte[])Microsoft.Phone.Info.DeviceExtendedProperties.GetValue("DeviceUniqueId");
             string deviceIDAsString = Convert.ToBase64String(deviceID);
 

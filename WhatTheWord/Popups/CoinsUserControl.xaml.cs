@@ -161,6 +161,7 @@ namespace WhatTheWord.Popups
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             this.hide();
         }
     }

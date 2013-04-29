@@ -99,23 +99,8 @@ namespace WhatTheWord.Popups
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             this.hide();
-        }
-
-        private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            // TODO: add game logic
-        }
-
-        private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            // TODO: add game logic
-        }
-
-        private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            App.Current.StateData.JumblePuzzleCharacters();
-            _mainPage.DisplayGame();
         }
     }
 

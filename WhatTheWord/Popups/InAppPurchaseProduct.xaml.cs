@@ -50,6 +50,7 @@ namespace WhatTheWord.Popups
 
         private void PurchaseButton_Click(object sender, RoutedEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             PurchaseProduct();
         }
 
@@ -73,8 +74,13 @@ namespace WhatTheWord.Popups
                 }
             }
 
-            App.Current.StateData.Coins += coinsToAdd;
-            _mainPage.DisplayGame();
+            if (coinsToAdd > 0)
+            {
+                App.Current.StateData.Coins += coinsToAdd;
+                _mainPage.DisplayGame();
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
+            }
+
             _coinsUserControl.hide();
         }
     }

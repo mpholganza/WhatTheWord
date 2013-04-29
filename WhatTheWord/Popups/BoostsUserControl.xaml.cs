@@ -8,19 +8,20 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+#if DEBUG
+using MockIAPLib;
+#else
+using Windows.ApplicationModel.Store;
+#endif
+
 using Facebook;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
-
-#if DEBUG
-using MockIAPLib;
 using System.Threading.Tasks;
 using WhatTheWord.Model;
-#else
-using Windows.ApplicationModel.Store;
-#endif
+
 
 namespace WhatTheWord.Popups
 {
@@ -116,6 +117,7 @@ namespace WhatTheWord.Popups
 
         private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             this.hide();
         }
 
@@ -156,6 +158,7 @@ namespace WhatTheWord.Popups
                 App.Current.StateData.Coins -= cost;
                 App.Current.StateData.RevealLetter();
                 _mainPage.DisplayGame();
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
             }
             
             this.hide();
@@ -174,6 +177,7 @@ namespace WhatTheWord.Popups
                 App.Current.StateData.Coins -= cost;
                 App.Current.StateData.RemoveLetter();
                 _mainPage.DisplayGame();
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
             }
 
             this.hide();
@@ -192,6 +196,7 @@ namespace WhatTheWord.Popups
                 App.Current.StateData.Coins -= cost;
                 App.Current.StateData.JumblePuzzleCharacters();
                 _mainPage.DisplayGame();
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
             }
 
             this.hide();

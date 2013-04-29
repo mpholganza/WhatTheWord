@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SoundEffects.cs" />
     <Compile Include="DownloadManager.cs" />
     <Compile Include="Controls\ImageButton.xaml.cs">
       <DependentUpon>ImageButton.xaml</DependentUpon>
@@ -252,6 +253,13 @@
     <Content Include="Assets\PuzzlePictures\sticky4.jpg" />
     <Content Include="Assets\settingsButton_p%401280_768.png" />
     <Content Include="Assets\shuffleButton_p%401280_768.png" />
+    <Content Include="Assets\Sounds\Bounce05.wav" />
+    <Content Include="Assets\Sounds\Buy05.wav" />
+    <Content Include="Assets\Sounds\Click02.wav" />
+    <Content Include="Assets\Sounds\PictureZoom02.wav" />
+    <Content Include="Assets\Sounds\TapLetter04.wav" />
+    <Content Include="Assets\Sounds\Win-4.wav" />
+    <Content Include="Assets\Sounds\Wrong02.wav" />
     <Content Include="Assets\undoButton_p%401280_768.png" />
     <Content Include="Assets\wincoinIcon%401280_768.png" />
     <Content Include="gameconfigdefault.txt">

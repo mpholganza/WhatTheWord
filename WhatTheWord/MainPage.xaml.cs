@@ -14,6 +14,7 @@ using System.Windows.Controls.Primitives;
 using WhatTheWord.Popups;
 using System.Windows.Threading;
 using System.Windows.Media;
+using WhatTheWord.Controls;
 
 namespace WhatTheWord
 {
@@ -44,6 +45,7 @@ namespace WhatTheWord
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
 
+            SoundEffects.Initialize();
             InitializeFacebookPopup();
             InitializeCoinsPopup();
             InitializeBoostsPopup();
@@ -114,7 +116,14 @@ namespace WhatTheWord
 
         private void bounceBoostButton(object o, EventArgs sender)
         {
-            BoostBounceStoryboard.Begin();
+            var currentPage = ((PhoneApplicationFrame)Application.Current.RootVisual).Content;
+
+            if (currentPage == this && !AreTherePopupsOpened())
+            {
+                BoostBounceStoryboard.Begin();
+                SoundEffects.PlayBounce();
+            }
+
         }
 
 		private bool TryLoadCurrentPuzzle(int currentLevel)
@@ -213,6 +222,7 @@ namespace WhatTheWord
 				var x = i;
 				letterImage.Tap += (sender, e) =>
 				{
+                    SoundEffects.PlayTapLetter();
 					CharacterPanelLetterPressed(x);
 				};
 
@@ -231,34 +241,40 @@ namespace WhatTheWord
 		{
 			App.Current.StateData.ClearGuessPanel();
 
-			DisplayGame();
+            DisplayGame();
+            SoundEffects.PlayClick();
 		}
 
 		private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			App.Current.StateData.JumblePuzzleCharacters();
 
-			DisplayGame();
+            DisplayGame();
+            SoundEffects.PlayClick();
 		}
 
 		private void BoostsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
             boostsUserControl.show();
+            SoundEffects.PlayClick();
 		}
 
 		private void CoinsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			coinsUserControl.show();
+            coinsUserControl.show();
+            SoundEffects.PlayClick();
 		}
 
 		private void FacebookButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			facebookUserControl.show();
+            facebookUserControl.show();
+            SoundEffects.PlayClick();
 		}
 
         private void SettingsButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             settingsUserControl.show();
+            SoundEffects.PlayClick();
         }
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
@@ -305,7 +321,8 @@ namespace WhatTheWord
 
 		private DispatcherTimer puzzleStatusTimer;
 		private void PuzzleComplete()
-		{
+        {
+            SoundEffects.PlayWin();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			PuzzleAttemptStatus.Text = "CORRECT!";
@@ -329,7 +346,8 @@ namespace WhatTheWord
 		}
 
 		private void PuzzleIncorrect()
-		{
+        {
+            SoundEffects.PlayWrong();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			PuzzleAttemptStatus.Text = "TRY AGAIN!";
@@ -382,6 +400,17 @@ namespace WhatTheWord
             {
                 e.Cancel = true;  //Cancels the default behavior.
             }
+        }
+
+        private bool AreTherePopupsOpened()
+        {
+            return facebookUserControl.isOpen()
+                || boostsUserControl.isOpen()
+                || coinsUserControl.isOpen()
+                || settingsUserControl.isOpen()
+                || aboutUserControl.isOpen()
+                || newPuzzlesUserControl.isOpen()
+                || outOfPuzzlesUserControl.isOpen();
         }
 
 		// Sample code for building a localized ApplicationBar
