@@ -11,6 +11,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Controls.Primitives;
 using Microsoft.Phone.Tasks;
 using System.Reflection;
+using WhatTheWord.Controls;
 
 namespace WhatTheWord.Popups
 {
@@ -100,6 +101,7 @@ namespace WhatTheWord.Popups
 
         private void SoundToggleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            SoundEffects.isSoundEnabled = !SoundEffects.isSoundEnabled;
         }
 
         private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
