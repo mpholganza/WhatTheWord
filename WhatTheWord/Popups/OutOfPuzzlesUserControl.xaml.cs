@@ -96,6 +96,14 @@ namespace WhatTheWord.Popups
             }
         }
         #endregion
+
+		private void DebugResetButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			App.Current.StateData.CurrentLevel = 1;
+			App.Current.StateData.Coins = 200;
+
+			App.Current.StateData.Save();
+		}
     }
 
 }
