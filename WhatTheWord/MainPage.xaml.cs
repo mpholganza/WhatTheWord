@@ -36,6 +36,7 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
+			SoundEffects.Initialize();
 			InitializeFacebookPopup();
 			InitializeCoinsPopup();
 			InitializeBoostsPopup();
@@ -61,27 +62,6 @@ namespace WhatTheWord
 
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
-<<<<<<< HEAD
-
-            SoundEffects.Initialize();
-            InitializeFacebookPopup();
-            InitializeCoinsPopup();
-            InitializeBoostsPopup();
-            InitializeAboutPopup();
-            InitializeSettingsPopup();
-            InitializeBoostBounceTimer();
-            InitializeNewPuzzlesPopup();
-            InitializeOutOfPuzzlesPopup();
-
-            ClearButton.Tap += ClearButton_Tap;
-            ShuffleButton.Tap += ShuffleButton_Tap;
-            CoinsButton.Tap += CoinsButton_Tap;
-            CoinsStackPanel.Tap += CoinsButton_Tap;
-            SettingsButton.Tap += SettingsButton_Tap;
-            BoostButton.Tap += BoostsButton_Tap;
-            FacebookButton.Tap += FacebookButton_Tap;
-=======
->>>>>>> 11bd7d89ea937fe35f8820cbe4e07f1fd8d90cba
 		}
 
 		private void InitializeFacebookPopup()
