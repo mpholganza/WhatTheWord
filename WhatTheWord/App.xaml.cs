@@ -139,7 +139,7 @@ namespace WhatTheWord
 				filesToDownload.Add(puzzle.Picture4.URI);
 			}
 
-			DownloadManager.DownloadMissingFiles(filesToDownload, ConfigData.picturesFilenamePath);
+			//DownloadManager.DownloadMissingFiles(filesToDownload, ConfigData.picturesFilenamePath);
 		}
 
         private void SetupMockIAP()

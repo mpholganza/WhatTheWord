@@ -10,11 +10,11 @@ using Windows.Storage;
 
 namespace WhatTheWord
 {
-	class FileAccess
+	public class FileAccess
 	{
-		public async static Task<String> LoadDataFromFileAsync(string fileName)
+		public async static Task<string> LoadDataFromFileAsync(string fileName)
 		{
-			String data = String.Empty;
+			string data = string.Empty;
 			try
 			{
 				StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
@@ -25,7 +25,7 @@ namespace WhatTheWord
 					data = Encoding.UTF8.GetString(content, 0, content.Length);
 				}
 			}
-			catch (FileNotFoundException) {}
+			catch (FileNotFoundException) { }
 
 			return data;
 		}
@@ -45,7 +45,30 @@ namespace WhatTheWord
 			using (Stream stream = await file.OpenStreamForWriteAsync())
 			{
 				byte[] content = Encoding.UTF8.GetBytes(data);
-				await stream.WriteAsync(content, 0 , content.Length);
+				await stream.WriteAsync(content, 0, content.Length);
+			}
+		}
+
+		public async static Task WriteStreamToFileAsync(Stream inStream, string fileName)
+		{
+			StorageFile file = null;
+			try
+			{
+				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error writing to file" + e.Message);
+			}
+
+			using (Stream outStream = await file.OpenStreamForWriteAsync())
+			{
+				byte[] data = new byte[16 * 1024];
+				int bytesRead;
+				while ((bytesRead = await inStream.ReadAsync(data, 0, data.Length)) > 0)
+				{
+					await outStream.WriteAsync(data, 0, bytesRead);
+				}
 			}
 		}
 
@@ -82,6 +105,21 @@ namespace WhatTheWord
 			}
 			catch { }
 			return false;
+		}
+
+		public async static Task<bool> Delete(string fileName)
+		{
+			StorageFile file = null;
+			try
+			{
+				file = await ApplicationData.Current.LocalFolder.GetFileAsync(fileName);
+				await file.DeleteAsync();
+			}
+			catch
+			{
+				return false;
+			}
+			return true;
 		}
 	}
 }

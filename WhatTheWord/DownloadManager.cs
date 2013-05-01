@@ -13,44 +13,164 @@ namespace WhatTheWord
 {
 	public class DownloadManager
 	{
+		private static DownloadManager downloadManagerInstance;
 
-		public async static void DownloadMissingFiles(List<string> filesToDownload, string sourceUri)
+		private DownloadManager() { }
+
+		public static DownloadManager GetInstance()
 		{
-			foreach (string fileName in filesToDownload)
+			if (downloadManagerInstance == null)
 			{
-				if (!await FileAccess.Exists(fileName, "Assets/PuzzlePictures"))
+				downloadManagerInstance = new DownloadManager();
+			}
+			return downloadManagerInstance;
+		}
+
+		private Queue<KeyValuePair<string, string>> FilesToDownload = new Queue<KeyValuePair<string, string>>();
+
+		public async Task<string> ListMissingFilesAndQueue(Dictionary<string, string> filesToDownload, string applicationPackagePath)
+		{
+			FilesToDownload.Clear();
+			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
+			{
+				string fileName = fileKVP.Key;
+				if (!await FileAccess.Exists(fileName, applicationPackagePath))
 				{
-					Uri uri = new Uri(sourceUri + fileName); // TODO: Check to ensure sourceUri has a trailiing "/" for now we assume it's there
-					WebClient client = new WebClient();
-					client.OpenReadCompleted += client_OpenReadCompleted;
-					client.OpenReadAsync(uri);
+					FilesToDownload.Enqueue(fileKVP);
 				}
+			}
+
+			return GetFilesToDownload();
+		}
+
+		public async Task<string> ListMissingFiles(List<string> fileNames, string applicationPackagePath)
+		{
+			string missingFiles = string.Empty;
+			foreach (string fileName in fileNames)
+			{
+				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				{
+					missingFiles += fileName + Environment.NewLine;
+				}
+			}
+			return missingFiles;
+		}
+
+		public async Task DownloadMissingFiles(Dictionary<string, string> filesToDownload, string applicationPackagePath)
+		{
+			FilesToDownload.Clear();
+			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
+			{
+				string fileName = fileKVP.Key;
+				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				{
+					FilesToDownload.Enqueue(fileKVP);
+				}
+			}
+
+			DownloadMissingFiles();
+		}
+
+		public async Task DownloadAndUnzipJpgFile(Dictionary<string, string> filesToDownload, string applicationPackagePath)
+		{
+			FilesToDownload.Clear();
+			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
+			{
+				string fileName = fileKVP.Key;
+				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				{
+					FilesToDownload.Enqueue(fileKVP);
+				}
+			}
+
+			DownloadAndUnzipJpgFile();
+		}
+
+		public string GetFilesToDownload()
+		{
+			string filesToDownloadString = string.Empty;
+			foreach (KeyValuePair<string, string> fileKVP in FilesToDownload)
+			{
+				filesToDownloadString += fileKVP.Key + Environment.NewLine;
+			}
+
+			return filesToDownloadString;
+		}
+
+		public void DownloadMissingFiles()
+		{
+			if (FilesToDownload.Count == 0)
+			{
+				return;
+			}
+
+			KeyValuePair<string, string> fileKVP = FilesToDownload.Peek();
+
+			string fileName = fileKVP.Key;
+			string fileUrl = fileKVP.Value;
+			if (fileName == null || fileUrl == null)
+			{
+				FilesToDownload.Dequeue();
+				DownloadMissingFiles();
+			}
+			else
+			{
+				Uri uri = new Uri(fileUrl);
+				WebClient client = new WebClient();
+				client.OpenReadCompleted += client_OpenReadCompleted_SaveStreamToFile;
+				client.OpenReadAsync(uri);
 			}
 		}
 
-		private async static void client_OpenReadCompleted(object sender, OpenReadCompletedEventArgs e)
+		private async void client_OpenReadCompleted_SaveStreamToFile(object sender, OpenReadCompletedEventArgs e)
 		{
-			Stream zipPackageStream = e.Result;
-			Image image = await LoadImageFromZipPackage("test.jpg", zipPackageStream);
-			
+			if (e.Error == null)
+			{
+				Stream inStream = e.Result;
+				string fileName = FilesToDownload.Dequeue().Key;
+				await FileAccess.WriteStreamToFileAsync(inStream, fileName);
+			}
+
+			DownloadMissingFiles();
 		}
 
-		public async static Task<Image> LoadImageFromZipPackage(string relativeUri, Stream zipPackageStream)
+		public void DownloadAndUnzipJpgFile()
 		{
-			StreamResourceInfo sri = new StreamResourceInfo(zipPackageStream, null);
-			Uri uri = new Uri(relativeUri, UriKind.Relative);
-			StreamResourceInfo imageSri = App.GetResourceStream(sri, uri);
+			if (FilesToDownload.Count == 0)
+			{
+				return;
+			}
 
-			Stream output;
-			//await imageSri.Stream.CopyToAsync(output);
+			KeyValuePair<string, string> fileKVP = FilesToDownload.Peek();
+			string fileName = fileKVP.Key;
+			string fileUrl = fileKVP.Value;
+			if (fileName == null || fileUrl == null)
+			{
+				FilesToDownload.Dequeue();
+				DownloadAndUnzipJpgFile();
+			}
+			else
+			{
+				Uri uri = new Uri(fileUrl);
+				WebClient client = new WebClient();
+				client.OpenReadCompleted += client_OpenReadCompleted_UnzipStreamAndSaveJpg;
+				client.OpenReadAsync(uri);
+			}
+		}
 
-			//// Convert the stream to an Image.
-			//BitmapImage bi = new BitmapImage();
-			//bi.SetSource(imageSri.Stream);
-			//Image img = new Image();
-			//img.Source = bi;
+		private async void client_OpenReadCompleted_UnzipStreamAndSaveJpg(object sender, OpenReadCompletedEventArgs e)
+		{
+			if (e.Error == null)
+			{
+				Stream zipPackageStream = e.Result;
+				string fileName = FilesToDownload.Dequeue().Key.Replace("zip", "jpg");
+				StreamResourceInfo zipSri = new StreamResourceInfo(zipPackageStream, null);
+				Uri uri = new Uri(fileName, UriKind.Relative);
+				StreamResourceInfo zippedFileSri = App.GetResourceStream(zipSri, uri);
+				await FileAccess.WriteStreamToFileAsync(zippedFileSri.Stream, fileName);
+			}
 
-			return new Image();
+			DownloadAndUnzipJpgFile();
 		}
 	}
 }
