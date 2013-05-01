@@ -13,7 +13,7 @@ namespace WhatTheWord.Controls
     public static class SoundEffects
     {
         private static bool initialized = false;
-        private static bool isSoundEnabled = true;
+        public static bool isSoundEnabled = true;
 
         private enum SFX { Bounce, Buy, Click, PictureZoom, TapLetter, Win, Wrong };
         private static Dictionary<SFX, SoundEffect> soundEffects;

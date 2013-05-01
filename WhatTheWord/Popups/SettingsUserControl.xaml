@@ -102,7 +102,7 @@
 
             <StackPanel x:Name="ContentStackPanel" Style="{StaticResource SettingsContentPanel}">
 
-                <Border Style="{StaticResource SettingBorder}">
+                <Border Style="{StaticResource SettingBorder}" Tap="SoundToggleButton_Tap">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
