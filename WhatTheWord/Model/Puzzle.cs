@@ -21,6 +21,33 @@ namespace WhatTheWord.Model
 		public bool Enabled { get; set; }
 		public int Order { get; set; }
 
+		public bool TryLoad()
+		{
+			try
+			{
+				// TODO: Look for file in LocalFolder first
+				// if not in LocalFolder look in pre-packaged Assets folder
+				Picture1.URI = "/Assets/PuzzlePictures/" + Picture1.URI.Replace("zip", "jpg");
+				Picture2.URI = "/Assets/PuzzlePictures/" + Picture2.URI.Replace("zip", "jpg");
+				Picture3.URI = "/Assets/PuzzlePictures/" + Picture3.URI.Replace("zip", "jpg");
+				Picture4.URI = "/Assets/PuzzlePictures/" + Picture4.URI.Replace("zip", "jpg");
+			}
+			catch
+			{
+				return false;
+			}
+
+			return true;
+			//CurrentPuzzle = new Puzzle()
+			//{
+			//	Word = "random".ToUpper(),
+			//	Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
+			//	Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
+			//	Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
+			//	Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
+			//};
+		}
+
 		public static String GeneratePuzzleCharacters(String word)
 		{
 			if (word.Length > MAX_WORD_LENGTH) throw new ApplicationException("Word is too long");

@@ -28,6 +28,7 @@ namespace WhatTheWord
         public SettingsUserControl settingsUserControl;
 		public NewPuzzlesUserControl newPuzzlesUserControl;
 		public OutOfPuzzlesUserControl outOfPuzzlesUserControl;
+		public ZoomedPictureUserControl zoomedPictureUserControl;
 
         private DispatcherTimer boostBounceTimer;
 
@@ -45,20 +46,55 @@ namespace WhatTheWord
 			InitializeBoostBounceTimer();
 			InitializeNewPuzzlesPopup();
 			InitializeOutOfPuzzlesPopup();
+			InitializeZoomedPicturePopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
 			CoinsButton.Tap += CoinsButton_Tap;
 			CoinsStackPanel.Tap += CoinsButton_Tap;
+			CoinsDollarSign.Tap += CoinsButton_Tap;
+			CoinsText.Tap += CoinsButton_Tap;
 			SettingsButton.Tap += SettingsButton_Tap;
 			BoostButton.Tap += BoostsButton_Tap;
 			FacebookButton.Tap += FacebookButton_Tap;
 
-			if (!TryLoadCurrentPuzzle(App.Current.StateData.CurrentLevel))
+			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
 			{
 				outOfPuzzlesUserControl.show();
 				return;
 			}
+
+			CurrentPuzzle = App.Current.ConfigData.Puzzles[App.Current.StateData.CurrentLevel];
+			if (!CurrentPuzzle.TryLoad())
+			{
+				outOfPuzzlesUserControl.show();
+				return;
+			}
+
+			string picture1Uri = CurrentPuzzle.Picture1.URI;
+			string picture2Uri = CurrentPuzzle.Picture2.URI;
+			string picture3Uri = CurrentPuzzle.Picture3.URI;
+			string picture4Uri = CurrentPuzzle.Picture4.URI;
+
+			Picture1.Tap += (sender, e) =>
+			{
+				zoomedPictureUserControl.show(new Uri(picture1Uri, UriKind.Relative));
+			};
+
+			Picture2.Tap += (sender, e) =>
+			{
+				zoomedPictureUserControl.show(new Uri(picture2Uri, UriKind.Relative));
+			};
+
+			Picture3.Tap += (sender, e) =>
+			{
+				zoomedPictureUserControl.show(new Uri(picture3Uri, UriKind.Relative));
+			};
+
+			Picture4.Tap += (sender, e) =>
+			{
+				zoomedPictureUserControl.show(new Uri(picture4Uri, UriKind.Relative));
+			};
 
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
@@ -103,6 +139,12 @@ namespace WhatTheWord
 		private void InitializeNewPuzzlesPopup()
 		{
 			newPuzzlesUserControl = new NewPuzzlesUserControl(new Popup(), this,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
+
+		private void InitializeZoomedPicturePopup()
+		{
+			zoomedPictureUserControl = new ZoomedPictureUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 
@@ -391,10 +433,14 @@ namespace WhatTheWord
             {
                 settingsUserControl.hide();
             }
-            else
-            {
-                cancelBackbutton = false;
-            }
+			else if (zoomedPictureUserControl.isOpen())
+			{
+				zoomedPictureUserControl.hide();
+			}
+			else
+			{
+				cancelBackbutton = false;
+			}
 
             if (cancelBackbutton)
             {

@@ -72,7 +72,7 @@
 			<Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="16,0,0,0"/>
 			<TextBlock Grid.Column="0" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" Margin="64,0,12,0"/>
             <StackPanel x:Name="CoinsStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
-				<Image Source="/Assets/coinIcon@1280_768.png" Width="37" Height="37" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+				<Image x:Name="CoinsDollarSign" Source="/Assets/coinIcon@1280_768.png" Width="37" Height="37" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock x:Name="CoinsText" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
                 <controls:ImageButton ImageSource="/Assets/coinIapButton@1280_768.png"
                                       ImageDisabledSource="/Assets/coinIapButton@1280_768.png"
@@ -107,10 +107,10 @@
 				<RowDefinition Height="1*"/>
 				<RowDefinition Height="48.125"/>
 			</Grid.RowDefinitions>
-			<Image Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture1.URI}"/>
-			<Image Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
-			<Image Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
-			<Image Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
+			<Image x:Name="Picture1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture1.URI}"/>
+			<Image x:Name="Picture2" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
+			<Image x:Name="Picture3" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
+			<Image x:Name="Picture4" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
 			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-70,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>

@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="WhatTheWord.Popups.ZoomedPictureUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    >
+    
+    <UserControl.Resources>
+        <local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
+    </UserControl.Resources>
+    
+    <Grid x:Name="HostPanel" Margin="0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Overlay" Grid.Row="0" Grid.RowSpan="2" 
+              Style="{StaticResource Popup_Overlay}" />
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Style="{StaticResource Popup_ContentPanel}" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+			<Image x:Name="ThePicture" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+
+		</Grid>
+
+    </Grid>
+
+</UserControl>
+    
