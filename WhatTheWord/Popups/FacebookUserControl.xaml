@@ -285,7 +285,8 @@
         </Grid>
 
         <phone:WebBrowser Grid.Row="1" x:Name="Browser" Style="{StaticResource FacebookBrowser}"
-                          IsScriptEnabled="True" Navigated="Browser_Navigated" Loaded="Browser_Loaded" />
+                          IsScriptEnabled="True" Navigated="Browser_Navigated" Loaded="Browser_Loaded" 
+                          NavigationFailed="Browser_NavigationFailed"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Style="{StaticResource Popup_ContentPanel}" >
@@ -304,7 +305,7 @@
                     <Image x:Name="Screenshot" Style="{StaticResource FacebookPostScreenshot}"/>
                 </Border>
 
-                <TextBox x:Name="Message" Grid.Row="0" Grid.Column="1" Text="Help me guess what this word is! "
+                <TextBox x:Name="Message" Grid.Row="0" Grid.Column="1" Text="Help me guess this 5-letter word! "
                             Style="{StaticResource FacebookPostMessage_Style}"/>
 
                 <Button x:Name="PostButton" Grid.Row="1" Grid.Column="1" Tap="PostButton_Tap"

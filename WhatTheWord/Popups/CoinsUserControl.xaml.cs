@@ -8,19 +8,19 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+#if DEBUG
+using MockIAPLib;
+#else
+using Windows.ApplicationModel.Store;
+#endif
+
 using Facebook;
 using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
-
-#if DEBUG
-using MockIAPLib;
 using System.Threading.Tasks;
 using WhatTheWord.Model;
-#else
-using Windows.ApplicationModel.Store;
-#endif
 
 namespace WhatTheWord.Popups
 {

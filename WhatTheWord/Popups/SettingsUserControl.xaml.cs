@@ -126,7 +126,7 @@ namespace WhatTheWord.Popups
 
             EmailComposeTask emailComposeTask = new EmailComposeTask();
 
-            emailComposeTask.Subject = "Guess the Word Support";
+            emailComposeTask.Subject = "Guess The Word Support";
             emailComposeTask.Body = "Device ID: " + deviceIDAsString + Environment.NewLine + 
                 "Version: " + version + Environment.NewLine + 
                 Environment.NewLine + 

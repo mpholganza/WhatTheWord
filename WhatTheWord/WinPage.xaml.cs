@@ -43,6 +43,7 @@ namespace WhatTheWord
 
 		void NextPuzzle_Click(object sender, RoutedEventArgs e)
 		{
+            WhatTheWord.Controls.SoundEffects.PlayClick();
 			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();
 		}
@@ -60,7 +61,7 @@ namespace WhatTheWord
 
         private void updateContent()
         {
-            int index = Math.Max(_gameState.CurrentLevel - 1, 0);
+            int index = Math.Max(_gameState.CurrentLevel - 1, 1);
 
             Puzzle currentPuzzle = _gameConfig.Puzzles[index];
 
