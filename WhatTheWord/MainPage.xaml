@@ -111,22 +111,22 @@
 			<Image x:Name="Picture2" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
 			<Image x:Name="Picture3" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
 			<Image x:Name="Picture4" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
-			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-70,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-85,85,0,0" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="137,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="117,87,-85,90" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-70,68,0,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-85,85,0,0" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="137,78,-44.64,0" Width="169.64" TextAlignment="Center" Foreground="Black">
+			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="117,87,-85,90" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
