@@ -123,8 +123,11 @@ namespace WhatTheWord.Popups
         private void Browser_NavigationFailed(object o, EventArgs sender)
         {
             System.Diagnostics.Debug.WriteLine("Browser_NavigationFailed.");
-            MessageBox.Show("Sorry, we couldn't connect to the Internet. Please try again later.");
-            this.hide();
+            if (this.isOpen())
+            {
+                MessageBox.Show("Sorry, we couldn't connect to the Internet. Please try again later.");
+                this.hide();
+            }
         }
 
         #region Show and Hide

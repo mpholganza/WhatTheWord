@@ -6,19 +6,20 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using WhatTheWord.Resources;
 
 #if DEBUG
 using MockIAPLib;
+#else
+using Windows.ApplicationModel.Store;
+#endif
+
+using WhatTheWord.Resources;
 using System.Xml.Linq;
 using Store = MockIAPLib;
 using System.Net;
 using WhatTheWord.Model;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-#else
-using Windows.ApplicationModel.Store;
-#endif
 
 namespace WhatTheWord
 {
