@@ -117,7 +117,7 @@ namespace WhatTheWord.Popups
             WhatTheWord.Controls.SoundEffects.PlayClick();
 
             byte[] deviceID = (byte[])Microsoft.Phone.Info.DeviceExtendedProperties.GetValue("DeviceUniqueId");
-            string deviceIDAsString = Convert.ToBase64String(deviceID);
+			string deviceIDAsString = BitConverter.ToString(deviceID);
 
             var nameHelper = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
             var version = nameHelper.Version;

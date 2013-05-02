@@ -104,7 +104,7 @@
 
             <StackPanel x:Name="ContentStackPanel" Style="{StaticResource BoostsContentPanel}">
 
-                <Border Style="{StaticResource BoostBorder}">
+                <Border x:Name="RevealALetterRow" Style="{StaticResource BoostBorder}" Tap="RevealALetterRow_Tap">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -128,7 +128,7 @@
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource BoostBorder}">
+                <Border x:Name="RemoveALetterRow" Style="{StaticResource BoostBorder}" Tap="RemoveALetterRow_Tap">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -152,7 +152,7 @@
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource BoostBorder}">
+                <!--<Border Style="{StaticResource BoostBorder}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -174,7 +174,7 @@
                             </StackPanel>
                         </Button>
                     </Grid>
-                </Border>
+                </Border>-->
                 
             </StackPanel>
             

@@ -76,7 +76,7 @@ namespace WhatTheWord.Popups
         {
             RevealALetterButton_Text.Text = App.Current.ConfigData.boostRevealLetterCost.ToString();
             RemoveALetterButton_Text.Text = App.Current.ConfigData.boostRemoveLettersCost.ToString();
-            ShuffleButton_Text.Text = App.Current.ConfigData.boostShuffleCost.ToString();
+			//ShuffleButton_Text.Text = App.Current.ConfigData.boostShuffleCost.ToString();
         }
 
         #region Show and Hide
@@ -145,62 +145,82 @@ namespace WhatTheWord.Popups
             }
         }
 
+		private void RevealALetter()
+		{
+			int cost = int.Parse(RevealALetterButton_Text.Text);
+
+			if (cost > App.Current.StateData.Coins)
+			{
+				openCoinsPopup();
+			}
+			else
+			{
+				App.Current.StateData.Coins -= cost;
+				App.Current.StateData.RevealLetter();
+				_mainPage.DisplayGame();
+				WhatTheWord.Controls.SoundEffects.PlayBuy();
+			}
+
+			this.hide();
+		}
+
         private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            int cost = int.Parse(RevealALetterButton_Text.Text);
-
-            if (cost > App.Current.StateData.Coins)
-            {
-                openCoinsPopup();
-            }
-            else
-            {
-                App.Current.StateData.Coins -= cost;
-                App.Current.StateData.RevealLetter();
-                _mainPage.DisplayGame();
-                WhatTheWord.Controls.SoundEffects.PlayBuy();
-            }
-            
-            this.hide();
+			RevealALetter();
         }
+
+		private void RemoveALetter()
+		{
+			int cost = int.Parse(RemoveALetterButton_Text.Text);
+
+			if (cost > App.Current.StateData.Coins)
+			{
+				openCoinsPopup();
+			}
+			else
+			{
+				App.Current.StateData.Coins -= cost;
+				App.Current.StateData.RemoveLetter();
+				_mainPage.DisplayGame();
+				WhatTheWord.Controls.SoundEffects.PlayBuy();
+			}
+
+			this.hide();
+		}
 
         private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            int cost = int.Parse(RemoveALetterButton_Text.Text);
-
-            if (cost > App.Current.StateData.Coins)
-            {
-                openCoinsPopup();
-            }
-            else
-            {
-                App.Current.StateData.Coins -= cost;
-                App.Current.StateData.RemoveLetter();
-                _mainPage.DisplayGame();
-                WhatTheWord.Controls.SoundEffects.PlayBuy();
-            }
-
-            this.hide();
+			RemoveALetter();
         }
 
-        private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            int cost = int.Parse(ShuffleButton_Text.Text);
+		//private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		//{
+		//	int cost = int.Parse(ShuffleButton_Text.Text);
 
-            if (cost > App.Current.StateData.Coins)
-            {
-                openCoinsPopup();
-            }
-            else
-            {
-                App.Current.StateData.Coins -= cost;
-                App.Current.StateData.JumblePuzzleCharacters();
-                _mainPage.DisplayGame();
-                WhatTheWord.Controls.SoundEffects.PlayBuy();
-            }
+		//	if (cost > App.Current.StateData.Coins)
+		//	{
+		//		openCoinsPopup();
+		//	}
+		//	else
+		//	{
+		//		App.Current.StateData.Coins -= cost;
+		//		App.Current.StateData.JumblePuzzleCharacters();
+		//		_mainPage.DisplayGame();
+		//		WhatTheWord.Controls.SoundEffects.PlayBuy();
+		//	}
 
-            this.hide();
-        }
+		//	this.hide();
+		//}
+
+		private void RevealALetterRow_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			RevealALetter();
+		}
+
+		private void RemoveALetterRow_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			RemoveALetter();
+		}
     }
 
 }
