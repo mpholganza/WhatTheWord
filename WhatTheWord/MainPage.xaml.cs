@@ -380,6 +380,7 @@ namespace WhatTheWord
             SoundEffects.PlayWin();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
+			Overlay.Visibility = Visibility.Visible; // Disallow user input
 			PuzzleAttemptStatus.Text = "CORRECT!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGCorrect@1280_768.png", UriKind.Relative)));
@@ -393,6 +394,7 @@ namespace WhatTheWord
 		{
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
+			Overlay.Visibility = Visibility.Collapsed; // Re-allow user input
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			App.Current.StateData.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
@@ -405,6 +407,7 @@ namespace WhatTheWord
             SoundEffects.PlayWrong();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
+			Overlay.Visibility = Visibility.Visible;
 			PuzzleAttemptStatus.Text = "TRY AGAIN!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGTryAgain@1280_768.png", UriKind.Relative)));
@@ -417,6 +420,7 @@ namespace WhatTheWord
 		private void puzzleStatusTimer_Incorrect(object sender, EventArgs e)
 		{
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
+			Overlay.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			puzzleStatusTimer.Stop();

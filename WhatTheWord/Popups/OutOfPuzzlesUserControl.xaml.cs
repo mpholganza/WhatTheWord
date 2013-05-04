@@ -101,7 +101,7 @@ namespace WhatTheWord.Popups
 		{
 			App.Current.StateData.CurrentLevel = 1;
 			App.Current.StateData.Coins = 200;
-
+			App.Current.StateData.PuzzleInitialized = false;
 			App.Current.StateData.Save();
 		}
     }

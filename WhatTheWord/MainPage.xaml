@@ -238,6 +238,10 @@
 
             Before shipping remove this XAML and the image itself.-->
 		<!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="8" IsHitTestVisible="False" Grid.ColumnSpan="5" />-->
+
+		<!--This overlay can go over the entire screen to prevent user input-->
+		<Grid x:Name="Overlay" Grid.Row="0" Grid.RowSpan="4" 
+              Style="{StaticResource Invisible_Overlay}" Visibility="Collapsed" />
 	</Grid>
 
 </phone:PhoneApplicationPage>
