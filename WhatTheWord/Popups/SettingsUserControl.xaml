@@ -60,7 +60,23 @@
             <Setter Property="Margin" Value="0,0,20,0" />
         </Style>
 
-    </UserControl.Resources>
+		<Style x:Key="SettingButton_Icon" TargetType="Image">
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="Height" Value="20" />
+			<Setter Property="Margin" Value="0,0,3,0" />
+			<Setter Property="Source" Value="/Assets/coinIcon@1280_768.png" />
+		</Style>
+
+		<Style x:Key="SettingButton_Text" TargetType="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="HorizontalAlignment" Value="Center" />
+			<Setter Property="FontWeight" Value="Bold" />
+			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
+			<Setter Property="FontSize" Value="20" />
+		</Style>
+
+	</UserControl.Resources>
     
     <Grid x:Name="HostPanel" Margin="0">
         
@@ -162,6 +178,25 @@
                     </Grid>
                 </Border>
 
+                <Border Style="{StaticResource SettingBorder}">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Grid.ColumnSpan="3"
+                               Style="{StaticResource SettingBackgrondImage}"/>
+
+						<Button x:Name="ResetEntireGame" Grid.Column="1" Tap="ResetEntireGame_Tap"
+                                   Style="{StaticResource Popup_ButtonStyle}" Margin="0,9,0,8" Width="267">
+                            <StackPanel Orientation="Horizontal">
+								<TextBlock x:Name="ResetEntireGame_Text" Text="Reset entire game" Style="{StaticResource SettingButton_Text}"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
             </StackPanel>
             
         </Grid>

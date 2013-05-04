@@ -29,6 +29,7 @@ namespace WhatTheWord
 		public NewPuzzlesUserControl newPuzzlesUserControl;
 		public OutOfPuzzlesUserControl outOfPuzzlesUserControl;
 		public ZoomedPictureUserControl zoomedPictureUserControl;
+		public ResetGameConfirmationUserControl resetGameConfirmationUserControl;
 
         private DispatcherTimer boostBounceTimer;
 
@@ -47,6 +48,7 @@ namespace WhatTheWord
 			InitializeNewPuzzlesPopup();
 			InitializeOutOfPuzzlesPopup();
 			InitializeZoomedPicturePopup();
+			InitializeResetGameConfirmationPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
@@ -145,6 +147,12 @@ namespace WhatTheWord
 		private void InitializeZoomedPicturePopup()
 		{
 			zoomedPictureUserControl = new ZoomedPictureUserControl(new Popup(), this,
+				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+		}
+
+		private void InitializeResetGameConfirmationPopup()
+		{
+			resetGameConfirmationUserControl = new ResetGameConfirmationUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
 		}
 

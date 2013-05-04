@@ -122,6 +122,9 @@
     <Compile Include="Popups\AboutUserControl.xaml.cs">
       <DependentUpon>AboutUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\ResetGameConfirmationControl.xaml.cs">
+      <DependentUpon>ResetGameConfirmationControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\ZoomedPictureUserControl.xaml.cs">
       <DependentUpon>ZoomedPictureUserControl.xaml</DependentUpon>
     </Compile>
@@ -177,6 +180,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Popups\AboutUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\ResetGameConfirmationControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -763,6 +770,7 @@
     <Content Include="Assets\PuzzlePictures\wrap2.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap3.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap4.jpg" />
+    <Content Include="Assets\resetEntireGameButton%401280_768.png" />
     <Content Include="Assets\settingsButton_p%401280_768.png" />
     <Content Include="Assets\shuffleButton_p%401280_768.png" />
     <Content Include="Assets\Sounds\Bounce05.wav" />

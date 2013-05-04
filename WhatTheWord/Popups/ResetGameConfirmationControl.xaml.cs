@@ -9,16 +9,15 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 using System.Windows.Controls.Primitives;
-using Microsoft.Phone.Tasks;
-using System.Reflection;
-using WhatTheWord.Controls;
 
 namespace WhatTheWord.Popups
 {
-    public partial class SettingsUserControl : UserControl
+    public partial class ResetGameConfirmationUserControl : UserControl
     {
         private Popup _popup;
         private MainPage _mainPage;
+
+        public bool isOpenedFromSettings = false;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -26,7 +25,7 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
-        public SettingsUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
+		public ResetGameConfirmationUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
 
@@ -70,6 +69,10 @@ namespace WhatTheWord.Popups
 
         public void hide()
         {
+            if (isOpenedFromSettings)
+            {
+                this.isOpenedFromSettings = false;
+            }
             _popup.IsOpen = false;
         }
 
@@ -93,56 +96,25 @@ namespace WhatTheWord.Popups
         }
         #endregion
 
-        private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WhatTheWord.Controls.SoundEffects.PlayClick();
-            this.hide();
-        }
-
-        private void SoundToggleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            SoundEffects.isSoundEnabled = !SoundEffects.isSoundEnabled;
-        }
-
-        private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WhatTheWord.Controls.SoundEffects.PlayClick();
-            _mainPage.aboutUserControl.isOpenedFromSettings = true;
-            _mainPage.aboutUserControl.show();
-            this.hide();
-        }
-
-        private void Feedback_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            WhatTheWord.Controls.SoundEffects.PlayClick();
-
-            byte[] deviceID = (byte[])Microsoft.Phone.Info.DeviceExtendedProperties.GetValue("DeviceUniqueId");
-			string deviceIDAsString = BitConverter.ToString(deviceID);
-
-            var nameHelper = new AssemblyName(Assembly.GetExecutingAssembly().FullName);
-            var version = nameHelper.Version;
-            var full = nameHelper.FullName;
-            var name = nameHelper.Name;
-
-            EmailComposeTask emailComposeTask = new EmailComposeTask();
-
-            emailComposeTask.Subject = "Guess This Word Support";
-            emailComposeTask.Body = "Device ID: " + deviceIDAsString + Environment.NewLine + 
-                "Version: " + version + Environment.NewLine + 
-                Environment.NewLine + 
-                "(Please enter your issue here)" +
-                Environment.NewLine;
-            emailComposeTask.To = "support@kooapps.com";
-
-            emailComposeTask.Show();
-        }
-
-		private void ResetEntireGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		private void NoResetGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
-			_mainPage.resetGameConfirmationUserControl.isOpenedFromSettings = true;
-			_mainPage.resetGameConfirmationUserControl.show();
+			this.isOpenedFromSettings = true;
+			_mainPage.settingsUserControl.show();
 			this.hide();
+		}
+
+		private void YesResetGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			WhatTheWord.Controls.SoundEffects.PlayClick();
+			App.Current.StateData.CurrentLevel = 1;
+			App.Current.StateData.Coins = 200;
+			App.Current.StateData.PuzzleInitialized = false;
+			App.Current.StateData.Save();
+
+			this.hide();
+			_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
+			_mainPage.NavigationService.RemoveBackEntry();
 		}
     }
 

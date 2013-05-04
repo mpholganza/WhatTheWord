@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Threading.Tasks;
 using WhatTheWord.Model;
+using System.Threading;
 
 namespace WhatTheWord
 {
@@ -22,6 +23,7 @@ namespace WhatTheWord
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			await LoadGame();
+			Thread.Sleep(800);
 			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();
 		}
