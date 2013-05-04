@@ -23,7 +23,7 @@ namespace WhatTheWord.Popups
         private const string AppId = "456585341077776"; // guesstheword
         private const string AppSecret = "1ceee952d1dcc1af00d0e8d4f1655b5d"; // guesstheword
 
-        private const string DefaultMessage = "Help me guess this %d-letter word!";
+        private const string DefaultMessage = "Help me guess this {0}-letter word!";
 
         /// <summary>
         /// Extended permissions is a comma separated list of permissions to ask the user.
