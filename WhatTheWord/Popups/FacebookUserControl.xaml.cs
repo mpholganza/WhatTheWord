@@ -13,6 +13,7 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Controls.Primitives;
+using WhatTheWord.Model;
 
 namespace WhatTheWord.Popups
 {
@@ -21,6 +22,8 @@ namespace WhatTheWord.Popups
         //private const string AppId = "561883217157240"; // cookpanion
         private const string AppId = "456585341077776"; // guesstheword
         private const string AppSecret = "1ceee952d1dcc1af00d0e8d4f1655b5d"; // guesstheword
+
+        private const string DefaultMessage = "Help me guess this %d-letter word!";
 
         /// <summary>
         /// Extended permissions is a comma separated list of permissions to ask the user.
@@ -117,6 +120,16 @@ namespace WhatTheWord.Popups
             }
         }
 
+        private void Browser_NavigationFailed(object o, EventArgs sender)
+        {
+            System.Diagnostics.Debug.WriteLine("Browser_NavigationFailed.");
+            if (this.isOpen())
+            {
+                MessageBox.Show("Sorry, we couldn't connect to the Internet. Please try again later.");
+                this.hide();
+            }
+        }
+
         #region Show and Hide
 
         public void show()
@@ -196,6 +209,9 @@ namespace WhatTheWord.Popups
             }
             takeScreenshot();
 
+            Puzzle currentPuzzle = _mainPage.CurrentPuzzle;
+
+            Message.Text = String.Format(DefaultMessage, currentPuzzle.Word.Length);
             Message.Focus();
             Message.SelectionStart = Message.Text.Length;
         }
@@ -375,7 +391,6 @@ namespace WhatTheWord.Popups
             //new Animation.SizeAnimation(ui.ActualWidth, ui.ActualHeight).Apply(ui);
         }
         #endregion Animation
-
     }
 
 }

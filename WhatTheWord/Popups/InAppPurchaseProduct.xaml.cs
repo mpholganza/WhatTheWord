@@ -10,12 +10,13 @@ using Microsoft.Phone.Shell;
 
 #if DEBUG
 using MockIAPLib;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
-using WhatTheWord.Model;
 #else
 using Windows.ApplicationModel.Store;
 #endif
+
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using WhatTheWord.Model;
 
 namespace WhatTheWord.Popups
 {
@@ -74,7 +75,7 @@ namespace WhatTheWord.Popups
                 }
             }
 
-            if (coinsToAdd > 0)
+            if (coinsToAdd != 0)
             {
                 App.Current.StateData.Coins += coinsToAdd;
                 _mainPage.DisplayGame();
