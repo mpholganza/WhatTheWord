@@ -35,6 +35,7 @@ namespace WhatTheWord.Model
 		public String PuzzleCharacters { get; set; }
 		public int[] GuessPanelState { get; set; }
 		public int[] CharacterPanelState { get; set; }
+		public bool SoundEnabled { get; set; }
 		#endregion
 
 		public GameState()
@@ -46,6 +47,7 @@ namespace WhatTheWord.Model
 			this.GuessPanelState = null;
 			this.CharacterPanelState = null;
 			this.FacebookToken = "";
+			this.SoundEnabled = true;
 		}
 
 		public async Task Load()
@@ -106,6 +108,7 @@ namespace WhatTheWord.Model
 			string puzzlecharacters = string.Empty;
 			bool puzzleinitialized = false;
 			string facebooktoken = string.Empty;
+			bool soundenabled = false;
 
 			string[] lines = gameData.Split(new string[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			if (lines.Length < 1) { throw new ApplicationException("GameState data is empty."); }
@@ -162,6 +165,9 @@ namespace WhatTheWord.Model
 						facebooktoken = value;
 						success = true;
 						break;
+					case "soundenabled":
+						success = bool.TryParse(value, out soundenabled);
+						break;
 					default:
 						throw new ApplicationException("Unknown GameState property: " + key);
 				}
@@ -180,6 +186,7 @@ namespace WhatTheWord.Model
 			this.PuzzleCharacters = puzzlecharacters;
 			this.PuzzleInitialized = puzzleinitialized;
 			this.FacebookToken = facebooktoken;
+			this.SoundEnabled = soundenabled;
 		}
 
 		#region Gameplay logic
@@ -411,7 +418,8 @@ namespace WhatTheWord.Model
 				"puzzleword=" + this.PuzzleWord + Environment.NewLine +
 				"puzzlecharacters=" + this.PuzzleCharacters + Environment.NewLine +
 				"puzzleinitialized=" + this.PuzzleInitialized.ToString() + Environment.NewLine +
-				"facebooktoken=" + this.FacebookToken;
+				"facebooktoken=" + this.FacebookToken + Environment.NewLine +
+				"soundenabled=" + this.SoundEnabled.ToString();
 
 			return gamePlayData;
 		}

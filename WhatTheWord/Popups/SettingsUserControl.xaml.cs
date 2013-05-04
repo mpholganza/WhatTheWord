@@ -12,6 +12,7 @@ using System.Windows.Controls.Primitives;
 using Microsoft.Phone.Tasks;
 using System.Reflection;
 using WhatTheWord.Controls;
+using System.Windows.Media.Imaging;
 
 namespace WhatTheWord.Popups
 {
@@ -19,6 +20,9 @@ namespace WhatTheWord.Popups
     {
         private Popup _popup;
         private MainPage _mainPage;
+
+		private BitmapImage _settingsToggleButtonOn = new BitmapImage(new Uri("/Assets/toggleButtonOn@1280_768.png", UriKind.Relative));
+		private BitmapImage _settingsToggleButtonOff = new BitmapImage(new Uri("/Assets/toggleButtonOff@1280_768.png", UriKind.Relative));
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -102,6 +106,9 @@ namespace WhatTheWord.Popups
         private void SoundToggleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             SoundEffects.isSoundEnabled = !SoundEffects.isSoundEnabled;
+			App.Current.StateData.SoundEnabled = SoundEffects.isSoundEnabled;
+			App.Current.StateData.Save();
+			SoundToggleButton.Source = SoundEffects.isSoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
         }
 
         private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -16,7 +16,7 @@ dataType=config;;;dataValue=key=rateMeURL;value=http://;comments=URL for rate us
 dataType=config;;;dataValue=key=picturesFilenamePath;value=https://s3.amazonaws.com/usa-guessthisword-pictures/;comments=all pictures are in this path;;;;
 dataType=config;;;dataValue=key=downloadPuzzleBuffer;value=10;comments=# puzzles before unblocking user in download puzzle scene;;;;
 dataType=enablefeature;;;dataValue=feature=rateMePopup;enable=1;comment=popup to ask user to rate us on app store;;;;
-dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c1;price=0.99;coins=300;order=5;name=300 Coins;discount=new column;;;;
+dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c1;price=0.99;coins=300;order=5;name=300 Coins;discount=;;;;
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c2;price=1.99;coins=700;order=4;name=600 Coins;discount=+100 FREE;;;;
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c5;price=4.99;coins=2100;order=3;name=1500 Coins;discount=+600 FREE;;;;
 dataType=iap;;;dataValue=bundleId=com.kooapps.guessthisword.c10;price=9.99;coins=5000;order=2;name=3000 Coins;discount=+2000 FREE;;;;

@@ -135,7 +135,7 @@
                         <TextBlock Grid.Column="1" Text="Sound" 
                                    Style="{StaticResource SettingName}"/>
 
-                        <Image x:Name="SoundToggleButton" Grid.Column="2" Source="/Assets/toggleButtonOn@1280_768.png" Tap="SoundToggleButton_Tap"
+                        <Image x:Name="SoundToggleButton" Grid.Column="2" Source="/Assets/toggleButtonOn@1280_768.png"
                                Style="{StaticResource SettingToggleSwitch}"/>
                     </Grid>
                 </Border>
