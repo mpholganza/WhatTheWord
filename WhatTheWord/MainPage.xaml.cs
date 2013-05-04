@@ -80,21 +80,25 @@ namespace WhatTheWord
 
 			Picture1.Tap += (sender, e) =>
 			{
+				WhatTheWord.Controls.SoundEffects.PlayClick();
 				zoomedPictureUserControl.show(new Uri(picture1Uri, UriKind.Relative));
 			};
 
 			Picture2.Tap += (sender, e) =>
 			{
+				WhatTheWord.Controls.SoundEffects.PlayClick();
 				zoomedPictureUserControl.show(new Uri(picture2Uri, UriKind.Relative));
 			};
 
 			Picture3.Tap += (sender, e) =>
 			{
+				WhatTheWord.Controls.SoundEffects.PlayClick();
 				zoomedPictureUserControl.show(new Uri(picture3Uri, UriKind.Relative));
 			};
 
 			Picture4.Tap += (sender, e) =>
 			{
+				WhatTheWord.Controls.SoundEffects.PlayClick();
 				zoomedPictureUserControl.show(new Uri(picture4Uri, UriKind.Relative));
 			};
 
@@ -241,6 +245,7 @@ namespace WhatTheWord
 				var x = i;
 				letterImage.Tap += (sender, e) =>
 				{
+					SoundEffects.PlayTapLetter();
 					GuessPanelLetterPressed(x);
 				};
 
