@@ -16,6 +16,7 @@ using System.Net;
 using WhatTheWord.Model;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Threading;
 #else
 using Windows.ApplicationModel.Store;
 #endif
@@ -74,17 +75,10 @@ namespace WhatTheWord
 				// and consume battery power when the user is not using the phone.
 				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
 			}
-            SetupMockIAP();
-			LoadGame();
+			SetupMockIAP();
 		}
 
-		private async Task LoadGame()
-		{
-			ConfigData = new GameConfig();
-			await ConfigData.Load();
-			StateData = new GameState();
-			await StateData.Load();
-		}
+
 
 		private void LoadGameConfigFromWeb()
 		{
@@ -130,15 +124,17 @@ namespace WhatTheWord
 
 		private void UpdateFiles(GameConfig tempGameConfig)
 		{
-			List<string> filesToDownload = new List<string>();
+			Dictionary<string, string> filesToDownload = new Dictionary<string, string>();
 			foreach (KeyValuePair<int, Puzzle> puzzleKvp in tempGameConfig.Puzzles) {
 				Puzzle puzzle = puzzleKvp.Value;
-				filesToDownload.Add(puzzle.Picture1.URI);
-				filesToDownload.Add(puzzle.Picture2.URI);
-				filesToDownload.Add(puzzle.Picture3.URI);
-				filesToDownload.Add(puzzle.Picture4.URI);
+				filesToDownload.Add(puzzle.Picture1.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture1.URI);
+				filesToDownload.Add(puzzle.Picture2.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture2.URI);
+				filesToDownload.Add(puzzle.Picture3.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture3.URI);
+				filesToDownload.Add(puzzle.Picture4.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture4.URI);
 			}
 
+			DownloadManager dm = DownloadManager.GetInstance();
+			//dm.DownloadAndUnzipJpgFiles(filesToDownload, "Assets/PuzzlePictures");
 			//DownloadManager.DownloadMissingFiles(filesToDownload, ConfigData.picturesFilenamePath);
 		}
 
@@ -164,14 +160,14 @@ namespace WhatTheWord
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-			LoadGameConfigFromWeb();
+			//LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is activated (brought to foreground)
 		// This code will not execute when the application is first launched
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
-			LoadGameConfigFromWeb();
+			//LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is deactivated (sent to background)

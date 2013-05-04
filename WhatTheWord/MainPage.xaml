@@ -176,28 +176,28 @@
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/sandBoxBG@1280_768.png"/>
 			</Grid.Background>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="26"/>
+				<ColumnDefinition Width="13.75"/>
 				<ColumnDefinition/>
-				<ColumnDefinition Width="26"/>
+				<ColumnDefinition Width="13.75"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="15"/>
+				<RowDefinition Height="18.125"/>
 				<RowDefinition/>
-				<RowDefinition Height="15.625"/>
+				<RowDefinition Height="14.375"/>
 				<RowDefinition/>
-				<RowDefinition Height="23.75"/>
+				<RowDefinition Height="21.875"/>
 			</Grid.RowDefinitions>
 			<StackPanel x:Name="LetterPickerPanel1" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,5.625,0"></Setter>
+						<Setter Property="Margin" Value="0,0,10.125,0"></Setter>
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>
 			<StackPanel x:Name="LetterPickerPanel2" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
 				<StackPanel.Resources>
 					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,5.625,0"></Setter>
+						<Setter Property="Margin" Value="0,0,10.125,0"></Setter>
 					</Style>
 				</StackPanel.Resources>
 			</StackPanel>

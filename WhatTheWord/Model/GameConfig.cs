@@ -37,7 +37,7 @@ namespace WhatTheWord.Model
 		public async Task Load()
 		{
 			// Load config info from previously saved file
-			//if (await LoadGameConfigFromFile()) { return; }
+			if (await LoadGameConfigFromFile()) { return; }
 
 			// Built-in config file
 			if (!LoadGameConfigFromDefaultFile())
@@ -55,17 +55,17 @@ namespace WhatTheWord.Model
 				try
 				{
 					Deserialize(gameData);
+					return true;
 				}
 				catch (ApplicationException)
 				{
 					// deserialized incorrectly. fail quietly
 					// TODO: report to server of failed deserialization
 					Console.WriteLine("Failed deserialization:\n" + gameData);
-					return false;
 				}
 			}
 
-			return true;
+			return false;
 		}
 
 		private bool LoadGameConfigFromDefaultFile()
@@ -129,11 +129,14 @@ namespace WhatTheWord.Model
 						break;
 					case "puzzles":
 						Puzzle puzzle = parsePuzzleString(dataValue);
-						this.Puzzles.Add(puzzle.Id, puzzle);
+						this.Puzzles.Add(puzzle.Order, puzzle);
 						break;
 					case "iap":
 						InAppPurchase purchase = parseInAppPurchase(dataValue);
 						this.Purchases.Add(purchase.BundleId, purchase);
+						break;
+					case "enablefeature":
+						//TODO
 						break;
 					default:
 						throw new ApplicationException("Invalid line in Gamedata file:" + lines[i]);
@@ -231,6 +234,10 @@ namespace WhatTheWord.Model
 				case "picturesFilenamePath":
 					picturesFilenamePath = value;
 					this.picturesFilenamePath = picturesFilenamePath;
+					success = true;
+					break;
+				case "downloadPuzzleBuffer":
+					//TODO
 					success = true;
 					break;
 				default:

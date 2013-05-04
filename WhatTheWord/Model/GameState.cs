@@ -224,7 +224,22 @@ namespace WhatTheWord.Model
 			// replacing non-removed characters. this can make the puzzle unsolvable
 			// should only jumble characters in the characterpanel
 			this.ClearGuessPanel();
+
 			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
+		}
+
+		public void JumbleCharacterPanel()
+		{
+			Random random = new Random((int)DateTime.Now.Ticks);
+
+			List<int> jumbledCharacterPanel = new List<int>();
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				int insertIndex = Convert.ToInt32(Math.Floor(random.NextDouble() * i));
+				jumbledCharacterPanel.Insert(insertIndex, CharacterPanelState[i]);
+			}
+
+			CharacterPanelState = jumbledCharacterPanel.ToArray();
 		}
 
 		internal bool CheckAnswer()
