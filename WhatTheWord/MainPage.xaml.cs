@@ -102,8 +102,35 @@ namespace WhatTheWord
 				zoomedPictureUserControl.show(new Uri(picture4Uri, UriKind.Relative));
 			};
 
+			if (App.Current.StateData.CurrentLevel == 1)
+			{
+				InitializeTutorialPuzzle();
+			}
+
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
+		}
+
+		private void InitializeTutorialPuzzle()
+		{
+			HeaderPanel.Visibility = Visibility.Collapsed;
+			TutorialOverlay.Visibility = Visibility.Visible;
+			ShuffleButton.Visibility = Visibility.Collapsed;
+			ClearButton.Visibility = Visibility.Collapsed;
+			App.Current.StateData.PuzzleWord = CurrentPuzzle.Word;
+			App.Current.StateData.GuessPanelState = new int[App.Current.StateData.PuzzleWord.Length];
+			for (int i = 0; i < App.Current.StateData.PuzzleWord.Length; i++)
+			{
+				App.Current.StateData.GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+			}
+
+			App.Current.StateData.PuzzleCharacters = "PYLPALYAPYLP";
+			App.Current.StateData.CharacterPanelState = new int[App.Current.StateData.PuzzleCharacters.Length];
+			for (int i = 0; i < App.Current.StateData.PuzzleCharacters.Length; i++)
+			{
+				App.Current.StateData.CharacterPanelState[i] = i;
+			}
+			App.Current.StateData.PuzzleInitialized = true;
 		}
 
 		private void InitializeFacebookPopup()
@@ -381,6 +408,7 @@ namespace WhatTheWord
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			Overlay.Visibility = Visibility.Visible; // Disallow user input
+			TutorialOverlay.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Text = "CORRECT!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGCorrect@1280_768.png", UriKind.Relative)));

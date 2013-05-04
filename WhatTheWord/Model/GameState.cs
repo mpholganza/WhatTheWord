@@ -389,6 +389,14 @@ namespace WhatTheWord.Model
 		}
 		#endregion
 
+		public void ResetGame()
+		{
+			App.Current.StateData.CurrentLevel = 1;
+			App.Current.StateData.Coins = 200;
+			App.Current.StateData.PuzzleInitialized = false;
+			App.Current.StateData.Save();
+		}
+
 		public void Save()
 		{
 			FileAccess.WriteDataToFileAsync(this.ToString(), GameState.GAMESTATEFILE);

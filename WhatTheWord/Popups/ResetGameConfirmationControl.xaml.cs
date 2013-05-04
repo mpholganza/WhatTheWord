@@ -107,10 +107,7 @@ namespace WhatTheWord.Popups
 		private void YesResetGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
-			App.Current.StateData.CurrentLevel = 1;
-			App.Current.StateData.Coins = 200;
-			App.Current.StateData.PuzzleInitialized = false;
-			App.Current.StateData.Save();
+			App.Current.StateData.ResetGame();
 
 			this.hide();
 			_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
