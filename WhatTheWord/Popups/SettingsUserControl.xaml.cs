@@ -106,6 +106,7 @@ namespace WhatTheWord.Popups
 
         private void SoundToggleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
             App.Current.StateData.SoundEnabled = !App.Current.StateData.SoundEnabled;
 			App.Current.StateData.Save();
             SoundToggleButton.Source = App.Current.StateData.SoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
