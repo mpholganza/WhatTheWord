@@ -13,15 +13,12 @@ namespace WhatTheWord.Controls
     public static class SoundEffects
     {
         private static bool initialized = false;
-        public static bool isSoundEnabled = true;
 
         private enum SFX { Bounce, Buy, Click, PictureZoom, TapLetter, Win, Wrong };
         private static Dictionary<SFX, SoundEffect> soundEffects;
 
         public static void Initialize()
         {
-            // TODO: (1) need a isSoundEnabled config in App.Config, and (2) expose the setting via Settings popup
-
             if (SoundEffects.initialized)
                 return;
 
@@ -41,7 +38,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayBounce()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.Bounce].Play();
@@ -50,7 +47,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayBuy()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.Buy].Play();
@@ -59,7 +56,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayClick()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.Click].Play();
@@ -68,7 +65,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayPictureZoom()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.PictureZoom].Play();
@@ -77,7 +74,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayTapLetter()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.TapLetter].Play();
@@ -86,7 +83,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayWin()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.Win].Play();
@@ -95,7 +92,7 @@ namespace WhatTheWord.Controls
 
         public static void PlayWrong()
         {
-            if (SoundEffects.initialized && isSoundEnabled)
+            if (SoundEffects.initialized && App.Current.StateData.SoundEnabled)
             {
                 FrameworkDispatcher.Update();
                 soundEffects[SFX.Wrong].Play();

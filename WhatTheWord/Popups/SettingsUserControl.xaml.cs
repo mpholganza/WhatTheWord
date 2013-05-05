@@ -60,6 +60,7 @@ namespace WhatTheWord.Popups
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
 
+            SoundToggleButton.Source = App.Current.StateData.SoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
         }
 
         #region Show and Hide
@@ -105,10 +106,9 @@ namespace WhatTheWord.Popups
 
         private void SoundToggleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            SoundEffects.isSoundEnabled = !SoundEffects.isSoundEnabled;
-			App.Current.StateData.SoundEnabled = SoundEffects.isSoundEnabled;
+            App.Current.StateData.SoundEnabled = !App.Current.StateData.SoundEnabled;
 			App.Current.StateData.Save();
-			SoundToggleButton.Source = SoundEffects.isSoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
+            SoundToggleButton.Source = App.Current.StateData.SoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
         }
 
         private void About_Tap(object sender, System.Windows.Input.GestureEventArgs e)
