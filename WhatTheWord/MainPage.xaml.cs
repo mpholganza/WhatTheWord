@@ -444,6 +444,7 @@ namespace WhatTheWord
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			Overlay.Visibility = Visibility.Visible;
+			TutorialOverlay.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Text = "TRY AGAIN!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGTryAgain@1280_768.png", UriKind.Relative)));
@@ -457,6 +458,12 @@ namespace WhatTheWord
 		{
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
 			Overlay.Visibility = Visibility.Collapsed;
+
+			if (App.Current.StateData.CurrentLevel == 1)
+			{
+				TutorialOverlay.Visibility = Visibility.Visible;
+			}
+
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			puzzleStatusTimer.Stop();
