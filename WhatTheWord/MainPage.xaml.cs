@@ -115,8 +115,16 @@ namespace WhatTheWord
 		{
 			HeaderPanel.Visibility = Visibility.Collapsed;
 			TutorialOverlay.Visibility = Visibility.Visible;
+			GuessPanelTutorial1.Visibility = Visibility.Visible;
+			GuessPanelTutorial2.Visibility = Visibility.Visible;
 			ShuffleButton.Visibility = Visibility.Collapsed;
 			ClearButton.Visibility = Visibility.Collapsed;
+			FacebookButton.Visibility = Visibility.Collapsed;
+			BoostButton.Visibility = Visibility.Collapsed;
+
+			LetterPickerPanel1.HorizontalAlignment = HorizontalAlignment.Center;
+			LetterPickerPanel2.HorizontalAlignment = HorizontalAlignment.Center;
+
 			App.Current.StateData.PuzzleWord = CurrentPuzzle.Word;
 			App.Current.StateData.GuessPanelState = new int[App.Current.StateData.PuzzleWord.Length];
 			for (int i = 0; i < App.Current.StateData.PuzzleWord.Length; i++)

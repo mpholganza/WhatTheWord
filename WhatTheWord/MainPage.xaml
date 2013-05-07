@@ -154,14 +154,18 @@
                                   Width="36" Height="36" 
                                   Style="{StaticResource ImageButtonStyle}"
                                   x:Name="ClearButton" />
-            <StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
-				<StackPanel.Resources>
-					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,8,0"></Setter>
-					</Style>
-				</StackPanel.Resources>
+			<StackPanel x:Name="GuessPanelContainer" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
+				<TextBlock x:Name="GuessPanelTutorial1" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">Let's&#160;</TextBlock>
+				<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
+					<StackPanel.Resources>
+						<Style TargetType="Image">
+							<Setter Property="Margin" Value="0,0,8,0"></Setter>
+						</Style>
+					</StackPanel.Resources>
+				</StackPanel>
+				<TextBlock x:Name="GuessPanelTutorial2" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">!</TextBlock>
 			</StackPanel>
-            <controls:ImageButton Grid.Column="2"
+			<controls:ImageButton Grid.Column="2"
                                   ImageSource="/Assets/shuffleButton@1280_768.png"
                                   ImageDisabledSource="/Assets/shuffleButton@1280_768.png"
                                   ImagePressedSource="/Assets/shuffleButton_p@1280_768.png"
@@ -255,7 +259,7 @@
 				<RowDefinition Height="30"/>
 			</Grid.RowDefinitions>
 			<StackPanel>
-				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Height="34" Margin="0,8,0,0" Width="228"></TextBlock>
+				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Height="34" Margin="0,4,0,0" Width="228"></TextBlock>
 				<TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="290"></TextBlock>
 				<TextBlock Text="Can you tell what's the word?" Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="340"></TextBlock>
 			</StackPanel>
