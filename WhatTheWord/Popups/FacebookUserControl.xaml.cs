@@ -66,6 +66,10 @@ namespace WhatTheWord.Popups
 
             Overlay.Width = this.HostWindowWidth;
             Overlay.Height = this.HostWindowHeight;
+			Overlay.Tap += (sender, e) =>
+			{
+				this.hide();
+			};
 
             this.PopupWidth = this.HostWindowWidth * 0.9;
             this.PopupHeight = this.HostWindowHeight * 0.8;
