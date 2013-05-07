@@ -267,6 +267,8 @@ namespace WhatTheWord.Model
 			string filename4 = string.Empty;
 			string credits4 = string.Empty;
 
+			string copyChar = "\u00a9";
+
 			for (int i = 0; i < kvps.Length; i++)
 			{
 				string key = string.Empty;
@@ -294,7 +296,7 @@ namespace WhatTheWord.Model
 						success = true;
 						break;
 					case "credits1":
-						credits1 = value;
+						credits1 = copyChar + " " + value;
 						success = true;
 						break;
 					case "filename2":
@@ -302,7 +304,7 @@ namespace WhatTheWord.Model
 						success = true;
 						break;
 					case "credits2":
-						credits2 = value;
+						credits2 = copyChar + " " + value;
 						success = true;
 						break;
 					case "filename3":
@@ -310,7 +312,7 @@ namespace WhatTheWord.Model
 						success = true;
 						break;
 					case "credits3":
-						credits3 = value;
+						credits3 = copyChar + " " + value;
 						success = true;
 						break;
 					case "filename4":
@@ -318,7 +320,7 @@ namespace WhatTheWord.Model
 						success = true;
 						break;
 					case "credits4":
-						credits4 = value;
+						credits4 = copyChar + " " + value;
 						success = true;
 						break;
 					default:
