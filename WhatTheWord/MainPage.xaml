@@ -111,22 +111,22 @@
 			<Image x:Name="Picture2" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
 			<Image x:Name="Picture3" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
 			<Image x:Name="Picture4" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
-			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-85,85,0,0" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
+			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-80,85,0,0" Width="200" TextAlignment="Center" Foreground="Gray"  Height="29" FontSize="16">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="117,87,-85,90" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
+			<TextBlock Text="{Binding Picture2.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="112,87,-85,90" Width="200" TextAlignment="Center" Foreground="Gray" Height="29" FontSize="16">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-85,85,0,0" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
+			<TextBlock Text="{Binding Picture3.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-80,85,0,0" Width="200" TextAlignment="Center" Foreground="Gray" Height="29" FontSize="16">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>
 				</TextBlock.RenderTransform>
 			</TextBlock>
-			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="117,87,-85,90" Width="200" TextAlignment="Center" Foreground="Black" Height="29">
+			<TextBlock Text="{Binding Picture4.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="3" Grid.Column="3" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="112,87,-85,90" Width="200" TextAlignment="Center" Foreground="Gray" Height="29" FontSize="16">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="90"/>
 				</TextBlock.RenderTransform>
@@ -154,14 +154,18 @@
                                   Width="36" Height="36" 
                                   Style="{StaticResource ImageButtonStyle}"
                                   x:Name="ClearButton" />
-            <StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
-				<StackPanel.Resources>
-					<Style TargetType="Image">
-						<Setter Property="Margin" Value="0,0,8,0"></Setter>
-					</Style>
-				</StackPanel.Resources>
+			<StackPanel x:Name="GuessPanelContainer" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
+				<TextBlock x:Name="GuessPanelTutorial1" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">Let's&#160;</TextBlock>
+				<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
+					<StackPanel.Resources>
+						<Style TargetType="Image">
+							<Setter Property="Margin" Value="0,0,8,0"></Setter>
+						</Style>
+					</StackPanel.Resources>
+				</StackPanel>
+				<TextBlock x:Name="GuessPanelTutorial2" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">!</TextBlock>
 			</StackPanel>
-            <controls:ImageButton Grid.Column="2"
+			<controls:ImageButton Grid.Column="2"
                                   ImageSource="/Assets/shuffleButton@1280_768.png"
                                   ImageDisabledSource="/Assets/shuffleButton@1280_768.png"
                                   ImagePressedSource="/Assets/shuffleButton_p@1280_768.png"
@@ -255,7 +259,7 @@
 				<RowDefinition Height="30"/>
 			</Grid.RowDefinitions>
 			<StackPanel>
-				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Height="34" Margin="0,8,0,0" Width="228"></TextBlock>
+				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Height="34" Margin="0,4,0,0" Width="228"></TextBlock>
 				<TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="290"></TextBlock>
 				<TextBlock Text="Can you tell what's the word?" Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="340"></TextBlock>
 			</StackPanel>

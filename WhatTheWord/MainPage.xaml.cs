@@ -118,8 +118,16 @@ namespace WhatTheWord
 		{
 			HeaderPanel.Visibility = Visibility.Collapsed;
 			TutorialOverlay.Visibility = Visibility.Visible;
+			GuessPanelTutorial1.Visibility = Visibility.Visible;
+			GuessPanelTutorial2.Visibility = Visibility.Visible;
 			ShuffleButton.Visibility = Visibility.Collapsed;
 			ClearButton.Visibility = Visibility.Collapsed;
+			FacebookButton.Visibility = Visibility.Collapsed;
+			BoostButton.Visibility = Visibility.Collapsed;
+
+			LetterPickerPanel1.HorizontalAlignment = HorizontalAlignment.Center;
+			LetterPickerPanel2.HorizontalAlignment = HorizontalAlignment.Center;
+
 			App.Current.StateData.PuzzleWord = CurrentPuzzle.Word;
 			App.Current.StateData.GuessPanelState = new int[App.Current.StateData.PuzzleWord.Length];
 			for (int i = 0; i < App.Current.StateData.PuzzleWord.Length; i++)
@@ -445,6 +453,7 @@ namespace WhatTheWord
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			Overlay.Visibility = Visibility.Visible;
+			TutorialOverlay.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Text = "TRY AGAIN!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGTryAgain@1280_768.png", UriKind.Relative)));
@@ -458,6 +467,12 @@ namespace WhatTheWord
 		{
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
 			Overlay.Visibility = Visibility.Collapsed;
+
+			if (App.Current.StateData.CurrentLevel == 1)
+			{
+				TutorialOverlay.Visibility = Visibility.Visible;
+			}
+
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			puzzleStatusTimer.Stop();
