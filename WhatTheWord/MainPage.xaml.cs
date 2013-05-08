@@ -29,7 +29,8 @@ namespace WhatTheWord
 		public NewPuzzlesUserControl newPuzzlesUserControl;
 		public OutOfPuzzlesUserControl outOfPuzzlesUserControl;
 		public ZoomedPictureUserControl zoomedPictureUserControl;
-		public ResetGameConfirmationUserControl resetGameConfirmationUserControl;
+        public ResetGameConfirmationUserControl resetGameConfirmationUserControl;
+        public UserReviewUserControl userReviewUserControl;
 
         private DispatcherTimer boostBounceTimer;
 
@@ -38,17 +39,19 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
-			SoundEffects.Initialize();
+            SoundEffects.Initialize();
+            InitializeBoostBounceTimer();
+
 			InitializeFacebookPopup();
 			InitializeCoinsPopup();
 			InitializeBoostsPopup();
 			InitializeAboutPopup();
 			InitializeSettingsPopup();
-			InitializeBoostBounceTimer();
 			InitializeNewPuzzlesPopup();
 			InitializeOutOfPuzzlesPopup();
 			InitializeZoomedPicturePopup();
 			InitializeResetGameConfirmationPopup();
+            InitializeUserReviewPopup();
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
@@ -154,6 +157,12 @@ namespace WhatTheWord
         private void InitializeAboutPopup()
         {
             aboutUserControl = new AboutUserControl(new Popup(), this,
+                Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+        }
+
+        private void InitializeUserReviewPopup()
+        {
+            userReviewUserControl = new UserReviewUserControl(new Popup(), this,
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
         }
 
@@ -481,7 +490,11 @@ namespace WhatTheWord
 			else if (zoomedPictureUserControl.isOpen())
 			{
 				zoomedPictureUserControl.hide();
-			}
+            }
+            else if (userReviewUserControl.isOpen())
+            {
+                userReviewUserControl.hide();
+            }
 			else
 			{
 				cancelBackbutton = false;
@@ -501,7 +514,10 @@ namespace WhatTheWord
                 || settingsUserControl.isOpen()
                 || aboutUserControl.isOpen()
                 || newPuzzlesUserControl.isOpen()
-                || outOfPuzzlesUserControl.isOpen();
+                || outOfPuzzlesUserControl.isOpen()
+                || resetGameConfirmationUserControl.isOpen()
+                || zoomedPictureUserControl.isOpen()
+                || userReviewUserControl.isOpen();
         }
 
 		// Sample code for building a localized ApplicationBar

@@ -122,6 +122,9 @@
     <Compile Include="Popups\AboutUserControl.xaml.cs">
       <DependentUpon>AboutUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\UserReviewUserControl.xaml.cs">
+      <DependentUpon>UserReviewUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\ResetGameConfirmationControl.xaml.cs">
       <DependentUpon>ResetGameConfirmationControl.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Popups\AboutUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Popups\UserReviewUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

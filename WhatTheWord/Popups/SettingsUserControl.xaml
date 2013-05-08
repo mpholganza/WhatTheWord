@@ -73,7 +73,7 @@
 			<Setter Property="HorizontalAlignment" Value="Center" />
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-			<Setter Property="FontSize" Value="20" />
+			<Setter Property="FontSize" Value="24" />
 		</Style>
 
 	</UserControl.Resources>
@@ -169,11 +169,27 @@
 
                         <Image Grid.Column="0" Grid.ColumnSpan="3"
                                Style="{StaticResource SettingBackgrondImage_Alt}"/>
-                        
+
                         <Image Grid.Column="0" Source="/Assets/feedbackButton@1280_768.png" 
                                Style="{StaticResource SettingIcon}" />
 
                         <TextBlock Grid.Column="1" Text="Feedback" 
+                                   Style="{StaticResource SettingName}"/>
+                    </Grid>
+                </Border>
+
+                <Border Style="{StaticResource SettingBorder}" Tap="Rate_Tap">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Grid.ColumnSpan="3"
+                               Style="{StaticResource SettingBackgrondImage}"/>
+                        
+                        <TextBlock Grid.Column="1" Text="Rate Us" 
                                    Style="{StaticResource SettingName}"/>
                     </Grid>
                 </Border>
@@ -187,13 +203,12 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Grid.Column="0" Grid.ColumnSpan="3"
-                               Style="{StaticResource SettingBackgrondImage}"/>
+                               Style="{StaticResource SettingBackgrondImage_Alt}"/>
 
-						<Button x:Name="ResetEntireGame" Grid.Column="1" Tap="ResetEntireGame_Tap"
-                                   Style="{StaticResource Popup_ButtonStyle}" Margin="0,9,0,8" Width="267">
-                            <StackPanel Orientation="Horizontal">
-								<TextBlock x:Name="ResetEntireGame_Text" Text="Reset entire game" Style="{StaticResource SettingButton_Text}"/>
-                            </StackPanel>
+                        <Button x:Name="ResetEntireGame" Grid.ColumnSpan="3" Tap="ResetEntireGame_Tap"
+                                HorizontalAlignment="Stretch" Width="Auto" Margin="70,0,70,0"
+                                Style="{StaticResource Popup_ButtonStyle}" >
+							<TextBlock x:Name="ResetEntireGame_Text" Text="Reset entire game" Style="{StaticResource SettingButton_Text}"/>
                         </Button>
                     </Grid>
                 </Border>

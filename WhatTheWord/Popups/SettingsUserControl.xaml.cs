@@ -120,6 +120,14 @@ namespace WhatTheWord.Popups
             this.hide();
         }
 
+        private void Rate_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            WhatTheWord.Controls.SoundEffects.PlayClick();
+            _mainPage.userReviewUserControl.isOpenedFromSettings = true;
+            _mainPage.userReviewUserControl.show();
+            this.hide();
+        }
+
         private void Feedback_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             WhatTheWord.Controls.SoundEffects.PlayClick();
