@@ -61,16 +61,25 @@
 				<ImageBrush Stretch="Fill" ImageSource="/Assets/topBarBG@1280_768.png"/>
 			</Grid.Background>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="3*"/>
-				<ColumnDefinition Width="7*"/>
-				<ColumnDefinition Width="3*"/>
+				<ColumnDefinition Width="5*"/>
+				<ColumnDefinition Width="12*"/>
+				<ColumnDefinition Width="5*"/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Image Grid.Column="0" Source="/Assets/levelBG@1280_768.png" Stretch="Fill"/>
-			<Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="48" Height="48" HorizontalAlignment="Left" Margin="16,0,0,0"/>
-			<TextBlock Grid.Column="0" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" Margin="64,0,12,0"/>
+
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Assets/levelBG@1280_768.png"/>
+                </Grid.Background>
+			    <Image Grid.Column="0" Source="/Assets/levelIcon@1280_768.png" Width="38" Height="38" HorizontalAlignment="Left" Margin="12,0,0,3"/>
+			    <TextBlock Grid.Column="1" Text="{Binding CurrentLevel}" Style="{StaticResource HeaderFont}" HorizontalAlignment="Center" Margin="0,0,8,0"/>
+            </Grid>
             <StackPanel x:Name="CoinsStackPanel" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" >
 				<Image x:Name="CoinsDollarSign" Source="/Assets/coinIcon@1280_768.png" Width="37" Height="37" HorizontalAlignment="Center" Margin="0,0,0,0"/>
 			    <TextBlock x:Name="CoinsText" Text="{Binding Coins}" Style="{StaticResource HeaderFont}" Margin="12,0,0,0"/>
