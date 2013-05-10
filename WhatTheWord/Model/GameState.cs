@@ -35,7 +35,8 @@ namespace WhatTheWord.Model
 		public String PuzzleCharacters { get; set; }
 		public int[] GuessPanelState { get; set; }
 		public int[] CharacterPanelState { get; set; }
-		public bool SoundEnabled { get; set; }
+        public bool SoundEnabled { get; set; }
+        public bool RewardGivenForUserReview { get; set; }
 		#endregion
 
 		public GameState()
@@ -48,6 +49,7 @@ namespace WhatTheWord.Model
 			this.CharacterPanelState = null;
 			this.FacebookToken = "";
 			this.SoundEnabled = true;
+            this.RewardGivenForUserReview = false;
 		}
 
 		public async Task Load()
@@ -108,7 +110,8 @@ namespace WhatTheWord.Model
 			string puzzlecharacters = string.Empty;
 			bool puzzleinitialized = false;
 			string facebooktoken = string.Empty;
-			bool soundenabled = false;
+            bool soundenabled = false;
+            bool rewardgivenforuserreview = false;
 
 			string[] lines = gameData.Split(new string[] { "\n", Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 			if (lines.Length < 1) { throw new ApplicationException("GameState data is empty."); }
@@ -167,7 +170,10 @@ namespace WhatTheWord.Model
 						break;
 					case "soundenabled":
 						success = bool.TryParse(value, out soundenabled);
-						break;
+                        break;
+                    case "rewardgivenforuserreview":
+                        success = bool.TryParse(value, out rewardgivenforuserreview);
+                        break;
 					default:
 						throw new ApplicationException("Unknown GameState property: " + key);
 				}
@@ -187,6 +193,7 @@ namespace WhatTheWord.Model
 			this.PuzzleInitialized = puzzleinitialized;
 			this.FacebookToken = facebooktoken;
 			this.SoundEnabled = soundenabled;
+            this.RewardGivenForUserReview = rewardgivenforuserreview;
 		}
 
 		#region Gameplay logic
@@ -419,7 +426,8 @@ namespace WhatTheWord.Model
 				"puzzlecharacters=" + this.PuzzleCharacters + Environment.NewLine +
 				"puzzleinitialized=" + this.PuzzleInitialized.ToString() + Environment.NewLine +
 				"facebooktoken=" + this.FacebookToken + Environment.NewLine +
-				"soundenabled=" + this.SoundEnabled.ToString();
+				"soundenabled=" + this.SoundEnabled.ToString() + Environment.NewLine +
+                "rewardgivenforuserreview=" + this.RewardGivenForUserReview.ToString();
 
 			return gamePlayData;
 		}
