@@ -26,6 +26,13 @@ namespace WhatTheWord.Popups
         public double PopupWidth { get; set; }
         public double PopupHeight { get; set; }
 
+        private readonly string UserReviewText_WithReward =
+            "Tell us what you think about Guess This Word and get 300 coins for free!";
+        private readonly string UserReviewText_ThankYou =
+            "Thank you for rating Guess This Word. We have added 300 coins to your game!";
+        private readonly string UserReviewText_NoReward =
+            "Tell us what you think about Guess This Word!";
+
         public UserReviewUserControl(Popup popup, MainPage mainPage, double hostWindowWidth, double hostWindowHeight)
         {
             InitializeComponent();
@@ -56,6 +63,14 @@ namespace WhatTheWord.Popups
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
 
+            if (!App.Current.StateData.RewardGivenForUserReview)
+            {
+                UserReviewText.Text = UserReviewText_WithReward;
+            }
+            else
+            {
+                UserReviewText.Text = UserReviewText_NoReward;
+            }
         }
 
         #region Show and Hide
@@ -63,6 +78,17 @@ namespace WhatTheWord.Popups
         {
             if (!_popup.IsOpen)
             {
+                if (!App.Current.StateData.RewardGivenForUserReview)
+                {
+                    UserReviewText.Text = UserReviewText_WithReward;
+                    UserReviewButton.IsEnabled = true;
+                }
+                else
+                {
+                    UserReviewText.Text = UserReviewText_NoReward;
+                    UserReviewButton.IsEnabled = true;
+                }
+
                 _popup.Child = this;
                 _popup.IsOpen = true;
             }
@@ -106,12 +132,22 @@ namespace WhatTheWord.Popups
 
         private void UserReviewButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            // TODO: add reward logic
-
             WhatTheWord.Controls.SoundEffects.PlayClick();
             MarketplaceReviewTask marketplaceReviewTask = new MarketplaceReviewTask();
             marketplaceReviewTask.Show();
-            this.hide();
+
+            if (!App.Current.StateData.RewardGivenForUserReview)
+            {
+                App.Current.StateData.Coins += 300;
+                App.Current.StateData.RewardGivenForUserReview = true;
+                UserReviewText.Text = UserReviewText_ThankYou;
+                UserReviewButton.IsEnabled = false;
+                _mainPage.DisplayGame();
+            }
+            else
+            {
+                this.hide();
+            }
         }
     }
 

@@ -75,7 +75,9 @@
         </Grid>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Style="{StaticResource Popup_ContentPanel}" >
+        <Grid x:Name="ContentPanel" Grid.Row="1" 
+              Margin="0,0,0,10"
+              Style="{StaticResource Popup_ContentPanel}" >
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -86,8 +88,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Column="0" Grid.Row="0"
-                       Margin="25,20,25,0"
+            <TextBlock x:Name="UserReviewText" 
+                       Grid.Column="0" Grid.Row="0" Margin="25,20,25,10"
                        Text="Tell us what you think about the app and get 300 coins for free!"
                        Style="{StaticResource UserReviewHeaderTitle}"/>
 
