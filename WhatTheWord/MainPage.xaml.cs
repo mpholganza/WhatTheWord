@@ -40,7 +40,7 @@ namespace WhatTheWord
 			InitializeComponent();
 
             string query = App.Current.getInstrumentationQuery(
-                null,null,null,null,null,null,null);
+                "Heartbeat", "Launch", null, null, null);
 
             SoundEffects.Initialize();
             InitializeBoostBounceTimer();

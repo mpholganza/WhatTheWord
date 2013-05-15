@@ -195,8 +195,6 @@ namespace WhatTheWord
             string event_name,
             string type,
             string sub_type,
-            string level,
-            string hc_bal,
             string hc_amt)
         {
             if (!String.IsNullOrWhiteSpace(event_category))
@@ -214,15 +212,8 @@ namespace WhatTheWord
                 parameters["type"] = type;
             }
 
-            if (!String.IsNullOrWhiteSpace(level))
-            {
-                parameters["level"] = level;
-            }
-
-            if (!String.IsNullOrWhiteSpace(hc_bal))
-            {
-                parameters["hc_bal"] = hc_bal;
-            }
+            parameters["level"] = App.Current.StateData.CurrentLevel.ToString();
+            parameters["hc_bal"] = App.Current.StateData.Coins.ToString();
 
             if (!String.IsNullOrWhiteSpace(hc_amt))
             {
@@ -252,8 +243,6 @@ namespace WhatTheWord
             string event_name,
             string type,
             string sub_type,
-            string level,
-            string hc_bal,
             string hc_amt)
         {
             var parameters = new Dictionary<string, string>();
@@ -265,8 +254,6 @@ namespace WhatTheWord
                 event_name,
                 type,
                 sub_type,
-                level,
-                hc_bal,
                 hc_amt
             );
 
