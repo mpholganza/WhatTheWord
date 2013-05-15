@@ -15,7 +15,8 @@ namespace WhatTheWord.Model
 		public const string GAMECONFIGDEFAULTFILE = "gameconfigdefault.txt";
 		#endregion
 
-		#region Config variables
+        #region Config variables
+        public int flight { get; set; }
 		public int initialCoins { get; set; }
 		public int boostRemoveLettersCost { get; set; }
 		public int boostRemoveLettersNumberOfLetters { get; set; }
@@ -112,6 +113,11 @@ namespace WhatTheWord.Model
 			if (key != "flight") { throw new ApplicationException("Corrupt Gamedata file"); }
 
 			if (flightHash != value) { throw new ApplicationException("Corrupt Gamedata file. Hash does not match"); }
+
+            int flight = 0;
+            bool success = int.TryParse(flightHash, out flight);
+            this.flight = flight;
+            if (!success) { throw new ApplicationException("Invalid Gamedata config info. Trouble parsing flight: " + flightHash); }
 
 			this.Purchases = new Dictionary<string, InAppPurchase>();
 			this.Puzzles = new Dictionary<int, Puzzle>();

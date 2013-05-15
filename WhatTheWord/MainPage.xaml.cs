@@ -39,6 +39,9 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
+            string query = App.Current.getInstrumentationQuery(
+                null,null,null,null,null,null,null);
+
             SoundEffects.Initialize();
             InitializeBoostBounceTimer();
 
