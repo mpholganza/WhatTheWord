@@ -21,6 +21,7 @@ using WhatTheWord.Model;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
+using Windows.Storage;
 
 namespace WhatTheWord
 {
@@ -34,6 +35,12 @@ namespace WhatTheWord
 
 		public GameConfig ConfigData { get; set; }
 		public GameState StateData { get; set; }
+
+		public DownloadManager Downloader { get; set; }
+
+		public List<string> LocalFolderFiles { get; set; }
+
+		public static string PuzzlePicturesPath = "Assets/PuzzlePictures/";
 
 		public static new App Current
 		{
@@ -58,10 +65,10 @@ namespace WhatTheWord
 			InitializeLanguage();
 
 			// Show graphics profiling information while debugging.
-			if (Debugger.IsAttached)
-			{
+			// if (Debugger.IsAttached)
+			// {
 				// Display the current frame rate counters.
-				Application.Current.Host.Settings.EnableFrameRateCounter = true;
+				// Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
 				// Show the areas of the app that are being redrawn in each frame.
 				//Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -74,9 +81,12 @@ namespace WhatTheWord
 				// the application's idle detection.
 				// Caution:- Use this under debug mode only. Application that disables user idle detection will continue to run
 				// and consume battery power when the user is not using the phone.
-				PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
-			}
+				// PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+			// }
 			SetupMockIAP();
+
+			// Set up DownloadManager
+			Downloader = DownloadManager.GetInstance();
 		}
 
 
@@ -111,6 +121,7 @@ namespace WhatTheWord
 				try
 				{
 					tempGameConfig.Deserialize(gameData); // test that the gamedata deserializes correctly
+					GameConfig.Save(args.Result);
 				}
 				catch (ApplicationException)
 				{
@@ -118,12 +129,11 @@ namespace WhatTheWord
 					// TODO: report to server of failed deserialization
 					Console.WriteLine("Failed deserialization:\n" + gameData);
 				}
-				GameConfig.Save(args.Result);
-				//UpdateFiles(tempGameConfig);
+
 			}
 		}
 
-		private void UpdateFiles(GameConfig tempGameConfig)
+		public void UpdatePictures(GameConfig tempGameConfig)
 		{
 			Dictionary<string, string> filesToDownload = new Dictionary<string, string>();
 			foreach (KeyValuePair<int, Puzzle> puzzleKvp in tempGameConfig.Puzzles) {
@@ -134,9 +144,20 @@ namespace WhatTheWord
 				filesToDownload.Add(puzzle.Picture4.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture4.URI);
 			}
 
-			DownloadManager dm = DownloadManager.GetInstance();
-			//dm.DownloadAndUnzipJpgFiles(filesToDownload, "Assets/PuzzlePictures");
-			//DownloadManager.DownloadMissingFiles(filesToDownload, ConfigData.picturesFilenamePath);
+			List<string> fileNamesToDownload = new List<string>();
+			foreach (KeyValuePair<string, string> file in filesToDownload) { fileNamesToDownload.Add(file.Key); }
+
+			foreach (string fileName in fileNamesToDownload)
+			{
+				string pictureFileName = fileName;
+				pictureFileName = pictureFileName.Replace("zip", "jpg");
+				if (LocalFolderFiles.Contains(pictureFileName) || FileAccess.ExistsInApplicationPackage(PuzzlePicturesPath + pictureFileName))
+				{
+					filesToDownload.Remove(pictureFileName.Replace("jpg", "zip"));
+				}
+			}
+
+			Downloader.DownloadAndUnzipJpgFiles(filesToDownload);
 		}
 
         private void SetupMockIAP()
@@ -161,14 +182,14 @@ namespace WhatTheWord
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-			//LoadGameConfigFromWeb();
+			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is activated (brought to foreground)
 		// This code will not execute when the application is first launched
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
-			//LoadGameConfigFromWeb();
+			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is deactivated (sent to background)

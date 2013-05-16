@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Resources;
+using Windows.Storage;
 
 namespace WhatTheWord.Model
 {
@@ -25,12 +27,11 @@ namespace WhatTheWord.Model
 		{
 			try
 			{
-				// TODO: Look for file in LocalFolder first
 				// if not in LocalFolder look in pre-packaged Assets folder
-				Picture1.URI = "/Assets/PuzzlePictures/" + Picture1.URI.Replace("zip", "jpg");
-				Picture2.URI = "/Assets/PuzzlePictures/" + Picture2.URI.Replace("zip", "jpg");
-				Picture3.URI = "/Assets/PuzzlePictures/" + Picture3.URI.Replace("zip", "jpg");
-				Picture4.URI = "/Assets/PuzzlePictures/" + Picture4.URI.Replace("zip", "jpg");
+				Picture1.URI = GetPictureUri(Picture1.URI);
+				Picture2.URI = GetPictureUri(Picture2.URI);
+				Picture3.URI = GetPictureUri(Picture3.URI);
+				Picture4.URI = GetPictureUri(Picture4.URI);
 			}
 			catch
 			{
@@ -38,14 +39,25 @@ namespace WhatTheWord.Model
 			}
 
 			return true;
-			//CurrentPuzzle = new Puzzle()
-			//{
-			//	Word = "random".ToUpper(),
-			//	Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
-			//	Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
-			//	Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
-			//	Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
-			//};
+		}
+
+		private string GetPictureUri(string originalURI)
+		{
+			string pictureUri = originalURI.Replace("zip", "jpg");
+			if (App.Current.LocalFolderFiles.Contains(pictureUri))
+			{
+				pictureUri = "ms-appdata:///local/" + pictureUri;
+			}
+			else
+			{
+				pictureUri = App.PuzzlePicturesPath + pictureUri;
+				StreamResourceInfo sri = App.GetResourceStream(new Uri(pictureUri, UriKind.Relative));
+				if (sri == null)
+				{
+					throw new Exception(pictureUri + " missing.");
+				}
+			}
+			return pictureUri;
 		}
 
 		public static String GeneratePuzzleCharacters(String word)

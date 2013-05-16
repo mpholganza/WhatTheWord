@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Resources;
 using Windows.Storage;
+using Windows.Storage.Search;
 
 namespace WhatTheWord
 {
@@ -36,16 +37,15 @@ namespace WhatTheWord
 			try
 			{
 				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+				using (Stream stream = await file.OpenStreamForWriteAsync())
+				{
+					byte[] content = Encoding.UTF8.GetBytes(data);
+					await stream.WriteAsync(content, 0, content.Length);
+				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Error writing to file" + e.Message);
-			}
-
-			using (Stream stream = await file.OpenStreamForWriteAsync())
-			{
-				byte[] content = Encoding.UTF8.GetBytes(data);
-				await stream.WriteAsync(content, 0, content.Length);
 			}
 		}
 
@@ -55,20 +55,19 @@ namespace WhatTheWord
 			try
 			{
 				file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+				using (Stream outStream = await file.OpenStreamForWriteAsync())
+				{
+					byte[] data = new byte[16 * 1024];
+					int bytesRead;
+					while ((bytesRead = await inStream.ReadAsync(data, 0, data.Length)) > 0)
+					{
+						await outStream.WriteAsync(data, 0, bytesRead);
+					}
+				}
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine("Error writing to file" + e.Message);
-			}
-
-			using (Stream outStream = await file.OpenStreamForWriteAsync())
-			{
-				byte[] data = new byte[16 * 1024];
-				int bytesRead;
-				while ((bytesRead = await inStream.ReadAsync(data, 0, data.Length)) > 0)
-				{
-					await outStream.WriteAsync(data, 0, bytesRead);
-				}
 			}
 		}
 
@@ -105,6 +104,18 @@ namespace WhatTheWord
 			}
 			catch { }
 			return false;
+		}
+
+		public async static Task<List<String>> ListFilesInLocalFolder()
+		{
+			List<string> fileNames = new List<string>();
+			IReadOnlyList<StorageFile> storageItems = await ApplicationData.Current.LocalFolder.GetFilesAsync();
+			foreach (StorageFile storageItem in storageItems)
+			{
+				fileNames.Add(storageItem.Name);
+			}
+
+			return fileNames;
 		}
 
 		public async static Task<bool> Delete(string fileName)

@@ -65,7 +65,14 @@ namespace WhatTheWord
 
 			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
 			{
-				outOfPuzzlesUserControl.show();
+				if (App.Current.Downloader.InProgress)
+				{
+					newPuzzlesUserControl.show();
+				}
+				else
+				{
+					outOfPuzzlesUserControl.show();
+				}
 				return;
 			}
 
@@ -223,37 +230,6 @@ namespace WhatTheWord
             }
 
         }
-
-		private bool TryLoadCurrentPuzzle(int currentLevel)
-		{
-			Puzzle puzzle;
-			try
-			{
-				puzzle = App.Current.ConfigData.Puzzles[currentLevel];
-				// TODO: Look for file in LocalFolder first
-
-				// if not in LocalFolder look in pre-packaged Assets folder
-				puzzle.Picture1.URI = "/Assets/PuzzlePictures/" + puzzle.Picture1.URI.Replace("zip", "jpg");
-				puzzle.Picture2.URI = "/Assets/PuzzlePictures/" + puzzle.Picture2.URI.Replace("zip", "jpg");
-				puzzle.Picture3.URI = "/Assets/PuzzlePictures/" + puzzle.Picture3.URI.Replace("zip", "jpg");
-				puzzle.Picture4.URI = "/Assets/PuzzlePictures/" + puzzle.Picture4.URI.Replace("zip", "jpg");
-			}
-			catch
-			{
-				return false;
-			}
-
-			CurrentPuzzle = puzzle;
-			return true;
-			//CurrentPuzzle = new Puzzle()
-			//{
-			//	Word = "random".ToUpper(),
-			//	Picture1 = new Picture { URI = "/Assets/PuzzlePictures/mangoes.png", Credits = "mph" },
-			//	Picture2 = new Picture { URI = "/Assets/PuzzlePictures/icecream.png", Credits = "mph" },
-			//	Picture3 = new Picture { URI = "/Assets/PuzzlePictures/water_houses.png", Credits = "mph" },
-			//	Picture4 = new Picture { URI = "/Assets/PuzzlePictures/magnets.png", Credits = "mph" },
-			//};
-		}
 
 		/// <summary>
 		/// Display game
@@ -440,7 +416,6 @@ namespace WhatTheWord
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
 			Overlay.Visibility = Visibility.Collapsed; // Re-allow user input
-			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBG@1280_768.png", UriKind.Relative)));
 			App.Current.StateData.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();

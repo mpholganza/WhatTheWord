@@ -17,11 +17,14 @@ namespace WhatTheWord
 
 		private DownloadManager() { }
 
+		public event EventHandler<FileDownloadedEventArgs> FileDownloaded;
+		public bool InProgress { get; set; }
+
 		public static DownloadManager GetInstance()
 		{
 			if (downloadManagerInstance == null)
 			{
-				downloadManagerInstance = new DownloadManager();
+				downloadManagerInstance = new DownloadManager() { InProgress = false };
 			}
 			return downloadManagerInstance;
 		}
@@ -31,10 +34,16 @@ namespace WhatTheWord
 		public async Task<string> ListMissingFilesAndQueue(Dictionary<string, string> filesToDownload, string applicationPackagePath)
 		{
 			FilesToDownload.Clear();
+
+			List<string> filesInLocalFolder = await FileAccess.ListFilesInLocalFolder();
 			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
 			{
 				string fileName = fileKVP.Key;
-				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//{
+				//	FilesToDownload.Enqueue(fileKVP);
+				//}
+				if (-1 == filesInLocalFolder.IndexOf(fileName))
 				{
 					FilesToDownload.Enqueue(fileKVP);
 				}
@@ -46,9 +55,15 @@ namespace WhatTheWord
 		public async Task<string> ListMissingFiles(List<string> fileNames, string applicationPackagePath)
 		{
 			string missingFiles = string.Empty;
+			List<string> filesInLocalFolder = await FileAccess.ListFilesInLocalFolder();
+
 			foreach (string fileName in fileNames)
 			{
-				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//{
+				//	missingFiles += fileName + Environment.NewLine;
+				//}
+				if (-1 == filesInLocalFolder.IndexOf(fileName))
 				{
 					missingFiles += fileName + Environment.NewLine;
 				}
@@ -59,10 +74,16 @@ namespace WhatTheWord
 		public async Task DownloadMissingFiles(Dictionary<string, string> filesToDownload, string applicationPackagePath)
 		{
 			FilesToDownload.Clear();
+
+			List<string> filesInLocalFolder = await FileAccess.ListFilesInLocalFolder();
 			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
 			{
 				string fileName = fileKVP.Key;
-				if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//if (!await FileAccess.Exists(fileName, applicationPackagePath))
+				//{
+				//	FilesToDownload.Enqueue(fileKVP);
+				//}
+				if (-1 == filesInLocalFolder.IndexOf(fileName))
 				{
 					FilesToDownload.Enqueue(fileKVP);
 				}
@@ -71,22 +92,19 @@ namespace WhatTheWord
 			DownloadMissingFiles();
 		}
 
-		public async Task DownloadAndUnzipJpgFile(Dictionary<string, string> filesToDownload, string applicationPackagePath)
+		public void DownloadAndUnzipJpgFiles(Dictionary<string, string> filesToDownload)
 		{
 			FilesToDownload.Clear();
 			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
 			{
-				string fileName = fileKVP.Key;
-				if (!await FileAccess.Exists(fileName, applicationPackagePath))
-				{
-					FilesToDownload.Enqueue(fileKVP);
-				}
+				FilesToDownload.Enqueue(fileKVP);
 			}
 
+			if (FilesToDownload.Count > 0) { InProgress = true; }
 			DownloadAndUnzipJpgFile();
 		}
 
-		public string GetFilesToDownload()
+		private string GetFilesToDownload()
 		{
 			string filesToDownloadString = string.Empty;
 			foreach (KeyValuePair<string, string> fileKVP in FilesToDownload)
@@ -138,6 +156,7 @@ namespace WhatTheWord
 		{
 			if (FilesToDownload.Count == 0)
 			{
+				InProgress = false;
 				return;
 			}
 
@@ -168,9 +187,27 @@ namespace WhatTheWord
 				Uri uri = new Uri(fileName, UriKind.Relative);
 				StreamResourceInfo zippedFileSri = App.GetResourceStream(zipSri, uri);
 				await FileAccess.WriteStreamToFileAsync(zippedFileSri.Stream, fileName);
+
+				FileDownloadedEventArgs args = new FileDownloadedEventArgs();
+				args.FilesLeftCount = FilesToDownload.Count();
+				OnFileDownloadedEvent(args);
 			}
 
 			DownloadAndUnzipJpgFile();
 		}
+
+		protected virtual void OnFileDownloadedEvent(FileDownloadedEventArgs e)
+		{
+			EventHandler<FileDownloadedEventArgs> handler = FileDownloaded;
+			if (handler != null)
+			{
+				handler(this, e);
+			}
+		}
+	}
+
+	public class FileDownloadedEventArgs : EventArgs
+	{
+		public int FilesLeftCount { get; set; }
 	}
 }

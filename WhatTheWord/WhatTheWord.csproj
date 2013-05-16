@@ -235,6 +235,7 @@
     <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton%401280_768.png" />
+    <Content Include="Assets\loadingSpinner%401280_768.png" />
     <Content Include="Assets\PuzzlePictures\alarm1.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm2.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm3.jpg" />

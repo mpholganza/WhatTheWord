@@ -89,9 +89,10 @@
                         Margin="25,20,0,0">
                 <TextBlock Text="Please keep app open to download more puzzles!"
                            Style="{StaticResource NewPuzzlesHeaderTitle}"/>
-                <TextBlock Text="Connection lost, please connect to WiFi for faster internet access"
-                           Style="{StaticResource NewPuzzlesName}"/>
-            </StackPanel>
+				<Image Source="/Assets/loadingSpinner@1280_768.png"></Image>
+				<TextBlock Text="Connection lost, please connect to WiFi for faster internet access"
+                           Style="{StaticResource NewPuzzlesName}"></TextBlock>
+			</StackPanel>
 
         </Grid>
 

@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Threading.Tasks;
 using WhatTheWord.Model;
 using System.Threading;
+using Windows.Storage;
 
 namespace WhatTheWord
 {
@@ -22,6 +23,7 @@ namespace WhatTheWord
 
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
+			App.Current.LocalFolderFiles = await FileAccess.ListFilesInLocalFolder();
 			await LoadGame();
 			Thread.Sleep(800);
 			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
@@ -34,6 +36,8 @@ namespace WhatTheWord
 			await App.Current.ConfigData.Load();
 			App.Current.StateData = new GameState();
 			await App.Current.StateData.Load();
+
+			App.Current.UpdatePictures(App.Current.ConfigData);
 		}
 	}
 }

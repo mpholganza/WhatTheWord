@@ -59,7 +59,20 @@ namespace WhatTheWord.Popups
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
 
+			App.Current.Downloader.FileDownloaded += Downloader_FileDownloaded;
         }
+
+		void Downloader_FileDownloaded(object sender, FileDownloadedEventArgs e)
+		{
+			if (e.FilesLeftCount == 0)
+			{
+				App.Current.Downloader.FileDownloaded -= Downloader_FileDownloaded;
+				this.hide();
+				// Reload the page
+				_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
+				_mainPage.NavigationService.RemoveBackEntry();
+			}
+		}
 
         #region Show and Hide
         public void show()
