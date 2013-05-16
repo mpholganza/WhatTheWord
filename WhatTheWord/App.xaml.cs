@@ -9,13 +9,13 @@ using Microsoft.Phone.Shell;
 
 #if DEBUG
 using MockIAPLib;
+using Store = MockIAPLib;
 #else
 using Windows.ApplicationModel.Store;
 #endif
 
 using WhatTheWord.Resources;
 using System.Xml.Linq;
-using Store = MockIAPLib;
 using System.Net;
 using WhatTheWord.Model;
 using System.Threading.Tasks;

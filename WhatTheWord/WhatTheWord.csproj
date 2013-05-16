@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SoundEffects.cs" />
+    <Compile Include="Instrumentation.cs" />
     <Compile Include="DownloadManager.cs" />
     <Compile Include="Controls\ImageButton.xaml.cs">
       <DependentUpon>ImageButton.xaml</DependentUpon>
@@ -108,6 +109,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MD5.cs" />
+    <Compile Include="MD5Managed.cs" />
     <Compile Include="Model\GameConfig.cs" />
     <Compile Include="Model\GameState.cs" />
     <Compile Include="Model\InAppPurchase.cs" />

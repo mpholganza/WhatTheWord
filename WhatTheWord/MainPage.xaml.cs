@@ -39,6 +39,9 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
+            string uri = Instrumentation.GetInstance().getInstrumentationUri(
+                "Heartbeat", "Launch", null, null, null);
+
             SoundEffects.Initialize();
             InitializeBoostBounceTimer();
 
