@@ -21,7 +21,6 @@ using WhatTheWord.Model;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
-using Microsoft.Phone.Info;
 
 namespace WhatTheWord
 {
@@ -35,8 +34,6 @@ namespace WhatTheWord
 
 		public GameConfig ConfigData { get; set; }
 		public GameState StateData { get; set; }
-        public readonly string InstrumentationUrl = 
-            "http://www.kooappsservers.com/kooappsPlatform/logToSql.php?appName=com.kooapps.guessthisword&log=";
 
 		public static new App Current
 		{
@@ -158,109 +155,6 @@ namespace WhatTheWord
 
             MockIAP.ClearCache();
 #endif
-        }
-
-        private void addStandardInstrumentationParameters(
-            Dictionary<string, string> parameters)
-        {
-            string deviceName = DeviceStatus.DeviceName;
-            if (!String.IsNullOrWhiteSpace(deviceName))
-            {
-                parameters["device"] = DeviceStatus.DeviceName;
-            }
-
-            string osVersion = Environment.OSVersion.Version.ToString();
-            if (!String.IsNullOrWhiteSpace(osVersion))
-            {
-                parameters["ios"] = osVersion;
-            }
-
-            DateTime utcNow = DateTime.UtcNow;
-            parameters["startdate"] = utcNow.Date.ToString("d");
-            parameters["starttime"] = utcNow.ToString("HH:mm:ss");
-
-            object uniqueid = DeviceExtendedProperties.GetValue("DeviceUniqueId");
-            if (uniqueid != null)
-            {
-                string unqiueidAsString = BitConverter.ToString((byte[])uniqueid);
-                parameters["uniqueid"] = unqiueidAsString;
-            }
-
-            parameters["version"] = "1.0";
-        }
-
-        private void addEventInstrumentationParameters(
-            Dictionary<string, string> parameters,
-            string event_category,
-            string event_name,
-            string type,
-            string sub_type,
-            string hc_amt)
-        {
-            if (!String.IsNullOrWhiteSpace(event_category))
-            {
-                parameters["event_category"] = event_category;
-            }
-
-            if (!String.IsNullOrWhiteSpace(event_name))
-            {
-                parameters["event_name"] = event_name;
-            }
-
-            if (!String.IsNullOrWhiteSpace(type))
-            {
-                parameters["type"] = type;
-            }
-
-            parameters["level"] = App.Current.StateData.CurrentLevel.ToString();
-            parameters["hc_bal"] = App.Current.StateData.Coins.ToString();
-
-            if (!String.IsNullOrWhiteSpace(hc_amt))
-            {
-                parameters["hc_amt"] = hc_amt;
-            }
-        }
-
-        private string generateQueryFromParameters(
-            Dictionary<string, string> parameters)
-        {
-            string query = String.Empty;
-
-            int i = 0;
-            foreach (var param in parameters)
-            {
-                if (i != 0) { query += ";;;"; }
-                i++;
-
-                query += param.Key + "=" + Uri.EscapeDataString(param.Value);
-            }
-
-            return query;
-        }
-
-        public string getInstrumentationQuery(
-            string event_category,
-            string event_name,
-            string type,
-            string sub_type,
-            string hc_amt)
-        {
-            var parameters = new Dictionary<string, string>();
-
-            addStandardInstrumentationParameters(parameters);
-            addEventInstrumentationParameters(
-                parameters,
-                event_category,
-                event_name,
-                type,
-                sub_type,
-                hc_amt
-            );
-
-            string query = generateQueryFromParameters(parameters);
-            query += "&flight=" + App.Current.ConfigData.flight.ToString();
-
-            return query;
         }
 
 		// Code to execute when the application is launching (eg, from Start)

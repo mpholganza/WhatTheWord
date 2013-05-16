@@ -39,7 +39,7 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
-            string query = App.Current.getInstrumentationQuery(
+            string uri = Instrumentation.GetInstance().getInstrumentationUri(
                 "Heartbeat", "Launch", null, null, null);
 
             SoundEffects.Initialize();
