@@ -138,6 +138,7 @@ namespace WhatTheWord.Popups
 
             if (!App.Current.StateData.RewardGivenForUserReview)
             {
+                System.Threading.Thread.Sleep(500);
                 App.Current.StateData.Coins += 300;
                 App.Current.StateData.RewardGivenForUserReview = true;
                 UserReviewText.Text = UserReviewText_ThankYou;
