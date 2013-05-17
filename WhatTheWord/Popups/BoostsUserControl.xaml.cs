@@ -139,13 +139,15 @@ namespace WhatTheWord.Popups
             if (this.RevealALetterButton.IsEnabled != canRevealLetter)
             {
                 this.RevealALetterButton.IsEnabled = canRevealLetter;
-                this.RevealALetterButton_Icon.Source = canRevealLetter ? _boostButtonEnabledIcon : _boostButtonDisabledIcon;
+                this.RevealALetterButton_Text.Text = canRevealLetter ? App.Current.ConfigData.boostRevealLetterCost.ToString() : "MAX";
+                this.RevealALetterButton_Icon.Source = canRevealLetter ? _boostButtonEnabledIcon : null;
             }
 
             if (this.RemoveALetterButton.IsEnabled != canRemoveLetter)
             {
                 this.RemoveALetterButton.IsEnabled = canRemoveLetter;
-                this.RemoveALetterButton_Icon.Source = canRemoveLetter ? _boostButtonEnabledIcon : _boostButtonDisabledIcon;
+                this.RemoveALetterButton_Text.Text = canRemoveLetter ? App.Current.ConfigData.boostRemoveLettersCost.ToString() : "MAX";
+                this.RemoveALetterButton_Icon.Source = canRemoveLetter ? _boostButtonEnabledIcon : null;
             }
         }
 
@@ -174,7 +176,7 @@ namespace WhatTheWord.Popups
 			this.hide();
 		}
 
-        private void RevealALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void RevealALetter_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
 			RevealALetter();
         }
@@ -204,7 +206,7 @@ namespace WhatTheWord.Popups
 			this.hide();
 		}
 
-        private void RemoveALetterButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void RemoveALetter_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
 			RemoveALetter();
         }
@@ -227,16 +229,6 @@ namespace WhatTheWord.Popups
 
 		//	this.hide();
 		//}
-
-		private void RevealALetterRow_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-		{
-			RevealALetter();
-		}
-
-		private void RemoveALetterRow_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-		{
-			RemoveALetter();
-		}
     }
 
 }
