@@ -198,5 +198,41 @@ namespace WhatTheWord
 
             return uri;
         }
+
+        public void sendInstrumentation(
+            string event_category,
+            string event_name,
+            string type,
+            string sub_type,
+            string hc_amt)
+        {
+            string uri = getInstrumentationUri(
+                event_category,
+                event_name,
+                type,
+                sub_type,
+                hc_amt);
+
+            WebClient client = new WebClient();
+            client.DownloadStringCompleted += client_DownloadStringCompleted;
+            client.DownloadStringAsync(new Uri(uri));
+        }
+
+        void client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs args)
+        {
+            bool success = false;
+            if (!args.Cancelled && args.Error == null)
+            {
+                if (args.Result.StartsWith("status=ok;;;"))
+                {
+                    success = true;
+                }
+            }
+
+            if (!success)
+            {
+                System.Diagnostics.Debug.WriteLine("sendInstrumentation: failed");
+            }
+        }
     }
 }

@@ -39,9 +39,6 @@ namespace WhatTheWord
 		{
 			InitializeComponent();
 
-            string uri = Instrumentation.GetInstance().getInstrumentationUri(
-                "Heartbeat", "Launch", null, null, null);
-
             SoundEffects.Initialize();
             InitializeBoostBounceTimer();
 
@@ -69,11 +66,17 @@ namespace WhatTheWord
 			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
 			{
 				if (App.Current.Downloader.InProgress)
-				{
+                {
+                    Instrumentation.GetInstance().sendInstrumentation(
+                        "Puzzle", "AllComplete", "download-more-puzzles", null, null);
+
 					newPuzzlesUserControl.show();
 				}
 				else
-				{
+                {
+                    Instrumentation.GetInstance().sendInstrumentation(
+                        "Puzzle", "AllComplete", "no-more-puzzles", null, null);
+
 					outOfPuzzlesUserControl.show();
 				}
 				return;
@@ -400,6 +403,9 @@ namespace WhatTheWord
 		private DispatcherTimer puzzleStatusTimer;
 		private void PuzzleComplete()
         {
+            Instrumentation.GetInstance().sendInstrumentation(
+                "Puzzle", "StageComplete", null, null, App.Current.ConfigData.rewardCoinsPerQuestion.ToString());
+
             SoundEffects.PlayWin();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;

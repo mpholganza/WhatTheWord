@@ -154,11 +154,17 @@ namespace WhatTheWord.Popups
 			int cost = int.Parse(RevealALetterButton_Text.Text);
 
 			if (cost > App.Current.StateData.Coins)
-			{
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "InsufficientCurrency", "revealaletter", null, cost.ToString());
+
 				openCoinsPopup();
 			}
 			else
-			{
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "Purchase", "revealaletter", null, cost.ToString());
+
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RevealLetter();
 				_mainPage.DisplayGame();
@@ -178,11 +184,17 @@ namespace WhatTheWord.Popups
 			int cost = int.Parse(RemoveALetterButton_Text.Text);
 
 			if (cost > App.Current.StateData.Coins)
-			{
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "InsufficientCurrency", "removealetter", null, cost.ToString());
+
 				openCoinsPopup();
 			}
 			else
-			{
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "Purchase", "removealetter", null, cost.ToString());
+
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RemoveLetter();
 				_mainPage.DisplayGame();
