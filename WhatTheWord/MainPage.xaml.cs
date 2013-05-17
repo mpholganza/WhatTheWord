@@ -401,7 +401,7 @@ namespace WhatTheWord
 		}
 
 		private DispatcherTimer puzzleStatusTimer;
-		private void PuzzleComplete()
+		public void PuzzleComplete()
         {
             Instrumentation.GetInstance().sendInstrumentation(
                 "Puzzle", "StageComplete", null, null, App.Current.ConfigData.rewardCoinsPerQuestion.ToString());

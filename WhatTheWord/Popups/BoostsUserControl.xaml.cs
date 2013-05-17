@@ -76,10 +76,18 @@ namespace WhatTheWord.Popups
             setupBoosts();
         }
 
+        private int calculateAnswerPuzzleCost()
+        {
+            int numLetters = App.Current.StateData.PuzzleWord.Length;
+
+            return numLetters <= 3 ? 120 : (numLetters * 40) - 40;
+        }
+
         private void setupBoosts()
         {
             RevealALetterButton_Text.Text = App.Current.ConfigData.boostRevealLetterCost.ToString();
             RemoveALetterButton_Text.Text = App.Current.ConfigData.boostRemoveLettersCost.ToString();
+            AnswerPuzzleButton_Text.Text = calculateAnswerPuzzleCost().ToString();
 			//ShuffleButton_Text.Text = App.Current.ConfigData.boostShuffleCost.ToString();
         }
 
@@ -160,6 +168,7 @@ namespace WhatTheWord.Popups
                 Instrumentation.GetInstance().sendInstrumentation(
                     "Monetization", "InsufficientCurrency", "revealaletter", null, cost.ToString());
 
+                WhatTheWord.Controls.SoundEffects.PlayClick();
 				openCoinsPopup();
 			}
 			else
@@ -167,10 +176,10 @@ namespace WhatTheWord.Popups
                 Instrumentation.GetInstance().sendInstrumentation(
                     "Monetization", "Purchase", "revealaletter", null, cost.ToString());
 
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RevealLetter();
 				_mainPage.DisplayGame();
-				WhatTheWord.Controls.SoundEffects.PlayBuy();
 			}
 
 			this.hide();
@@ -190,6 +199,7 @@ namespace WhatTheWord.Popups
                 Instrumentation.GetInstance().sendInstrumentation(
                     "Monetization", "InsufficientCurrency", "removealetter", null, cost.ToString());
 
+                WhatTheWord.Controls.SoundEffects.PlayClick();
 				openCoinsPopup();
 			}
 			else
@@ -197,10 +207,10 @@ namespace WhatTheWord.Popups
                 Instrumentation.GetInstance().sendInstrumentation(
                     "Monetization", "Purchase", "removealetter", null, cost.ToString());
 
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RemoveLetter();
 				_mainPage.DisplayGame();
-				WhatTheWord.Controls.SoundEffects.PlayBuy();
 			}
 
 			this.hide();
@@ -209,6 +219,38 @@ namespace WhatTheWord.Popups
         private void RemoveALetter_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
 			RemoveALetter();
+        }
+
+        private void AnswerPuzzle()
+        {
+            int cost = int.Parse(AnswerPuzzleButton_Text.Text);
+
+            if (cost > App.Current.StateData.Coins)
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "InsufficientCurrency", "answerpuzzle", null, cost.ToString());
+
+                WhatTheWord.Controls.SoundEffects.PlayClick();
+                openCoinsPopup();
+            }
+            else
+            {
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Monetization", "Purchase", "answerpuzzle", null, cost.ToString());
+
+                WhatTheWord.Controls.SoundEffects.PlayBuy();
+                App.Current.StateData.Coins -= cost;
+                App.Current.StateData.AnswerPuzzle();
+                _mainPage.DisplayGame();
+                _mainPage.PuzzleComplete();
+            }
+
+            this.hide();
+        }
+
+        private void AnswerPuzzle_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            AnswerPuzzle();
         }
 
 		//private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -208,6 +208,30 @@
                     </Grid>
                 </Border>
 
+                <Border x:Name="AnswerPuzzleRow" Style="{StaticResource BoostBorder}" Tap="AnswerPuzzle_Tap">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="/Assets/answerPuzzleBoostIcon@1280_768.png" 
+                               Style="{StaticResource BoostIcon}" />
+
+                        <TextBlock Grid.Column="1" Text="Answer puzzle" 
+                                   Style="{StaticResource BoostName}"/>
+
+                        <Button x:Name="AnswerPuzzleButton" Grid.Column="2" Tap="AnswerPuzzle_Tap"
+                                   Style="{StaticResource Boost_ButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image x:Name="AnswerPuzzleButton_Icon" Style="{StaticResource BoostButton_Icon}"/>
+                                <TextBlock x:Name="AnswerPuzzleButton_Text" Text="120" Style="{StaticResource BoostButton_Text}"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
+
                 <!--<Border Style="{StaticResource BoostBorder}">
                     <Grid>
                         <Grid.ColumnDefinitions>
