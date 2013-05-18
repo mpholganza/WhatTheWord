@@ -162,6 +162,8 @@ namespace WhatTheWord
 		{
 			facebookUserControl = new FacebookUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+
+            setupLetterImageAnimation(FacebookButton);
 		}
 
 		private void InitializeCoinsPopup()
@@ -174,6 +176,8 @@ namespace WhatTheWord
 		{
 			boostsUserControl = new BoostsUserControl(new Popup(), this,
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+
+            setupLetterImageAnimation(BoostButton);
 		}
 
         private void InitializeAboutPopup()
@@ -275,6 +279,8 @@ namespace WhatTheWord
 					SoundEffects.PlayTapLetter();
 					GuessPanelLetterPressed(x);
 				};
+
+                setupLetterImageAnimation(letterImage);
 
 				GuessPanel.Children.Add(letterImage);
 			}
