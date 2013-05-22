@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 using System.Windows.Controls.Primitives;
+using System.Windows.Media.Animation;
 
 namespace WhatTheWord.Popups
 {
@@ -58,8 +59,6 @@ namespace WhatTheWord.Popups
 
             HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
             ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
-
-			App.Current.Downloader.FileDownloaded += Downloader_FileDownloaded;
         }
 
 		void Downloader_FileDownloaded(object sender, FileDownloadedEventArgs e)
@@ -68,7 +67,7 @@ namespace WhatTheWord.Popups
 			{
 				App.Current.Downloader.FileDownloaded -= Downloader_FileDownloaded;
 				this.hide();
-				// Reload the page
+				// Reload the game
 				_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
 				_mainPage.NavigationService.RemoveBackEntry();
 			}
@@ -77,6 +76,8 @@ namespace WhatTheWord.Popups
         #region Show and Hide
         public void show()
         {
+			App.Current.Downloader.FileDownloaded += Downloader_FileDownloaded;
+			AnimateContent();
             if (!_popup.IsOpen)
             {
                 _popup.Child = this;
@@ -112,6 +113,13 @@ namespace WhatTheWord.Popups
                 _popup.IsOpen = true;
             }
         }
+
+		private void AnimateContent()
+		{
+			LoadingAnimation.RepeatBehavior = RepeatBehavior.Forever;
+			LoadingAnimation.Begin();
+		}
+
         #endregion
     }
 

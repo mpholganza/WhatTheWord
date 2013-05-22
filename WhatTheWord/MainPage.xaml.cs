@@ -15,6 +15,9 @@ using WhatTheWord.Popups;
 using System.Windows.Threading;
 using System.Windows.Media;
 using WhatTheWord.Controls;
+using Windows.Storage;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace WhatTheWord
 {
@@ -82,37 +85,40 @@ namespace WhatTheWord
 			CurrentPuzzle = App.Current.ConfigData.Puzzles[App.Current.StateData.CurrentLevel];
 			if (!CurrentPuzzle.TryLoad())
 			{
-				outOfPuzzlesUserControl.show();
+				if (App.Current.Downloader.InProgress)
+				{
+					newPuzzlesUserControl.show();
+				}
 				return;
 			}
 
-			string picture1Uri = CurrentPuzzle.Picture1.URI;
-			string picture2Uri = CurrentPuzzle.Picture2.URI;
-			string picture3Uri = CurrentPuzzle.Picture3.URI;
-			string picture4Uri = CurrentPuzzle.Picture4.URI;
+			Picture1.Source = CurrentPuzzle.Picture1.ImageSource;
+			Picture2.Source = CurrentPuzzle.Picture2.ImageSource;
+			Picture3.Source = CurrentPuzzle.Picture3.ImageSource;
+			Picture4.Source = CurrentPuzzle.Picture4.ImageSource;
 
 			Picture1.Tap += (sender, e) =>
 			{
 				WhatTheWord.Controls.SoundEffects.PlayClick();
-				zoomedPictureUserControl.show(new Uri(picture1Uri, UriKind.Relative));
+				zoomedPictureUserControl.show((Image)sender);
 			};
 
 			Picture2.Tap += (sender, e) =>
 			{
 				WhatTheWord.Controls.SoundEffects.PlayClick();
-				zoomedPictureUserControl.show(new Uri(picture2Uri, UriKind.Relative));
+				zoomedPictureUserControl.show((Image)sender);
 			};
 
 			Picture3.Tap += (sender, e) =>
 			{
 				WhatTheWord.Controls.SoundEffects.PlayClick();
-				zoomedPictureUserControl.show(new Uri(picture3Uri, UriKind.Relative));
+				zoomedPictureUserControl.show((Image)sender);
 			};
 
 			Picture4.Tap += (sender, e) =>
 			{
 				WhatTheWord.Controls.SoundEffects.PlayClick();
-				zoomedPictureUserControl.show(new Uri(picture4Uri, UriKind.Relative));
+				zoomedPictureUserControl.show((Image)sender);
 			};
 
 			if (App.Current.StateData.CurrentLevel == 1)

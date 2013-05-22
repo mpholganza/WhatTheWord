@@ -116,10 +116,10 @@
 				<RowDefinition Height="1*"/>
 				<RowDefinition Height="48.125"/>
 			</Grid.RowDefinitions>
-			<Image x:Name="Picture1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture1.URI}"/>
-			<Image x:Name="Picture2" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1" Source="{Binding Picture2.URI}"/>
-			<Image x:Name="Picture3" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture3.URI}"/>
-			<Image x:Name="Picture4" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1" Source="{Binding Picture4.URI}"/>
+			<Image x:Name="Picture1" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="1"/>
+			<Image x:Name="Picture2" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="1"/>
+			<Image x:Name="Picture3" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1"/>
+			<Image x:Name="Picture4" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="1"/>
 			<TextBlock Text="{Binding Picture1.Credits}" Grid.ColumnSpan="2" HorizontalAlignment="Left" Grid.Row="1" Grid.Column ="0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Margin="-80,85,0,0" Width="200" TextAlignment="Center" Foreground="Gray"  Height="29" FontSize="16">
 				<TextBlock.RenderTransform>
 					<CompositeTransform Rotation="-90"/>

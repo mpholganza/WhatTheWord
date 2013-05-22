@@ -66,7 +66,7 @@ namespace WhatTheWord
             Puzzle currentPuzzle = _gameConfig.Puzzles[index];
 
             // set image
-            WinImage.Source = new BitmapImage(new Uri(currentPuzzle.Picture1.URI, UriKind.Relative));
+            WinImage.Source = currentPuzzle.Picture1.ImageSource;
 
             // set word
             WinWord.Children.Clear();

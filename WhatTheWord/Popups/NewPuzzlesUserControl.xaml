@@ -10,9 +10,14 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     >
-    
-    <UserControl.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
+
+	<UserControl.Resources>
+		<Storyboard x:Name="LoadingAnimation">
+			<DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)"
+             Storyboard.TargetName="LoadingCircle" Duration="00:00:01" From="0" To="360" />
+		</Storyboard>
+		<local:LocalizedStrings xmlns:local="clr-namespace:WhatTheWord" x:Key="LocalizedStrings"/>
 
         <Style x:Key="NewPuzzlesContentPanel" TargetType="StackPanel">
             <Setter Property="Orientation" Value="Vertical" />
@@ -87,10 +92,14 @@
             <StackPanel Grid.Column="0" Grid.Row="0" 
                         VerticalAlignment="Top" HorizontalAlignment="Left"
                         Margin="25,20,0,0">
-                <TextBlock Text="Please keep app open to download more puzzles!"
+                <TextBlock Text="Please keep app open to update puzzles!"
                            Style="{StaticResource NewPuzzlesHeaderTitle}"/>
-				<Image Source="/Assets/loadingSpinner@1280_768.png"></Image>
-				<TextBlock Text="Connection lost, please connect to WiFi for faster internet access"
+				<Image x:Name="LoadingCircle" Source="/Assets/loadingSpinner@1280_768.png" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<CompositeTransform Rotation="0"/>
+					</Image.RenderTransform>
+				</Image>
+				<TextBlock Text="Please connect to WiFi for faster internet access"
                            Style="{StaticResource NewPuzzlesName}"></TextBlock>
 			</StackPanel>
 

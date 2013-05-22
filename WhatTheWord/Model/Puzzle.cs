@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using System.Windows.Resources;
 using Windows.Storage;
 
@@ -28,10 +29,10 @@ namespace WhatTheWord.Model
 			try
 			{
 				// if not in LocalFolder look in pre-packaged Assets folder
-				Picture1.URI = GetPictureUri(Picture1.URI);
-				Picture2.URI = GetPictureUri(Picture2.URI);
-				Picture3.URI = GetPictureUri(Picture3.URI);
-				Picture4.URI = GetPictureUri(Picture4.URI);
+				if (!(Picture1.Load() && Picture2.Load() && Picture3.Load() && Picture4.Load()))
+				{
+					return false;
+				}
 			}
 			catch
 			{
@@ -39,25 +40,6 @@ namespace WhatTheWord.Model
 			}
 
 			return true;
-		}
-
-		private string GetPictureUri(string originalURI)
-		{
-			string pictureUri = originalURI.Replace("zip", "jpg");
-			if (App.Current.LocalFolderFiles.Contains(pictureUri))
-			{
-				pictureUri = "ms-appdata:///local/" + pictureUri;
-			}
-			else
-			{
-				pictureUri = App.PuzzlePicturesPath + pictureUri;
-				StreamResourceInfo sri = App.GetResourceStream(new Uri(pictureUri, UriKind.Relative));
-				if (sri == null)
-				{
-					throw new Exception(pictureUri + " missing.");
-				}
-			}
-			return pictureUri;
 		}
 
 		public static String GeneratePuzzleCharacters(String word)

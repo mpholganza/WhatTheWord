@@ -23,6 +23,7 @@ namespace WhatTheWord
 
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
+			//await DeleteLocalFolderJpgFiles(); // Comment this out during production. This is for debug only.
 			App.Current.LocalFolderFiles = await FileAccess.ListFilesInLocalFolder();
 			await LoadGame();
 			Thread.Sleep(800);
@@ -38,6 +39,23 @@ namespace WhatTheWord
 			await App.Current.StateData.Load();
 
 			App.Current.UpdatePictures(App.Current.ConfigData);
+		}
+
+		/// <summary>
+		/// Delete jpg files in local folder
+		/// FOR DEBUG USE
+		/// </summary>
+		/// <returns></returns>
+		private async Task DeleteLocalFolderJpgFiles()
+		{
+			IReadOnlyList<StorageFile> storageItems = await ApplicationData.Current.LocalFolder.GetFilesAsync();
+			foreach (StorageFile storageItem in storageItems)
+			{
+				if (storageItem.Name.EndsWith("jpg"))
+				{
+					await storageItem.DeleteAsync();
+				}
+			}
 		}
 	}
 }

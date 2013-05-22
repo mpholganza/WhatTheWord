@@ -138,10 +138,10 @@ namespace WhatTheWord
 			Dictionary<string, string> filesToDownload = new Dictionary<string, string>();
 			foreach (KeyValuePair<int, Puzzle> puzzleKvp in tempGameConfig.Puzzles) {
 				Puzzle puzzle = puzzleKvp.Value;
-				filesToDownload.Add(puzzle.Picture1.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture1.URI);
-				filesToDownload.Add(puzzle.Picture2.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture2.URI);
-				filesToDownload.Add(puzzle.Picture3.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture3.URI);
-				filesToDownload.Add(puzzle.Picture4.URI, tempGameConfig.picturesFilenamePath + puzzle.Picture4.URI);
+				filesToDownload.Add(puzzle.Picture1.Path, tempGameConfig.picturesFilenamePath + puzzle.Picture1.Path);
+				filesToDownload.Add(puzzle.Picture2.Path, tempGameConfig.picturesFilenamePath + puzzle.Picture2.Path);
+				filesToDownload.Add(puzzle.Picture3.Path, tempGameConfig.picturesFilenamePath + puzzle.Picture3.Path);
+				filesToDownload.Add(puzzle.Picture4.Path, tempGameConfig.picturesFilenamePath + puzzle.Picture4.Path);
 			}
 
 			List<string> fileNamesToDownload = new List<string>();

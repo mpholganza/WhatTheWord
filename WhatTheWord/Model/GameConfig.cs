@@ -342,10 +342,10 @@ namespace WhatTheWord.Model
 			return new Puzzle()
 			{
 				Word = answer.ToUpper(), // TODO: Fix constructor to do the ToUpper() instead of here
-				Picture1 = new Picture { URI = filename1, Credits = credits1 },
-				Picture2 = new Picture { URI = filename2, Credits = credits2 },
-				Picture3 = new Picture { URI = filename3, Credits = credits3 },
-				Picture4 = new Picture { URI = filename4, Credits = credits4 },
+				Picture1 = new Picture { Path = filename1, Credits = credits1 },
+				Picture2 = new Picture { Path = filename2, Credits = credits2 },
+				Picture3 = new Picture { Path = filename3, Credits = credits3 },
+				Picture4 = new Picture { Path = filename4, Credits = credits4 },
 				Enabled = enable,
 				Id = id,
 				Order = order,

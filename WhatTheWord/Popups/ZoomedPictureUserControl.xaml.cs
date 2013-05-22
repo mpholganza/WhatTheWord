@@ -66,15 +66,15 @@ namespace WhatTheWord.Popups
         }
 
         #region Show and Hide
-        public void show(Uri pictureUri)
-        {
-            if (!_popup.IsOpen)
-            {
-                _popup.Child = this;
-                _popup.IsOpen = true;
-				ThePicture.Source = new BitmapImage(pictureUri);
-            }
-        }
+		public void show(Image image)
+		{
+			if (!_popup.IsOpen)
+			{
+				_popup.Child = this;
+				_popup.IsOpen = true;
+				ThePicture.Source = image.Source;
+			}
+		}
 
         public void hide()
         {
