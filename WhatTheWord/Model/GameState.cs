@@ -380,6 +380,19 @@ namespace WhatTheWord.Model
 			return (CharacterPanelState.Length - removedLetters > this.PuzzleWord.Length);
 		}
 
+        public void AnswerPuzzle()
+        {
+            // Clear the guess panel
+            this.ClearGuessPanel();
+
+            for (int i = 0; i < GuessPanelState.Length; i++)
+            {
+                GuessPanelState[i] = GUESSPANEL_LETTER_REVEALED;
+            }
+
+            this.Save();
+        }
+
 		internal void InitializePuzzle(Puzzle CurrentPuzzle)
 		{
 			if (!this.PuzzleInitialized)

@@ -267,13 +267,13 @@
 				<RowDefinition/>
 				<RowDefinition Height="30"/>
 			</Grid.RowDefinitions>
-			<StackPanel>
-				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Height="34" Margin="0,4,0,0" Width="228"></TextBlock>
-				<TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="290"></TextBlock>
-				<TextBlock Text="Can you tell what's the word?" Style="{StaticResource TutorialSmallHeader}" Height="34" Margin="0,0,0,0" Width="340"></TextBlock>
+			<StackPanel HorizontalAlignment="Center">
+				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Margin="0,4,0,0"></TextBlock>
+				<TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
+				<TextBlock Text="Can you tell what's the word?" Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
 			</StackPanel>
-			<StackPanel Grid.Row="2" Grid.RowSpan="2">
-				<TextBlock Text="Guess the word to start playing. Ready?" Style="{StaticResource TutorialSmallText}" Height="34" Margin="0,0,0,0" Width="380"></TextBlock>
+			<StackPanel Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Text="Guess the word to start playing. Ready?" Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
 			</StackPanel>
 
 		</Grid>

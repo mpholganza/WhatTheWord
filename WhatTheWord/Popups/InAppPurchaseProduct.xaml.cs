@@ -57,11 +57,14 @@ namespace WhatTheWord.Popups
 
         async void PurchaseProduct()
         {
-            await CurrentApp.RequestProductPurchaseAsync(_product.BundleId, false);
-            DoFulfillment();
+            Instrumentation.GetInstance().sendInstrumentation(
+                "Monetization", "AttemptIap", this._product.BundleId, null, _product.Price.ToString());
+
+            string receipt = await CurrentApp.RequestProductPurchaseAsync(_product.BundleId, true);
+            DoFulfillment(receipt);
         }
 
-        public void DoFulfillment()
+        public void DoFulfillment(string receipt)
         {
             var productLicenses = CurrentApp.LicenseInformation.ProductLicenses;
             int coinsToAdd = 0;
@@ -72,6 +75,9 @@ namespace WhatTheWord.Popups
                 {
                     coinsToAdd += App.Current.ConfigData.Purchases[license.ProductId].Coins;
                     CurrentApp.ReportProductFulfillment(license.ProductId);
+
+                    Instrumentation.GetInstance().sendInstrumentation(
+                        "Monetization", "SuccessIap", license.ProductId, receipt, _product.Price.ToString());
                 }
             }
 

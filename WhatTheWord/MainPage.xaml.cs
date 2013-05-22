@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using System.Windows.Media;
 using WhatTheWord.Controls;
 using Windows.Storage;
+using System.Windows.Media.Animation;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -41,9 +42,6 @@ namespace WhatTheWord
 		public MainPage()
 		{
 			InitializeComponent();
-
-            string uri = Instrumentation.GetInstance().getInstrumentationUri(
-                "Heartbeat", "Launch", null, null, null);
 
             SoundEffects.Initialize();
             InitializeBoostBounceTimer();
@@ -72,11 +70,17 @@ namespace WhatTheWord
 			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
 			{
 				if (App.Current.Downloader.InProgress)
-				{
+                {
+                    Instrumentation.GetInstance().sendInstrumentation(
+                        "Puzzle", "AllComplete", "download-more-puzzles", null, null);
+
 					newPuzzlesUserControl.show();
 				}
 				else
-				{
+                {
+                    Instrumentation.GetInstance().sendInstrumentation(
+                        "Puzzle", "AllComplete", "no-more-puzzles", null, null);
+
 					outOfPuzzlesUserControl.show();
 				}
 				return;
@@ -164,6 +168,8 @@ namespace WhatTheWord
 		{
 			facebookUserControl = new FacebookUserControl(new Popup(), this,
 				Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+
+            setupLetterImageAnimation(FacebookButton);
 		}
 
 		private void InitializeCoinsPopup()
@@ -176,6 +182,8 @@ namespace WhatTheWord
 		{
 			boostsUserControl = new BoostsUserControl(new Popup(), this,
                 Application.Current.Host.Content.ActualWidth, Application.Current.Host.Content.ActualHeight);
+
+            setupLetterImageAnimation(BoostButton);
 		}
 
         private void InitializeAboutPopup()
@@ -278,6 +286,8 @@ namespace WhatTheWord
 					GuessPanelLetterPressed(x);
 				};
 
+                setupLetterImageAnimation(letterImage);
+
 				GuessPanel.Children.Add(letterImage);
 			}
 
@@ -310,6 +320,8 @@ namespace WhatTheWord
 					CharacterPanelLetterPressed(x);
 				};
 
+                setupLetterImageAnimation(letterImage);
+
 				if (0 == i % 2)
 				{
 					LetterPickerPanel1.Children.Add(letterImage);
@@ -320,6 +332,79 @@ namespace WhatTheWord
 				}
 			}
 		}
+
+        private void setupLetterImageAnimation(Image letterImage)
+        {
+            letterImage.RenderTransformOrigin = new Point(0.5, 0.5);
+
+            CompositeTransform compositeTransform = new CompositeTransform();
+            compositeTransform.ScaleX = 1;
+            compositeTransform.ScaleY = 1;
+            letterImage.RenderTransform = compositeTransform;
+
+            Storyboard mouseEnterStoryboard = createLetterImageMouseEnterStoryboard();
+            foreach (Timeline timeline in mouseEnterStoryboard.Children)
+            {
+                Storyboard.SetTarget(timeline, letterImage);
+            }
+            letterImage.MouseEnter += (sender, e) =>
+            {
+                mouseEnterStoryboard.Begin();
+            };
+
+            Storyboard mouseLeaveStoryboard = createLetterImageMouseLeaveStoryboard();
+            foreach (Timeline timeline in mouseLeaveStoryboard.Children)
+            {
+                Storyboard.SetTarget(timeline, letterImage);
+            }
+            letterImage.MouseLeave += (sender, e) =>
+            {
+                mouseLeaveStoryboard.Begin();
+            };
+
+        }
+
+        private Storyboard createLetterImageMouseEnterStoryboard()
+        {
+            DoubleAnimation scaleXAnimation = new DoubleAnimation();
+            scaleXAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(50));
+            //scaleXAnimation.From = 1;
+            scaleXAnimation.To = 1.25;
+            Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("(UIElement.RenderTransform).(CompositeTransform.ScaleX)"));
+
+            DoubleAnimation scaleYAnimation = new DoubleAnimation();
+            scaleYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(50));
+            //scaleYAnimation.From = 0;
+            scaleYAnimation.To = 1.25;
+            Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("(UIElement.RenderTransform).(CompositeTransform.ScaleY)"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(scaleXAnimation);
+            storyboard.Children.Add(scaleYAnimation);
+
+            return storyboard;
+        }
+
+        private Storyboard createLetterImageMouseLeaveStoryboard()
+        {
+            DoubleAnimation scaleXAnimation = new DoubleAnimation();
+            scaleXAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(20));
+            //scaleXAnimation.From = 0;
+            scaleXAnimation.To = 1;
+            Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("(UIElement.RenderTransform).(CompositeTransform.ScaleX)"));
+
+            DoubleAnimation scaleYAnimation = new DoubleAnimation();
+            scaleYAnimation.Duration = new Duration(TimeSpan.FromMilliseconds(20));
+            //scaleYAnimation.From = 0;
+            scaleYAnimation.To = 1;
+            Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("(UIElement.RenderTransform).(CompositeTransform.ScaleY)"));
+
+            Storyboard storyboard = new Storyboard();
+            storyboard.Children.Add(scaleXAnimation);
+            storyboard.Children.Add(scaleYAnimation);
+
+            return storyboard;
+        }
 
 		private void ClearButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
@@ -404,8 +489,11 @@ namespace WhatTheWord
 		}
 
 		private DispatcherTimer puzzleStatusTimer;
-		private void PuzzleComplete()
+		public void PuzzleComplete()
         {
+            Instrumentation.GetInstance().sendInstrumentation(
+                "Puzzle", "StageComplete", null, null, App.Current.ConfigData.rewardCoinsPerQuestion.ToString());
+
             SoundEffects.PlayWin();
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;

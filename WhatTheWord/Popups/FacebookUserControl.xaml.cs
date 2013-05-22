@@ -299,6 +299,9 @@ namespace WhatTheWord.Popups
             {
                 //fb.PostAsync("me/photos", parameters);
                 var result = await fb.PostTaskAsync("me/photos", parameters);
+
+                Instrumentation.GetInstance().sendInstrumentation(
+                    "Social", "FacebookShare", null, null, null);
             }
             catch (FacebookApiException e)
             {

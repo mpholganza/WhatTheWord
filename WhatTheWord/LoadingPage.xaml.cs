@@ -39,6 +39,9 @@ namespace WhatTheWord
 			await App.Current.StateData.Load();
 
 			App.Current.UpdatePictures(App.Current.ConfigData);
+
+            Instrumentation.GetInstance().sendInstrumentation(
+                "Heartbeat", "Launch", "launchorreset", null, null);
 		}
 
 		/// <summary>

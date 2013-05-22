@@ -229,6 +229,7 @@
   <ItemGroup>
     <Content Include="Assets\aboutButton%401280_768.png" />
     <Content Include="Assets\altLineColor%40%401280_768.png" />
+    <Content Include="Assets\answerPuzzleBoostIcon%401280_768.png" />
     <Content Include="Assets\backButton_p%401280_768.png" />
     <Content Include="Assets\backButton_q%401280_768.png" />
     <Content Include="Assets\coinIapButton%401280_768.png" />
@@ -239,6 +240,7 @@
     <Content Include="Assets\buyButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton%401280_768.png" />
     <Content Include="Assets\loadingSpinner%401280_768.png" />
+    <Content Include="Assets\maxButton%401280_768.png" />
     <Content Include="Assets\PuzzlePictures\alarm1.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm2.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm3.jpg" />
