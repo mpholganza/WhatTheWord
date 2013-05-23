@@ -495,10 +495,10 @@ namespace WhatTheWord
                 "Puzzle", "StageComplete", null, null, App.Current.ConfigData.rewardCoinsPerQuestion.ToString());
 
             SoundEffects.PlayWin();
-			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
+            TutorialInstruction.Visibility = System.Windows.Visibility.Collapsed;
+            PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/correctSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			Overlay.Visibility = Visibility.Visible; // Disallow user input
-			TutorialOverlay.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Text = "CORRECT!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGCorrect@1280_768.png", UriKind.Relative)));
@@ -509,14 +509,15 @@ namespace WhatTheWord
 		}
 
 		private void puzzleStatusTimer_Correct(object sender, EventArgs e)
-		{
-			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
-			PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
-			Overlay.Visibility = Visibility.Collapsed; // Re-allow user input
+        {
 			App.Current.StateData.CompleteLevel();
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();
-			puzzleStatusTimer.Stop();
+            puzzleStatusTimer.Stop();
+            TutorialOverlay.Visibility = Visibility.Collapsed;
+            PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
+            PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
+            Overlay.Visibility = Visibility.Collapsed; // Re-allow user input
 		}
 
 		private void PuzzleIncorrect()

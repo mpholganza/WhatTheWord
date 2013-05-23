@@ -263,20 +263,40 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="102"/>
+                <RowDefinition Height="79.3"/>
 				<RowDefinition/>
 				<RowDefinition Height="30"/>
 			</Grid.RowDefinitions>
-			<StackPanel HorizontalAlignment="Center">
+            
+			<!--<StackPanel HorizontalAlignment="Center">
 				<TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Margin="0,4,0,0"></TextBlock>
 				<TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
 				<TextBlock Text="Can you tell what's the word?" Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
-			</StackPanel>
-			<StackPanel Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+			</StackPanel>-->
+
+            <Grid Grid.Row="0">
+                <Grid.Background>
+                    <ImageBrush Stretch="Fill" ImageSource="/Assets/topBarBG@1280_768.png"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Guess This Word!" Style="{StaticResource TutorialHeaderFont}" Margin="0,0,0,0"></TextBlock>
+                    <TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallHeader}" Margin="0,0,0,0"></TextBlock>
+                </StackPanel>
+            </Grid>
+            <StackPanel x:Name="TutorialInstruction" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<TextBlock Text="Guess the word to start playing. Ready?" Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
 			</StackPanel>
 
 		</Grid>
-	</Grid>
+    </Grid>
 
 </phone:PhoneApplicationPage>
