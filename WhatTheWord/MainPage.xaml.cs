@@ -583,6 +583,10 @@ namespace WhatTheWord
             {
                 userReviewUserControl.hide();
             }
+            else if (resetGameConfirmationUserControl.isOpen())
+            {
+                resetGameConfirmationUserControl.hide();
+            }
 			else
 			{
 				cancelBackbutton = false;
@@ -605,7 +609,8 @@ namespace WhatTheWord
                 || outOfPuzzlesUserControl.isOpen()
                 || resetGameConfirmationUserControl.isOpen()
                 || zoomedPictureUserControl.isOpen()
-                || userReviewUserControl.isOpen();
+                || userReviewUserControl.isOpen()
+                || resetGameConfirmationUserControl.isOpen();
         }
 
 		// Sample code for building a localized ApplicationBar

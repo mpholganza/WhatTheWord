@@ -100,10 +100,14 @@ namespace WhatTheWord.Popups
         }
         #endregion
 
+        private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NoResetGame_Tap(sender, e);
+        }
+
 		private void NoResetGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
-			this.isOpenedFromSettings = true;
 			_mainPage.settingsUserControl.show();
 			this.hide();
 		}
@@ -112,8 +116,8 @@ namespace WhatTheWord.Popups
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
 			App.Current.StateData.ResetGame();
-
 			this.hide();
+
 			_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
 			_mainPage.NavigationService.RemoveBackEntry();
 		}
