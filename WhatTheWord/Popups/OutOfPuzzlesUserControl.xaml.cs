@@ -103,10 +103,16 @@ namespace WhatTheWord.Popups
 
 		private void DebugResetButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
-			App.Current.StateData.ResetGame();
-			this.hide();
-			_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
-			_mainPage.NavigationService.RemoveBackEntry();
+            WhatTheWord.Controls.SoundEffects.PlayClick();
+
+            _mainPage.resetGameConfirmationUserControl.isOpenedFromOutOfPuzzles = true;
+            _mainPage.resetGameConfirmationUserControl.show();
+
+            this.hide();
+
+            //App.Current.StateData.ResetGame();
+            //_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
+            //_mainPage.NavigationService.RemoveBackEntry();
 		}
     }
 
