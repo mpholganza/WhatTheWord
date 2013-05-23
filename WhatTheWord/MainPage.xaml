@@ -143,7 +143,7 @@
 			<Image x:Name="PuzzleAttemptStatusBackground" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="36" Width="240" Source="/Assets/correctSlider@1280_768.png" Stretch="None" Visibility="Collapsed"/>
 			<TextBlock x:Name="PuzzleAttemptStatus" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource HeaderFont}" Height="32" Text="CORRECT!" Foreground="White" Visibility="Collapsed"/>
             <TextBlock x:Name="TutorialInstruction" Grid.Row="4" Grid.ColumnSpan="5"
-                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Visible" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Collapsed" 
                        Text="Guess the word to play." Style="{StaticResource TutorialSmallText}" 
                        Margin="0,0,0,5"></TextBlock>
         </Grid>
