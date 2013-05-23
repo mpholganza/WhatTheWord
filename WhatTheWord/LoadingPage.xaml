@@ -21,13 +21,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="0,0,0,0">
-			<Image Source="SplashScreenImage.jpg"></Image>
+			<Image Source="SplashScreenImage.jpg" Stretch="Fill"></Image>
 		</StackPanel>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

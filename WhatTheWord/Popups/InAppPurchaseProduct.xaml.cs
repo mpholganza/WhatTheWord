@@ -84,6 +84,7 @@ namespace WhatTheWord.Popups
             if (coinsToAdd != 0)
             {
                 App.Current.StateData.Coins += coinsToAdd;
+				App.Current.StateData.Save();
                 _mainPage.DisplayGame();
                 WhatTheWord.Controls.SoundEffects.PlayBuy();
             }

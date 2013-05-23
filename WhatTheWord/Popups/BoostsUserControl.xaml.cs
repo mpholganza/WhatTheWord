@@ -179,6 +179,7 @@ namespace WhatTheWord.Popups
                 WhatTheWord.Controls.SoundEffects.PlayBuy();
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RevealLetter();
+				App.Current.StateData.Save();
 				_mainPage.DisplayGame();
 			}
 
@@ -210,6 +211,7 @@ namespace WhatTheWord.Popups
                 WhatTheWord.Controls.SoundEffects.PlayBuy();
 				App.Current.StateData.Coins -= cost;
 				App.Current.StateData.RemoveLetter();
+				App.Current.StateData.Save();
 				_mainPage.DisplayGame();
 			}
 
@@ -241,6 +243,7 @@ namespace WhatTheWord.Popups
                 WhatTheWord.Controls.SoundEffects.PlayBuy();
                 App.Current.StateData.Coins -= cost;
                 App.Current.StateData.AnswerPuzzle();
+				App.Current.StateData.Save();
                 _mainPage.DisplayGame();
                 _mainPage.PuzzleComplete();
             }
@@ -252,25 +255,6 @@ namespace WhatTheWord.Popups
         {
             AnswerPuzzle();
         }
-
-		//private void ShuffleButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-		//{
-		//	int cost = int.Parse(ShuffleButton_Text.Text);
-
-		//	if (cost > App.Current.StateData.Coins)
-		//	{
-		//		openCoinsPopup();
-		//	}
-		//	else
-		//	{
-		//		App.Current.StateData.Coins -= cost;
-		//		App.Current.StateData.JumblePuzzleCharacters();
-		//		_mainPage.DisplayGame();
-		//		WhatTheWord.Controls.SoundEffects.PlayBuy();
-		//	}
-
-		//	this.hide();
-		//}
     }
 
 }

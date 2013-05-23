@@ -300,7 +300,8 @@ namespace WhatTheWord
 				letterImage.Height = 56.25;
 				letterImage.Width = 56.25;
 
-				switch (App.Current.StateData.CharacterPanelState[i])
+				int puzzleCharacterIndex = App.Current.StateData.CharacterPanelState[i];
+				switch (puzzleCharacterIndex)
 				{
 					case GameState.CHARACTERPANEL_LETTER_REMOVED:
 						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
@@ -309,7 +310,7 @@ namespace WhatTheWord
 						letterImage.Source = new BitmapImage(new Uri("/Assets/sandBoxBG@1280_768.png", UriKind.Relative));
 						break;
 					default:
-						string letter = App.Current.StateData.PuzzleCharacters[i].ToString();
+						string letter = App.Current.StateData.PuzzleCharacters[puzzleCharacterIndex].ToString();
 						letterImage.Source = new BitmapImage(new Uri("/Assets/SandboxLetters/sb_" + letter + "@1280_768.png", UriKind.Relative));
 						break;
 				}
@@ -449,14 +450,7 @@ namespace WhatTheWord
 
 		private void GuessPanelLetterPressed(int guessPanelIndex)
 		{
-			int currentGuessPanelIndexValue = App.Current.StateData.GuessPanelState[guessPanelIndex];
-			if (currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_REVEALED && currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_NOT_GUESSED)
-			{
-				// Return a letter back to the character panel
-				App.Current.StateData.CharacterPanelState[currentGuessPanelIndexValue] = currentGuessPanelIndexValue;
-				App.Current.StateData.GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
-			}
-
+			App.Current.StateData.GuessPanelLetterPressed(guessPanelIndex);
 			App.Current.StateData.Save();
 			DisplayGame();
 		}
