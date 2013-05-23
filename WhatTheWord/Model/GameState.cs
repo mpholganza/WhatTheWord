@@ -215,31 +215,45 @@ namespace WhatTheWord.Model
 			// Clear guess panel
 			for (int i = 0; i < GuessPanelState.Length; i++)
 			{
-				if (GuessPanelState[i] != GameState.GUESSPANEL_LETTER_REVEALED)
+				if (GuessPanelState[i] != GameState.GUESSPANEL_LETTER_REVEALED && GuessPanelState[i] != GameState.GUESSPANEL_LETTER_NOT_GUESSED)
 				{
+					int index = GetIndexOfFirstGuessedCharacterPanel();
+					if (index == -1) { throw new ApplicationException("Error clearing letters"); }
+					CharacterPanelState[index] = GuessPanelState[i];
 					GuessPanelState[i] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
-				}
-			}
-
-			// Clear character panel
-			for (int i = 0; i < CharacterPanelState.Length; i++)
-			{
-				if (CharacterPanelState[i] != GameState.CHARACTERPANEL_LETTER_REMOVED)
-				{
-					CharacterPanelState[i] = i;
 				}
 			}
 		}
 
+		private int GetIndexOfFirstGuessedCharacterPanel()
+		{
+			for (int i = 0; i < CharacterPanelState.Length; i++)
+			{
+				if (CharacterPanelState[i] == GameState.CHARACTERPANEL_LETTER_GUESSED)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+
+		public void GuessPanelLetterPressed(int guessPanelIndex)
+		{
+			int currentGuessPanelIndexValue = GuessPanelState[guessPanelIndex];
+			if (currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_REVEALED && currentGuessPanelIndexValue != GameState.GUESSPANEL_LETTER_NOT_GUESSED)
+			{
+				int index = GetIndexOfFirstGuessedCharacterPanel();
+				if (index == -1) { throw new ApplicationException("Error clearing letters"); }
+				CharacterPanelState[index] = currentGuessPanelIndexValue;
+				GuessPanelState[guessPanelIndex] = GameState.GUESSPANEL_LETTER_NOT_GUESSED;
+			}
+
+		}
+
 		public void JumblePuzzleCharacters()
 		{
-			// TODO: IMPORTANT BUG - CAN'T SHIP WITH THIS
-			// if jumbled after removing letters removed letters can characters show up
-			// replacing non-removed characters. this can make the puzzle unsolvable
-			// should only jumble characters in the characterpanel
 			this.ClearGuessPanel();
-
-			PuzzleCharacters = Puzzle.Jumble(PuzzleCharacters);
+			this.JumbleCharacterPanel();
 		}
 
 		public void JumbleCharacterPanel()
