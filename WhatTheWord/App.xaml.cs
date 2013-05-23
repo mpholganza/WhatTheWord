@@ -33,6 +33,8 @@ namespace WhatTheWord
 		/// <returns>The root frame of the Phone Application.</returns>
 		public static PhoneApplicationFrame RootFrame { get; private set; }
 
+		public static string GetConfigDataUrl = "http://www.kooappsservers.com/kooappsFlights/getData.php";
+
 		public GameConfig ConfigData { get; set; }
 		public GameState StateData { get; set; }
 
@@ -91,20 +93,23 @@ namespace WhatTheWord
 
 
 
-		private void LoadGameConfigFromWeb()
+		public void LoadGameConfigFromWeb()
 		{
-			//string udid = DeviceExtendedProperties.GetValue("DeviceUniqueId").ToString();
-			//string flight = "test";
-			//string password = "pjcfizp12fzviwx";
-			//string appName = "com.kooapps.guessthisword";
-			//string version = "1.0";
-			//string hash = MD5(MD5(udid) + "com.kooapps.guessthisword" + flight + password + version + udid);
+			Dictionary<string, string> parameters = new Dictionary<string, string>();
+			parameters["udid"] = Instrumentation.getDeviceUniqueId();
+			parameters["appName"] = "com.kooapps.guessthisword";
+			parameters["flight"] = App.Current.ConfigData.flight.ToString();
+			parameters["password"] = "pjcfizp12fzviwx";
+			parameters["version"] = "1.0";
+
+			string hash = Instrumentation.generateHash(parameters["udid"], parameters);
 
 			// Download config info from web, if valid save to file
-			//string uri = "http://www.google.com";
-			Uri uri = new Uri("http://www.kooappsservers.com/kooappsFlights/getData.php?appName=com.kooapps.guessthisword&hash=a3819daec9ab5b3243abf7d8731e4d77&udid=testudid&version=1.0&flight=test&password=pjcfizp12fzviwx");
-			//string uri = String.Format("http://www.kooappsservers.com/kooappsFlights/getData.php?appName={0}&hash={1}&udid={2}&version={3}&flight={4}&password={5}",
-			//	appName, hash, udid, version, flight, password);
+			string url = GetConfigDataUrl + "?" +
+				Instrumentation.concatenateParameters(parameters, "&") +
+				"&hash=" + hash;
+
+			Uri uri = new Uri(url);
 
 			WebClient client = new WebClient();
 			client.DownloadStringCompleted += client_DownloadStringCompleted;
@@ -182,14 +187,12 @@ namespace WhatTheWord
 		// This code will not execute when the application is reactivated
 		private void Application_Launching(object sender, LaunchingEventArgs e)
 		{
-			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is activated (brought to foreground)
 		// This code will not execute when the application is first launched
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
-			LoadGameConfigFromWeb();
 		}
 
 		// Code to execute when the application is deactivated (sent to background)

@@ -26,6 +26,7 @@ namespace WhatTheWord
 			//await DeleteLocalFolderJpgFiles(); // Comment this out during production. This is for debug only.
 			App.Current.LocalFolderFiles = await FileAccess.ListFilesInLocalFolder();
 			await LoadGame();
+			App.Current.LoadGameConfigFromWeb();
 			Thread.Sleep(800);
 			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();

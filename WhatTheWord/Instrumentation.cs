@@ -26,7 +26,7 @@ namespace WhatTheWord
             return instrumentationInstance;
         }
 
-        public string getDeviceUniqueId()
+        public static string getDeviceUniqueId()
         {
             string unqiueidAsString = "Unknown";
             object uniqueid = DeviceExtendedProperties.GetValue("DeviceUniqueId");
@@ -37,7 +37,7 @@ namespace WhatTheWord
             return unqiueidAsString;
         }
 
-        public string getMD5Hash(string input)
+        public static string getMD5Hash(string input)
         {
             byte[] bs = System.Text.Encoding.UTF8.GetBytes(input);
             MD5Managed md5 = new MD5Managed();
@@ -52,7 +52,7 @@ namespace WhatTheWord
             return sb.ToString();
         }
 
-        private string concatenateParametersForHash(Dictionary<string, string> parameters)
+        public static string concatenateParametersForHash(Dictionary<string, string> parameters)
         {
             var list = parameters.Keys.ToList();
             list.Sort();
@@ -66,7 +66,7 @@ namespace WhatTheWord
             return sb.ToString();
         }
 
-        private string generateHashForInstrumentation(
+        public static string generateHash(
             string uid, Dictionary<string, string> parameters)
         {
             /* Hash algorithm
@@ -95,7 +95,7 @@ namespace WhatTheWord
         }
 
 
-        public string concatenateParameters(
+        public static string concatenateParameters(
             Dictionary<string, string> parameters, string delimiter)
         {
             string query = String.Empty;
@@ -190,7 +190,7 @@ namespace WhatTheWord
                 sub_type,
                 hc_amt);
             
-            string hash = generateHashForInstrumentation(getDeviceUniqueId(), parameters);
+            string hash = generateHash(getDeviceUniqueId(), parameters);
 
             string uri = this.Url + "?" +
                 concatenateParameters(parameters, "&") +
