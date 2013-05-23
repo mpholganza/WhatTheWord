@@ -137,7 +137,8 @@ namespace WhatTheWord
 		private void InitializeTutorialPuzzle()
 		{
 			HeaderPanel.Visibility = Visibility.Collapsed;
-			TutorialOverlay.Visibility = Visibility.Visible;
+            TutorialOverlay.Visibility = Visibility.Visible;
+            TutorialInstruction.Visibility = Visibility.Visible;
 			GuessPanelTutorial1.Visibility = Visibility.Visible;
 			GuessPanelTutorial2.Visibility = Visibility.Visible;
 			ShuffleButton.Visibility = Visibility.Collapsed;
@@ -526,7 +527,8 @@ namespace WhatTheWord
 			PuzzleAttemptStatusBackground.Source = new BitmapImage(new Uri("/Assets/tryAgainSlider@1280_768.png", UriKind.Relative));
 			PuzzleAttemptStatusBackground.Visibility = Visibility.Visible;
 			Overlay.Visibility = Visibility.Visible;
-			TutorialOverlay.Visibility = Visibility.Collapsed;
+            //TutorialOverlay.Visibility = Visibility.Collapsed;
+            TutorialInstruction.Visibility = Visibility.Collapsed;
 			PuzzleAttemptStatus.Text = "TRY AGAIN!";
 			PuzzleAttemptStatus.Visibility = Visibility.Visible;
 			GuessPanelGrid.Background.SetValue(ImageBrush.ImageSourceProperty, new BitmapImage(new Uri("/Assets/guessBGTryAgain@1280_768.png", UriKind.Relative)));
@@ -543,7 +545,8 @@ namespace WhatTheWord
 
 			if (App.Current.StateData.CurrentLevel == 1)
 			{
-				TutorialOverlay.Visibility = Visibility.Visible;
+                TutorialOverlay.Visibility = Visibility.Visible;
+                TutorialInstruction.Visibility = Visibility.Visible;
 			}
 
 			PuzzleAttemptStatus.Visibility = Visibility.Collapsed;

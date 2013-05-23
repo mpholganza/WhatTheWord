@@ -138,6 +138,8 @@
                            Style="{StaticResource AboutName}"/>
                 <TextBlock Text="Dong Ming" HorizontalAlignment="Center"
                            Style="{StaticResource AboutName}"/>
+                <TextBlock Text="Yi Lang Mok" HorizontalAlignment="Center"
+                           Style="{StaticResource AboutName}"/>
                 <TextBlock Text="Akshay Ahooja" HorizontalAlignment="Center"
                            Style="{StaticResource AboutName}"/>
                 <TextBlock Text="Teresa Thomas" HorizontalAlignment="Center"

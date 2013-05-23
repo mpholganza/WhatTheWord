@@ -142,7 +142,11 @@
 			</TextBlock>
 			<Image x:Name="PuzzleAttemptStatusBackground" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="36" Width="240" Source="/Assets/correctSlider@1280_768.png" Stretch="None" Visibility="Collapsed"/>
 			<TextBlock x:Name="PuzzleAttemptStatus" Grid.Row="4" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource HeaderFont}" Height="32" Text="CORRECT!" Foreground="White" Visibility="Collapsed"/>
-		</Grid>
+            <TextBlock x:Name="TutorialInstruction" Grid.Row="4" Grid.ColumnSpan="5"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Visibility="Visible" 
+                       Text="Guess the word to play." Style="{StaticResource TutorialSmallText}" 
+                       Margin="0,0,0,5"></TextBlock>
+        </Grid>
 
 		<Grid Grid.Row="2" x:Name="GuessPanelGrid">
 			<Grid.Background>
@@ -164,7 +168,7 @@
                                   Style="{StaticResource ImageButtonStyle}"
                                   x:Name="ClearButton" />
 			<StackPanel x:Name="GuessPanelContainer" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
-				<TextBlock x:Name="GuessPanelTutorial1" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">Let's&#160;</TextBlock>
+                <TextBlock x:Name="GuessPanelTutorial1" VerticalAlignment="Center" FontSize="37" FontWeight="Bold" Visibility="Collapsed" CharacterSpacing="35" Margin="0,0,0,2" Foreground="#FFFFFF">Let's&#160;</TextBlock>
 				<StackPanel x:Name="GuessPanel" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0" Grid.ColumnSpan="1">
 					<StackPanel.Resources>
 						<Style TargetType="Image">
@@ -172,7 +176,7 @@
 						</Style>
 					</StackPanel.Resources>
 				</StackPanel>
-				<TextBlock x:Name="GuessPanelTutorial2" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Visibility="Collapsed">!</TextBlock>
+                <TextBlock x:Name="GuessPanelTutorial2" VerticalAlignment="Center" FontSize="37" FontWeight="Bold" Visibility="Collapsed" Foreground="#FFFFFF" Margin="0,0,0,2">!</TextBlock>
 			</StackPanel>
 			<controls:ImageButton Grid.Column="2"
                                   ImageSource="/Assets/shuffleButton@1280_768.png"
@@ -257,15 +261,13 @@
               Style="{StaticResource Invisible_Overlay}" Visibility="Collapsed" />
 
 		<!--This overlay is for the tutorial-->
-		<Grid x:Name="TutorialOverlay" Grid.Row="0" Grid.RowSpan="2" 
+		<Grid x:Name="TutorialOverlay" Grid.Row="0" 
               Style="{StaticResource Tutorial_Overlay}" Visibility="Collapsed">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Grid.RowDefinitions>
                 <RowDefinition Height="79.3"/>
-				<RowDefinition/>
-				<RowDefinition Height="30"/>
 			</Grid.RowDefinitions>
             
 			<!--<StackPanel HorizontalAlignment="Center">
@@ -292,10 +294,6 @@
                     <TextBlock Text="Four Pictures. One Word." Style="{StaticResource TutorialSmallHeader}" Margin="0,0,0,0"></TextBlock>
                 </StackPanel>
             </Grid>
-            <StackPanel x:Name="TutorialInstruction" Grid.Row="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<TextBlock Text="Guess the word to start playing. Ready?" Style="{StaticResource TutorialSmallText}" Margin="0,0,0,0"></TextBlock>
-			</StackPanel>
-
 		</Grid>
     </Grid>
 
