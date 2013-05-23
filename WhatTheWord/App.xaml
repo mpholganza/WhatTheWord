@@ -49,7 +49,7 @@
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
 			<Setter Property="FontSize" Value="34" />
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="CharacterSpacing" Value="35"/>
         </Style>
 
@@ -58,8 +58,8 @@
 			<Setter Property="HorizontalAlignment" Value="Center" />
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-			<Setter Property="FontSize" Value="24" />
-			<Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Foreground" Value="White"/>
 		</Style>
 
 		<Style x:Key="TutorialSmallText" TargetType="TextBlock">
@@ -68,7 +68,7 @@
 			<Setter Property="FontWeight" Value="Bold" />
 			<Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
 			<Setter Property="FontSize" Value="20" />
-			<Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="#777777"/>
 		</Style>
 
 		<Style x:Key="Popup_Overlay" TargetType="Grid">

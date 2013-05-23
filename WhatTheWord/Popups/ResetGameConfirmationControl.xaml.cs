@@ -18,6 +18,9 @@ namespace WhatTheWord.Popups
         private MainPage _mainPage;
 
         public bool isOpenedFromSettings = false;
+        public bool isOpenedFromOutOfPuzzles = false;
+
+        private bool userPressedYes = false;
 
         public double HostWindowWidth { get; set; }
         public double HostWindowHeight { get; set; }
@@ -73,8 +76,20 @@ namespace WhatTheWord.Popups
 
         public void hide()
         {
-            if (isOpenedFromSettings)
+            if (isOpenedFromOutOfPuzzles)
             {
+                if (!userPressedYes)
+                {
+                    _mainPage.outOfPuzzlesUserControl.show();
+                }
+                this.isOpenedFromOutOfPuzzles = false;
+            }
+            else if (isOpenedFromSettings)
+            {
+                if (!userPressedYes)
+                {
+                    _mainPage.settingsUserControl.show();
+                }
                 this.isOpenedFromSettings = false;
             }
             _popup.IsOpen = false;
@@ -100,11 +115,15 @@ namespace WhatTheWord.Popups
         }
         #endregion
 
+        private void BackButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NoResetGame_Tap(sender, e);
+        }
+
 		private void NoResetGame_Tap(object sender, System.Windows.Input.GestureEventArgs e)
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
-			this.isOpenedFromSettings = true;
-			_mainPage.settingsUserControl.show();
+            userPressedYes = false;
 			this.hide();
 		}
 
@@ -112,8 +131,9 @@ namespace WhatTheWord.Popups
 		{
 			WhatTheWord.Controls.SoundEffects.PlayClick();
 			App.Current.StateData.ResetGame();
-
+            userPressedYes = true;
 			this.hide();
+
 			_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
 			_mainPage.NavigationService.RemoveBackEntry();
 		}

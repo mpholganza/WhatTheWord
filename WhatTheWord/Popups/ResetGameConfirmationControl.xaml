@@ -5,6 +5,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="clr-namespace:WhatTheWord.Controls"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -70,47 +71,52 @@
               Style="{StaticResource Popup_HeaderPanel}" >
         
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="9*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <controls:ImageButton Grid.Column="0" Tap="BackButton_Tap"
+                                  ImageSource="/Assets/backButton@1280_768.png"
+                                  ImageDisabledSource="/Assets/backButton@1280_768.png"
+                                  ImagePressedSource="/Assets/backButton_p@1280_768.png"
+                                  Height="60" Width="60"
+                                  Margin="12,0,12,0" HorizontalAlignment="Left"
+                                  Style="{StaticResource ImageButtonStyle}"
+                                  x:Name="BackButton" />
+
             <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="RESET GAME" 
+                       HorizontalAlignment="Left"
                        Style="{StaticResource Popup_HeaderFont}" />
 
         </Grid>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Style="{StaticResource Popup_ContentPanel}" >
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
             
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0" Grid.Row="0" 
-                        VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="25,20,25,40">
-                <TextBlock Text="Are you sure you want to reset your game progress and start over?"
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"
+                        Margin="10,20,15,25">
+                <TextBlock Text="Your coins and your game progress will be reset. Do you want to start over?"
+                           Margin="15,0,15,6"
                            Style="{StaticResource ResetGameConfirmationHeaderTitle}" />
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-					<Button x:Name="NoResetGame" Grid.Column="0" Tap="NoResetGame_Tap"
-						Style="{StaticResource Popup_ButtonStyle}" Margin="0,9,0,8" Width="114">
-						<StackPanel Orientation="Horizontal">
-							<TextBlock x:Name="ResetEntireGame_Text" Text="NO" Style="{StaticResource ResetGameConfirmationButton_Text}"/>
-						</StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="YesResetGame" Grid.Column="0" Tap="YesResetGame_Tap"
+                            HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="Auto"
+						    Style="{StaticResource Popup_ButtonStyle}">
+                        <TextBlock Text="YES" Style="{StaticResource ResetGameConfirmationButton_Text}"/>
+                    </Button>
+                    
+                    <Button x:Name="NoResetGame" Grid.Column="1" Tap="NoResetGame_Tap"
+                            HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="Auto"
+						    Style="{StaticResource Popup_ButtonStyle}">
+						<TextBlock x:Name="ResetEntireGame_Text" Text="NO" Style="{StaticResource ResetGameConfirmationButton_Text}"/>
 					</Button>
-					<Button x:Name="YesResetGame" Grid.Column="2" Tap="YesResetGame_Tap"
-						Style="{StaticResource Popup_ButtonStyle}" Margin="0,9,0,8" Width="114">
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="YES" Style="{StaticResource ResetGameConfirmationButton_Text}"/>
-						</StackPanel>
-					</Button>
-				</StackPanel>
-			</StackPanel>
+                </Grid>
+            </StackPanel>
 
         </Grid>
 
