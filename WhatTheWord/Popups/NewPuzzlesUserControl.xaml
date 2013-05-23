@@ -73,7 +73,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="New Puzzles" 
+            <TextBlock Grid.Column="1" x:Name="HeaderTitle" Text="NEW PUZZLES" 
                        Style="{StaticResource Popup_HeaderFont}" />
 
         </Grid>
@@ -91,15 +91,17 @@
             
             <StackPanel Grid.Column="0" Grid.Row="0" 
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="25,20,0,0">
-                <TextBlock Text="Please keep app open to update puzzles!"
+                        Margin="25,20,25,25">
+                <TextBlock Text="Please keep the app open to update the puzzles!"
                            Style="{StaticResource NewPuzzlesHeaderTitle}"/>
-				<Image x:Name="LoadingCircle" Source="/Assets/loadingSpinner@1280_768.png" RenderTransformOrigin="0.5,0.5">
+				<Image x:Name="LoadingCircle" Source="/Assets/loadingSpinner@1280_768.png"
+                       Margin="30" Width="150" 
+                       RenderTransformOrigin="0.5,0.5">
 					<Image.RenderTransform>
 						<CompositeTransform Rotation="0"/>
 					</Image.RenderTransform>
 				</Image>
-				<TextBlock Text="Please connect to WiFi for faster internet access"
+				<TextBlock Text="Connect to WiFi for faster downloads."
                            Style="{StaticResource NewPuzzlesName}"></TextBlock>
 			</StackPanel>
 
