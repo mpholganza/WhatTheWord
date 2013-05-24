@@ -65,10 +65,257 @@
             </summary>
             <value>The epoch time.</value>
         </member>
+        <member name="T:Facebook.FacebookApiEventArgs">
+            <summary>
+            Represents the Facebook api event args.
+            </summary>
+        </member>
+        <member name="F:Facebook.FacebookApiEventArgs._result">
+            <summary>
+            The result.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookApiEventArgs.#ctor(System.Exception,System.Boolean,System.Object,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiEventArgs"/> class.
+            </summary>
+            <param name="error">
+            The error.
+            </param>
+            <param name="cancelled">
+            The cancelled.
+            </param>
+            <param name="userState">
+            The user state.
+            </param>
+            <param name="result">
+            The result.
+            </param>
+        </member>
+        <member name="M:Facebook.FacebookApiEventArgs.GetResultData">
+            <summary>
+            Get the json result.
+            </summary>
+            <returns>
+            The json result.
+            </returns>
+        </member>
+        <member name="M:Facebook.FacebookApiEventArgs.GetResultData``1">
+            <summary>
+            Get the json result.
+            </summary>
+            <typeparam name="TResult">The result type.</typeparam>
+            <returns>The json result.</returns>
+        </member>
+        <member name="T:Facebook.FacebookApiException">
+            <summary>
+            Represent errors that occur while calling a Facebook API.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="errorType">Type of the error.</param>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="errorType">Type of the error.</param>
+            <param name="errorCode">Code of the error.</param>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="errorType">Type of the error.</param>
+            <param name="errorCode">Code of the error.</param>
+            <param name="errorSubcode">Subcode of the error.</param>
+        </member>
+        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Facebook.FacebookApiException.ErrorType">
+            <summary>
+            Gets or sets the type of the error.
+            </summary>
+            <value>The type of the error.</value>
+        </member>
+        <member name="P:Facebook.FacebookApiException.ErrorCode">
+            <summary>
+            Gets or sets the code of the error.
+            </summary>
+            <value>The code of the error.</value>
+        </member>
+        <member name="P:Facebook.FacebookApiException.ErrorSubcode">
+            <summary>
+            Gets or sets the error subcode.
+            </summary>
+            <value>The code of the error subcode.</value>
+        </member>
+        <member name="T:Facebook.FacebookBatchParameter">
+            <summary>
+            Represents a batch parameter for the creating batch requests.
+            </summary>
+            <remarks>
+            http://developers.facebook.com/docs/api/batch/
+            </remarks>
+        </member>
+        <member name="M:Facebook.FacebookBatchParameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookBatchParameter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
+            </summary>
+            <param name="path">
+            The resource path.
+            </param>
+        </member>
+        <member name="M:Facebook.FacebookBatchParameter.#ctor(Facebook.HttpMethod,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
+            </summary>
+            <param name="httpMethod">
+            The http method.
+            </param>
+            <param name="path">
+            The resource path.
+            </param>
+        </member>
+        <member name="M:Facebook.FacebookBatchParameter.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
+            </summary>
+            <param name="path">
+            The resource path.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+        </member>
+        <member name="M:Facebook.FacebookBatchParameter.#ctor(Facebook.HttpMethod,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
+            </summary>
+            <param name="httpMethod">
+            The http method.
+            </param>
+            <param name="path">
+            The resource path.
+            </param>
+            <param name="parameters">
+            The parameters.
+            </param>
+        </member>
+        <member name="P:Facebook.FacebookBatchParameter.HttpMethod">
+            <summary>
+            Gets or sets the http method.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookBatchParameter.Path">
+            <summary>
+            Gets or sets the resource path.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookBatchParameter.Parameters">
+            <summary>
+            Gets or sets the parameters.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookBatchParameter.Data">
+            <summary>
+            Gets or sets the raw data parameter.
+            </summary>
+        </member>
         <member name="T:Facebook.FacebookClient">
             <summary>
             Provides access to the Facbook Platform.
             </summary>
+        </member>
+        <member name="M:Facebook.FacebookClient.#cctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookClient.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
+            </summary>
+            <param name="accessToken">The facebook access_token.</param>
+            <exception cref="T:System.ArgumentNullException">Access token in null or empty.</exception>
+        </member>
+        <member name="M:Facebook.FacebookClient.SetDefaultJsonSerializers(System.Func{System.Object,System.String},System.Func{System.String,System.Type,System.Object})">
+            <summary>
+            Sets the default json seriazliers and deserializers.
+            </summary>
+            <param name="jsonSerializer">Json serializer</param>
+            <param name="jsonDeserializer">Json deserializer</param>
+        </member>
+        <member name="M:Facebook.FacebookClient.SetJsonSerializers(System.Func{System.Object,System.String},System.Func{System.String,System.Type,System.Object})">
+            <summary>
+            Sets the json seriazliers and deserializers for the current instance of <see cref="T:Facebook.FacebookClient"/>.
+            </summary>
+            <param name="jsonSerializer">Json serializer</param>
+            <param name="jsonDeserializer">Json deserializer</param>
+        </member>
+        <member name="M:Facebook.FacebookClient.SetDefaultHttpWebRequestFactory(System.Func{System.Uri,Facebook.HttpWebRequestWrapper})">
+            <summary>
+            Sets the default http web request factory.
+            </summary>
+            <param name="httpWebRequestFactory"></param>
+        </member>
+        <member name="M:Facebook.FacebookClient.SetHttpWebRequestFactory(System.Func{System.Uri,Facebook.HttpWebRequestWrapper})">
+            <summary>
+            Sets the http web request factory for the current instance of <see cref="T:Facebook.FacebookClient"/>.
+            </summary>
+            <param name="httpWebRequestFactory"></param>
+        </member>
+        <member name="M:Facebook.FacebookClient.ToDictionary(System.Object,System.Collections.Generic.IDictionary{System.String,Facebook.FacebookMediaObject}@,System.Collections.Generic.IDictionary{System.String,Facebook.FacebookMediaStream}@)">
+            <summary>
+            Converts the parameters to IDictionary&lt;string,object&gt;
+            </summary>
+            <param name="parameters">The parameter to convert.</param>
+            <param name="mediaObjects">The extracted Facebook media objects.</param>
+            <param name="mediaStreams">The extracted Facebook media streams.</param>
+            <returns>The converted dictionary.</returns>
+        </member>
+        <member name="M:Facebook.FacebookClient.BuildHttpQuery(System.Object,System.Func{System.String,System.String})">
+            <summary>
+            Converts the parameters to http query.
+            </summary>
+            <param name="parameter">The parameter to convert.</param>
+            <param name="encode">Url encoder function.</param>
+            <returns>The http query.</returns>
+            <remarks>
+            The result is not url encoded. The caller needs to take care of url encoding the result.
+            </remarks>
         </member>
         <member name="M:Facebook.FacebookClient.CancelAsync">
             <summary>
@@ -437,130 +684,6 @@
             The json result task.
             </returns>
         </member>
-        <member name="M:Facebook.FacebookClient.#cctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
-            </summary>
-        </member>
-        <member name="M:Facebook.FacebookClient.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
-            </summary>
-        </member>
-        <member name="M:Facebook.FacebookClient.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookClient"/> class.
-            </summary>
-            <param name="accessToken">The facebook access_token.</param>
-            <exception cref="T:System.ArgumentNullException">Access token in null or empty.</exception>
-        </member>
-        <member name="M:Facebook.FacebookClient.SetDefaultJsonSerializers(System.Func{System.Object,System.String},System.Func{System.String,System.Type,System.Object})">
-            <summary>
-            Sets the default json seriazliers and deserializers.
-            </summary>
-            <param name="jsonSerializer">Json serializer</param>
-            <param name="jsonDeserializer">Json deserializer</param>
-        </member>
-        <member name="M:Facebook.FacebookClient.SetJsonSerializers(System.Func{System.Object,System.String},System.Func{System.String,System.Type,System.Object})">
-            <summary>
-            Sets the json seriazliers and deserializers for the current instance of <see cref="T:Facebook.FacebookClient"/>.
-            </summary>
-            <param name="jsonSerializer">Json serializer</param>
-            <param name="jsonDeserializer">Json deserializer</param>
-        </member>
-        <member name="M:Facebook.FacebookClient.SetDefaultHttpWebRequestFactory(System.Func{System.Uri,Facebook.HttpWebRequestWrapper})">
-            <summary>
-            Sets the default http web request factory.
-            </summary>
-            <param name="httpWebRequestFactory"></param>
-        </member>
-        <member name="M:Facebook.FacebookClient.SetHttpWebRequestFactory(System.Func{System.Uri,Facebook.HttpWebRequestWrapper})">
-            <summary>
-            Sets the http web request factory for the current instance of <see cref="T:Facebook.FacebookClient"/>.
-            </summary>
-            <param name="httpWebRequestFactory"></param>
-        </member>
-        <member name="M:Facebook.FacebookClient.ToDictionary(System.Object,System.Collections.Generic.IDictionary{System.String,Facebook.FacebookMediaObject}@,System.Collections.Generic.IDictionary{System.String,Facebook.FacebookMediaStream}@)">
-            <summary>
-            Converts the parameters to IDictionary&lt;string,object&gt;
-            </summary>
-            <param name="parameters">The parameter to convert.</param>
-            <param name="mediaObjects">The extracted Facebook media objects.</param>
-            <param name="mediaStreams">The extracted Facebook media streams.</param>
-            <returns>The converted dictionary.</returns>
-        </member>
-        <member name="M:Facebook.FacebookClient.BuildHttpQuery(System.Object,System.Func{System.String,System.String})">
-            <summary>
-            Converts the parameters to http query.
-            </summary>
-            <param name="parameter">The parameter to convert.</param>
-            <param name="encode">Url encoder function.</param>
-            <returns>The http query.</returns>
-            <remarks>
-            The result is not url encoded. The caller needs to take care of url encoding the result.
-            </remarks>
-        </member>
-        <member name="M:Facebook.FacebookClient.TryParseSignedRequest(System.String,System.String,System.Object@)">
-            <summary>
-            Tries parsing the facebook signed_request.
-            </summary>
-            <param name="appSecret">The app secret.</param>
-            <param name="signedRequestValue">The signed_request value.</param>
-            <param name="signedRequest">The parsed signed request.</param>
-            <returns>True if signed request parsed successfully otherwise false.</returns>
-        </member>
-        <member name="M:Facebook.FacebookClient.TryParseSignedRequest(System.String,System.Object@)">
-            <summary>
-            Tries parsing the facebook signed_request.
-            </summary>
-            <param name="signedRequestValue">The signed_request value.</param>
-            <param name="signedRequest">The parsed signed request.</param>
-            <returns>True if signed request parsed successfully otherwise false.</returns>
-        </member>
-        <member name="M:Facebook.FacebookClient.ParseSignedRequest(System.String,System.String)">
-            <summary>
-            Parse the facebook signed_request.
-            </summary>
-            <param name="appSecret">The appsecret.</param>
-            <param name="signedRequestValue">The signed_request value.</param>
-            <returns>The parse signed_request value.</returns>
-            <exception cref="T:System.ArgumentNullException">Throws if appSecret or signedRequestValue is null or empty.</exception>
-            <exception cref="T:System.InvalidOperationException">If the signedRequestValue is an invalid signed_request.</exception>
-        </member>
-        <member name="M:Facebook.FacebookClient.ParseSignedRequest(System.String)">
-            <summary>
-            Parse the facebook signed_request.
-            </summary>
-            <param name="signedRequestValue">The signed_request value.</param>
-            <returns>The parse signed_request value.</returns>
-            <exception cref="T:System.ArgumentNullException">Throws if appSecret or signedRequestValue is null or empty.</exception>
-            <exception cref="T:System.InvalidOperationException">If the signedRequestValue is an invalid signed_request.</exception>
-        </member>
-        <member name="M:Facebook.FacebookClient.Base64UrlDecode(System.String)">
-            <summary>
-            Base64 Url decode.
-            </summary>
-            <param name="base64UrlSafeString">
-            The base 64 url safe string.
-            </param>
-            <returns>
-            The base 64 url decoded string.
-            </returns>c
-        </member>
-        <member name="M:Facebook.FacebookClient.ComputeHmacSha256Hash(System.Byte[],System.Byte[])">
-            <summary>
-            Computes the Hmac Sha 256 Hash.
-            </summary>
-            <param name="data">
-            The data to hash.
-            </param>
-            <param name="key">
-            The hash key.
-            </param>
-            <returns>
-            The Hmac Sha 256 hash.
-            </returns>
-        </member>
         <member name="M:Facebook.FacebookClient.TryParseOAuthCallbackUrl(System.Uri,Facebook.FacebookOAuthResult@)">
             <summary>
             Try parsing the url to <see cref="T:Facebook.FacebookOAuthResult"/>.
@@ -572,6 +695,14 @@
         <member name="M:Facebook.FacebookClient.ParseOAuthCallbackUrl(System.Uri)">
             <summary>
             Parse the url to <see cref="T:Facebook.FacebookOAuthResult"/>.
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Facebook.FacebookClient.ParseDialogCallbackUrl(System.Uri)">
+            <summary>
+            Parses the dialog callback url to an object of the resulting data.
             </summary>
             <param name="uri"></param>
             <returns></returns>
@@ -619,32 +750,6 @@
             The logout url.
             </returns>
         </member>
-        <member name="E:Facebook.FacebookClient.GetCompleted">
-            <summary>
-            Event handler for get completion.
-            </summary>
-        </member>
-        <member name="E:Facebook.FacebookClient.PostCompleted">
-            <summary>
-            Event handler for post completion.
-            </summary>
-        </member>
-        <member name="E:Facebook.FacebookClient.DeleteCompleted">
-            <summary>
-            Event handler for delete completion.
-            </summary>
-        </member>
-        <member name="E:Facebook.FacebookClient.UploadProgressChanged">
-            <summary>
-            Event handler for upload progress changed.
-            </summary>
-        </member>
-        <member name="E:Facebook.FacebookClient.HttpWebRequestWrapperCreated">
-            <summary>
-            Event handler when http web request wrapper is created for async api only.
-            (used internally by TPL for cancellation support)
-            </summary>
-        </member>
         <member name="P:Facebook.FacebookClient.Boundary">
             <remarks>For unit testing</remarks>
         </member>
@@ -688,148 +793,66 @@
             Http web request factory.
             </summary>
         </member>
-        <member name="T:Facebook.FacebookApiEventArgs">
+        <member name="E:Facebook.FacebookClient.GetCompleted">
             <summary>
-            Represents the Facebook api event args.
+            Event handler for get completion.
             </summary>
         </member>
-        <member name="F:Facebook.FacebookApiEventArgs._result">
+        <member name="E:Facebook.FacebookClient.PostCompleted">
             <summary>
-            The result.
+            Event handler for post completion.
             </summary>
         </member>
-        <member name="M:Facebook.FacebookApiEventArgs.#ctor(System.Exception,System.Boolean,System.Object,System.Object)">
+        <member name="E:Facebook.FacebookClient.DeleteCompleted">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiEventArgs"/> class.
-            </summary>
-            <param name="error">
-            The error.
-            </param>
-            <param name="cancelled">
-            The cancelled.
-            </param>
-            <param name="userState">
-            The user state.
-            </param>
-            <param name="result">
-            The result.
-            </param>
-        </member>
-        <member name="M:Facebook.FacebookApiEventArgs.GetResultData">
-            <summary>
-            Get the json result.
-            </summary>
-            <returns>
-            The json result.
-            </returns>
-        </member>
-        <member name="M:Facebook.FacebookApiEventArgs.GetResultData``1">
-            <summary>
-            Get the json result.
-            </summary>
-            <typeparam name="TResult">The result type.</typeparam>
-            <returns>The json result.</returns>
-        </member>
-        <member name="T:Facebook.FacebookApiLimitException">
-            <summary>
-            Represents errors that occur as a result of problems with the OAuth access token.
+            Event handler for delete completion.
             </summary>
         </member>
-        <member name="T:Facebook.FacebookApiException">
+        <member name="E:Facebook.FacebookClient.UploadProgressChanged">
             <summary>
-            Represent errors that occur while calling a Facebook API.
+            Event handler for upload progress changed.
             </summary>
         </member>
-        <member name="M:Facebook.FacebookApiException.#ctor">
+        <member name="E:Facebook.FacebookClient.HttpWebRequestWrapperCreated">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
+            Event handler when http web request wrapper is created for async api only.
+            (used internally by TPL for cancellation support)
             </summary>
         </member>
-        <member name="M:Facebook.FacebookApiException.#ctor(System.String)">
+        <member name="T:Facebook.FacebookMediaObject">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-        </member>
-        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-            <param name="errorType">Type of the error.</param>
-        </member>
-        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-            <param name="errorType">Type of the error.</param>
-            <param name="errorCode">Code of the error.</param>
-        </member>
-        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.String,System.Int32,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-            <param name="errorType">Type of the error.</param>
-            <param name="errorCode">Code of the error.</param>
-            <param name="errorSubcode">Subcode of the error.</param>
-        </member>
-        <member name="M:Facebook.FacebookApiException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiException"/> class.
-            </summary>
-            <param name="message">The message.</param>
-            <param name="innerException">The inner exception.</param>
-        </member>
-        <member name="P:Facebook.FacebookApiException.ErrorType">
-            <summary>
-            Gets or sets the type of the error.
-            </summary>
-            <value>The type of the error.</value>
-        </member>
-        <member name="P:Facebook.FacebookApiException.ErrorCode">
-            <summary>
-            Gets or sets the code of the error.
-            </summary>
-            <value>The code of the error.</value>
-        </member>
-        <member name="P:Facebook.FacebookApiException.ErrorSubcode">
-            <summary>
-            Gets or sets the error subcode.
-            </summary>
-            <value>The code of the error subcode.</value>
-        </member>
-        <member name="M:Facebook.FacebookApiLimitException.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            Represents a media object such as a photo or video.
             </summary>
         </member>
-        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String)">
+        <member name="F:Facebook.FacebookMediaObject._value">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            The value of the media object.
             </summary>
-            <param name="message">
-            The message.
-            </param>
         </member>
-        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String,System.String)">
+        <member name="M:Facebook.FacebookMediaObject.SetValue(System.Byte[])">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            Sets the value of the media object.
             </summary>
-            <param name="message">The message.</param>
-            <param name="errorType">The error type.</param>
+            <param name="value">The media object value.</param>
+            <returns>Facebook Media Object</returns>
         </member>
-        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String,System.Exception)">
+        <member name="M:Facebook.FacebookMediaObject.GetValue">
             <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            Gets the value of the media object.
             </summary>
-            <param name="message">
-            The message.
-            </param>
-            <param name="innerException">
-            The inner exception.
-            </param>
+            <returns>The value of the media object.</returns>
+        </member>
+        <member name="P:Facebook.FacebookMediaObject.ContentType">
+            <summary>
+            Gets or sets the type of the content.
+            </summary>
+            <value>The type of the content.</value>
+        </member>
+        <member name="P:Facebook.FacebookMediaObject.FileName">
+            <summary>
+            Gets or sets the name of the file.
+            </summary>
+            <value>The name of the file.</value>
         </member>
         <member name="T:Facebook.FacebookMediaStream">
             <summary>
@@ -866,154 +889,6 @@
             <value>The type of the content.</value>
         </member>
         <member name="P:Facebook.FacebookMediaStream.FileName">
-            <summary>
-            Gets or sets the name of the file.
-            </summary>
-            <value>The name of the file.</value>
-        </member>
-        <member name="T:Facebook.FacebookUploadProgressChangedEventArgs">
-            <summary>
-            Represents Facebook api upload progress changed event args.
-            </summary>
-        </member>
-        <member name="M:Facebook.FacebookUploadProgressChangedEventArgs.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Int32,System.Object)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookUploadProgressChangedEventArgs"/> class.
-            </summary>
-            <param name="bytesReceived">Bytes received.</param>
-            <param name="totalBytesToReceive">Total bytes to receive.</param>
-            <param name="bytesSent">Bytes sent.</param>
-            <param name="totalBytesToSend">Total bytes to send.</param>
-            <param name="progressPercentage">Progress percentage.</param>
-            <param name="userToken">User token.</param>
-        </member>
-        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.BytesReceived">
-            <summary>
-            Bytes received.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.TotalBytesToReceive">
-            <summary>
-            Total bytes to receive.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.BytesSent">
-            <summary>
-            Bytes sent.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.TotalBytesToSend">
-            <summary>
-            Total bytes to send.
-            </summary>
-        </member>
-        <member name="T:Facebook.FacebookBatchParameter">
-            <summary>
-            Represents a batch parameter for the creating batch requests.
-            </summary>
-            <remarks>
-            http://developers.facebook.com/docs/api/batch/
-            </remarks>
-        </member>
-        <member name="M:Facebook.FacebookBatchParameter.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
-            </summary>
-        </member>
-        <member name="M:Facebook.FacebookBatchParameter.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
-            </summary>
-            <param name="path">
-            The resource path.
-            </param>
-        </member>
-        <member name="M:Facebook.FacebookBatchParameter.#ctor(Facebook.HttpMethod,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
-            </summary>
-            <param name="httpMethod">
-            The http method.
-            </param>
-            <param name="path">
-            The resource path.
-            </param>
-        </member>
-        <member name="M:Facebook.FacebookBatchParameter.#ctor(System.String,System.Object)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
-            </summary>
-            <param name="path">
-            The resource path.
-            </param>
-            <param name="parameters">
-            The parameters.
-            </param>
-        </member>
-        <member name="M:Facebook.FacebookBatchParameter.#ctor(Facebook.HttpMethod,System.String,System.Object)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Facebook.FacebookBatchParameter"/> class.
-            </summary>
-            <param name="httpMethod">
-            The http method.
-            </param>
-            <param name="path">
-            The resource path.
-            </param>
-            <param name="parameters">
-            The parameters.
-            </param>
-        </member>
-        <member name="P:Facebook.FacebookBatchParameter.HttpMethod">
-            <summary>
-            Gets or sets the http method.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookBatchParameter.Path">
-            <summary>
-            Gets or sets the resource path.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookBatchParameter.Parameters">
-            <summary>
-            Gets or sets the parameters.
-            </summary>
-        </member>
-        <member name="P:Facebook.FacebookBatchParameter.Data">
-            <summary>
-            Gets or sets the raw data parameter.
-            </summary>
-        </member>
-        <member name="T:Facebook.FacebookMediaObject">
-            <summary>
-            Represents a media object such as a photo or video.
-            </summary>
-        </member>
-        <member name="F:Facebook.FacebookMediaObject._value">
-            <summary>
-            The value of the media object.
-            </summary>
-        </member>
-        <member name="M:Facebook.FacebookMediaObject.SetValue(System.Byte[])">
-            <summary>
-            Sets the value of the media object.
-            </summary>
-            <param name="value">The media object value.</param>
-            <returns>Facebook Media Object</returns>
-        </member>
-        <member name="M:Facebook.FacebookMediaObject.GetValue">
-            <summary>
-            Gets the value of the media object.
-            </summary>
-            <returns>The value of the media object.</returns>
-        </member>
-        <member name="P:Facebook.FacebookMediaObject.ContentType">
-            <summary>
-            Gets or sets the type of the content.
-            </summary>
-            <value>The type of the content.</value>
-        </member>
-        <member name="P:Facebook.FacebookMediaObject.FileName">
             <summary>
             Gets or sets the name of the file.
             </summary>
@@ -1065,6 +940,42 @@
             </summary>
             <param name="message">The message.</param>
             <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:Facebook.FacebookApiLimitException">
+            <summary>
+            Represents errors that occur as a result of problems with the OAuth access token.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookApiLimitException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            </summary>
+            <param name="message">
+            The message.
+            </param>
+        </member>
+        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            </summary>
+            <param name="message">The message.</param>
+            <param name="errorType">The error type.</param>
+        </member>
+        <member name="M:Facebook.FacebookApiLimitException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookApiLimitException"/> class. 
+            </summary>
+            <param name="message">
+            The message.
+            </param>
+            <param name="innerException">
+            The inner exception.
+            </param>
         </member>
         <member name="T:Facebook.FacebookOAuthResult">
             <summary>
@@ -1163,6 +1074,42 @@
         <member name="P:Facebook.FacebookOAuthResult.State">
             <summary>
             Gets an opaque state used to maintain application state between the request and callback.
+            </summary>
+        </member>
+        <member name="T:Facebook.FacebookUploadProgressChangedEventArgs">
+            <summary>
+            Represents Facebook api upload progress changed event args.
+            </summary>
+        </member>
+        <member name="M:Facebook.FacebookUploadProgressChangedEventArgs.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.Int32,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Facebook.FacebookUploadProgressChangedEventArgs"/> class.
+            </summary>
+            <param name="bytesReceived">Bytes received.</param>
+            <param name="totalBytesToReceive">Total bytes to receive.</param>
+            <param name="bytesSent">Bytes sent.</param>
+            <param name="totalBytesToSend">Total bytes to send.</param>
+            <param name="progressPercentage">Progress percentage.</param>
+            <param name="userToken">User token.</param>
+        </member>
+        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.BytesReceived">
+            <summary>
+            Bytes received.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.TotalBytesToReceive">
+            <summary>
+            Total bytes to receive.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.BytesSent">
+            <summary>
+            Bytes sent.
+            </summary>
+        </member>
+        <member name="P:Facebook.FacebookUploadProgressChangedEventArgs.TotalBytesToSend">
+            <summary>
+            Total bytes to send.
             </summary>
         </member>
         <member name="T:Facebook.HttpWebRequestWrapper">
@@ -1292,16 +1239,6 @@
             Gets or sets the http headers.
             </summary>
         </member>
-        <member name="P:Facebook.HttpWebRequestWrapper.AllowAutoRedirect">
-            <summary>
-            Gets or sets a value that indicates whether the request should follow redirection responses.
-            </summary>
-        </member>
-        <member name="P:Facebook.HttpWebRequestWrapper.UserAgent">
-            <summary>
-            Gets or sets the user agent.
-            </summary>
-        </member>
         <member name="P:Facebook.HttpWebRequestWrapper.CookieContainer">
             <summary>
             Gets or sets the cookie container.
@@ -1320,6 +1257,11 @@
         <member name="P:Facebook.HttpWebRequestWrapper.Accept">
             <summary>
             Gets or sets the accept.
+            </summary>
+        </member>
+        <member name="P:Facebook.HttpWebRequestWrapper.Proxy">
+            <summary>
+            Gets or sets the proxy.
             </summary>
         </member>
         <member name="P:Facebook.HttpWebRequestWrapper.IsCancelled">

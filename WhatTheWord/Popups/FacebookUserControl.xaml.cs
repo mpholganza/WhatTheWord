@@ -142,7 +142,7 @@ namespace WhatTheWord.Popups
 
             var loginUrl = GetFacebookLoginUrl(AppId, ExtendedPermissions);
 
-            App.Current.StateData.FacebookToken = String.Empty;
+            //App.Current.StateData.FacebookToken = String.Empty;
 
             if (String.IsNullOrWhiteSpace(App.Current.StateData.FacebookToken))
             {
