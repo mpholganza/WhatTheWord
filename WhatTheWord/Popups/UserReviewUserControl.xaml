@@ -90,7 +90,7 @@
             
             <TextBlock x:Name="UserReviewText" 
                        Grid.Column="0" Grid.Row="0" Margin="25,20,25,10"
-                       Text="Tell us what you think about the app and get 300 coins for free!"
+                       Text="Tell us what you think about Guess This Word and get coins for free!"
                        Style="{StaticResource UserReviewHeaderTitle}"/>
 
             <Button x:Name="UserReviewButton" Grid.Column="0" Grid.Row="1" Tap="UserReviewButton_Tap"

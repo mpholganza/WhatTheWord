@@ -192,7 +192,7 @@ namespace WhatTheWord
             //WinCoinsAnimation.To = _gameConfig.rewardCoinsPerQuestion;
             //WinCoinsStoryboard.Begin();
 
-            WinCoins.Text = "0";
+            WinCoins.Text = (App.Current.StateData.Coins - App.Current.ConfigData.rewardCoinsPerQuestion).ToString();
             myDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 30); // 100 Milliseconds 
             myDispatcherTimer.Tick += new EventHandler(incrementWinCoins);
             myDispatcherTimer.Start();
@@ -203,7 +203,7 @@ namespace WhatTheWord
         {
             int currentCoins = int.Parse(WinCoins.Text) + 1;
 
-            if (currentCoins > _gameConfig.rewardCoinsPerQuestion)
+            if (currentCoins > App.Current.StateData.Coins)
             {
                 myDispatcherTimer.Stop();
                 animateNextPuzzle(sender, e);

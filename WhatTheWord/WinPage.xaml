@@ -125,7 +125,7 @@
                 <Image Source="/Assets/WinLetters/gb_g_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
                 <Image Source="/Assets/WinLetters/gb_h_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
             </StackPanel>
-            <TextBlock x:Name="CoinsEarned" Text="Coins earned:"
+            <TextBlock x:Name="CoinsEarned" Text="Coins:"
                        Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
                        HorizontalAlignment="Center"
                        RenderTransformOrigin="0.5,0.5">

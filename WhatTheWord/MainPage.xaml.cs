@@ -232,7 +232,7 @@ namespace WhatTheWord
         private void InitializeBoostBounceTimer()
         {
             boostBounceTimer = new System.Windows.Threading.DispatcherTimer();
-            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, 10, 0); // 10 seconds
+            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, App.Current.ConfigData.boostBounceTimeInterval, 0);
             boostBounceTimer.Tick += new EventHandler(bounceBoostButton);
             boostBounceTimer.Start();
         }

@@ -27,9 +27,9 @@ namespace WhatTheWord.Popups
         public double PopupHeight { get; set; }
 
         private readonly string UserReviewText_WithReward =
-            "Tell us what you think about Guess This Word and get 300 coins for free!";
+			"Tell us what you think about Guess This Word and get " + App.Current.ConfigData.rateMeReward + " coins for free!";
         private readonly string UserReviewText_ThankYou =
-            "Thank you for rating Guess This Word. We have added 300 coins to your game!";
+            "Thank you for rating Guess This Word. We have added " + App.Current.ConfigData.rateMeReward + " coins to your game!";
         private readonly string UserReviewText_NoReward =
             "Tell us what you think about Guess This Word!";
 
@@ -139,7 +139,7 @@ namespace WhatTheWord.Popups
             if (!App.Current.StateData.RewardGivenForUserReview)
             {
                 System.Threading.Thread.Sleep(500);
-                App.Current.StateData.Coins += 300;
+                App.Current.StateData.Coins += App.Current.ConfigData.rateMeReward;
                 App.Current.StateData.RewardGivenForUserReview = true;
                 UserReviewText.Text = UserReviewText_ThankYou;
                 UserReviewButton.IsEnabled = false;

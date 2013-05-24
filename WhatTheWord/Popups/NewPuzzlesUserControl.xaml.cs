@@ -41,10 +41,6 @@ namespace WhatTheWord.Popups
 
             Overlay.Width = this.HostWindowWidth;
             Overlay.Height = this.HostWindowHeight;
-			Overlay.Tap += (sender, e) =>
-			{
-				this.hide();
-			};
 
             this.PopupWidth = this.HostWindowWidth * 0.9;
 
@@ -70,6 +66,16 @@ namespace WhatTheWord.Popups
 				// Reload the game
 				_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
 				_mainPage.NavigationService.RemoveBackEntry();
+			}
+			else if (e.FilesLeftCount % 4 == 0)
+			{
+				// Try to load the current puzzle every four files
+				if (_mainPage.CurrentPuzzle.TryLoad())
+				{
+					// Reload the game
+					_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
+					_mainPage.NavigationService.RemoveBackEntry();
+				}
 			}
 		}
 

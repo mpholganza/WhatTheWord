@@ -23,7 +23,6 @@ namespace WhatTheWord.Model
 		public const int CHARACTERPANEL_LETTER_REMOVED = 200;
 		public const int CHARACTERPANEL_LETTER_GUESSED = 201;
 		public const string GAMESTATEFILE = "gamestate.txt";
-		public const string GAMESTATEDEFAULTFILE = "gamestatedefault.txt";
 		#endregion
 
         #region Gameplay variables
@@ -42,7 +41,7 @@ namespace WhatTheWord.Model
 		public GameState()
 		{
 			this.CurrentLevel = 1;
-			this.Coins = 0;
+			this.Coins = App.Current.ConfigData.initialCoins;
 			this.PuzzleWord = "";
 			this.PuzzleCharacters = "";
 			this.GuessPanelState = null;
@@ -54,32 +53,7 @@ namespace WhatTheWord.Model
 
 		public async Task Load()
 		{
-			if (await LoadGameStateFromFile()) { return; }
-
-			if (!LoadGameStateFromDefaultFile())
-			{
-				throw new ApplicationException("Unable to load game state information.");
-			}
-		}
-
-		private bool LoadGameStateFromDefaultFile()
-		{
-			StreamResourceInfo sri = App.GetResourceStream(new Uri(GameState.GAMESTATEDEFAULTFILE, UriKind.Relative));
-			StreamReader streamReader = new StreamReader(sri.Stream);
-			string gameData = streamReader.ReadToEnd();
-			try
-			{
-				Deserialize(gameData);
-			}
-			catch (ApplicationException)
-			{
-				// deserialized incorrectly. fail quietly
-				// TODO: report to server of failed deserialization
-				Console.WriteLine("Failed deserialization:\n" + gameData);
-				return false;
-			}
-
-			return true;
+			await LoadGameStateFromFile();
 		}
 
 		private async Task<bool> LoadGameStateFromFile()
@@ -433,7 +407,7 @@ namespace WhatTheWord.Model
 		public void ResetGame()
 		{
 			App.Current.StateData.CurrentLevel = 1;
-			App.Current.StateData.Coins = 200;
+			App.Current.StateData.Coins = App.Current.ConfigData.initialCoins;
 			App.Current.StateData.PuzzleInitialized = false;
 			App.Current.StateData.Save();
 		}
