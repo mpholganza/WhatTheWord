@@ -241,6 +241,11 @@
     <Content Include="Assets\cancelPostButton%401280_768.png" />
     <Content Include="Assets\loadingSpinner%401280_768.png" />
     <Content Include="Assets\maxButton%401280_768.png" />
+    <Content Include="Assets\facebookSharePostBG%401280_768.png" />
+    <Content Include="Assets\feedbackButton%401280_768.png" />
+    <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
+    <Content Include="Assets\Fonts\nevis.ttf" />
+    <Content Include="Assets\guesstheword-336x336-appicon.png" />
     <Content Include="Assets\PuzzlePictures\alarm1.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm2.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm3.jpg" />
@@ -249,6 +254,10 @@
     <Content Include="Assets\PuzzlePictures\alley2.jpg" />
     <Content Include="Assets\PuzzlePictures\alley3.jpg" />
     <Content Include="Assets\PuzzlePictures\alley4.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon1.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon2.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon3.jpg" />
+    <Content Include="Assets\PuzzlePictures\amazon4.jpg" />
     <Content Include="Assets\PuzzlePictures\bag1.jpg" />
     <Content Include="Assets\PuzzlePictures\bag2.jpg" />
     <Content Include="Assets\PuzzlePictures\bag3.jpg" />
@@ -265,6 +274,10 @@
     <Content Include="Assets\PuzzlePictures\bar2.jpg" />
     <Content Include="Assets\PuzzlePictures\bar3.jpg" />
     <Content Include="Assets\PuzzlePictures\bar4.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass1.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass2.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass3.jpg" />
+    <Content Include="Assets\PuzzlePictures\bass4.jpg" />
     <Content Include="Assets\PuzzlePictures\bear1.jpg" />
     <Content Include="Assets\PuzzlePictures\bear2.jpg" />
     <Content Include="Assets\PuzzlePictures\bear3.jpg" />
@@ -310,19 +323,6 @@
     <Content Include="Assets\PuzzlePictures\can3.jpg" />
     <Content Include="Assets\PuzzlePictures\can4.jpg" />
     <Content Include="Assets\PuzzlePictures\cancelPostButton_p%401280_768.png" />
-    <Content Include="Assets\facebookSharePostBG%401280_768.png" />
-    <Content Include="Assets\feedbackButton%401280_768.png" />
-    <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
-    <Content Include="Assets\Fonts\nevis.ttf" />
-    <Content Include="Assets\guesstheword-336x336-appicon.png" />
-    <Content Include="Assets\PuzzlePictures\amazon1.jpg" />
-    <Content Include="Assets\PuzzlePictures\amazon2.jpg" />
-    <Content Include="Assets\PuzzlePictures\amazon3.jpg" />
-    <Content Include="Assets\PuzzlePictures\amazon4.jpg" />
-    <Content Include="Assets\PuzzlePictures\bass1.jpg" />
-    <Content Include="Assets\PuzzlePictures\bass2.jpg" />
-    <Content Include="Assets\PuzzlePictures\bass3.jpg" />
-    <Content Include="Assets\PuzzlePictures\bass4.jpg" />
     <Content Include="Assets\PuzzlePictures\cell1.jpg" />
     <Content Include="Assets\PuzzlePictures\cell2.jpg" />
     <Content Include="Assets\PuzzlePictures\cell3.jpg" />
@@ -475,6 +475,7 @@
     <Content Include="Assets\PuzzlePictures\house2.jpg" />
     <Content Include="Assets\PuzzlePictures\house3.jpg" />
     <Content Include="Assets\PuzzlePictures\house4.jpg" />
+    <Content Include="Assets\PuzzlePictures\icecream.png" />
     <Content Include="Assets\PuzzlePictures\illusion1.jpg" />
     <Content Include="Assets\PuzzlePictures\illusion2.jpg" />
     <Content Include="Assets\PuzzlePictures\illusion3.jpg" />
@@ -523,6 +524,8 @@
     <Content Include="Assets\PuzzlePictures\live2.jpg" />
     <Content Include="Assets\PuzzlePictures\live3.jpg" />
     <Content Include="Assets\PuzzlePictures\live4.jpg" />
+    <Content Include="Assets\PuzzlePictures\magnets.png" />
+    <Content Include="Assets\PuzzlePictures\mangoes.png" />
     <Content Include="Assets\PuzzlePictures\match1.jpg" />
     <Content Include="Assets\PuzzlePictures\match2.jpg" />
     <Content Include="Assets\PuzzlePictures\match3.jpg" />
@@ -779,6 +782,7 @@
     <Content Include="Assets\PuzzlePictures\turn2.jpg" />
     <Content Include="Assets\PuzzlePictures\turn3.jpg" />
     <Content Include="Assets\PuzzlePictures\turn4.jpg" />
+    <Content Include="Assets\PuzzlePictures\water_houses.png" />
     <Content Include="Assets\PuzzlePictures\wrap1.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap2.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap3.jpg" />
@@ -836,7 +840,6 @@
     <Content Include="Assets\WinLetters\gb_z_win%401280_768.png" />
     <Content Include="Assets\winTransitionBG%401280_768.png" />
     <Content Include="Assets\IAPcoinIcon%401280_768.png" />
-    <Content Include="gamestatedefault.txt" />
     <Content Include="MockupLicenseInfo.xml" />
     <Content Include="SplashScreenImage.jpg" />
     <None Include="packages.config" />
@@ -887,10 +890,6 @@
     <Content Include="Assets\levelBG%401280_768.png" />
     <Content Include="Assets\levelIcon%401280_768.png" />
     <Content Include="Assets\line%401280_768.png" />
-    <Content Include="Assets\PuzzlePictures\icecream.png" />
-    <Content Include="Assets\PuzzlePictures\magnets.png" />
-    <Content Include="Assets\PuzzlePictures\mangoes.png" />
-    <Content Include="Assets\PuzzlePictures\water_houses.png" />
     <Content Include="Assets\sandBoxBG%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_a%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_b%401280_768.png" />
