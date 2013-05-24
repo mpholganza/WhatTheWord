@@ -55,11 +55,19 @@
         <Storyboard x:Name="CoinsIconStoryboard">
             <DoubleAnimation
              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
-             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.2" From="0" To="1.0" 
+             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.25" From="0" To="1.0" 
                 BeginTime="00:00:00.0"/>
             <DoubleAnimation
              Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
-             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.2" From="0" To="1.0" 
+             Storyboard.TargetName="CoinsIcon" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)"
+             Storyboard.TargetName="WinCoins" Duration="00:00:00.25" From="0" To="1.0" 
+                BeginTime="00:00:00.0"/>
+            <DoubleAnimation
+             Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)"
+             Storyboard.TargetName="WinCoins" Duration="00:00:00.25" From="0" To="1.0" 
                 BeginTime="00:00:00.0"/>
         </Storyboard>
         <!--<Storyboard x:Name="WinCoinsStoryboard">
@@ -125,7 +133,7 @@
                 <Image Source="/Assets/WinLetters/gb_g_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
                 <Image Source="/Assets/WinLetters/gb_h_win@1280_768.png" Margin="4,0,4,0" Height="40"/>
             </StackPanel>
-            <TextBlock x:Name="CoinsEarned" Text="Coins earned:"
+            <TextBlock x:Name="CoinsEarned" Text="You now have:"
                        Foreground="Black" FontWeight="Bold" FontSize="32" FontFamily="/Fonts/nevis.ttf"
                        HorizontalAlignment="Center"
                        RenderTransformOrigin="0.5,0.5">
@@ -142,7 +150,11 @@
                 </Image>
                 <TextBlock x:Name="WinCoins" VerticalAlignment="Center"
                            Text="10"
-                           Foreground="Black" FontWeight="Bold" FontSize="56" FontFamily="/Fonts/nevis.ttf">
+                           Foreground="Black" FontWeight="Bold" FontSize="56" FontFamily="/Fonts/nevis.ttf"
+                           RenderTransformOrigin="0.5,0.5" >
+                    <TextBlock.RenderTransform>
+                        <CompositeTransform ScaleY="1" ScaleX="1"/>
+                    </TextBlock.RenderTransform>
                 </TextBlock>
 			</StackPanel>
 		</StackPanel>
