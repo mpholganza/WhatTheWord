@@ -84,7 +84,7 @@ namespace WhatTheWord
             }
             
             // set coins
-            WinCoins.Text = _gameConfig.rewardCoinsPerQuestion.ToString();
+            WinCoins.Text = _gameState.Coins.ToString();
         }
 
         private void animateContent()
@@ -173,37 +173,41 @@ namespace WhatTheWord
         {
             Thread.Sleep(400);
 
-            CoinsEarnedStoryboard.Completed += animateWinCoins;
+            CoinsEarnedStoryboard.Completed += animateCoinsIcon;
             CoinsEarnedStoryboard.Begin();
+
+            WinCoins.Text = (_gameState.Coins - _gameConfig.rewardCoinsPerQuestion).ToString();
+
             CoinsEarned.Opacity = 1;
         }
 
+        private void animateCoinsIcon(object sender, EventArgs e)
+        {
+            Thread.Sleep(300);
 
+            WinCoins.Text = (_gameState.Coins - _gameConfig.rewardCoinsPerQuestion).ToString();
+
+            CoinsIcon.Opacity = 1;
+            WinCoins.Opacity = 1;
+
+            CoinsIconStoryboard.Completed += animateWinCoins;
+            CoinsIconStoryboard.Begin();
+        }
 
         private void animateWinCoins(object sender, EventArgs e)
         {
-            Thread.Sleep(350);
+            Thread.Sleep(400);
 
-            //CoinsIconStoryboard.Completed += animateNextPuzzle;
-            CoinsIconStoryboard.Begin();
-            //CoinsIcon.Visibility = System.Windows.Visibility.Visible;
-            CoinsIcon.Opacity = 1;
-
-            //WinCoinsAnimation.To = _gameConfig.rewardCoinsPerQuestion;
-            //WinCoinsStoryboard.Begin();
-
-            WinCoins.Text = (App.Current.StateData.Coins - App.Current.ConfigData.rewardCoinsPerQuestion).ToString();
-            myDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 30); // 100 Milliseconds 
+            myDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 35); // 100 Milliseconds 
             myDispatcherTimer.Tick += new EventHandler(incrementWinCoins);
             myDispatcherTimer.Start();
-            WinCoins.Opacity = 1;
         }
 
         private void incrementWinCoins(object sender, EventArgs e)
         {
             int currentCoins = int.Parse(WinCoins.Text) + 1;
 
-            if (currentCoins > App.Current.StateData.Coins)
+            if (currentCoins > _gameState.Coins)
             {
                 myDispatcherTimer.Stop();
                 animateNextPuzzle(sender, e);

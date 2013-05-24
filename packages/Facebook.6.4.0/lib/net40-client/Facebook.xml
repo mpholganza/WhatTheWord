@@ -480,19 +480,7 @@
             <param name="userState">The user state.</param>
             <returns>The json result.</returns>
         </member>
-        <member name="M:Facebook.FacebookClient.ApiTaskAsync(Facebook.HttpMethod,System.String,System.Object,System.Type,System.Object,System.Threading.CancellationToken,System.IProgress{Facebook.FacebookUploadProgressChangedEventArgs})">
-            <returns>The task of json result with headers.</returns>
-        </member>
         <member name="M:Facebook.FacebookClient.ApiTaskAsync(Facebook.HttpMethod,System.String,System.Object,System.Type,System.Object,System.Threading.CancellationToken)">
-            <summary>
-            Makes an asynchronous request to the Facebook server.
-            </summary>
-            <param name="httpMethod">Http method. (GET/POST/DELETE)</param>
-            <param name="path">The resource path or the resource url.</param>
-            <param name="parameters">The parameters</param>
-            <param name="resultType">The type of deserialize object into.</param>
-            <param name="userState">The user state.</param>
-            <param name="cancellationToken">The cancellation token.</param>
             <returns>The task of json result with headers.</returns>
         </member>
         <member name="M:Facebook.FacebookClient.GetTaskAsync(System.String)">
@@ -605,9 +593,6 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>The json result task.</returns>
         </member>
-        <member name="M:Facebook.FacebookClient.PostTaskAsync(System.String,System.Object,System.Object,System.Threading.CancellationToken,System.IProgress{Facebook.FacebookUploadProgressChangedEventArgs})">
-            <returns>The json result task.</returns>
-        </member>
         <member name="M:Facebook.FacebookClient.DeleteTaskAsync(System.String)">
             <summary>
             Makes an asynchronous DELETE request to the Facebook server.
@@ -675,7 +660,7 @@
             The json result task.
             </returns>
         </member>
-        <member name="M:Facebook.FacebookClient.BatchTaskAsync(Facebook.FacebookBatchParameter[],System.Object,System.Threading.CancellationToken,System.IProgress{Facebook.FacebookUploadProgressChangedEventArgs})">
+        <member name="M:Facebook.FacebookClient.BatchTaskAsync(Facebook.FacebookBatchParameter[],System.Object,System.Threading.CancellationToken)">
             <summary>
             Makes an asynchronous batch request to the Facebook server.
             </summary>
@@ -692,7 +677,7 @@
             The json result task.
             </returns>
         </member>
-        <member name="M:Facebook.FacebookClient.BatchTaskAsync(Facebook.FacebookBatchParameter[],System.Object,System.Object,System.Threading.CancellationToken,System.IProgress{Facebook.FacebookUploadProgressChangedEventArgs})">
+        <member name="M:Facebook.FacebookClient.BatchTaskAsync(Facebook.FacebookBatchParameter[],System.Object,System.Object,System.Threading.CancellationToken)">
             <summary>
             Makes an asynchronous batch request to the Facebook server.
             </summary>
@@ -929,6 +914,14 @@
         <member name="M:Facebook.FacebookClient.ParseOAuthCallbackUrl(System.Uri)">
             <summary>
             Parse the url to <see cref="T:Facebook.FacebookOAuthResult"/>.
+            </summary>
+            <param name="uri"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Facebook.FacebookClient.ParseDialogCallbackUrl(System.Uri)">
+            <summary>
+            Parses the dialog callback url to an object of the resulting data.
             </summary>
             <param name="uri"></param>
             <returns></returns>
@@ -1922,44 +1915,6 @@
             <param name="s">The string to html decode.</param>
             <returns>The html decoded string.</returns>
         </member>
-        <member name="M:Facebook.HttpHelper.CopyStream(System.IO.Stream,System.IO.Stream,System.Nullable{System.Int32},System.Boolean,System.Boolean)">
-            <summary>
-            Copy stream.
-            </summary>
-            <param name="source">The source stream.</param>
-            <param name="destination">The destination stream.</param>
-            <param name="bufferSize">The buffer size.</param>
-            <param name="flushInput">Indicates whether to flush the input after every buffer read.</param>
-            <param name="flushOutput">Indicates whether to flush the output after every buffer write.</param>
-        </member>
-        <member name="M:Facebook.HttpHelper.ReadStreamToEnd(System.IO.Stream,System.Nullable{System.Int32},System.Boolean)">
-            <summary>
-            Reads the stream to end.
-            </summary>
-            <param name="input">The input stream.</param>
-            <param name="bufferSize">The buffer size.</param>
-            <param name="flushInput">Indicates whether to flush the input after every buffer read.</param>
-        </member>
-        <member name="M:Facebook.HttpHelper.ReadTask(System.IO.Stream,System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Asynchronously reads the stream.
-            </summary>
-            <param name="stream"></param>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Facebook.HttpHelper.WriteTask(System.IO.Stream,System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            Asynchronously writes to the stream.
-            </summary>
-            <param name="stream"></param>
-            <param name="buffer"></param>
-            <param name="offset"></param>
-            <param name="count"></param>
-            <returns></returns>
-        </member>
         <member name="P:Facebook.HttpHelper.InnerException">
             <summary>
             Gets the inner exception.
@@ -1988,11 +1943,6 @@
         <member name="P:Facebook.HttpHelper.HttpWebResponse">
             <summary>
             Gets the http web response.
-            </summary>
-        </member>
-        <member name="T:Facebook.HttpHelper.Action">
-            <summary>
-            Action delegate.
             </summary>
         </member>
         <member name="T:Facebook.HttpMethod">

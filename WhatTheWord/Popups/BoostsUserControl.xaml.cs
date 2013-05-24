@@ -78,7 +78,8 @@ namespace WhatTheWord.Popups
 
         private int calculateAnswerPuzzleCost()
         {
-            int numLetters = App.Current.StateData.PuzzleWord.Length;
+            int currentLevel = App.Current.StateData.CurrentLevel;
+            int numLetters = currentLevel > 0 ? App.Current.ConfigData.Puzzles[currentLevel].Word.Length : 0;
 
             return numLetters <= 3 ? 120 : (numLetters * 40) - 40;
         }
