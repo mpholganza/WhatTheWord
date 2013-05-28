@@ -67,34 +67,7 @@ namespace WhatTheWord
 			BoostButton.Tap += BoostsButton_Tap;
 			FacebookButton.Tap += FacebookButton_Tap;
 
-			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
-			{
-				if (App.Current.Downloader.InProgress)
-                {
-                    Instrumentation.GetInstance().sendInstrumentation(
-                        "Puzzle", "AllComplete", "download-more-puzzles", null, null);
-
-					newPuzzlesUserControl.show();
-				}
-				else
-                {
-                    Instrumentation.GetInstance().sendInstrumentation(
-                        "Puzzle", "AllComplete", "no-more-puzzles", null, null);
-
-					outOfPuzzlesUserControl.show();
-				}
-				return;
-			}
-
-			CurrentPuzzle = App.Current.ConfigData.Puzzles[App.Current.StateData.CurrentLevel];
-			if (!CurrentPuzzle.TryLoad())
-			{
-				if (App.Current.Downloader.InProgress)
-				{
-					newPuzzlesUserControl.show();
-				}
-				return;
-			}
+			if (!LoadCurrentPuzzle()) return;
 
 			Picture1.Source = CurrentPuzzle.Picture1.ImageSource;
 			Picture2.Source = CurrentPuzzle.Picture2.ImageSource;
@@ -132,6 +105,57 @@ namespace WhatTheWord
 
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
 			DisplayGame();
+		}
+
+		private bool LoadCurrentPuzzle()
+		{
+			if (App.Current.StateData.CurrentLevel > App.Current.ConfigData.Puzzles.Count)
+			{
+				if (App.Current.Downloader.InProgress)
+				{
+					Instrumentation.GetInstance().sendInstrumentation(
+						"Puzzle", "AllComplete", "download-more-puzzles", null, null);
+
+					newPuzzlesUserControl.show();
+				}
+				else
+				{
+					Instrumentation.GetInstance().sendInstrumentation(
+						"Puzzle", "AllComplete", "no-more-puzzles", null, null);
+
+					outOfPuzzlesUserControl.show();
+				}
+				return false;
+			}
+
+			CurrentPuzzle = App.Current.ConfigData.Puzzles[App.Current.StateData.CurrentLevel];
+			if (!CurrentPuzzle.TryLoad())
+			{
+				if (App.Current.Downloader.InProgress)
+				{
+					Dictionary<string, string> filesToDownload = new Dictionary<string, string>();
+					filesToDownload.Add(CurrentPuzzle.Picture1.Path, App.Current.ConfigData.picturesFilenamePath + CurrentPuzzle.Picture1.Path);
+					filesToDownload.Add(CurrentPuzzle.Picture2.Path, App.Current.ConfigData.picturesFilenamePath + CurrentPuzzle.Picture2.Path);
+					filesToDownload.Add(CurrentPuzzle.Picture3.Path, App.Current.ConfigData.picturesFilenamePath + CurrentPuzzle.Picture3.Path);
+					filesToDownload.Add(CurrentPuzzle.Picture4.Path, App.Current.ConfigData.picturesFilenamePath + CurrentPuzzle.Picture4.Path);
+					App.Current.DownloadCurrentPuzzle(filesToDownload);
+
+					Instrumentation.GetInstance().sendInstrumentation(
+						"Puzzle", "AllComplete", "download-more-puzzles", null, null);
+
+					newPuzzlesUserControl.show();
+				}
+				else
+				{
+					Instrumentation.GetInstance().sendInstrumentation(
+						"Puzzle", "AllComplete", "no-more-puzzles", null, null);
+
+					outOfPuzzlesUserControl.show();
+				}
+				return false;
+			}
+
+			return true;
 		}
 
 		private void InitializeTutorialPuzzle()

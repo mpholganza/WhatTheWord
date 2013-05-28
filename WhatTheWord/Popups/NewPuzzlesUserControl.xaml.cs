@@ -67,16 +67,6 @@ namespace WhatTheWord.Popups
 				_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
 				_mainPage.NavigationService.RemoveBackEntry();
 			}
-			else if (e.FilesLeftCount % 4 == 0)
-			{
-				// Try to load the current puzzle every four files
-				if (_mainPage.CurrentPuzzle.TryLoad())
-				{
-					// Reload the game
-					_mainPage.NavigationService.Navigate(new Uri("/LoadingPage.xaml", UriKind.Relative));
-					_mainPage.NavigationService.RemoveBackEntry();
-				}
-			}
 		}
 
         #region Show and Hide

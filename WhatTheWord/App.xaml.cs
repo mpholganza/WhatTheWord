@@ -165,6 +165,11 @@ namespace WhatTheWord
 			Downloader.DownloadAndUnzipJpgFiles(filesToDownload);
 		}
 
+		public void DownloadCurrentPuzzle(Dictionary<string, string> filesToDownload)
+		{
+			Downloader.DownloadAndUnzipJpgFiles(filesToDownload);
+		}
+
         private void SetupMockIAP()
         {
 #if DEBUG

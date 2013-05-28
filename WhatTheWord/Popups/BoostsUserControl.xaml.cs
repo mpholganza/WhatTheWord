@@ -79,7 +79,18 @@ namespace WhatTheWord.Popups
         private int calculateAnswerPuzzleCost()
         {
             int currentLevel = App.Current.StateData.CurrentLevel;
-            int numLetters = currentLevel > 0 ? App.Current.ConfigData.Puzzles[currentLevel].Word.Length : 0;
+			Puzzle puzzle = new Puzzle();
+			try
+			{
+				puzzle = App.Current.ConfigData.Puzzles[currentLevel];
+			}
+			catch
+			{
+				// If puzzle can not be loaded, it doesn't exist in the config file. Return default amount but it won't be used
+				// We will fail in the proper place later, not here
+				return 120;
+			}
+			int numLetters = currentLevel > 0 ? puzzle.Word.Length : 0;
 
             return numLetters <= 3 ? 120 : (numLetters * 40) - 40;
         }

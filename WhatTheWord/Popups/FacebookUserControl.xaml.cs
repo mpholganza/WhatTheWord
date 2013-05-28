@@ -20,8 +20,12 @@ namespace WhatTheWord.Popups
     public partial class FacebookUserControl : UserControl
     {
         //private const string AppId = "561883217157240"; // cookpanion
-        private const string AppId = "456585341077776"; // guesstheword
-        private const string AppSecret = "1ceee952d1dcc1af00d0e8d4f1655b5d"; // guesstheword
+
+		private const string AppId = "456585341077776"; // guesstheword
+		private const string AppSecret = "1ceee952d1dcc1af00d0e8d4f1655b5d"; // guesstheword
+
+		//private const string AppId = "383552091761291"; // PaoTestAuth
+		//private const string AppSecret = "5d684adc6a686303772524cd664f4d47"; // PaoTestAuth
 
         private const string DefaultMessage = "Help me guess this {0}-letter word!";
 

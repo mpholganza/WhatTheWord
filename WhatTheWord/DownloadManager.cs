@@ -15,11 +15,12 @@ namespace WhatTheWord
 	{
 		private static DownloadManager downloadManagerInstance;
 
-		private DownloadManager() { }
-
 		public event EventHandler<FileDownloadedEventArgs> FileDownloaded;
 		public bool InProgress { get; set; }
+		private Queue<KeyValuePair<string, string>> FilesToDownload = new Queue<KeyValuePair<string, string>>();
 
+		#region Constructors
+		private DownloadManager() { }
 		public static DownloadManager GetInstance()
 		{
 			if (downloadManagerInstance == null)
@@ -28,9 +29,9 @@ namespace WhatTheWord
 			}
 			return downloadManagerInstance;
 		}
+		#endregion
 
-		private Queue<KeyValuePair<string, string>> FilesToDownload = new Queue<KeyValuePair<string, string>>();
-
+		#region Unused
 		public async Task<string> ListMissingFilesAndQueue(Dictionary<string, string> filesToDownload, string applicationPackagePath)
 		{
 			FilesToDownload.Clear();
@@ -92,29 +93,6 @@ namespace WhatTheWord
 			DownloadMissingFiles();
 		}
 
-		public void DownloadAndUnzipJpgFiles(Dictionary<string, string> filesToDownload)
-		{
-			FilesToDownload.Clear();
-			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
-			{
-				FilesToDownload.Enqueue(fileKVP);
-			}
-
-			if (FilesToDownload.Count > 0) { InProgress = true; }
-			DownloadAndUnzipJpgFile();
-		}
-
-		private string GetFilesToDownload()
-		{
-			string filesToDownloadString = string.Empty;
-			foreach (KeyValuePair<string, string> fileKVP in FilesToDownload)
-			{
-				filesToDownloadString += fileKVP.Key + Environment.NewLine;
-			}
-
-			return filesToDownloadString;
-		}
-
 		public void DownloadMissingFiles()
 		{
 			if (FilesToDownload.Count == 0)
@@ -152,6 +130,30 @@ namespace WhatTheWord
 			DownloadMissingFiles();
 		}
 
+		private string GetFilesToDownload()
+		{
+			string filesToDownloadString = string.Empty;
+			foreach (KeyValuePair<string, string> fileKVP in FilesToDownload)
+			{
+				filesToDownloadString += fileKVP.Key + Environment.NewLine;
+			}
+
+			return filesToDownloadString;
+		}
+		#endregion
+
+		public void DownloadAndUnzipJpgFiles(Dictionary<string, string> filesToDownload)
+		{
+			FilesToDownload.Clear();
+			foreach (KeyValuePair<string, string> fileKVP in filesToDownload)
+			{
+				FilesToDownload.Enqueue(fileKVP);
+			}
+
+			if (FilesToDownload.Count > 0) { InProgress = true; }
+			DownloadAndUnzipJpgFile();
+		}
+
 		public void DownloadAndUnzipJpgFile()
 		{
 			if (FilesToDownload.Count == 0)
@@ -181,14 +183,26 @@ namespace WhatTheWord
 		{
 			if (e.Error == null)
 			{
+				if (FilesToDownload.Count == 0)
+				{
+					return;
+				}
+
 				Stream zipPackageStream = e.Result;
-				string fileName = FilesToDownload.Dequeue().Key.Replace("zip", "jpg");
+				string fileName = FilesToDownload.Peek().Key.Replace("zip", "jpg");
 				StreamResourceInfo zipSri = new StreamResourceInfo(zipPackageStream, null);
 				Uri uri = new Uri(fileName, UriKind.Relative);
 				StreamResourceInfo zippedFileSri = App.GetResourceStream(zipSri, uri);
+				if (zippedFileSri == null)
+				{
+					// Can't find zipped jpg file with the same name as the next in the queue
+					// This is either a bad resource or the callback from a cancelled download
+					return;
+				}
+				FilesToDownload.Dequeue();
 				await FileAccess.WriteStreamToFileAsync(zippedFileSri.Stream, fileName);
 
-				FileDownloadedEventArgs args = new FileDownloadedEventArgs();
+				FileDownloadedEventArgs args = new FileDownloadedEventArgs();	
 				args.FilesLeftCount = FilesToDownload.Count();
 				OnFileDownloadedEvent(args);
 			}
