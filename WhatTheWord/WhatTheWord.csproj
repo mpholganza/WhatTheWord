@@ -228,24 +228,70 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\aboutButton%401280_768.png" />
+    <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\altLineColor%40%401280_768.png" />
     <Content Include="Assets\answerPuzzleBoostIcon%401280_768.png" />
+    <Content Include="Assets\ApplicationIcon.png" />
+    <Content Include="Assets\backButton%401280_768.png" />
     <Content Include="Assets\backButton_p%401280_768.png" />
     <Content Include="Assets\backButton_q%401280_768.png" />
-    <Content Include="Assets\coinIapButton%401280_768.png" />
-    <Content Include="Assets\coinIapButton_p%401280_768.png" />
-    <Content Include="Assets\coinIcon_disabled%401280_768.png" />
-    <Content Include="Assets\correctSlider%401280_768.png" />
-    <Content Include="Assets\backButton%401280_768.png" />
+    <Content Include="Assets\boostTile%401280_768.png" />
     <Content Include="Assets\buyButton%401280_768.png" />
     <Content Include="Assets\cancelPostButton%401280_768.png" />
-    <Content Include="Assets\loadingSpinner%401280_768.png" />
-    <Content Include="Assets\maxButton%401280_768.png" />
+    <Content Include="Assets\coinIapButton%401280_768.png" />
+    <Content Include="Assets\coinIapButton_p%401280_768.png" />
+    <Content Include="Assets\coinIcon%401280_768.png" />
+    <Content Include="Assets\coinIcon_disabled%401280_768.png" />
+    <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\facebookSharePostBG%401280_768.png" />
+    <Content Include="Assets\facebookTile%401280_768.png" />
     <Content Include="Assets\feedbackButton%401280_768.png" />
     <Content Include="Assets\Fonts\MyriadPro-Regular.otf" />
     <Content Include="Assets\Fonts\nevis.ttf" />
+    <Content Include="Assets\guessBG%401280_768.png" />
+    <Content Include="Assets\guessBGCorrect%401280_768.png" />
+    <Content Include="Assets\guessBGTryAgain%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_a%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_b%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_c%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_clear%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_d%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_e%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_f%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_g%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_h%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_i%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_j%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_k%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_l%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_m%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_n%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_o%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_p%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_q%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_r%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_s%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_t%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_u%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_v%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_w%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_x%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_y%401280_768.png" />
+    <Content Include="Assets\GuessLetters\gb_z%401280_768.png" />
     <Content Include="Assets\guesstheword-336x336-appicon.png" />
+    <Content Include="Assets\guesstheword-336x336-appicon_old.png" />
+    <Content Include="Assets\IAPcoinIcon%401280_768.png" />
+    <Content Include="Assets\infoBG%401280_768.png" />
+    <Content Include="Assets\inGameBG%401280_768.png" />
+    <Content Include="Assets\levelBG%401280_768.png" />
+    <Content Include="Assets\levelIcon%401280_768.png" />
+    <Content Include="Assets\line%401280_768.png" />
+    <Content Include="Assets\lineColor%40%401280_768.png" />
+    <Content Include="Assets\loadingSceneBG%401280_768.png" />
+    <Content Include="Assets\loadingSpinner%401280_768.png" />
+    <Content Include="Assets\maxButton%401280_768.png" />
+    <Content Include="Assets\nextPuzzleButton%401280_768.png" />
+    <Content Include="Assets\nextPuzzleButton_p%401280_768.png" />
     <Content Include="Assets\PuzzlePictures\alarm1.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm2.jpg" />
     <Content Include="Assets\PuzzlePictures\alarm3.jpg" />
@@ -787,111 +833,9 @@
     <Content Include="Assets\PuzzlePictures\wrap2.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap3.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap4.jpg" />
-    <Content Include="Assets\resetEntireGameButton%401280_768.png" />
-    <Content Include="Assets\settingsButton_p%401280_768.png" />
-    <Content Include="Assets\shuffleButton_p%401280_768.png" />
-    <Content Include="Assets\Sounds\Bounce05.wav" />
-    <Content Include="Assets\Sounds\Buy05.wav" />
-    <Content Include="Assets\Sounds\Click02.wav" />
-    <Content Include="Assets\Sounds\PictureZoom02.wav" />
-    <Content Include="Assets\Sounds\TapLetter04.wav" />
-    <Content Include="Assets\Sounds\Win-4.wav" />
-    <Content Include="Assets\Sounds\Wrong02.wav" />
-    <Content Include="Assets\undoButton_p%401280_768.png" />
-    <Content Include="Assets\wincoinIcon%401280_768.png" />
-    <Content Include="gameconfigdefault.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\infoBG%401280_768.png" />
-    <Content Include="Assets\lineColor%40%401280_768.png" />
-    <Content Include="Assets\nextPuzzleButton%401280_768.png" />
-    <Content Include="Assets\nextPuzzleButton_p%401280_768.png" />
     <Content Include="Assets\removeALetterBoostIcon%401280_768.png" />
+    <Content Include="Assets\resetEntireGameButton%401280_768.png" />
     <Content Include="Assets\revealALetterBoostIcon%401280_768.png" />
-    <Content Include="Assets\shuffleBoostIcon%401280_768.png" />
-    <Content Include="Assets\soundButton%401280_768.png" />
-    <Content Include="Assets\toggleButtonOff%401280_768.png" />
-    <Content Include="Assets\toggleButtonOn%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_a_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_b_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_c_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_d_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_e_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_f_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_g_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_h_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_i_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_j_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_k_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_l_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_m_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_n_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_o_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_p_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_q_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_r_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_s_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_t_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_u_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_v_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_w_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_x_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_y_win%401280_768.png" />
-    <Content Include="Assets\WinLetters\gb_z_win%401280_768.png" />
-    <Content Include="Assets\winTransitionBG%401280_768.png" />
-    <Content Include="Assets\IAPcoinIcon%401280_768.png" />
-    <Content Include="MockupLicenseInfo.xml" />
-    <Content Include="SplashScreenImage.screen-720p.jpg" />
-    <Content Include="SplashScreenImage.screen-WVGA.jpg" />
-    <Content Include="SplashScreenImage.screen-WXGA.jpg" />
-    <None Include="packages.config" />
-    <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\AlignmentGrid.png" />
-    <Content Include="Assets\ApplicationIcon.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\boostTile%401280_768.png" />
-    <Content Include="Assets\coinIcon%401280_768.png" />
-    <Content Include="Assets\facebookTile%401280_768.png" />
-    <Content Include="Assets\guessBG%401280_768.png" />
-    <Content Include="Assets\guessBGCorrect%401280_768.png" />
-    <Content Include="Assets\guessBGTryAgain%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_a%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_b%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_c%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_clear%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_d%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_e%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_f%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_g%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_h%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_i%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_j%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_k%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_l%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_m%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_n%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_o%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_p%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_q%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_r%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_s%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_t%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_u%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_v%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_w%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_x%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_y%401280_768.png" />
-    <Content Include="Assets\GuessLetters\gb_z%401280_768.png" />
-    <Content Include="Assets\inGameBG%401280_768.png" />
-    <Content Include="Assets\levelBG%401280_768.png" />
-    <Content Include="Assets\levelIcon%401280_768.png" />
-    <Content Include="Assets\line%401280_768.png" />
     <Content Include="Assets\sandBoxBG%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_a%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_b%401280_768.png" />
@@ -920,25 +864,69 @@
     <Content Include="Assets\SandboxLetters\sb_y%401280_768.png" />
     <Content Include="Assets\SandboxLetters\sb_z%401280_768.png" />
     <Content Include="Assets\settingsButton%401280_768.png" />
+    <Content Include="Assets\settingsButton_p%401280_768.png" />
+    <Content Include="Assets\shuffleBoostIcon%401280_768.png" />
     <Content Include="Assets\shuffleButton%401280_768.png" />
-    <Content Include="Assets\Tiles\FlipCycleTileLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileMedium.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\FlipCycleTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileMediumLarge.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Tiles\IconicTileSmall.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Assets\shuffleButton_p%401280_768.png" />
+    <Content Include="Assets\soundButton%401280_768.png" />
+    <Content Include="Assets\Sounds\Bounce05.wav" />
+    <Content Include="Assets\Sounds\Buy05.wav" />
+    <Content Include="Assets\Sounds\Click02.wav" />
+    <Content Include="Assets\Sounds\PictureZoom02.wav" />
+    <Content Include="Assets\Sounds\TapLetter04.wav" />
+    <Content Include="Assets\Sounds\Win-4.wav" />
+    <Content Include="Assets\Sounds\Wrong02.wav" />
+    <Content Include="Assets\Tiles\FlipCycleTileLarge.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileMedium.png" />
+    <Content Include="Assets\Tiles\FlipCycleTileSmall.png" />
+    <Content Include="Assets\Tiles\IconicTileMediumLarge.png" />
+    <Content Include="Assets\Tiles\IconicTileSmall.png" />
+    <Content Include="Assets\toggleButtonOff%401280_768.png" />
+    <Content Include="Assets\toggleButtonOn%401280_768.png" />
     <Content Include="Assets\topBarBG%401280_768.png" />
     <Content Include="Assets\tryAgainSlider%401280_768.png" />
     <Content Include="Assets\undoButton%401280_768.png" />
+    <Content Include="Assets\undoButton_p%401280_768.png" />
+    <Content Include="Assets\wincoinIcon%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_a_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_b_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_c_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_d_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_e_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_f_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_g_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_h_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_i_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_j_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_k_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_l_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_m_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_n_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_o_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_p_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_q_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_r_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_s_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_t_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_u_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_v_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_w_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_x_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_y_win%401280_768.png" />
+    <Content Include="Assets\WinLetters\gb_z_win%401280_768.png" />
+    <Content Include="Assets\winTransitionBG%401280_768.png" />
+    <Content Include="gameconfigdefault.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MockupLicenseInfo.xml" />
+    <Content Include="SplashScreenImage.screen-720p.jpg" />
+    <Content Include="SplashScreenImage.screen-WVGA.jpg" />
+    <Content Include="SplashScreenImage.screen-WXGA.jpg" />
+    <None Include="packages.config" />
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
