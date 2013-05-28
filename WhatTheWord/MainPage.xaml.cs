@@ -104,7 +104,28 @@ namespace WhatTheWord
 			}
 
 			App.Current.StateData.InitializePuzzle(CurrentPuzzle);
+
+			if (ShouldShowUserReview())
+			{
+				userReviewUserControl.show();
+			}
+
 			DisplayGame();
+		}
+
+		private static bool ShouldShowUserReview()
+		{
+			int currentLevel = App.Current.StateData.CurrentLevel;
+			int rateMeShowInitial = App.Current.ConfigData.rateMeShowInitial;
+			int rateMeShowReminderInterval = App.Current.ConfigData.rateMeShowReminderInterval;
+
+			if (!App.Current.StateData.RewardGivenForUserReview)
+			{
+				return (currentLevel == rateMeShowInitial ||
+					(currentLevel > rateMeShowInitial && ((currentLevel - rateMeShowInitial) % rateMeShowReminderInterval == 0)));
+			}
+
+			return false;
 		}
 
 		private bool LoadCurrentPuzzle()
