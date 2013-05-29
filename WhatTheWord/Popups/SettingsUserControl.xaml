@@ -188,8 +188,11 @@
 
                         <Image Grid.Column="0" Grid.ColumnSpan="3"
                                Style="{StaticResource SettingBackgrondImage}"/>
-                        
-                        <TextBlock Grid.Column="1" Text="Rate Us" 
+
+						<Image Grid.Column="0" Source="/Assets/rateUsStar@1280_768.png" 
+                               Style="{StaticResource SettingIcon}" />
+
+						<TextBlock Grid.Column="1" Text="Rate Us" 
                                    Style="{StaticResource SettingName}"/>
                     </Grid>
                 </Border>
