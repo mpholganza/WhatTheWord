@@ -279,7 +279,6 @@
     <Content Include="Assets\GuessLetters\gb_y%401280_768.png" />
     <Content Include="Assets\GuessLetters\gb_z%401280_768.png" />
     <Content Include="Assets\guesstheword-336x336-appicon.png" />
-    <Content Include="Assets\guesstheword-336x336-appicon_old.png" />
     <Content Include="Assets\IAPcoinIcon%401280_768.png" />
     <Content Include="Assets\infoBG%401280_768.png" />
     <Content Include="Assets\inGameBG%401280_768.png" />
