@@ -173,7 +173,13 @@ namespace WhatTheWord.Popups
 
 		private void RevealALetter()
 		{
-			int cost = int.Parse(RevealALetterButton_Text.Text);
+            // if we already revealed all the letters that we can, then return
+            if (!App.Current.StateData.CanRevealLetter()) { return; }
+
+            // try and get the boost cost from the button text
+            int cost = 0;
+            bool success = int.TryParse(RevealALetterButton_Text.Text, out cost);
+            if (!success) { return; };
 
 			if (cost > App.Current.StateData.Coins)
             {
@@ -204,8 +210,15 @@ namespace WhatTheWord.Popups
         }
 
 		private void RemoveALetter()
-		{
-			int cost = int.Parse(RemoveALetterButton_Text.Text);
+        {
+            // if we already removed all the letters that we can, then return
+            if (!App.Current.StateData.CanRemoveLetter()) { return; }
+
+            // try and get the boost cost from the button text
+            int cost = 0;
+            bool success = int.TryParse(RemoveALetterButton_Text.Text, out cost);
+
+            if (!success) { return; };
 
 			if (cost > App.Current.StateData.Coins)
             {
@@ -237,7 +250,11 @@ namespace WhatTheWord.Popups
 
         private void AnswerPuzzle()
         {
-            int cost = int.Parse(AnswerPuzzleButton_Text.Text);
+            // try and get the boost cost from the button text
+            int cost = 0;
+            bool success = int.TryParse(AnswerPuzzleButton_Text.Text, out cost);
+
+            if (!success) { return; };
 
             if (cost > App.Current.StateData.Coins)
             {
