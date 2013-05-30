@@ -554,10 +554,6 @@ namespace WhatTheWord
 			NavigationService.Navigate(new Uri("/WinPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();
             puzzleStatusTimer.Stop();
-            TutorialOverlay.Visibility = Visibility.Collapsed;
-            PuzzleAttemptStatus.Visibility = Visibility.Collapsed;
-            PuzzleAttemptStatusBackground.Visibility = Visibility.Collapsed;
-            Overlay.Visibility = Visibility.Collapsed; // Re-allow user input
 		}
 
 		private void PuzzleIncorrect()
