@@ -97,7 +97,7 @@
                     Margin="10,0,10,20"
                     VerticalAlignment="Top" HorizontalAlignment="Stretch" Height="80" Width="Auto"
                     Style="{StaticResource Popup_ButtonStyle}">
-                <TextBlock Text="Sure" Style="{StaticResource UserReviewButton_Text}"/>
+                <TextBlock Text="Sure!" Style="{StaticResource UserReviewButton_Text}"/>
             </Button>
 
         </Grid>
