@@ -25,7 +25,7 @@ namespace WhatTheWord
 	public partial class MainPage : PhoneApplicationPage
 	{
 		public Puzzle CurrentPuzzle { get; set; }
-		FacebookUserControl facebookUserControl;
+		public FacebookUserControl facebookUserControl;
 		public CoinsUserControl coinsUserControl;
         public BoostsUserControl boostsUserControl;
         public AboutUserControl aboutUserControl;

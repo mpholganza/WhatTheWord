@@ -197,16 +197,35 @@
                     </Grid>
                 </Border>
 
-                <Border Style="{StaticResource SettingBorder}">
-                    <Grid >
+				<Border x:Name="LogOutBorder" Style="{StaticResource SettingBorder}" Tap="Logout_Tap">
+					<Grid >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="2*"/>
+							<ColumnDefinition Width="5*"/>
+							<ColumnDefinition Width="2*"/>
+						</Grid.ColumnDefinitions>
+
+						<Image Grid.Column="0" Grid.ColumnSpan="3"
+                               Style="{StaticResource SettingBackgrondImage_Alt}"/>
+
+						<Image Grid.Column="0" Source="/Assets/facebookTile_BlackAndWhite@1280_768.png" 
+                               Style="{StaticResource SettingIcon}" />
+
+						<TextBlock Grid.Column="1" Text="Log Out" 
+                                   Style="{StaticResource SettingName}"/>
+					</Grid>
+				</Border>
+
+				<Border Style="{StaticResource SettingBorder}">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="5*"/>
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Grid.ColumnSpan="3"
-                               Style="{StaticResource SettingBackgrondImage_Alt}"/>
+                        <Image x:Name="ResetEntireGameBackground" Grid.Column="0" Grid.ColumnSpan="3"
+                               Style="{StaticResource SettingBackgrondImage}"/>
 
                         <Button x:Name="ResetEntireGame" Grid.ColumnSpan="3" Tap="ResetEntireGame_Tap"
                                 HorizontalAlignment="Stretch" Width="Auto" Margin="70,0,70,0"

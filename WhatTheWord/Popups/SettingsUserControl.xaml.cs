@@ -13,6 +13,7 @@ using Microsoft.Phone.Tasks;
 using System.Reflection;
 using WhatTheWord.Controls;
 using System.Windows.Media.Imaging;
+using Facebook;
 
 namespace WhatTheWord.Popups
 {
@@ -58,23 +59,37 @@ namespace WhatTheWord.Popups
             ContentPanel.Width = this.PopupWidth;
             //ContentPanel.MaxHeight = this.PopupHeight - HeaderPanel.Height;
 
-            int leftMargin = (int) ((HostPanel.Width - this.PopupWidth) / 2.0);
-            int topMargin = (int) (120);
-
-            HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0 , 0);
-            ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
-
             SoundToggleButton.Source = App.Current.StateData.SoundEnabled ? _settingsToggleButtonOn : _settingsToggleButtonOff;
         }
 
         #region Show and Hide
         public void show()
         {
-            if (!_popup.IsOpen)
-            {
-                _popup.Child = this;
-                _popup.IsOpen = true;
-            }
+			int leftMargin = (int)((HostPanel.Width - this.PopupWidth) / 2.0);
+			int topMargin = 60;
+
+			if (string.IsNullOrEmpty(App.Current.StateData.FacebookToken))
+			{
+				LogOutBorder.Visibility = Visibility.Collapsed;
+				ResetEntireGameBackground.Style = this.Resources["SettingBackgrondImage_Alt"] as Style;
+				topMargin = 120;
+			}
+			else
+			{
+				LogOutBorder.Visibility = Visibility.Visible;
+				ResetEntireGameBackground.Style = this.Resources["SettingBackgroundImage"] as Style;
+				topMargin = 60;
+			}
+
+
+			HeaderPanel.Margin = new Thickness(leftMargin, topMargin, 0, 0);
+			ContentPanel.Margin = new Thickness(leftMargin, 0, 0, 0);
+
+			if (!_popup.IsOpen)
+			{
+				_popup.Child = this;
+				_popup.IsOpen = true;
+			}
         }
 
         public void hide()
@@ -163,6 +178,14 @@ namespace WhatTheWord.Popups
 			WhatTheWord.Controls.SoundEffects.PlayClick();
 			_mainPage.resetGameConfirmationUserControl.isOpenedFromSettings = true;
 			_mainPage.resetGameConfirmationUserControl.show();
+			this.hide();
+		}
+
+		private async void Logout_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			App.Current.StateData.FacebookToken = string.Empty;
+			await _mainPage.facebookUserControl.Browser.ClearCookiesAsync();
+			App.Current.StateData.Save();
 			this.hide();
 		}
     }

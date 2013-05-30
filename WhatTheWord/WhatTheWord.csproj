@@ -242,6 +242,7 @@
     <Content Include="Assets\coinIapButton_p%401280_768.png" />
     <Content Include="Assets\coinIcon%401280_768.png" />
     <Content Include="Assets\coinIcon_disabled%401280_768.png" />
+    <Content Include="Assets\facebookTile_BlackAndWhite%401280_768.png" />
     <Content Include="Assets\correctSlider%401280_768.png" />
     <Content Include="Assets\facebookSharePostBG%401280_768.png" />
     <Content Include="Assets\facebookTile%401280_768.png" />
@@ -833,6 +834,7 @@
     <Content Include="Assets\PuzzlePictures\wrap2.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap3.jpg" />
     <Content Include="Assets\PuzzlePictures\wrap4.jpg" />
+    <Content Include="Assets\rateUsStar%401280_768.png" />
     <Content Include="Assets\removeALetterBoostIcon%401280_768.png" />
     <Content Include="Assets\resetEntireGameButton%401280_768.png" />
     <Content Include="Assets\revealALetterBoostIcon%401280_768.png" />
