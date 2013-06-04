@@ -114,23 +114,20 @@
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="0" 
-                        VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="6,20,20,0">
-                <TextBlock Text="Programmers"
+
+			<StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                        VerticalAlignment="Top" HorizontalAlignment="Center"
+                        Margin="20,15,20,0">
+				<TextBlock Text="Programmers"
                            Style="{StaticResource AboutHeaderTitle}"/>
-                <TextBlock Text="Jacky Yip"
-                           Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Paolo Holganza"
-                           Style="{StaticResource AboutName}"/>
                 <TextBlock Text="Chun-Kai Wang"
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                        VerticalAlignment="Top" HorizontalAlignment="Center"
-                        Margin="20,15,20,0">
-                <TextBlock Text="Special Thanks"
+			<StackPanel Grid.Column="1" Grid.Row="0" 
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        Margin="6,20,20,0">
+				<TextBlock Text="Special Thanks"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="Jeremy Bong" HorizontalAlignment="Center"
                            Style="{StaticResource AboutName}"/>
