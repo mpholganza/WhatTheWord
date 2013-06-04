@@ -224,5 +224,11 @@ namespace WhatTheWord
             NextPuzzleStoryboard.Begin();
             NextPuzzle.Opacity = 1;
         }
+
+		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+		{
+			NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+			NavigationService.RemoveBackEntry();
+		}
 	}
 }
