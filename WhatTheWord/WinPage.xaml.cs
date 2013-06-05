@@ -56,7 +56,7 @@ namespace WhatTheWord
             CoinsEarned.Opacity = 0;
             CoinsIcon.Opacity = 0;
             WinCoins.Opacity = 0;
-            NextPuzzle.Opacity = 0;
+            //NextPuzzle.Opacity = 0;
         }
 
         private void updateContent()
@@ -84,7 +84,7 @@ namespace WhatTheWord
             }
             
             // set coins
-            WinCoins.Text = _gameState.Coins.ToString();
+            WinCoins.Text = (_gameState.Coins - _gameConfig.rewardCoinsPerQuestion).ToString();
         }
 
         private void animateContent()
@@ -176,16 +176,12 @@ namespace WhatTheWord
             CoinsEarnedStoryboard.Completed += animateCoinsIcon;
             CoinsEarnedStoryboard.Begin();
 
-            WinCoins.Text = (_gameState.Coins - _gameConfig.rewardCoinsPerQuestion).ToString();
-
             CoinsEarned.Opacity = 1;
         }
 
         private void animateCoinsIcon(object sender, EventArgs e)
         {
             Thread.Sleep(300);
-
-            WinCoins.Text = (_gameState.Coins - _gameConfig.rewardCoinsPerQuestion).ToString();
 
             CoinsIcon.Opacity = 1;
             WinCoins.Opacity = 1;
@@ -210,7 +206,7 @@ namespace WhatTheWord
             if (currentCoins > _gameState.Coins)
             {
                 myDispatcherTimer.Stop();
-                animateNextPuzzle(sender, e);
+                //animateNextPuzzle(sender, e);
             }
             else
             {
@@ -218,12 +214,12 @@ namespace WhatTheWord
             }
         }
 
-        private void animateNextPuzzle(object sender, EventArgs e)
-        {
-            Thread.Sleep(350);
-            NextPuzzleStoryboard.Begin();
-            NextPuzzle.Opacity = 1;
-        }
+        //private void animateNextPuzzle(object sender, EventArgs e)
+        //{
+        //    Thread.Sleep(350);
+        //    NextPuzzleStoryboard.Begin();
+        //    NextPuzzle.Opacity = 1;
+        //}
 
 		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
 		{

@@ -59,10 +59,10 @@ namespace WhatTheWord
 
 			ClearButton.Tap += ClearButton_Tap;
 			ShuffleButton.Tap += ShuffleButton_Tap;
-			CoinsButton.Tap += CoinsButton_Tap;
+            //CoinsButton.Tap += CoinsButton_Tap;
 			CoinsStackPanel.Tap += CoinsButton_Tap;
-			CoinsDollarSign.Tap += CoinsButton_Tap;
-			CoinsText.Tap += CoinsButton_Tap;
+            //CoinsDollarSign.Tap += CoinsButton_Tap;
+            //CoinsText.Tap += CoinsButton_Tap;
 			SettingsButton.Tap += SettingsButton_Tap;
 			BoostButton.Tap += BoostsButton_Tap;
 			FacebookButton.Tap += FacebookButton_Tap;
