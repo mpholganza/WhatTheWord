@@ -441,6 +441,8 @@ namespace WhatTheWord.Model
 		public static void GetKeyValuePairFromString(string kvpString, out string key, out string value)
 		{
 			String[] kvp = kvpString.Split(new string[] { "=" }, StringSplitOptions.None);
+			if (kvp.Length < 2) { throw new ApplicationException("Invalid key value pair: \"" + kvpString + "\""); }
+
 			key = kvp[0];
 			value = kvp[1];
 		}
