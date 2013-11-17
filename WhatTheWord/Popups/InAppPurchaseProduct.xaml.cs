@@ -60,7 +60,15 @@ namespace WhatTheWord.Popups
             Instrumentation.GetInstance().sendInstrumentation(
                 "Monetization", "AttemptIap", this._product.BundleId, null, _product.Price.ToString());
 
-            string receipt = await CurrentApp.RequestProductPurchaseAsync(_product.BundleId, true);
+            string receipt = "";
+            try
+            {
+                receipt = await CurrentApp.RequestProductPurchaseAsync(_product.BundleId, true);
+            }
+            catch (System.Runtime.InteropServices.COMException e)
+            {
+                MessageBox.Show("We can't connect to the Store right now. Please try again later.");
+            }
             DoFulfillment(receipt);
         }
 

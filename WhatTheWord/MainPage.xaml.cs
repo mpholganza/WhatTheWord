@@ -276,10 +276,13 @@ namespace WhatTheWord
 
         private void InitializeBoostBounceTimer()
         {
-            boostBounceTimer = new System.Windows.Threading.DispatcherTimer();
-            boostBounceTimer.Interval = new TimeSpan(0, 0, 0, App.Current.ConfigData.boostBounceTimeInterval, 0);
-            boostBounceTimer.Tick += new EventHandler(bounceBoostButton);
-            boostBounceTimer.Start();
+            if (App.Current.StateData.CurrentLevel > 1)
+            {
+                boostBounceTimer = new DispatcherTimer();
+                boostBounceTimer.Interval = new TimeSpan(0, 0, 0, App.Current.ConfigData.boostBounceTimeInterval, 0);
+                boostBounceTimer.Tick += new EventHandler(bounceBoostButton);
+                boostBounceTimer.Start();
+            }
         }
 
         private void bounceBoostButton(object o, EventArgs sender)
