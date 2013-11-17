@@ -24,7 +24,7 @@
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
-            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontSize" Value="26" />
             <Setter Property="Margin" Value="0,0,0,0" />
         </Style>
 
@@ -37,7 +37,7 @@
         </Style>
 
         <Style x:Key="AboutLink" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="FontWeight" Value="Normal" />
             <Setter Property="FontFamily" Value="/Fonts/nevis.ttf" />
@@ -115,44 +115,48 @@
             </StackPanel>
 
 
-			<StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                        VerticalAlignment="Top" HorizontalAlignment="Center"
-                        Margin="20,15,20,0">
-				<TextBlock Text="Programmers"
+			<StackPanel Grid.Column="0" Grid.Row="1"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"
+                        Margin="25,20,20,0">
+				<TextBlock Text="Programmer"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="Chun-Kai Wang"
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
-			<StackPanel Grid.Column="1" Grid.Row="0" 
+			<StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="6,20,20,0">
+                        Margin="2,20,25,0">
 				<TextBlock Text="Special Thanks"
                            Style="{StaticResource AboutHeaderTitle}"/>
-                <TextBlock Text="Jeremy Bong" HorizontalAlignment="Center"
+                <TextBlock Text="Jeremy Bong"
                            Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Han Li" HorizontalAlignment="Center"
+                <TextBlock Text="Han Li"
                            Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Dong Ming" HorizontalAlignment="Center"
+                <TextBlock Text="Dong Ming"
                            Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Yi Lang Mok" HorizontalAlignment="Center"
+                <TextBlock Text="Yi Lang Mok"
                            Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Akshay Ahooja" HorizontalAlignment="Center"
+                <TextBlock Text="Akshay Ahooja"
                            Style="{StaticResource AboutName}"/>
-                <TextBlock Text="Teresa Thomas" HorizontalAlignment="Center"
+                <TextBlock Text="Teresa Thomas"
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                        VerticalAlignment="Top" HorizontalAlignment="Center"
-                        Margin="20,15,20,30">
-                <TextBlock Text="Photos Provided by:"
+            <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                    Margin="25,20,25,0"
+                    BorderBrush="#DDDDDD" BorderThickness="0,1,0,0">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="left"
+                            Margin="0,20,0,30">
+                    <TextBlock Text="Photos Provided by:"
                            Style="{StaticResource AboutHeaderTitle}"/>
-                <TextBlock Text="foter.com"
+                    <TextBlock Text="foter.com"
                            Style="{StaticResource AboutLink}"/>
-                <TextBlock Text="morguefile.com"
+                    <TextBlock Text="morguefile.com"
                            Style="{StaticResource AboutLink}"/>
-            </StackPanel>
+                </StackPanel>
+            </Border>
+
 
         </Grid>
 
