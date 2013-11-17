@@ -65,7 +65,7 @@ namespace WhatTheWord.Popups
             {
                 receipt = await CurrentApp.RequestProductPurchaseAsync(_product.BundleId, true);
             }
-            catch (System.Runtime.InteropServices.COMException e)
+            catch (System.Runtime.InteropServices.COMException)
             {
                 MessageBox.Show("We can't connect to the Store right now. Please try again later.");
             }

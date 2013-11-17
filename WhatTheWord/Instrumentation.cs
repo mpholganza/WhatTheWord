@@ -8,12 +8,14 @@ using Microsoft.Phone.Info;
 
 namespace WhatTheWord
 {
-    public class Instrumentation
+    public sealed class Instrumentation
     {
+
         public readonly string Url = "http://www.kooappsservers.com/kooappsPlatform/logToSql.php";
         public readonly string AppName = "com.kooapps.guessthisword";
 
-        private static Instrumentation instrumentationInstance;
+        private static volatile Instrumentation instrumentationInstance;
+        private static object syncRoot = new Object();
 
         private Instrumentation() { }
 
@@ -21,7 +23,14 @@ namespace WhatTheWord
         {
             if (instrumentationInstance == null)
             {
-                instrumentationInstance = new Instrumentation();
+                lock (syncRoot)
+                {
+
+                    if (instrumentationInstance == null)
+                    {
+                        instrumentationInstance = new Instrumentation();
+                    }
+                }
             }
             return instrumentationInstance;
         }
