@@ -469,6 +469,10 @@
     <Content Include="Assets\PuzzlePictures\free2.jpg" />
     <Content Include="Assets\PuzzlePictures\free3.jpg" />
     <Content Include="Assets\PuzzlePictures\free4.jpg" />
+    <Content Include="Assets\PuzzlePictures\frost1.jpg" />
+    <Content Include="Assets\PuzzlePictures\frost2.jpg" />
+    <Content Include="Assets\PuzzlePictures\frost3.jpg" />
+    <Content Include="Assets\PuzzlePictures\frost4.jpg" />
     <Content Include="Assets\PuzzlePictures\fungus1.jpg" />
     <Content Include="Assets\PuzzlePictures\fungus2.jpg" />
     <Content Include="Assets\PuzzlePictures\fungus3.jpg" />
@@ -776,6 +780,10 @@
     <Content Include="Assets\PuzzlePictures\spot2.jpg" />
     <Content Include="Assets\PuzzlePictures\spot3.jpg" />
     <Content Include="Assets\PuzzlePictures\spot4.jpg" />
+    <Content Include="Assets\PuzzlePictures\star1.jpg" />
+    <Content Include="Assets\PuzzlePictures\star2.jpg" />
+    <Content Include="Assets\PuzzlePictures\star3.jpg" />
+    <Content Include="Assets\PuzzlePictures\star4.jpg" />
     <Content Include="Assets\PuzzlePictures\static1.jpg" />
     <Content Include="Assets\PuzzlePictures\static2.jpg" />
     <Content Include="Assets\PuzzlePictures\static3.jpg" />
