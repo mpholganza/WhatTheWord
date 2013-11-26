@@ -117,10 +117,14 @@
 
 			<StackPanel Grid.Column="0" Grid.Row="1"
                         VerticalAlignment="Top" HorizontalAlignment="Left"
-                        Margin="25,20,20,0">
+                        Margin="25,15,20,0">
 				<TextBlock Text="Programmer"
                            Style="{StaticResource AboutHeaderTitle}"/>
                 <TextBlock Text="Chun-Kai Wang"
+                           Style="{StaticResource AboutName}"/>
+                <TextBlock Text="Paolo Holganza"
+                           Style="{StaticResource AboutName}"/>
+                <TextBlock Text="Jacky Yip"
                            Style="{StaticResource AboutName}"/>
             </StackPanel>
 
